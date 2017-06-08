@@ -1,0 +1,81 @@
+@startuml
+
+class Input{
+    -String sConfigPath
+}
+class Network{
+    -FlightsVector vpFlightsList
+    -AirportsVector vpAirportsList
+    -WayPointsVector vpWayPointsList
+}
+class Position{
+    -double dLatitude
+    -double dLongitude
+}
+class Node{
+    #String sCode
+    #String  sName
+    #Position position
+}
+class FLevel{
+    -ALevel iFlightLevel
+    -double dPenalCost
+}
+class Flight{
+    -String sCode
+    -Airport *pAOrigin
+    -Airport *pADestination
+    -Time iDepartureTime
+    -int iDefaultRoute
+    -int iCurrentRoute
+    -FLevelVector vpFeasibleLevelList
+    -RouteVector vpPossibleRouteList
+}
+class Point{
+    -WayPoint *pWayPoint
+    -Time iArrivingTime
+
+}
+class Route{
+    -FLevel *pFlightLevel
+    -PointVector vpPointsList
+}
+
+class Solver{
+    #ProcessClock clock
+    #IloModel model
+    #IloNumVarArray x
+    #IloCplex solver
+    #Network *pNetwork
+}
+class MonteCarloMethod{
+}
+class HoeffdingMethod{
+}
+class EnumerationMethod{
+}
+class GaussianMethod{
+}
+
+Airport -u-|> Node
+WayPoint --|> Node
+Route *-u- Point:(1:*)
+Route *-l-> FLevel:(1:1)
+Point *-u->WayPoint:(1:1)
+Flight *-u->Route:(1:*)
+Flight *-l->Airport:(1:2)
+Node *-u->Position:(1:1)
+Input o-->Network:(1:1)
+Network o--Flight:(1:*)
+Network o--Airport:(1:*)
+Network o--WayPoint:(*:1)
+Solver *-->Network:(1:1)
+MonteCarloMethod -u-|> Solver
+HoeffdingMethod -d-|> Solver
+EnumerationMethod --|> Solver
+GaussianMethod -r-|> Solver
+Main -u- MonteCarloMethod
+Main -d- HoeffdingMethod
+Main -- EnumerationMethod
+Main -r- GaussianMethod
+@enduml

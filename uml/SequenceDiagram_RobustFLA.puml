@@ -1,0 +1,25 @@
+@startuml
+CommandLine->AppSolver: Launch App
+AppSolver-->CommandLine:Arguments valid
+AppSolver->DataReader:Read data
+DataReader-->AppSolver:Read successfully
+DataReader->PreVerification:Verify the data
+PreVerification->Model:Generate the model
+PreVerification-->DataReader:Data is ok
+Model-->PreVerification:Construct successfully
+Model->Solver:Solve the problem
+Solver-->Model:Solve successfully
+Solver->PostVerification:Verify the solution
+PostVerification-->Solver:Solution is accepted
+PostVerification->Solution:Export
+Solution-->PostVerification:Export successfully
+Solution-->Exception:Export failed, show the fatal error
+Solution->Terminate:Finish, exit normally
+AppSolver-->Exception:Invalid Arguments, then display Usage
+DataReader-->Exception:Read failed, show the fatal error
+PreVerification-->Exception:Data isn't valid
+Model-->Exception:Construct failed, show the fatal error
+Solver-->Exception:Solve failed, show the reason
+PostVerification-->Exception:Solution is rejected
+Exception->Terminate:Exit with error
+@enduml

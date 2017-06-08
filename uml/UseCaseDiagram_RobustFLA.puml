@@ -1,0 +1,18 @@
+@startuml
+:User/Application: as User
+User --> (Solve FLA problem):<<include>>
+(Solve FLA problem) -l-> (DataReader):<<include>>
+note left of (DataReader)
+Flight file
+Airport file
+Beacon file
+end note
+(Solve FLA problem) --> (Solver):<<include>>
+note left of (Solver)
+Estimation feasibility:
+    Hoeffding
+    Montre-Carlo
+    Numeration
+end note
+(Solve FLA problem) -r-> (Exporter Solution):<<include>>
+@enduml

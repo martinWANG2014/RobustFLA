@@ -1,0 +1,193 @@
+@startuml
+
+class Input{
+    -String sConfigPath
+    +explict Input(const String &configPath, Network *network)
+    +~Input()
+    -void parseFlights()
+    -void parseAirports()
+    -void parseWayPoints()
+    +void initNetwork()
+}
+class Network{
+    -FlightsVector vpFlightsList
+    -AirportsVector vpAirportsList
+    -WayPointsVector vpWayPointsList
+    +FlightsVector &getFlights()
+    +AirportsVector &getAirports()
+    +WayPointsVector &getWayPoints()
+    -Flight *findFlightById(const String &sCode)
+    -Airport *findAirportByCode(const String &sCode)
+    -WayPoint *findWayPointByCode(const String &sCode)
+    +Flight * getFlightAtI(int index) const
+    +void addNewFlight(Flight *pFlight)
+    +void addNewAirport(Airport *pAirport)
+    +void addNewWayPoint(WayPoint *pWayPoint)
+    +Network* clone()
+}
+class Position{
+    -double dLatitude
+    -double dLongitude
+    +Position(const Position &position)
+    +Position(double dLatitude, double dLongitude)
+    +~Position()
+    +double getLatitude() cost
+    +double getLongitude() cost
+    +bool operator==(const Position &rhs) const
+    +bool operator!=(const Position &rhs) const
+    +Position *clone()
+}
+class Node{
+    #String sCode
+    #String  sName
+    #Position position
+    +Node(const Node &node)
+    +Node(const String &sCode, const String &sName, \n const Position &position)
+    +Node(const String &sCode, const String &sName, \n const double dLatitude, const double dLongitude)
+    +~Node()
+    +const String &getCode() const
+    +const String &getName() const
+    +const Position &getPosition() const
+    +bool operator==(const Node &rhs) const
+    +bool operator!=(const Node &rhs) const
+    +Node *clone()
+}
+class FLevel{
+    -ALevel iFlightLevel
+    -double dPenalCost
+    +FLevel(const FLevel &level)
+    +FLevel(ALevel iFlightLevel)
+    +FLevel(ALevel iFlightLevel, double dPenalCost)
+    +~FLevel()
+    +double getFlightLevel() const;
+    +double getPenalCost() const;
+    +void setPenalCost(double dPenalCost);
+    +bool operator==(const FLevel &rhs) const
+    +bool operator!=(const FLevel &rhs) const
+    +FLevel *clone()
+}
+class Flight{
+    -String sCode
+    -Airport *pAOrigin
+    -Airport *pADestination
+    -Time iDepartureTime
+    -int iDefaultRoute
+    -int iCurrentRoute
+    -FLevelVector vpFeasibleLevelList
+    -RouteVector vpPossibleRouteList
+    +Flight(const Flight &flight)
+    +Flight(const String &sCode, Airport *pAOrigin, \n Airport *pADestination, Time iDepartureTime, Route *pRouteDefault)
+    +~Flight()
+    +setCurrentRoute(int iCurrentRoute)
+    +Route *getCurrentRoute() const
+    +void addNewRoute(Route *pRoute)
+    +bool operator==(const Flight &rhs) const
+    +bool operator!=(const Flight &rhs) const
+    +Flight *clone()
+}
+class Point{
+    -WayPoint *pWayPoint
+    -Time iArrivingTime
+    +Point(Point &point)
+    +Point(WayPoint *pWayPoint, Time iArrivingTime)
+    +~Point()
+    +Time getArrivingTime() const
+    +WayPoint *getWayPoint() const
+    +void setArrivingTime(Time iArrivingTime)
+    +bool operator==(const Point &rhs) const
+    +bool operator!=(const Point &rhs) const
+    +Point* clone()
+}
+class Route{
+    -FLevel *pFlightLevel
+    -PointVector vpPointsList
+    +Route(Route &route)
+    +Route(FLevel *pFlightLevel)
+    +Route(FLevel *pFlightLevel, PointVector vpPointsList)
+    +~Route()
+    +void addNewPoint(Point *pPoint)
+    +void setFlightLevel(FLevel *pFlightLevel)
+    +ALevel getFlightLevel() const
+    +PointVector getPointsList() const
+    +Point *getPointAtI(int index) const
+    +Point *getPointNextOfI(int index) const
+    +Point *getPointBeforeI(int index) const
+    +bool operator==(const Route &rhs) const
+    +bool operator!=(const Route &rhs) const
+    +Route* clone()
+}
+
+class Solver{
+    #ProcessClock clock
+    #IloModel model
+    #IloNumVarArray x
+    #IloCplex solver
+    #Network *pNetwork
+    +Solver(IloEnv &env, Network *pNetwork)
+    +virtual ~Solver()
+    +void initDecisionVariable()
+    +void initFunctionObjective()
+    +void initConstraints()
+    +virtual bool feasibilityEstimation()
+    +void solve()
+    +IloNumArray getDecisionVariable() const
+}
+class MonteCarloMethod{
+    +bool feasibilityEstimation()
+    +~Solver()
+}
+class HoeffdingMethod{
+    +bool feasibilityEstimation()
+    +~Solver()
+}
+class EnumerationMethod{
+    +bool feasibilityEstimation()
+    +~Solver()
+}
+class GaussianMethod{
+    +bool feasibilityEstimation()
+    +~Solver()
+}
+Airport -u-|> Node
+WayPoint --|> Node
+Route *-u- Point:(1:*)
+Route *-l-> FLevel:(1:1)
+Point *-u->WayPoint:(1:1)
+Flight *-u->Route:(1:*)
+Flight *-l->Airport:(2:1)
+Node *-u->Position:(1:1)
+Input o-->Network:(1:1)
+Network o--Flight:(1:*)
+Network o-d-Airport:(1:*)
+Network o--WayPoint:(1:*)
+Solver *-->Network:(1:1)
+MonteCarloMethod --|> Solver
+HoeffdingMethod --|> Solver
+EnumerationMethod --|> Solver
+GaussianMethod -r-|> Solver
+Main -d- MonteCarloMethod
+Main -d- HoeffdingMethod
+Main -u- EnumerationMethod
+Main -r- GaussianMethod
+'Airport --|> Node
+'WayPoint --|> Node
+'Route *-- Point:(1:*)
+'Route *--> FLevel:(1:1)
+'Point *-u->WayPoint:(1:1)
+'Flight *-->Route:(1:*)
+'Flight *-->Airport:(1:2)
+'Node *-->Position:(1:1)
+'Input o-->Network:(1:1)
+'Network o-r-Flight:(1:*)
+'Network o--Airport:(1:*)
+'Network o-l-WayPoint:(*:1)
+'Solver *-->Network:(1:1)
+'MonteCarloMethod --|> Solver
+'HoeffdingMethod --|> Solver
+'EnumerationMethod --|> Solver
+'GaussianMethod --|> Solver
+'Main -- MonteCarloMethod
+'Main -- HoeffdingMethod
+'Main -- EnumerationMethod
+'Main -- GaussianMethod
+@enduml
