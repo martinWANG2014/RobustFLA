@@ -2,28 +2,10 @@
 // Created by chenghaowang on 23/05/17.
 //
 
-#ifndef ROBUSTFLA_PROCESSCLOCK_H
-#define ROBUSTFLA_PROCESSCLOCK_H
+#ifndef PROCESSCLOCK_H
+#define PROCESSCLOCK_H
 
-
-#include "predefine.h"
-#ifdef WIN64
-#include <windows.h>
-    struct ProcessTime {
-        FILETIME tms_utime;
-        FILETIME tms_stime;
-        FILETIME tms_cutime;
-        FILETIME tms_cstime;
-    };
-#else
-#include <sys/times.h>
-typedef struct tms ProcessTime;
-#endif
-#ifndef WIN64
-clock_t startClock;
-clock_t endClock;
-#endif
-
+#include "common.h"
 
 /**
  * the class to describe the process clock to calculate the elapsed time by the program.
@@ -33,37 +15,37 @@ private:
     /**
      * the start time of process.
      */
-    ProcessTime oPCStartTime;
+    ProcessTime oStartTime;
 
     /**
      * the end time of process.
      */
-    ProcessTime oPCEndTime;
+    ProcessTime oEndTime;
 
     /**
 	 * the user time.
 	 */
-    double dPCUserTime;
+    double dUserTime;
 
     /**
 	 * the system time.
 	 */
-    double dPCSysTime;
+    double dSysTime;
 
     /**
 	 * the creation time.
 	 */
-    double dPCCreateTime;
+    double dCreateTime;
 
     /**
 	 * the exit time.
 	 */
-    double dPCExitTime;
+    double dExitTime;
 
     /**
 	 * the cpu time.
 	 */
-    double dPCCpuTime;
+    double dCpuTime;
 public:
     /**
      * start process.
@@ -79,32 +61,32 @@ public:
      * Getter for User time.
      * @return the corresponding user time.
      */
-    double getDPCUserTime() const;
+    double getUserTime() const;
 
     /**
      * Getter for System time.
      * @return the corresponding system time.
      */
-    double getDPCSysTime() const;
+    double getSysTime() const;
 
     /**
      * Getter for Create time.
      * @return the corresponding create time.
      */
-    double getDPCCreateTime() const;
+    double getCreateTime() const;
 
     /**
      * Getter for Exit time.
      * @return the corresponding exit time.
      */
-    double getDPCExitTime() const;
+    double getExitTime() const;
 
     /**
      * Getter for Cpu time.
      * @return the corresponding Cpu time.
      */
-    double getDPCCpuTime() const;
+    double getCpuTime() const;
 };
 
 
-#endif //ROBUSTFLA_PROCESSCLOCK_H
+#endif //PROCESSCLOCK_H

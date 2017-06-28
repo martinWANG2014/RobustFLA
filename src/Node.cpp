@@ -22,7 +22,7 @@ const String &Node::getName() const {
     return sName;
 }
 
-const Position &Node::getPosition() const {
+Position &Node::getPosition() const {
     return position;
 }
 

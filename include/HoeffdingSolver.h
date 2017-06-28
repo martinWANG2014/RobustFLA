@@ -2,9 +2,8 @@
 // Created by chenghaowang on 07/06/17.
 //
 
-#ifndef ROBUSTFLA_HOEFFDING_H
-#define ROBUSTFLA_HOEFFDING_H
-
+#ifndef HOEFFDINGSOLVER_H
+#define HOEFFDINGSOLVER_H
 
 #include "BasicSolver.h"
 
@@ -21,4 +20,4 @@ private:
 };
 
 
-#endif //ROBUSTFLA_HOEFFDING_H
+#endif //HOEFFDINGSOLVER_H

@@ -2,14 +2,12 @@
 // Created by martinwang on 27/04/17.
 //
 
-#ifndef ROBUSTFLA_INPUT_H
-#define ROBUSTFLA_INPUT_H
+#ifndef INPUT_H
+#define INPUT_H
 
-#include "predefine.h"
+#include "common.h"
 #include "Flight.h"
 #include "Network.h"
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/json_parser.hpp>
 
 class Input {
 public:

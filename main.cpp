@@ -27,10 +27,10 @@ int main(int argc, char *argv[]) {
         network.displayLevelFlightsMap();
         //follows the decreasing order of loads
         //(number of concerned flights in their preferred level)
-        for(auto &&element: network.getProcessingLevelOrder()){
-            //update the
-            network.updateFlightsInLevel(element);
-        }
+//        for(auto &&element: network.getProcessingLevelOrder()){
+//            //update the
+//            network.updateFlightsInLevel(element);
+//        }
     }
     catch (const invalid_argument &e) {
         std::cerr << "Error: " << e.what() << std::endl;

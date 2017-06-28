@@ -2,12 +2,11 @@
 // Created by chenghaowang on 31/05/17.
 //
 
-#ifndef ROBUSTFLA_FLEVEL_H
-#define ROBUSTFLA_FLEVEL_H
+#ifndef FLEVEL_H
+#define FLEVEL_H
 
+#include "common.h"
 
-#include <ostream>
-#include "predefine.h"
 class FLevel {
 public:
     /**
@@ -78,5 +77,4 @@ private:
     int iFLightLevel;
     double dPenalCost;
 };
-typedef std::vector<FLevel *> FLevelVector;
-#endif //ROBUSTFLA_FLEVEL_H
+#endif //FLEVEL_H

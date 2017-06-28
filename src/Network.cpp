@@ -4,7 +4,6 @@
 
 #include "../include/Network.h"
 
-
 Flight *Network::addNewFlight(Flight *pFlight) {
     vpFlightsList.push_back(pFlight);
     return pFlight;
@@ -38,22 +37,6 @@ Airport *Network::findAirportByCode(String sCode) {
 
 WayPoint *Network::findWayPointByCode(String sCode) {
     return findByCode<WayPoint>(vpWayPointsList, sCode);
-}
-
-int Network::getNbFeasibleLevels() const {
-    return pConfiguration->getNbFeasibleLevels();
-}
-
-int Network::getNbPeriods() const {
-    return pConfiguration->getNbPeriods();
-}
-
-Time Network::getPeriodUnit() const {
-    return pConfiguration->getPeriodUnit();
-}
-
-void Network::setConfiguration(Configuration *pConfiguration) {
-    Network::pConfiguration = pConfiguration;
 }
 
 void Network::initFeasibleLevelList() {
@@ -142,9 +125,6 @@ double **Network::getDelay() {
 double *Network::getPi() {
     return nullptr;
 }
-IntVector &Network::getProcessingLevelOrder() const {
-    return  viProcessingLevelOrder;
-}
 
 bool Network::compare(const int i, const int j)
 {
@@ -170,4 +150,8 @@ int Network::getNbLevelPreferredAtLevel(int iIndex) {
 
 void Network::updateFlightsInLevel(int iLevel) {
 
+}
+
+const IntVector &Network::getProcessingLevelOrder() const {
+    return viProcessingLevelOrder;
 }

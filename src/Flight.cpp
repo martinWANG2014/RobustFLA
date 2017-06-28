@@ -3,9 +3,7 @@
 //
 
 #include "../include/Flight.h"
-#include "../include/GlobalDefinition.h"
-#include "../include/Network.h"
-#include "../include/Position.h"
+
 Flight::Flight(const Flight &flight) : sCode(flight.getCode()), pAOrigin(flight.getAirportOrigin()),
                                        pADestination(flight.getAirportDestination()),
                                        iDepartureTime(flight.getDepartureTime()),
@@ -149,7 +147,7 @@ void calcluteConflictBetween(Flight &lhs, int iIndexI, Flight &rhs, int iIndexJ,
                              double *dOutCost = 0) {
     Point *p1 = lhs.getRoutePointAtI(iIndexI);
     Point *p2 = rhs.getRoutePointAtI(iIndexJ);
-    if (equal(*p1, *p2, Network::iPeriodTime)) {
+    if (*p1 == *p2) {
         Position n1 = p1->getWayPoint()->getPosition();
         Time t1 = p1->getArrivingTime();
         Time t2 = p2->getArrivingTime();
@@ -196,7 +194,7 @@ void calcluteConflictBetween(Flight &lhs, int iIndexI, Flight &rhs, int iIndexJ,
         }
         const double f2 = (min_separation - muy) / (sqrt(2.0) * sigma);
         const double f1 = (-min_separation - muy) / (sqrt(2.0) * sigma);
-        const double prob = (erfFunction(f2) - erfFunction(f1)) / sqrt(PIx);
+        const double prob = (erfFunction(f2) - erfFunction(f1)) / sqrt(PI);
         *dOutProbability = (prob > 1) ? 1 : fabs(prob);
     }
 }

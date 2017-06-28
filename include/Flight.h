@@ -2,13 +2,12 @@
 // Created by martinwang on 28/04/17.
 //
 
-#ifndef ROBUSTFLA_FLIGHT_H
-#define ROBUSTFLA_FLIGHT_H
+#ifndef FLIGHT_H
+#define FLIGHT_H
 
-#include "predefine.h"
-#include "Node.h"
+#include "common.h"
 #include "Route.h"
-typedef std::vector<std::tuple<Point*, Point*, double>> conflictMatrix;
+
 class Flight {
 public:
     /**
@@ -120,12 +119,5 @@ private:
 
 
     bool hasAssigned = false;
-
-
 };
-typedef std::vector<Flight *> FlightVector;
-typedef std::map<int, std::vector<std::pair<Flight *, int>>> LevelFlightMap;
-typedef std::vector<std::pair<Flight *, int>> FlightPVector;
-typedef std::map<Flight *, bool> FlightAssignmentMap;
-
-#endif //ROBUSTFLA_FLIGHT_H
+#endif //FLIGHT_H

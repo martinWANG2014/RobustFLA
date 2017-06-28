@@ -2,9 +2,8 @@
 // Created by chenghaowang on 07/06/17.
 //
 
-#ifndef ROBUSTFLA_MONTECARLO_H
-#define ROBUSTFLA_MONTECARLO_H
-
+#ifndef MONTECARLOSOLVER_H
+#define MONTECARLOSOLVER_H
 
 #include "BasicSolver.h"
 
@@ -18,4 +17,4 @@ private:
 };
 
 
-#endif //ROBUSTFLA_MONTECARLO_H
+#endif //MONTECARLOSOLVER_H

@@ -2,12 +2,11 @@
 // Created by chenghaowang on 23/05/17.
 //
 
-#ifndef ROBUSTFLA_ROUTE_H
-#define ROBUSTFLA_ROUTE_H
+#ifndef ROUTE_H
+#define ROUTE_H
 
-#include "predefine.h"
-#include "FLevel.h"
-#include "NodePoint.h"
+#include "common.h"
+
 class Route {
 public:
     /**
@@ -72,4 +71,4 @@ private:
      */
     PointVector vpPointsList;
 };
-#endif //ROBUSTFLA_ROUTE_H
+#endif //ROUTE_H

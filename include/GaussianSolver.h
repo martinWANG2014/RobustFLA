@@ -2,9 +2,8 @@
 // Created by chenghaowang on 07/06/17.
 //
 
-#ifndef ROBUSTFLA_GAUSSIANSOLVER_H
-#define ROBUSTFLA_GAUSSIANSOLVER_H
-
+#ifndef GAUSSIANSOLVER_H
+#define GAUSSIANSOLVER_H
 
 #include "BasicSolver.h"
 
@@ -18,4 +17,4 @@ private:
 };
 
 
-#endif //ROBUSTFLA_GAUSSIANSOLVER_H
+#endif //GAUSSIANSOLVER_H

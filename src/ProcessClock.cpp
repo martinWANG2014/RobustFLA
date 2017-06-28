@@ -3,6 +3,7 @@
 //
 
 #include "../include/ProcessClock.h"
+
 #ifdef WIN32
 union b64 {
     FILETIME time;
@@ -10,60 +11,56 @@ union b64 {
 };
 
 void ProcessClock::start() {
-    GetProcessTimes(GetCurrentProcess(), &oPCStartTime.tms_cutime, &oPCStartTime.tms_cstime, &oPCStartTime.tms_stime, &oPCStartTime.tms_utime);
+    GetProcessTimes(GetCurrentProcess(), &oStartTime.tms_cutime, &oStartTime.tms_cstime, &oStartTime.tms_stime, &oStartTime.tms_utime);
 }
 void ProcessClock::end() {
-    GetProcessTimes(GetCurrentProcess(), &oPCEndTime.tms_cutime, &oPCEndTime.tms_cstime, &oPCEndTime.tms_stime, &oPCEndTime.tms_utime);
+    GetProcessTimes(GetCurrentProcess(), &oEndTime.tms_cutime, &oEndTime.tms_cstime, &oEndTime.tms_stime, &oEndTime.tms_utime);
 
     b64 start, end;
-    start.time = oPCStartTime.tms_utime; end.time = oPCEndTime.tms_utime;
-    dPCUserTime = (double)(end.i64 - start.i64)/10000000U;
-    start.time = oPCStartTime.tms_stime; end.time = oPCEndTime.tms_stime;
-    dPCSysTime = (double)(end.i64 - start.i64)/10000000U;
-    start.time = oPCStartTime.tms_cutime; end.time = oPCEndTime.tms_cutime;
-    dPCCreateTime = (double)(end.i64 - start.i64)/10000000U;
-    start.time = oPCStartTime.tms_cstime; end.time = oPCEndTime.tms_cstime;
-    dPCExitTime = (double)(end.i64 - start.i64)/10000000U;
-    dPCCpuTime = dPCUserTime + dPCSysTime;
+    start.time = oStartTime.tms_utime; end.time = oEndTime.tms_utime;
+    dUserTime = (double)(end.i64 - start.i64)/10000000U;
+    start.time = oStartTime.tms_stime; end.time = oEndTime.tms_stime;
+    dSysTime = (double)(end.i64 - start.i64)/10000000U;
+    start.time = oStartTime.tms_cutime; end.time = oEndTime.tms_cutime;
+    dCreateTime = (double)(end.i64 - start.i64)/10000000U;
+    start.time = oStartTime.tms_cstime; end.time = oEndTime.tms_cstime;
+    dExitTime = (double)(end.i64 - start.i64)/10000000U;
+    dCpuTime = dUserTime + dSysTime;
 }
-
 #else
-
 #include <unistd.h>
-
 void ProcessClock::start() {
-    startClock = times(&oPCStartTime);
+    startClock = times(&oStartTime);
 }
 
 void ProcessClock::end() {
-    endClock = times(&oPCEndTime);
+    endClock = times(&oEndTime);
 
     long tick_per_sec = sysconf(_SC_CLK_TCK);
-    dPCUserTime = (double) (oPCEndTime.tms_utime - oPCStartTime.tms_utime) / tick_per_sec;
-    dPCSysTime = (double) (oPCEndTime.tms_stime - oPCStartTime.tms_stime) / tick_per_sec;
-    dPCCpuTime = (double) (endClock - startClock) / tick_per_sec;
-    dPCCreateTime = (double) (oPCEndTime.tms_cutime - oPCStartTime.tms_cutime) / tick_per_sec;
-    dPCExitTime = (double) (oPCEndTime.tms_cstime - oPCStartTime.tms_cstime) / tick_per_sec;
+    dUserTime = (double) (oEndTime.tms_utime - oStartTime.tms_utime) / tick_per_sec;
+    dSysTime = (double) (oEndTime.tms_stime - oStartTime.tms_stime) / tick_per_sec;
+    dCpuTime = (double) (endClock - startClock) / tick_per_sec;
+    dCreateTime = (double) (oEndTime.tms_cutime - oStartTime.tms_cutime) / tick_per_sec;
+    dExitTime = (double) (oEndTime.tms_cstime - oStartTime.tms_cstime) / tick_per_sec;
 }
-
 #endif
 
-double ProcessClock::getDPCUserTime() const {
-    return dPCUserTime;
+double ProcessClock::getUserTime() const {
+    return dUserTime;
 }
 
-double ProcessClock::getDPCSysTime() const {
-    return dPCSysTime;
+double ProcessClock::getSysTime() const {
+    return dSysTime;
 }
 
-double ProcessClock::getDPCCreateTime() const {
-    return dPCCreateTime;
+double ProcessClock::getCreateTime() const {
+    return dCreateTime;
 }
 
-double ProcessClock::getDPCExitTime() const {
-    return dPCExitTime;
+double ProcessClock::getExitTime() const {
+    return dExitTime;
 }
 
-double ProcessClock::getDPCCpuTime() const {
-    return dPCCpuTime;
+double ProcessClock::getCpuTime() const {
+    return dCpuTime;
 }

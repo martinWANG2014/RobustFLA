@@ -3,7 +3,6 @@
 //
 
 #include "../include/Position.h"
-#include "../include/predefine.h"
 
 Position::Position(const Position &position): dLatitude(position.getLatitude()), dLongitude(position.getLongitude()) {}
 
@@ -35,7 +34,7 @@ Position *Position::clone() {
 }
 
 std::ostream &operator<<(std::ostream &os, const Position &position) {
-    os << "dLatitude: " << position.dLatitude << " dLongitude: " << position.dLongitude;
+    os << "Lat: " << position.dLatitude << " Lng: " << position.dLongitude;
     return os;
 }
 
@@ -47,15 +46,14 @@ double distanceBetween(const Position &p1, const Position &p2) {
 
     double dDeltaLat = dLat1 - dLat2;
     double dDeltaLng = dLng1 - dLng2;
-    double dDeltaLatRadian = dDeltaLat * PIx / 180;
-    double dDeltaLngRadian = dDeltaLng * PIx / 180;
-    double dLat1Radian = dLat1 * PIx / 180;
-    double dLat2Radian = dLat2 * PIx / 180;
-    double a = sin(dDeltaLatRadian / 2) * sin(dDeltaLatRadian / 2) +
-               cos(dLat1Radian) * cos(dLat2Radian) * sin(dDeltaLngRadian / 2) * sin(dDeltaLngRadian / 2);
+    double dDeltaLatRadian = dDeltaLat * PI / 180;
+    double dDeltaLngRadian = dDeltaLng * PI / 180;
+    double dLat1Radian = dLat1 * PI / 180;
+    double dLat2Radian = dLat2 * PI / 180;
+    double a = pow(sin(dDeltaLatRadian / 2), 2) +
+               cos(dLat1Radian) * cos(dLat2Radian) * pow(sin(dDeltaLngRadian / 2), 2);
     double c = 2 * atan2(sqrt(a), sqrt(1 - a));
-    double d = RADIO * c;
-    return d;
+    return EARTH_RADIUS * c;
 }
 
 

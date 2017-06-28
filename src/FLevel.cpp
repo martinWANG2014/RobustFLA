@@ -4,6 +4,7 @@
 
 
 #include "../include/FLevel.h"
+
 FLevel::FLevel(const FLevel &level): iFLightLevel(level.getFlightLevel()), dPenalCost(level.getPenalCost()) {}
 
 FLevel::FLevel(int iFlightLevel): iFLightLevel(iFlightLevel), dPenalCost(0.0) {}

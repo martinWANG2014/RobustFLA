@@ -3,7 +3,6 @@
 //
 
 #include "../include/Input.h"
-#include "../include/NodePoint.h"
 
 Input::Input(const String &sAirportPath, const String &sWayPointPath, const String &sFlightPath, const String &sConfigPath)
         :sAirportPath(sAirportPath), sWayPointPath(sWayPointPath), sFlightPath(sFlightPath), sConfigPath(sConfigPath){}
@@ -174,15 +173,26 @@ void Input::parseConfiguration(Network *pNetwork) {
     }
     ptree root;
     read_json(sConfigPath, root);
-    Configuration *configuration = new Configuration(root.get<int>("NbPeriods"),
-                                                     root.get<Time>("PeriodUnit"),
-                                                     root.get<int>("NbFeasibleLevels"));
-    pNetwork->setConfiguration(configuration);
+    int iNbPeriods = root.get<int>("NbPeriods");
+    Time iPeriodUnit = root.get<Time>("PeriodUnit");
+    int iNbFeasibleLevels = root.get<int>("NbFeasibleLevels");
+    if (iNbPeriods != *NBPERIODS){
+        delete(NBPERIODS);
+        NBPERIODS = &iNbPeriods;
+    }
+    if (iNbFeasibleLevels != *LEVELSIZE){
+        delete(LEVELSIZE);
+        LEVELSIZE = &iNbFeasibleLevels;
+    }
+    if (iPeriodUnit != *PERIODUNIT){
+        delete(PERIODUNIT);
+        PERIODUNIT = &iPeriodUnit;
+    }
     std::cout << "OK" << std::endl
               << "Configuration file data:" << std::endl
-              << "NbPeriods: " << pNetwork->getNbPeriods() << std::endl
-              << "PeriodUint: " << pNetwork->getPeriodUnit() << std::endl
-              << "NbFeasibleLevels: " << pNetwork->getNbFeasibleLevels() << std::endl;
+              << "NbPeriods: " << *NBPERIODS << std::endl
+              << "PeriodUint: " << *PERIODUNIT << std::endl
+              << "NbFeasibleLevels: " << *LEVELSIZE << std::endl;
 }
 
 void Input::initNetwork(Network *pNetwork) {

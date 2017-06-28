@@ -2,19 +2,19 @@
 // Created by chenghaowang on 22/05/17.
 //
 
-#ifndef ROBUSTFLA_POINT_H
-#define ROBUSTFLA_POINT_H
+#ifndef NODE_H
+#define NODE_H
 
-#include <ostream>
-#include "predefine.h"
+#include "common.h"
 #include "Position.h"
+
 /**
  * A Node is specified by an unique code, a name and a corresponding position.
  */
 class Node {
 public:
     /**
-     * Copy Contructor.
+     * Copy Constructor.
      * @param node see{@link Node}.
      */
     Node(const Node &node);
@@ -57,17 +57,17 @@ public:
      * Getter for point position.
      * @return the position of corresponding point.
      */
-    const Position &getPosition() const;
+    Position &getPosition() const;
 
     /**
-     * override of == operand.
+     * Override of == operand.
      * @param rhs the other compared Node.
      * @return true, if the two points have same code; false, otherwise.
      */
     bool operator==(const Node &rhs) const;
 
     /**
-     * override of != operand. see == operand override.
+     * Override of != operand. see == operand override.
      * @param rhs the other compared Node.
      * @return true, if the two points don't have same code; false, otherwise.
      */
@@ -79,8 +79,13 @@ public:
      */
     Node *clone();
 
+    /**
+     * Override the output stream to print the Node object.
+     * @param os the standard output stream.
+     * @param node the Node object.
+     * @return redirected output stream.
+     */
     friend std::ostream &operator<<(std::ostream &os, const Node &node);
-
 private:
     /**
      * the point code.
@@ -97,6 +102,4 @@ private:
      */
     Position position;
 };
-typedef Node WayPoint, Airport;
-typedef std::vector<Node *> WayPointVector, AirportVector;
-#endif //ROBUSTFLA_POINT_H
+#endif //NODE_H

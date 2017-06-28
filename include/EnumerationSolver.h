@@ -2,9 +2,8 @@
 // Created by chenghaowang on 07/06/17.
 //
 
-#ifndef ROBUSTFLA_ENUMERATION_H
-#define ROBUSTFLA_ENUMERATION_H
-
+#ifndef ENUMERATIONSOLVER_H
+#define ENUMERATIONSOLVER_H
 
 #include "BasicSolver.h"
 
@@ -21,4 +20,4 @@ private:
 };
 
 
-#endif //ROBUSTFLA_ENUMERATION_H
+#endif //ENUMERATIONSOLVER_H
