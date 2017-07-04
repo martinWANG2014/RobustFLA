@@ -2,45 +2,49 @@
 // Created by chenghaowang on 22/05/17.
 //
 
-#ifndef ROBUSTFLA_POSITION_H
-#define ROBUSTFLA_POSITION_H
-
-#include "common.h"
-
+#ifndef POSITION_H
+#define POSITION_H
 /**
  * A Position is denoted by a latitude and a longitude.
  */
 class Position {
 public:
+    Position(void){
+
+    }
     /**
      * Copy Constructor.
      * @param position see {@link Position}.
      */
-    Position(const Position &position);
+    Position(const Position &position): dLatitude(position.getLatitude()), dLongitude(position.getLongitude()) {}
 
     /**
      * Constructor with parameters.
      * @param dLatitude the latitude of a position.
      * @param dLongitude the longitude of a position.
      */
-    Position(double dLatitude, double dLongitude);
+    Position(double dLatitude, double dLongitude): dLatitude(dLatitude),dLongitude(dLongitude) {}
 
     /**
      * Destructor
      */
-    virtual ~Position();
+    virtual ~Position(){}
 
     /**
      * Getter for the latitude.
      * @return the latitude of a corresponding position.
      */
-    double getLatitude() const;
+    double getLatitude() const {
+        return dLatitude;
+    }
 
     /**
      * Getter for the longitude.
      * @return the longitude of a corresponding position.
      */
-    double getLongitude() const;
+    double getLongitude() const {
+        return dLongitude;
+    }
 
     /**
      * Override of == operand.
@@ -57,20 +61,6 @@ public:
     bool operator!=(const Position &rhs) const;
 
     /**
-     * Clone the object itself.
-     * @return the cloned object.
-     */
-    Position *clone();
-
-    /**
-     * Override the output stream to print the Position object.
-     * @param os the standard output stream.
-     * @param position the Position Object.
-     * @return redirected output stream.
-     */
-    friend std::ostream &operator<<(std::ostream &os, const Position &position);
-
-    /**
      * Calculate the distance between the two positions by Haversine formula.
      * Haversine formula:
      *                  R = earth’s radius (mean radius = 6,378.16km)
@@ -85,7 +75,6 @@ public:
      * @return the distance between two positions.
      */
     friend double distanceBetween(const Position &p1, const Position &p2);
-
 private:
     /**
      * the latitude of a position.
@@ -99,4 +88,4 @@ private:
 };
 
 
-#endif //ROBUSTFLA_POSITION_H
+#endif //POSITION_H

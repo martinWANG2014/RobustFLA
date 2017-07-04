@@ -2,8 +2,8 @@
 // Created by chenghaowang on 23/05/17.
 //
 
-#ifndef COMMON_H
-#define COMMON_H
+#ifndef DEFINE_H
+#define DEFINE_H
 
 #include <string>
 #include <iostream>
@@ -12,30 +12,23 @@
 #include <set>
 #include <random>
 #include <algorithm>
+//#include <boost/python.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
-#include "Node.h"
-#include "NodePoint.h"
-#include "FLevel.h"
-#include "Flight.h"
+#include <boost/math/special_functions/erf.hpp>
 #undef IL_STD
 #define  IL_STD
 #include <ilcplex/ilocplex.h>
 
 typedef std::string String;
 typedef int Time;
+typedef int Level;
+typedef std::set<Level> LevelSet;
+typedef std::map<Level, bool> LevelExamine;
 typedef std::vector<int> IntVector;
+typedef std::vector<double> DoubleVector;
 typedef std::uniform_real_distribution<double> uni_dist;
 typedef std::normal_distribution<double> normal_dist;
-typedef Node WayPoint, Airport;
-typedef std::vector<Node *> WayPointVector, AirportVector;
-typedef std::vector<Point*> PointVector;
-typedef std::vector<FLevel *> FLevelVector;
-typedef std::vector<std::tuple<Point*, Point*, double>> conflictMatrix;
-typedef std::vector<Flight *> FlightVector;
-typedef std::map<int, std::vector<std::pair<Flight *, int>>> LevelFlightMap;
-typedef std::vector<std::pair<Flight *, int>> FlightPVector;
-typedef std::map<Flight *, bool> FlightAssignmentMap;
 #ifdef WIN64
 #include <windows.h>
     struct ProcessTime {
@@ -52,25 +45,39 @@ typedef struct tms ProcessTime;
 clock_t startClock;
 clock_t endClock;
 #endif
-const double k = 1.8520108;              // constant : 1(nmi)=k*1(km)
-const double min_separation = 5.0;
+const double K = 1.8520108;              // constant : 1(nmi)=K*1(km)
+const double MIN_SEPARATION_DISTANCE = 5.0;
 const double PI = 3.141592653589793;
 const double EARTH_RADIUS = 6378.16;
-const double EPSILON = 1.0e-10; // precision of double variables
-const int ITMAX = 1000;
+const double PRECISION = 1.0e-10; // precision of double variables
+const int ITERATIONCOUNT = 1000;
+const double  COEFPORBABILITY = 0.001;
+const double CONFIDNECE = 0.95;
+const double ALPHA=15;
+const double BETA=60;
+const double COEFPI = 5;
+const double COEFPIJ = 1;//0.7
+const double EPSILON = 0.05;
 const Time* PERIODUNIT = new Time(30);
 const int* NBPERIODS = new int(96);
 const int* LEVELSIZE = new int(3);
+#ifdef NRVSM
 static IntVector LevelIFRA{10, 30, 50, 70, 90, 110, 130, 150, 170, 190, 210, 230, 250, 270, 290, 330, 370, 410, 450, 490};
 static IntVector LevelIFRB{20, 40, 60, 80, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 310, 350, 390, 430, 470, 510};
+#else
+static IntVector LevelIFRA{10, 30, 50, 70, 90, 110, 130, 150, 170, 190, 210, 230, 250, 270, 290, 310, 330, 350, 370, 390, 410, 450, 490};
+static IntVector LevelIFRB{20, 40, 60, 80, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340, 360, 380, 400, 430, 470, 510};
+#endif
 static IntVector LevelVFRA{35, 55, 75, 95, 115, 135, 155, 175, 195};
 static IntVector LevelVFRB{45, 65, 85, 105, 125, 145, 165, 185};
 
 std::default_random_engine generator;
+std::random_device randomDevice;
 uni_dist rand_2(0.0, 2.0);
 uni_dist rand_3(0.0, 3.0);
 uni_dist rand_5(0.0, 5.0);
 uni_dist rand_100(0.0, 100.0);
+uni_dist rand_1(0.0, 1.0);
 
 template<typename T> T* findByCode(std::vector<T*> vpObjectsVector, const String &sCode){
     if (vpObjectsVector.size() < 1) return nullptr;
@@ -104,8 +111,13 @@ template<typename T> bool contains(std::vector<T> vpObjectsVector, T object){
 
 IntVector findFeasibleLevels(int iDefaultLevel){
     IntVector feasibleList;
+    feasibleList.push_back(iDefaultLevel);
     //auto position;
+#ifdef NRVSM
     if (iDefaultLevel < 290){
+#else
+    if (iDefaultLevel < 410){
+#endif
         auto position = LevelIFRA.end();
         switch (iDefaultLevel % 4){
             // in IFR B group
@@ -184,18 +196,23 @@ IntVector findFeasibleLevels(int iDefaultLevel){
     return feasibleList;
 }
 
-/**
- * Generate a random departure time which follows the piecewise uniform laws.
- * @param dDepartureTime the initial departure time.
- * @return the random departure time.
- */
-double randDepartureTimeInterval(double dDepartureTime){
-    normal_dist NormalDistribution1(dDepartureTime, 3/3);
-    normal_dist NormalDistribution2(dDepartureTime, 2/3);
+double randNormalDataFromInterval1(double dValue, double dSigma){
+    normal_dist NormalDistribution((ALPHA+BETA)/2, dSigma);
+    return dValue+NormalDistribution(generator);
+}
+
+double randNormalDataFromInterval2(double dValue, double dSigma){
+    normal_dist NormalDistribution(0, dSigma);
+    return dValue+NormalDistribution(generator);
+}
+
+double randNormalDataFromInterval3(double dValue, double dW1, double dW2, double dSigma1, double dSigma2, double dRatio){
+    normal_dist NormalDistributionLeft(-dW1*ALPHA, dSigma1);
+    normal_dist NormalDistributionRight(dW2*BETA, dSigma2);
     double dOffset;
-    return dDepartureTime + (rand_100(generator) > 50)
-           ? (dOffset = NormalDistribution2(generator), dOffset < 0 ? -dOffset : dOffset)
-           : (dOffset = NormalDistribution1(generator), dOffset > 0 ? -dOffset : dOffset);
+    return dValue + (rand_1(generator) > dRatio)
+           ? (dOffset = NormalDistributionRight(generator), dOffset < 0 ? -dOffset : dOffset)
+           : (dOffset = NormalDistributionLeft(generator), dOffset > 0 ? -dOffset : dOffset);
 }
 
 /**
@@ -203,7 +220,7 @@ double randDepartureTimeInterval(double dDepartureTime){
  * @param dDepartureTime the initial departure time.
  * @return the random departure time.
  */
-double randDepartureTimeNormalDist(double dDepartureTime){
+double randPiecewiseData(double dDepartureTime){
     double dSeed;
     double dSeed_2;
     return dDepartureTime + (dSeed = rand_100(generator), dSeed_2 = rand_100(generator), dSeed < 83)
@@ -272,4 +289,16 @@ double randDepartureTimeNormalDist(double dDepartureTime){
                                    )));
 }
 
-#endif //COMMON_H
+/**
+ * Generate the sigma value that makes:
+ * P(a <= x <= b) >= gamma, where a-b=alpha+beta,
+ * x follows a normal distribution, where the mean mu=(a+b)/2.
+ * @param alpha the expected absolute of lower bound far from the mean of random variables.
+ * @param beta the expected upper bound far from the mean of random variables.
+ * @param gamma the confidence that random variable will fall in interval [a, b]
+ * @return the sigma of random varaibles.
+ */
+double getSigma(double alpha, double beta, double gamma){
+    return (alpha+beta)/(2*sqrt(2)*boost::math::erf_inv(gamma));
+}
+#endif //DEFINE_H

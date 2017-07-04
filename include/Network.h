@@ -5,7 +5,8 @@
 #ifndef NETWORK_H
 #define NETWORK_H
 
-#include "common.h"
+#include "Define.h"
+#include "Flight.h"
 
 class Network {
 public:
@@ -17,32 +18,15 @@ public:
     int getNbFlights() const ;
     Airport *findAirportByCode(String sCode);
     WayPoint *findWayPointByCode(String sCode);
-    void initFeasibleLevelList();
-    void initATMFlightLevelList();
-    void initFlightsInLevel();
-    FlightPVector getFlightsAtL(int iLevel);
-    void displayFlightsInfo();
-    void displayFlightLevelsInfo();
-    void displayLevelFlightsMap();
-    FlightVector getProcessingFlightsAtLevel(int iProcessingLevel);
-    int getCurrentProcessingSize();
-    double getPenalCostOfFlightAtLevel(int iIndexFlight, int iProcessingLevel);
-    double **getPorbability();
-    double **getDelay();
-    double *getPi();
+    const FlightVector &getFlightList(void) const;
+    const IntVector &getLevelList();
+    void setLevelList(IntVector &level_list);
 
-    const IntVector &getProcessingLevelOrder() const;
-
-    void initProcessingLevelOrder();
-    void updateFlightsInLevel(int iLevel);
 private:
+
     FlightVector vpFlightsList;
     AirportVector vpAirportsList;
     WayPointVector vpWayPointsList;
-    IntVector viATMFlightLevelsList;
-    LevelFlightMap mvpLevelFlightMap;
-    IntVector viProcessingLevelOrder;
-    int getNbLevelPreferredAtLevel(int iIndex);
-    bool compare(const int i, const int j);
+    IntVector viLevelsList;
 };
 #endif //NETWORK_H

@@ -5,16 +5,22 @@
 #ifndef FLIGHT_H
 #define FLIGHT_H
 
-#include "common.h"
+#include "Define.h"
+#include "Node.h"
+#include "NodePoint.h"
 #include "Route.h"
 
 class Flight {
 public:
-    /**
-     * Copy Constructor
-     * @param flight see {@link Flight}.
-     */
-    Flight(const Flight &flight);
+    Flight(const Flight &flight) {
+        sCode = flight.getCode();
+        pAOrigin = flight.getAirportOrigin()->clone();
+        pADestination = flight.getAirportDestination()->clone();
+        iDepartureTime = flight.getDepartureTime();
+        pRoute = flight.getRoute()->clone();
+        iCurrentLevel = flight.getCurrentLevel();
+        iDefaultLevel = flight.getDefaultLevel();
+    }
 
     /**
      * Constructor with parameters
@@ -22,27 +28,53 @@ public:
      * @param pAOrigin the original airport.
      * @param pADestination the destination airport.
      * @param iDepartureTime  the departure time.
-     * @param pDefaultLevel
-     * @param pDefaultRoute
+     * @param iDefaultLevel
      */
-    Flight(const String &sCode, Airport *pAOrigin, Airport *pADestination, Time iDepartureTime, FLevel *pDefaultLevel, Route *pDefaultRoute);
+    Flight(const String &sCode, Airport *pAOrigin, Airport *pADestination, Time iDepartureTime, Route* pRoute): sCode(sCode), pAOrigin(pAOrigin), pADestination(pADestination), iDepartureTime(iDepartureTime), pRoute(pRoute){
+        iCurrentLevel = iDefaultLevel = pRoute->getLevel();
+    }
 
     /***
      * Destructor.
      */
-    virtual ~Flight();
+    virtual ~Flight(){
+        delete pAOrigin;
+        delete pADestination;
+        delete pRoute;
+    }
 
-    const String &getCode() const;
+    const String &getCode() const{
+        return sCode;
+    }
 
-    Airport *getAirportOrigin() const;
+    Airport *getAirportOrigin() const {
+        return pAOrigin;
+    }
 
-    Airport *getAirportDestination() const;
+    Airport *getAirportDestination() const {
+        return pADestination;
+    }
 
-    Time getDepartureTime() const;
+    Time getDepartureTime() const{
+        return iDepartureTime;
+    }
 
-    const FLevelVector &getFeasibleLevelList() const;
+    Point* getRoutePointAtI(int iIndex) const {
+        return pRoute->getPointAtI(iIndex);
+    }
 
-    Point* getRoutePointAtI(int iIndex);
+    Level getDefaultLevel() const{
+        return iDefaultLevel;
+    }
+
+    Route* getRoute() const{
+        return pRoute;
+    }
+
+    void setRoute(Route *pRoute){
+        delete pRoute;
+        Flight::pRoute = pRoute;
+    }
 
     /**
      * override == operand.
@@ -51,37 +83,57 @@ public:
      */
     bool operator==(const Flight &rhs) const;
 
-    /**
-     * override != operand.
-     * @param rhs the other compared Flight.
-     * @return false, if the two flights have same id, same departure time;true, otherwise.
-     */
     bool operator!=(const Flight &rhs) const;
 
-    /**
-     * Clone the object itself.
-     * @return the cloned object.
-     */
-    Flight *clone();
+    const LevelSet &getLevelSet() const{
+        return spFeasibleLevelSet;
+    }
+    Level getCurrentLevel() const{
+        return iCurrentLevel;
+    }
+    void setCurrentLevel(Level iCurrentLevel){
+        Flight::iCurrentLevel = iCurrentLevel;
+    }
 
-    void initFeasibleLevelList();
+    Flight *clone(){
+        return new Flight(*this);
+    }
 
-    int getDefaultLevel();
+    Time getArrivingTime(){
+        return pRoute->getFinalArrivingTime();
+    }
 
-    int getNbLevels() const;
-
-    int getLevelAtI(int index) const;
-    int getCurrentLevel() const ;
-    void setCurrentLevel(int iIndexLevel);
-    double getCostOfCurrentLevel();
-    friend std::ostream &operator<<(std::ostream &os, const FLevelVector &flightLevelVector);
-    friend std::ostream &operator<<(std::ostream &os, const Flight &flight);
-
-    bool isCurrentPreferred();
-    void setAssigned(bool bAssigned);
-    bool isAssigned();
-    friend double erfFunction(double x);
-    friend void calcluteConflictBetween(Flight &lhs, int iIndexI, Flight &rhs, int iIndexJ, bool *isIFirst, double *dOutProbability, double *dOutCost);
+    double getProbabilityConflict(const Flight &flight, double *delayWithoutConflict, int *IOrJ, int modeConflict) {
+        Route *route1 = pRoute;
+        Route *route2 = flight.getRoute();
+        if (modeConflict == 0) {
+            for (int i = 1; i < route1->getPointListSize(); i++) {
+                for (int j = 1; j < route2->getPointListSize(); j++) {
+                    if (*route1->getPointAtI(i) == *route2->getPointAtI(j)) {
+                        double prob = route1->probabilityConflict(i, route2, j);
+                        if (prob > COEFPORBABILITY){
+                            *delayWithoutConflict = route1->delayWithoutConflict(i, route2, j, IOrJ);
+                            return prob;
+                        }
+                    }
+                }
+            }
+        }else{
+            for (int i = 1; i < route1->getPointListSize(); i++) {
+                for (int j = 1; j < route2->getPointListSize(); j++) {
+                    if (*route1->getPointAtI(i) == *route2->getPointAtI(j)) {
+                        double prob = route1->probabilityConflict2(i, route2, j);
+                        if (prob > COEFPORBABILITY){
+                            *delayWithoutConflict = route1->delayWithoutConflict2(i, route2, j, IOrJ);
+                            return prob;
+                        }
+                    }
+                }
+            }
+        }
+        *delayWithoutConflict = 0;
+        return -1;
+    }
 
 private:
     /**
@@ -104,20 +156,26 @@ private:
      */
     Time iDepartureTime;
 
-    int iDefaultLevelIndex;
-
-    int iCurrentLevelIndex;
+    /**
+     * the default flight level.
+     */
+    Level iDefaultLevel;
 
     /**
-     * the feasible list of flight level.
+     * the current flight level.
      */
-    FLevelVector vpFeasibleLevelList;
+    Level iCurrentLevel;
 
+    /**
+     * the feasible set of flight level.
+     */
+    LevelSet spFeasibleLevelSet;
+
+    /**
+     * the chosen route of flight.
+     */
     Route *pRoute;
-
-    void addNewFLevel(FLevel *pFLevel);
-
-
-    bool hasAssigned = false;
 };
+typedef std::vector<Flight *> FlightVector;
+typedef std::map<Flight*, bool> FlightAssignmentMap;
 #endif //FLIGHT_H

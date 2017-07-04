@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.6)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 project(RobustFLA)
+
 ######## Cplex Dependency
 find_package(CPLEX REQUIRED)
 if(CPLEX_FOUND)
@@ -24,7 +25,8 @@ set(Boost_USE_MULTITHREADED OFF)
 set(Boost_USE_STATIC_RUNTIME OFF)
 find_package(Boost 1.55.0 COMPONENTS system REQUIRED)
 if(Boost_FOUND)
-    include_directories(${Boost_INCLUDE_DIRS})
+    INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
+    LINK_LIBRARIES(${Boost_LIBRARIES})
 endif()
 
 ######## Complier message

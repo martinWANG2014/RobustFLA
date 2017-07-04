@@ -5,27 +5,26 @@
 #ifndef NODE_H
 #define NODE_H
 
-#include "common.h"
 #include "Position.h"
+#include "Define.h"
 
 /**
  * A Node is specified by an unique code, a name and a corresponding position.
  */
 class Node {
 public:
-    /**
-     * Copy Constructor.
-     * @param node see{@link Node}.
-     */
-    Node(const Node &node);
-
+    Node(const Node &node){
+        sCode = node.getCode();
+        sName = node.getName();
+        position = node.getPosition();
+    }
     /**
      * Constructor with parameters.
      * @param sCode the point code.
      * @param sName  the point name.
      * @param position the point position.
      */
-    Node(const String &sCode, const String &sName, const Position &position);
+    Node(const String &sCode, const String &sName, const Position &position): sCode(sCode), sName(sName), position(position) {}
 
     /**
      * Constructor with parameters.
@@ -34,30 +33,36 @@ public:
      * @param dLatitude the point latitude.
      * @param dLongitude the point longitude.
      */
-    Node(const String &sCode, const String &sName, double dLatitude, double dLongitude);
+    Node(const String &sCode, const String &sName, double dLatitude, double dLongitude): sCode(sCode), sName(sName), position(dLatitude, dLongitude){}
 
     /**
      * Destructor.
      */
-    virtual ~Node();
+    virtual ~Node(){}
 
     /**
      * Getter for point code.
      * @return the code of corresponding point.
      */
-    const String &getCode() const;
+    const String &getCode() const {
+        return sCode;
+    }
 
     /**
      * Getter for point name.
      * @return the name of corresponding point.
      */
-    const String &getName() const;
+    const String &getName() const {
+        return sName;
+    }
 
     /**
      * Getter for point position.
      * @return the position of corresponding point.
      */
-    Position &getPosition() const;
+    const Position &getPosition() const {
+        return position;
+    }
 
     /**
      * Override of == operand.
@@ -73,19 +78,9 @@ public:
      */
     bool operator!=(const Node &rhs) const;
 
-    /**
-     * Clone the object itself.
-     * @return the cloned object.
-     */
-    Node *clone();
-
-    /**
-     * Override the output stream to print the Node object.
-     * @param os the standard output stream.
-     * @param node the Node object.
-     * @return redirected output stream.
-     */
-    friend std::ostream &operator<<(std::ostream &os, const Node &node);
+    Node *clone(){
+        return new Node(*this);
+    }
 private:
     /**
      * the point code.
@@ -102,4 +97,6 @@ private:
      */
     Position position;
 };
+typedef Node WayPoint, Airport;
+typedef std::vector<Node *> WayPointVector, AirportVector;
 #endif //NODE_H

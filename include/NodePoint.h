@@ -5,8 +5,10 @@
 #ifndef NODEPOINT_H
 #define NODEPOINT_H
 
-#include "common.h"
+#include "Define.h"
+#include "Node.h"
 
+typedef int Time;
 /**
  * the Point contains the wayPoint and the arriving time of a given wayPoint.
  */
@@ -17,31 +19,43 @@ public:
      * @param pWayPoint a pointer links to the given wayPoint.
      * @param iArrivingTime the arriving time at the given wayPoint.
      */
-    Point(WayPoint *pWayPoint, Time iArrivingTime);
+    Point(WayPoint *pWayPoint, Time iArrivingTime) : pWayPoint(pWayPoint), iArrivingTime(iArrivingTime){}
 
     /**
      * Getter for pWayPoint.
      * @return the corresponding pointer links to the wayPoint.
      */
-    WayPoint *getWayPoint() const;
+    WayPoint *getWayPoint() const {
+        return pWayPoint;
+    }
 
     /**
      * Getter for iArriving time.
      * @return the corresponding arriving time.
      */
-    Time getArrivingTime() const;
+    Time getArrivingTime() const {
+        return iArrivingTime;
+    }
+
+    void setArrivingTime(Time iArrivingTime){
+        Point::iArrivingTime = iArrivingTime;
+    }
 
     /**
      * Get the code of wayPoint.
      * @return the wayPoint code.
      */
-    const String &getCode() const ;
+    const String &getCode() const {
+        return pWayPoint->getCode();
+    }
 
     /**
      * Getter for position of wayPoint.
      * @return the wayPoint position.
      */
-    Position &getPosition() const;
+    const Position &getPosition() const {
+        return pWayPoint->getPosition();
+    }
 
     /**
      * Override of == operand
@@ -58,24 +72,6 @@ public:
      * true, otherwise.
      */
     bool operator!=(const Point &rhs) const;
-
-//    /**
-//     * Compaere the two NodePoints will have conflct or not in a ginven Period Unit.
-//     * @param lhs the one Point.
-//     * @param rhs the another Point.
-//     * @param iPeriodUnit the given Period Unit.
-//     * @return true, if the difference between the arriving time of two points less than a given period unit;
-//     * false, otherwise.
-//     */
-//    friend bool equal(const Point &lhs, const Point &rhs, Time iPeriodUnit);
-
-    /**
-     * Override the output stream to print the NodePoint object.
-     * @param os the standard output stream.
-     * @param point the NodePoint object.
-     * @return redirected output stream.
-     */
-    friend std::ostream &operator<<(std::ostream &os, const Point &point);
 private:
     /**
      * the wayPoint of the node point.
@@ -87,4 +83,5 @@ private:
      */
     Time iArrivingTime;
 };
+typedef std::vector<Point*> PointVector;
 #endif //NODEPOINT_H

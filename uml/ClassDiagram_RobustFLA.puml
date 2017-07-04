@@ -80,7 +80,7 @@ class Flight{
     +~Flight()
     +setCurrentRoute(int iCurrentRoute)
     +Route *getCurrentRoute() const
-    +void addNewRoute(Route *pRoute)
+    +void addNewRoute(Route *pActiveRoute)
     +bool operator==(const Flight &rhs) const
     +bool operator!=(const Flight &rhs) const
     +Flight *clone()

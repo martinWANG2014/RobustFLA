@@ -3,22 +3,7 @@
 //
 
 #include "../include/Position.h"
-
-Position::Position(const Position &position): dLatitude(position.getLatitude()), dLongitude(position.getLongitude()) {}
-
-Position::Position(double dLatitude, double dLongitude) : dLatitude(dLatitude),dLongitude(dLongitude) {}
-
-Position::~Position() {
-
-}
-
-double Position::getLatitude() const {
-    return dLatitude;
-}
-
-double Position::getLongitude() const {
-    return dLongitude;
-}
+#include "../include/Define.h"
 
 bool Position::operator==(const Position &rhs) const {
     return dLatitude == rhs.getLatitude() &&
@@ -27,15 +12,6 @@ bool Position::operator==(const Position &rhs) const {
 
 bool Position::operator!=(const Position &rhs) const {
     return !(rhs == *this);
-}
-
-Position *Position::clone() {
-    return new Position(*this);
-}
-
-std::ostream &operator<<(std::ostream &os, const Position &position) {
-    os << "Lat: " << position.dLatitude << " Lng: " << position.dLongitude;
-    return os;
 }
 
 double distanceBetween(const Position &p1, const Position &p2) {

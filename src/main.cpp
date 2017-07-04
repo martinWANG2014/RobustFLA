@@ -1,6 +1,7 @@
-#include "include/Network.h"
-#include "include/Input.h"
-#include <boost/lexical_cast.hpp>
+#include "../include/Network.h"
+#include "../include/Input.h"
+#include "../include/Solution.h"
+
 int main(int argc, char *argv[]) {
     using std::invalid_argument;
     try {
@@ -19,18 +20,10 @@ int main(int argc, char *argv[]) {
         Network network;
         Input input(argv[1], argv[2], argv[3], argv[4]);
         input.initNetwork(&network);
-        network.initFeasibleLevelList();
-        //network.displayFlightsInfo();
-        network.initATMFlightLevelList();
-        network.displayFlightLevelsInfo();
-        network.initFlightsInLevel();
-        network.displayLevelFlightsMap();
-        //follows the decreasing order of loads
-        //(number of concerned flights in their preferred level)
-//        for(auto &&element: network.getProcessingLevelOrder()){
-//            //update the
-//            network.updateFlightsInLevel(element);
-//        }
+        double *somme_objectif = new double(0);
+        double *maxConflictCount = new double(0);
+//        ApproximateFLA(&network, somme_objectif, maxConflictCount, 0);
+        ApproximateFLA(&network, somme_objectif, maxConflictCount, 0, 0, 0, 0, 0, 0, 0);
     }
     catch (const invalid_argument &e) {
         std::cerr << "Error: " << e.what() << std::endl;
