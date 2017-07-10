@@ -4,47 +4,29 @@
 
 #ifndef PROCESSCLOCK_H
 #define PROCESSCLOCK_H
+#ifdef WIN64
+#include <windows.h>
+struct ProcessTime {
+    FILETIME tms_utime;
+    FILETIME tms_stime;
+    FILETIME tms_cutime;
+    FILETIME tms_cstime;
+};
+#else
 
-#include "Define.h"
+#include <sys/times.h>
+
+typedef struct tms ProcessTime;
+#endif
+#ifndef WIN64
+clock_t startClock;
+clock_t endClock;
+#endif
+
 /**
  * the class to describe the process clock to calculate the elapsed time by the program.
  */
 class ProcessClock {
-private:
-    /**
-     * the start time of process.
-     */
-    ProcessTime oStartTime;
-
-    /**
-     * the end time of process.
-     */
-    ProcessTime oEndTime;
-
-    /**
-	 * the user time.
-	 */
-    double dUserTime;
-
-    /**
-	 * the system time.
-	 */
-    double dSysTime;
-
-    /**
-	 * the creation time.
-	 */
-    double dCreateTime;
-
-    /**
-	 * the exit time.
-	 */
-    double dExitTime;
-
-    /**
-	 * the cpu time.
-	 */
-    double dCpuTime;
 public:
     /**
      * start process.
@@ -95,6 +77,42 @@ public:
     double getCpuTime() const {
         return dCpuTime;
     }
+
+private:
+    /**
+     * the start time of process.
+     */
+    ProcessTime oStartTime;
+
+    /**
+     * the end time of process.
+     */
+    ProcessTime oEndTime;
+
+    /**
+	 * the user time.
+	 */
+    double dUserTime;
+
+    /**
+	 * the system time.
+	 */
+    double dSysTime;
+
+    /**
+	 * the creation time.
+	 */
+    double dCreateTime;
+
+    /**
+	 * the exit time.
+	 */
+    double dExitTime;
+
+    /**
+	 * the cpu time.
+	 */
+    double dCpuTime;
 };
 
 #ifdef WIN32
@@ -103,9 +121,16 @@ union b64 {
     __int64 i64;
 };
 
+/**
+ * Start the process clock.
+ */
 void ProcessClock::start() {
     GetProcessTimes(GetCurrentProcess(), &oStartTime.tms_cutime, &oStartTime.tms_cstime, &oStartTime.tms_stime, &oStartTime.tms_utime);
 }
+
+/**
+ * Terminate the process clock, and assign the correspding value.
+ */
 void ProcessClock::end() {
     GetProcessTimes(GetCurrentProcess(), &oEndTime.tms_cutime, &oEndTime.tms_cstime, &oEndTime.tms_stime, &oEndTime.tms_utime);
 
@@ -121,14 +146,21 @@ void ProcessClock::end() {
     dCpuTime = dUserTime + dSysTime;
 }
 #else
+
 #include <unistd.h>
+
+/**
+ * Start the process clock.
+ */
 void ProcessClock::start() {
     startClock = times(&oStartTime);
 }
 
+/**
+ * Terminate the process clock, and assign the correspding value.
+ */
 void ProcessClock::end() {
     endClock = times(&oEndTime);
-
     long tick_per_sec = sysconf(_SC_CLK_TCK);
     dUserTime = (double) (oEndTime.tms_utime - oStartTime.tms_utime) / tick_per_sec;
     dSysTime = (double) (oEndTime.tms_stime - oStartTime.tms_stime) / tick_per_sec;
@@ -136,5 +168,6 @@ void ProcessClock::end() {
     dCreateTime = (double) (oEndTime.tms_cutime - oStartTime.tms_cutime) / tick_per_sec;
     dExitTime = (double) (oEndTime.tms_cstime - oStartTime.tms_cstime) / tick_per_sec;
 }
+
 #endif
 #endif //PROCESSCLOCK_H

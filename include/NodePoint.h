@@ -5,21 +5,21 @@
 #ifndef NODEPOINT_H
 #define NODEPOINT_H
 
-#include "Define.h"
 #include "Node.h"
 
-typedef int Time;
+typedef double Time;
+
 /**
  * the Point contains the wayPoint and the arriving time of a given wayPoint.
  */
-class Point{
+class Point {
 public:
     /**
      * Constructor with parameters
-     * @param pWayPoint a pointer links to the given wayPoint.
-     * @param iArrivingTime the arriving time at the given wayPoint.
+     * @param pWayPoint         A pointer links to the given wayPoint.
+     * @param iArrivingTime     The arriving time at the given wayPoint.
      */
-    Point(WayPoint *pWayPoint, Time iArrivingTime) : pWayPoint(pWayPoint), iArrivingTime(iArrivingTime){}
+    Point(WayPoint *pWayPoint, Time iArrivingTime) : pWayPoint(pWayPoint), iArrivingTime(iArrivingTime) {}
 
     /**
      * Getter for pWayPoint.
@@ -37,7 +37,11 @@ public:
         return iArrivingTime;
     }
 
-    void setArrivingTime(Time iArrivingTime){
+    /**
+     * Setter for iArriving time
+     * @param iArrivingTime the arriving time for a given point.
+     */
+    void setArrivingTime(Time iArrivingTime) {
         Point::iArrivingTime = iArrivingTime;
     }
 
@@ -59,7 +63,7 @@ public:
 
     /**
      * Override of == operand
-     * @param rhs the compared Point.
+     * @param rhs       the compared Point.
      * @return true, if the difference of the arriving time of two points less than Peiod Unit;
      * false, otherwise.
      */
@@ -67,11 +71,21 @@ public:
 
     /**
      * Override of != operand
-     * @param rhs the compared Point.
+     * @param rhs       the compared Point.
      * @return false, if the difference of the arriving time of two points less than Peiod Unit;
      * true, otherwise.
      */
     bool operator!=(const Point &rhs) const;
+
+    /**
+     * Clone a point with new arriving time.
+     * @param iArrivingTime         the new arriving time.
+     * @return The pointer of a new Point object.
+     */
+    Point *clone(Time iArrivingTime) {
+        return new Point(this->pWayPoint->clone(), iArrivingTime);
+    }
+
 private:
     /**
      * the wayPoint of the node point.
@@ -83,5 +97,6 @@ private:
      */
     Time iArrivingTime;
 };
-typedef std::vector<Point*> PointVector;
+
+typedef std::vector<Point *> PointVector;
 #endif //NODEPOINT_H

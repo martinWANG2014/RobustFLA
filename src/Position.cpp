@@ -3,7 +3,6 @@
 //
 
 #include "../include/Position.h"
-#include "../include/Define.h"
 
 bool Position::operator==(const Position &rhs) const {
     return dLatitude == rhs.getLatitude() &&
@@ -22,14 +21,14 @@ double distanceBetween(const Position &p1, const Position &p2) {
 
     double dDeltaLat = dLat1 - dLat2;
     double dDeltaLng = dLng1 - dLng2;
-    double dDeltaLatRadian = dDeltaLat * PI / 180;
-    double dDeltaLngRadian = dDeltaLng * PI / 180;
-    double dLat1Radian = dLat1 * PI / 180;
-    double dLat2Radian = dLat2 * PI / 180;
+    double dDeltaLatRadian = dDeltaLat * M_PI / 180;
+    double dDeltaLngRadian = dDeltaLng * M_PI / 180;
+    double dLat1Radian = dLat1 * M_PI / 180;
+    double dLat2Radian = dLat2 * M_PI / 180;
     double a = pow(sin(dDeltaLatRadian / 2), 2) +
                cos(dLat1Radian) * cos(dLat2Radian) * pow(sin(dDeltaLngRadian / 2), 2);
     double c = 2 * atan2(sqrt(a), sqrt(1 - a));
-    return EARTH_RADIUS * c;
+    return Position::EARTH_RADIUS * c;
 }
 
 

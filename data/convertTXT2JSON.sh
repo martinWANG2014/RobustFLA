@@ -39,21 +39,24 @@ if [[ $# -eq 1 ]] ; then
                     print "\t\t\42FLevel\42: " $5 ",";
                     print "\t\t\42PointList\42: {";
                     n=split($6, pointlist, ":");
-                    print "\t\t\t\42PLN\42: " int(n/2) ",";
-                    for(i=0;i<int(n/2)-1;i++){
+                    for(i=0;i<int(n/2);i++){
+                        if(pointlist[i*2+2]>pointlist[(i+1)*2+2]){
+                            break;
+                        }
                         print "\t\t\t\42" i"\42: {";
                         gsub (" ", "", pointlist[i*2+1]);
                         print "\t\t\t\t\42Code\42: \42" pointlist[i*2+1] "\42,";
                         print "\t\t\t\t\42Time\42: " pointlist[i*2+2];
                         print "\t\t\t},";
                     }
-                    print "\t\t\t\42" int(n/2)-1 "\42: {";
-                    gsub (" ", "", pointlist[n-2]);
-                    print "\t\t\t\t\42Code\42: \42" pointlist[n-2] "\42,";
-                    print "\t\t\t\t\42Time\42: " pointlist[n-1];
-                    print "\t\t\t}";
+                    print "\t\t\t\42" i"\42: {";
+                    gsub (" ", "", pointlist[i*2+1]);
+                    print "\t\t\t\t\42Code\42: \42" pointlist[i*2+1] "\42,";
+                    print "\t\t\t\t\42Time\42: " pointlist[i*2+2];
+                    print "\t\t\t},";
+                    print "\t\t\t\42PLN\42: " i+1 "";
                     print "\t\t}";
-                    print "\t},"
+                    print "\t},";
                 }
                 END{print "}" }' $1 | sed 'N;$s/,\n/\n/;P;D' > ${outfile}
             ;;

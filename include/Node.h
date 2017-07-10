@@ -6,39 +6,40 @@
 #define NODE_H
 
 #include "Position.h"
-#include "Define.h"
+#include <string>
+#include <vector>
+
+typedef std::string String;
 
 /**
  * A Node is specified by an unique code, a name and a corresponding position.
  */
 class Node {
 public:
-    Node(const Node &node){
-        sCode = node.getCode();
-        sName = node.getName();
-        position = node.getPosition();
-    }
     /**
      * Constructor with parameters.
-     * @param sCode the point code.
-     * @param sName  the point name.
-     * @param position the point position.
+     * @param sCode         the point code.
+     * @param sName         the point name.
+     * @param position      the point position.
      */
-    Node(const String &sCode, const String &sName, const Position &position): sCode(sCode), sName(sName), position(position) {}
+    Node(const String &sCode, const String &sName, const Position &position) : sCode(sCode), sName(sName),
+                                                                               position(position) {}
 
     /**
      * Constructor with parameters.
-     * @param sCode the point code.
-     * @param sName the point name.
-     * @param dLatitude the point latitude.
-     * @param dLongitude the point longitude.
+     * @param sCode             the point code.
+     * @param sName             the point name.
+     * @param dLatitude         the point latitude.
+     * @param dLongitude        the point longitude.
      */
-    Node(const String &sCode, const String &sName, double dLatitude, double dLongitude): sCode(sCode), sName(sName), position(dLatitude, dLongitude){}
+    Node(const String &sCode, const String &sName, double dLatitude, double dLongitude) : sCode(sCode), sName(sName),
+                                                                                          position(dLatitude,
+                                                                                                   dLongitude) {}
 
     /**
      * Destructor.
      */
-    virtual ~Node(){}
+    virtual ~Node() {}
 
     /**
      * Getter for point code.
@@ -66,21 +67,26 @@ public:
 
     /**
      * Override of == operand.
-     * @param rhs the other compared Node.
+     * @param rhs       the other compared Node.
      * @return true, if the two points have same code; false, otherwise.
      */
     bool operator==(const Node &rhs) const;
 
     /**
      * Override of != operand. see == operand override.
-     * @param rhs the other compared Node.
+     * @param rhs       the other compared Node.
      * @return true, if the two points don't have same code; false, otherwise.
      */
     bool operator!=(const Node &rhs) const;
 
-    Node *clone(){
-        return new Node(*this);
+    /**
+     * Clone a Node object
+     * @return The pointer of a new object.
+     */
+    Node *clone() {
+        return new Node(this->getCode(), this->getName(), this->getPosition());
     }
+
 private:
     /**
      * the point code.
@@ -93,10 +99,11 @@ private:
     String sName;
 
     /**
-     * the point position, see{@link Position}
+     * the point position, see{@link Position}.
      */
     Position position;
 };
+
 typedef Node WayPoint, Airport;
 typedef std::vector<Node *> WayPointVector, AirportVector;
 #endif //NODE_H

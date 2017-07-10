@@ -50,7 +50,7 @@ file(GLOB HEADER_FILES include/*.h)
 file(GLOB SOURCE_FILES src/*.cpp)
 
 ######## Set executable file name, and add the source files for it.
-add_executable(RobustFLA ${HEADER_FILES} ${SOURCE_FILES})
+add_executable(RobustFLA ${HEADER_FILES} ${SOURCE_FILES} src/Solver.cpp)
 
 ######## Add Dependency Library
 target_link_libraries(RobustFLA cplex-library cplex-concert ilocplex)

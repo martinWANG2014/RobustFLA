@@ -4,89 +4,149 @@
 
 #ifndef SOLVER_H
 #define SOLVER_H
+#undef IL_STD
+#define  IL_STD
 
-#include "Network.h"
+#include <ilcplex/ilocplex.h>
+#include "Flight.h"
 
-class Solver{
+typedef std::vector<int> IntVector;
+typedef std::vector<double> DoubleVector;
+
+/**
+ * The solver class for purpose to solve the ILP model, then give a corresponding result.
+ */
+class Solver {
 private:
-    IloEnv *cplex;
-    IloNumVarArray *decisionVariables;
-    IloNumArray *decisionVariablesValues;
-    IloExpr *functionObjective;
-    IloModel *model;
+    /**
+     * Cplex environment.
+     */
+    IloEnv env;
 
+    /**
+     * The model entity.
+     */
+    IloModel model;
+
+    /**
+     * Cplex Solver.
+     */
+    IloCplex solver;
+
+    /**
+     * Decision variables array.
+     */
+    IloNumVarArray decisionVariables;
+
+    /**
+     * Decision variables's value array.
+     */
+    IloNumArray decisionVariablesValues;
+
+    /**
+     * Function objective expression.
+     */
+    IloExpr functionObjective;
+
+    /**
+     * Function objective value.
+     */
     double dFunctionObjectiveValue;
 
-    void initDecisionVariables(int iSize) {
-        IloNumVarArray x(*cplex, iSize, 0, 1, ILOBOOL);
-        *decisionVariables = x;
-    }
+    /**
+     * Initialize the decision variables array.
+     * @param iSize     the array size.
+     */
+    void initDecisionVariables(int iSize);
 
-    void initFunctionObjective(int iProcessingLevel, FlightVector &flCandLev_list) {
-        IloModel model_temp(*cplex);
-        *model = model_temp;
-        IloExpr obj(*cplex);
-        for(int i = 0; i < (int)flCandLev_list.size(); i++){
-            Flight *pFlight = flCandLev_list[i];
-            if (pFlight->getDefaultLevel() == iProcessingLevel) {
-                obj += 3 * (*decisionVariables)[i];
-            }
-            else {
-                obj += (*decisionVariables)[i];
-            }
-        }
-        *functionObjective = obj;
-        model->add(IloMaximize(*cplex, obj));
-    }
+    /**
+     * Initialize the function objective.
+     * @param iProcessingLevel      the current processing flight level
+     * @param ConflictedFlightList  the conflicted flights list
+     */
+    void initFunctionObjective(int iProcessingLevel, FlightVector &ConflictedFlightList);
 
-    void initConstraints(IntVector &viConstraintList, int sizeCandidateFlights, DoubleVector &Mi, DoubleVector &Pi, double** probability, double** delay) {
-        for (unsigned int i = 0; i < viConstraintList.size(); i++) {
-            int k = viConstraintList[i];
-            IloExpr constraint(*cplex);
-            for (int j = 0; j < sizeCandidateFlights; j++) {
-                if (k == j) {
-                    constraint += Mi[j] * (*decisionVariables)[j];
-                }
-                else if (probability[k][j]>0) {
-                    constraint += COEFPIJ*(*decisionVariables)[j] * delay[k][j];
-                }
-            }
-            model->add(constraint <= Mi[k] + Pi[k]);
-        }
+    /**
+     * Initialize the constraints.
+     * @param viConstraintList      A list of flight index, for which should respect the constraint.
+     * @param iNbConflictedFlights  The number of conflicted flights.
+     * @param Mi                    A list of Mi, which is a sufficient large value to assure the constraint for a given flight i should be satisfied at any condition.
+     * @param Pi                    A list of Pi, which means the admissible cumulative cost for a given flight i at current flight level.
+     * @param penalCost
+     */
+    void initConstraints(IntVector &viConstraintList, int iNbConflictedFlights, DoubleVector &Mi, DoubleVector &Pi,
+                         double **penalCost);
+
+    /**
+     * Configure the solver.
+     * @param log       The log file stream
+     */
+    void configureSolver(std::ofstream &log) {
+        env.setOut(log);
+        solver.setOut(log);
+        solver.setParam(IloCplex::Threads, 1);
     }
 
 public:
-    Solver(IloEnv &env, FlightVector &flCandLev_list, int iProcessingLevel, DoubleVector &Mi, DoubleVector &Pi, double** probability, double** delay, IntVector &viConstraintList) {
-        *cplex= env;
-        initDecisionVariables((int)flCandLev_list.size());
-        initConstraints(viConstraintList, (int)flCandLev_list.size(), Mi, Pi, probability, delay);
-        initFunctionObjective(iProcessingLevel, flCandLev_list);
+    /**
+     * Constructor with parameters.
+     * @param env                   Cplex environment
+     * @param ConflictedFlightList  A list of conflicted flights
+     * @param iProcessingLevel      The current processing flight level
+     * @param Mi                    A list of Mi, which is a sufficient large value to assure the constraint for a given flight i should be satisfied at any condition.
+     * @param Pi                    A list of Pi, which means the admissible cumulative cost for a given flight i at current flight level.
+     * @param penalCost
+     * @param viConstraintList      A list of flight index, for which should respect the constraint.
+     * @param log                   The log file stream
+     */
+    Solver(IloEnv env, FlightVector &ConflictedFlightList, int iProcessingLevel, DoubleVector &Mi, DoubleVector &Pi,
+           double **penalCost, IntVector &viConstraintList, std::ofstream &log) {
+        Solver::env = env;
+        IloModel model_temp(env);
+        Solver::model = model_temp;
+        IloCplex solver_temp(model);
+        Solver::solver = solver_temp;
+        configureSolver(log);
+        initDecisionVariables((int) ConflictedFlightList.size());
+        initConstraints(viConstraintList, (int) ConflictedFlightList.size(), Mi, Pi, penalCost);
+        initFunctionObjective(iProcessingLevel, ConflictedFlightList);
     }
 
-    void solve() {
-        // solver
-        IloCplex solver(*model);
-        // no output
-        solver.setOut(cplex->getNullStream());
-        // no multi-threading (less performance)
-        solver.setParam(IloCplex::Threads, 1);
-        solver.solve();
-        solver.exportModel("model.lp");
-        solver.writeSolution("sol.sl");
-        IloNumArray values(*cplex);
-        solver.getValues(values, *decisionVariables);
-        *decisionVariablesValues = values;
-        dFunctionObjectiveValue = solver.getObjValue();
+    /**
+     * Destructor.
+     */
+    virtual ~Solver() {
+        functionObjective.end();
+        decisionVariables.end();
         solver.end();
-        model->end();
-        functionObjective->end();
-        decisionVariables->end();
+        model.end();
     }
 
-    IloNumArray *getDecisionVariablesValues() const {
+    /**
+     * solve method, call explicitly to solve the ILP model.
+     */
+    void solve() {
+        std::cout << "\t\tSolving..." << std::flush;
+        IloNumArray values(env);
+        solver.solve();
+        solver.getValues(values, decisionVariables);
+        decisionVariablesValues = values;
+        dFunctionObjectiveValue = solver.getObjValue();
+        std::cout << "Ok" << std::endl;
+    }
+
+    /**
+     * Get the decision variables value after solving the model.
+     * @return an array of decision variables value
+     */
+    IloNumArray getDecisionVariablesValues() const {
         return decisionVariablesValues;
     }
 
+    /**
+     * Get the function objective value after solving the model.
+     * @return the function objective value
+     */
     double getFunctionObjectiveValue() const {
         return dFunctionObjectiveValue;
     }

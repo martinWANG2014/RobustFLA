@@ -5,259 +5,150 @@
 #ifndef INPUT_H
 #define INPUT_H
 
-#include "Define.h"
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/json_parser.hpp>
 #include "Flight.h"
 #include "Network.h"
 
+////////////Definition of Flight Level/////////////////////////////////////////
+typedef std::vector<int> IntVector;
+typedef std::vector<double> DoubleVector;
+#ifdef NRVSM
+static IntVector const LevelIFRA{10, 30, 50, 70, 90, 110, 130, 150, 170, 190, 210, 230, 250, 270, 290, 330, 370, 410, 450, 490};
+static IntVector const LevelIFRB{20, 40, 60, 80, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 310, 350, 390, 430, 470, 510};
+#else
+const IntVector LevelIFRA{10, 30, 50, 70, 90, 110, 130, 150, 170, 190, 210, 230, 250, 270, 290, 310, 330, 350, 370, 390,
+                          410, 450, 490};
+const IntVector LevelIFRB{20, 40, 60, 80, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340, 360, 380,
+                          400, 430, 470, 510};
+#endif
+const IntVector LevelVFRA{35, 55, 75, 95, 115, 135, 155, 175, 195};
+const IntVector LevelVFRB{45, 65, 85, 105, 125, 145, 165, 185};
+////////////Definition of Flight Level/////////////////////////////////////////
+
+////////////Method template////////////////////////////////////////////////////
+/**
+ * A template of the method to verify whether the a vector contains an element.
+ * @tparam T                    the general type of data
+ * @param vObjectsVector        the target vector
+ * @param object                the queried object
+ * @return true, if the vector contains the queried object; false, otherwise.
+ */
+template<typename T>
+bool contains(std::vector<T> vObjectsVector, T object) {
+    if (vObjectsVector.size() < 1) return false;
+    for (auto &&item : vObjectsVector) {
+        if (item == object) {
+            return true;
+        }
+    }
+    return false;
+}
+
+/**
+ * A template of the method to verify whether the a vector contains an element, where the element is a pointer.
+ * @tparam T                    the general type of data
+ * @param vpObjectsVector       the target vector
+ * @param pObject               the queried object
+ * @return true, if the vector contains the queried object; false, otherwise.
+ */
+template<typename T>
+bool contains(std::vector<T *> vpObjectsVector, T *pObject) {
+    if (vpObjectsVector.size() < 1) return false;
+    for (auto &&item : vpObjectsVector) {
+        if (*item == *pObject) {
+            return true;
+        }
+    }
+    return false;
+}
+////////////Method template////////////////////////////////////////////////////
+
+/**
+ * The input class for a purpose to parse the data file, then to initialize the network object with these parsed data.
+ */
 class Input {
 public:
-    explicit Input(const String &sAirportPath, const String &sWayPointPath, const String &sFlightPath, const String &sConfigPath) :sAirportPath(sAirportPath), sWayPointPath(sWayPointPath), sFlightPath(sFlightPath), sConfigPath(sConfigPath){}
-
-    ~Input(){}
     /**
-     * initialize the air management network
-     * and the feasible flight level list for each flight.
+     * A coefficient parameter: the unit length of period.
+     */
+    static Time PERIOD_UNIT;
+
+    /**
+     * Constructor with parameter
+     * @param sAirportPath      The filename of airport
+     * @param sWayPointPath     The filename of wayPoint
+     * @param sFlightPath       The filename of flight
+     */
+    explicit Input(const String &sAirportPath, const String &sWayPointPath, const String &sFlightPath)
+            : sAirportPath(sAirportPath), sWayPointPath(sWayPointPath), sFlightPath(sFlightPath){}
+
+    /**
+     * Destructor.
+     */
+    ~Input() {}
+
+    /**
+     * Initialize the air management network
+     * @param pNetwork      A pointer of network
      */
     void initNetwork(Network *pNetwork) {
         parseAirports(pNetwork);
         parseWayPoints(pNetwork);
         parseFlights(pNetwork);
-        parseConfiguration(pNetwork);
+        pNetwork->InitFlightLevelsList();
+        std::cout << "\tFlight Level size: " << pNetwork->getNbLevels() << std::endl;
     }
 
 private:
+    /**
+     * The airport filename.
+     */
     String sAirportPath;
+
+    /**
+     * The wayPoint filename.
+     */
     String sWayPointPath;
+
+    /**
+     * The flight filename.
+     */
     String sFlightPath;
-    String sConfigPath;
-    void parseFlights(Network *pNetwork) {
-        using boost::property_tree::ptree;
-        using boost::property_tree::read_json;
 
-        LevelSet level_temp;
-        std::cout << "Parsing flights file... " << std::flush;
-        if (!exists(sFlightPath)){
-            std::cerr << "not exist " << sFlightPath << std::endl;
-            abort();
-        }
-        ptree root;
-        read_json(sFlightPath, root);
+    /**
+     * Parse the flight file.
+     * @param pNetwork      A pointer of network
+     */
+    void parseFlights(Network *pNetwork);
 
-        int nbFlights = root.get<int>("FN");
-        for(int i  = 0; i < nbFlights; i++){
-            String sPrefixed(std::to_string(i));
-            String sCode(root.get<String>(sPrefixed + ".FCode"));
-            Airport *pAirportOrigin = pNetwork->findAirportByCode(root.get<String>(sPrefixed + ".Origin"));
-            Airport *pAirportDestination = pNetwork->findAirportByCode(root.get<String>(sPrefixed + ".Dest"));
-            Time iDepartureTime = root.get<Time>(sPrefixed + ".DTime", -1);
-            if (sCode.empty()) {
-                std::cerr << "at: "<< sFlightPath << std::endl
-                          << "at: " << i << "th flight" << std::endl
-                          << "the flight code is unknown, it is ignored automatically!" << std::endl;
-            }
-            else if(iDepartureTime < 0) {
-                std::cerr << "at: "<< sFlightPath << std::endl
-                          << "at: " << i << "th flight" << std::endl
-                          << "the flight departure time is not valid, it is ignored automatically!" << std::endl;
-            }
-            else if(pAirportOrigin == nullptr) {
-                std::cerr << "at: "<< sFlightPath << std::endl
-                          << "at: " << i << "th flight" << std::endl
-                          << "the flight's origin airport is unknown, it is ignored automatically!" << std::endl;
-            }
-            else if(pAirportDestination == nullptr) {
-                std::cerr << "at: "<< sFlightPath << std::endl
-                          << "at: " << i << "th flight" << std::endl
-                          << "the flight's destination is unknown, it is ignored automatically!" << std::endl;
-            }
-            else if(*pAirportOrigin == *pAirportDestination){
-                std::cerr << "at: "<< sFlightPath << std::endl
-                          << "at: " << i << "th flight" << std::endl
-                          << "the flight's destination is identical with the departure, it is ignored automatically!" << std::endl;
-            }
-            else{
-                Level iLevel = root.get<int>(sPrefixed + ".FLevel");
-                Route *pRoute = new Route(iLevel, pAirportOrigin, iDepartureTime);
-                int nbPoints = root.get<int>(sPrefixed + ".PointList.PLN");
-                bool bValid = true;
-                int iIndexPoint = 0;
-                while(bValid && iIndexPoint < nbPoints){
-                    String sPrefixedPath(sPrefixed + ".PointList." + std::to_string(iIndexPoint));
-                    WayPoint *pWayPoint = pNetwork->findWayPointByCode(root.get<String>(sPrefixedPath + ".Code"));
-                    if (pWayPoint == nullptr){
-                        std::cerr << "at: "<< sFlightPath << std::endl
-                                  << "at: " << i << "th pFlight" << std::endl
-                                  << "at: " << iIndexPoint << "th point of route" << std::endl
-                                  << "the code of wayPoint in pFlight's route is unknown, it is ignored automatically!" << std::endl;
-                        bValid = false;
-                    }
-                    else{
-                        Point *point = new Point(pWayPoint, root.get<Time>(sPrefixedPath + ".Time"));
-                        pRoute->addNewPoint(point);
-                    }
-                    iIndexPoint++;
-                }
-                if(bValid){
-                    Flight *pFlight = new Flight(sCode, pAirportOrigin, pAirportDestination, iDepartureTime, pRoute);
-                    pNetwork->addNewFlight(pFlight);
-                }
-            }
-        }
-        int* pNbFlights=new int[level_temp.size()];
-        FlightVector vpFlightList=pNetwork->getFlightList();
-        int indexL=0;
-        for (LevelSet::iterator itA = level_temp.begin() ; itA != level_temp.end() ; itA++,indexL++){
-            Level iLevel=(*itA);
-            pNbFlights[indexL]=0;
-            for (int i=0;i< (int)vpFlightList.size();i++){
-                Flight *pFlight=vpFlightList[i];
-                Level iLevelDefault = pFlight->getDefaultLevel();
-                if (iLevel==iLevelDefault){
-                    pNbFlights[indexL]=pNbFlights[indexL]+1;
-                }
-            }
-        }
-        IntVector temp_list2;
-        IntVector temp_list1;
-        while (temp_list1.size()!=level_temp.size()){
-            int k=maxLevel(pNbFlights,temp_list1,level_temp);
-            if (k!=-1){
-                temp_list1.push_back(k);
-                indexL=0;
-                for (LevelSet::iterator itB=level_temp.begin();itB!=level_temp.end();itB++,indexL++){
-                    if (indexL==k){
-                        int m=(*itB);
-                        temp_list2.push_back(m);
-                    }
-                }
-            }
-        }
-        pNetwork->setLevelList(temp_list2);
-        std::cout << "OK" << std::endl
-                  << "Flights file data:" << std::endl
-                  << "Flights: " << nbFlights << std::endl
-                  << "Valid Flights: " << pNetwork->getNbFlights() << std::endl;
-    }
-    void parseAirports(Network *pNetwork) {
-        using boost::property_tree::ptree;
-        using boost::property_tree::read_json;
+    /**
+     * Parse the airport file.
+     * @param pNetwork      A pointer of network
+     */
+    void parseAirports(Network *pNetwork);
 
-        std::cout << "Parsing airports file... " << std::flush;
-        if (!exists(sAirportPath)){
-            std::cerr << "not exist " << sAirportPath << std::endl;
-            abort();
-        }
+    /**
+     * Parse the wayPoint file.
+     * @param pNetwork      A pointer of network
+     */
+    void parseWayPoints(Network *pNetwork);
 
-        ptree root;
-        read_json(sAirportPath, root);
-
-        int nbAirports = root.get<int>("AN");
-        for(int i  = 0; i < nbAirports; i++) {
-            String sPrefixed(std::to_string(i));
-            String sCode = root.get<String>(sPrefixed + ".ICAO");
-            if (sCode.empty()) {
-                std::cerr << "at: " << sAirportPath << std::endl
-                          << "at: " << i << "th airport" << std::endl
-                          << "the airport icao code is unknown, it is ignored automatically!" << std::endl;
-            } else {
-                Airport * airport = new Airport(sCode,
-                                                root.get<String>(sPrefixed + ".Name", ""),
-                                                root.get<double>(sPrefixed + ".Lat", 0.0),
-                                                root.get<double>(sPrefixed + ".Lng", 0.0));
-                pNetwork->addNewAirport(airport);
-            }
-        }
-        std::cout << "OK" << std::endl
-                  << "Airports file data:" << std::endl
-                  << "Airports: " << nbAirports << std::endl
-                  << "Valid Airports: " << pNetwork->getNbAirports() << std::endl;
-    }
-    void parseWayPoints(Network *pNetwork) {
-        using boost::property_tree::ptree;
-        using boost::property_tree::read_json;
-
-        std::cout << "Parsing wayPoints file... " << std::flush;
-        if (!exists(sWayPointPath)){
-            std::cerr << "not exist " << sWayPointPath << std::endl;
-            abort();
-        }
-        ptree root;
-        read_json(sWayPointPath, root);
-
-        int nbWayPoints = root.get<int>("BN");
-        for(int i  = 0; i < nbWayPoints; i++){
-            String sPrefixed(std::to_string(i));
-            String sCode = root.get<String>(sPrefixed + ".Code");
-            if (sCode.empty()) {
-                std::cerr << "at: " << sWayPointPath << std::endl
-                          << "at: " << i << "th wayPoint" << std::endl
-                          << "the wayPoint's code is unknown, it is ignored automatically!" << std::endl;
-            }
-            else {
-                WayPoint *wayPoint = new WayPoint(sCode,
-                                                  root.get<String>(sPrefixed  + ".Name", ""),
-                                                  root.get<double>(sPrefixed  + ".Lat", 0.0),
-                                                  root.get<double>(sPrefixed  + ".Lng", 0.0));
-                //std::cout << *wayPoint;
-                pNetwork->addNewWayPoint(wayPoint);
-            }
-        }
-        std::cout << "OK" << std::endl
-                  << "Beacon file data:" << std::endl
-                  << "WayPoints: " << nbWayPoints << std::endl
-                  << "Valid WayPoints: " << pNetwork->getNbWayPoints() << std::endl;
-    }
-    void parseConfiguration(Network *pNetwork) {
-        using boost::property_tree::ptree;
-        using boost::property_tree::read_json;
-
-        std::cout << "Parsing configuration file... " << std::flush;
-        if (!exists(sConfigPath)){
-            std::cerr << "not exist " << sConfigPath << std::endl;
-            abort();
-        }
-        ptree root;
-        read_json(sConfigPath, root);
-        int iNbPeriods = root.get<int>("NbPeriods");
-        Time iPeriodUnit = root.get<Time>("PeriodUnit");
-        int iNbFeasibleLevels = root.get<int>("NbFeasibleLevels");
-        if (iNbPeriods != *NBPERIODS){
-            delete(NBPERIODS);
-            NBPERIODS = new int(iNbPeriods);
-        }
-        if (iNbFeasibleLevels != *LEVELSIZE){
-            delete(LEVELSIZE);
-            LEVELSIZE = new int(iNbFeasibleLevels);
-        }
-        if (iPeriodUnit != *PERIODUNIT){
-            delete(PERIODUNIT);
-            PERIODUNIT = new int(iPeriodUnit);
-        }
-        std::cout << "OK" << std::endl
-                  << "Configuration file data:" << std::endl
-                  << "NbPeriods: " << *NBPERIODS << std::endl
-                  << "PeriodUint: " << *PERIODUNIT << std::endl
-                  << "NbFeasibleLevels: " << *LEVELSIZE << std::endl;
-    }
-    inline bool exists (const String& name) {
+    /**
+     * Verify whether the file exists.
+     * @param name      The filename
+     * @return true, if exists; false, otherwise.
+     */
+    bool exists(const String &name) {
         std::ifstream f(name.c_str());
         return f.good();
     }
-    int maxLevel(int *pNbFlights, IntVector temp_list, LevelSet level) {
-        int maxV=-1;
-        int maxIndice=-1;
-        int index=0;
-        for (LevelSet::iterator itB=level.begin();itB!=level.end();itB++,index++){
-            if (pNbFlights[index] > maxV && !contains(temp_list, index)){
-                maxV=pNbFlights[index];
-                maxIndice=index;
-            }
-        }
-        if (maxIndice!=-1){
-            return maxIndice;
-        }
-        return -1;
-    }
-};
 
-#endif //ROBUSTFLA_INPUT_H
+    /**
+     * Find the feasible flight level list.
+     * @param iDefaultLevel     A given default flight level
+     * @return A three elements list.
+     */
+    IntVector findFeasibleLevels(int iDefaultLevel);
+};
+#endif //INPUT_H

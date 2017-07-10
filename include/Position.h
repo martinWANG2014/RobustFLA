@@ -4,31 +4,36 @@
 
 #ifndef POSITION_H
 #define POSITION_H
+
+#include <math.h>
+
 /**
  * A Position is denoted by a latitude and a longitude.
  */
 class Position {
 public:
-    Position(void){
+    /**
+     * A coefficient parameter: earth radius.
+     */
+    static double EARTH_RADIUS;
 
-    }
     /**
      * Copy Constructor.
-     * @param position see {@link Position}.
+     * @param position      The position object.
      */
-    Position(const Position &position): dLatitude(position.getLatitude()), dLongitude(position.getLongitude()) {}
+    Position(const Position &position) : dLatitude(position.getLatitude()), dLongitude(position.getLongitude()) {}
 
     /**
      * Constructor with parameters.
-     * @param dLatitude the latitude of a position.
-     * @param dLongitude the longitude of a position.
+     * @param dLatitude     the latitude of a position.
+     * @param dLongitude    the longitude of a position.
      */
-    Position(double dLatitude, double dLongitude): dLatitude(dLatitude),dLongitude(dLongitude) {}
+    Position(double dLatitude, double dLongitude) : dLatitude(dLatitude), dLongitude(dLongitude) {}
 
     /**
      * Destructor
      */
-    virtual ~Position(){}
+    virtual ~Position() {}
 
     /**
      * Getter for the latitude.
@@ -48,14 +53,14 @@ public:
 
     /**
      * Override of == operand.
-     * @param rhs the other compared Position.
+     * @param rhs       the other compared Position.
      * @return true, if they are the same position; false, otherwise.
      */
     bool operator==(const Position &rhs) const;
 
     /**
      * Override of != operand.
-     * @param rhs the other compared Position.
+     * @param rhs       the other compared Position.
      * @return true, if they are different position; false, otherwise.
      */
     bool operator!=(const Position &rhs) const;
@@ -70,11 +75,12 @@ public:
      *					c = 2*atan2(√a, √(1−a))
      *					d = R*c
      * (Note that angles need to be in radians to pass to trig functions).
-     * @param p1 the one position.
-     * @param p2 the another position.
+     * @param p1        the one position.
+     * @param p2        the another position.
      * @return the distance between two positions.
      */
     friend double distanceBetween(const Position &p1, const Position &p2);
+
 private:
     /**
      * the latitude of a position.
@@ -86,6 +92,5 @@ private:
      */
     double dLongitude;
 };
-
 
 #endif //POSITION_H
