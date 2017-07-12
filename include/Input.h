@@ -64,15 +64,25 @@ bool contains(std::vector<T *> vpObjectsVector, T *pObject) {
 }
 ////////////Method template////////////////////////////////////////////////////
 
+double getSigma2Recursive(double alpha, double beta, double gamma, double sigma1, double sigma2);
+
+double getSigma3Recursive(double alpha, double beta, double gamma, double w1, double w2, double p, double sigma1,
+                          double sigma2);
+
+double getSigmaRecursive(double alpha, double gamma, double w1, double sigma1, double sigma2);
+
+double getSigma(double alpha, double gamma, double w1);
+
+double getSigma1(double alpha, double beta, double gamma);
+
+double getSigma2(double alpha, double beta, double gamma);
+
+double getSigma3(double alpha, double beta, double gamma, double w1, double w2, double p);
 /**
  * The input class for a purpose to parse the data file, then to initialize the network object with these parsed data.
  */
 class Input {
 public:
-    /**
-     * A coefficient parameter: the unit length of period.
-     */
-    static Time PERIOD_UNIT;
 
     /**
      * Constructor with parameter
@@ -92,14 +102,13 @@ public:
      * Initialize the air management network
      * @param pNetwork      A pointer of network
      */
-    void initNetwork(Network *pNetwork) {
+    void initNetwork(Network *pNetwork, int iRandomMode, const DoubleVector &vdParameter) {
         parseAirports(pNetwork);
         parseWayPoints(pNetwork);
-        parseFlights(pNetwork);
+        parseFlights(pNetwork, iRandomMode, vdParameter);
         pNetwork->InitFlightLevelsList();
         std::cout << "\tFlight Level size: " << pNetwork->getNbLevels() << std::endl;
     }
-
 private:
     /**
      * The airport filename.
@@ -120,7 +129,7 @@ private:
      * Parse the flight file.
      * @param pNetwork      A pointer of network
      */
-    void parseFlights(Network *pNetwork);
+    void parseFlights(Network *pNetwork, int iRandomMode, const DoubleVector &vdParameter);
 
     /**
      * Parse the airport file.
@@ -151,4 +160,5 @@ private:
      */
     IntVector findFeasibleLevels(int iDefaultLevel);
 };
+
 #endif //INPUT_H

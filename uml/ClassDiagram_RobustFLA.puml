@@ -70,13 +70,13 @@ class Flight{
     -String sCode
     -Airport *pAOrigin
     -Airport *pADestination
-    -Time iDepartureTime
+    -Time dDepartureTime
     -int iDefaultRoute
     -int iCurrentRoute
     -FLevelVector vpFeasibleLevelList
     -RouteVector vpPossibleRouteList
     +Flight(const Flight &flight)
-    +Flight(const String &sCode, Airport *pAOrigin, \n Airport *pADestination, Time iDepartureTime, Route *pRouteDefault)
+    +Flight(const String &sCode, Airport *pAOrigin, \n Airport *pADestination, Time dDepartureTime, Route *pRouteDefault)
     +~Flight()
     +setCurrentRoute(int iCurrentRoute)
     +Route *getCurrentRoute() const

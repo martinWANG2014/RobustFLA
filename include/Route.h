@@ -11,6 +11,7 @@
 #include "NodePoint.h"
 
 typedef std::normal_distribution<double> normal_dist;
+typedef std::uniform_real_distribution<double> uni_dist;
 typedef int Level;
 
 /**
@@ -154,53 +155,21 @@ public:
 
     /**
      * Geometric method: Generate a new route with different times compared with current route.
-     * @param iDepartureTime    The new departure time.
+     * @param iNewDepartureTime    The new departure time.
      * @return A new route.
      */
-    Route *GenerateNewRoute(Time iDepartureTime);
+    Route *GenerateNewRoute(Time iNewDepartureTime);
 
     /**
      * Gaussian method: Generate a new route with different times compared with current route.
-     * @param iDepartureTime    The new departure time.
+     * @param iNewDepartureTime    The new departure time.
      * @return A new route.
      */
-    Route *GenerateNewRoute2(Time iDepartureTime);
-
-    /**
-     * Geometric method: Calculate the conflict probability and the delay time to avoid this conflict.
-     * @param iIndex1       The index of point in current route
-     * @param pRoute2       The pointer of a given route
-     * @param iIndex2       The index of point in given route
-     * @param delay         output: The delay to avoid the conflict for the two point.
-     * @return the conflict probability between the two point in different route.
-     */
-    double CPAD(int iIndex1, Route *pRoute2, int iIndex2, double *delay, bool *ind);
-    double CPAD3(int iIndex1, Route *pRoute2, int iIndex2, double *delay, bool *ind);
-    double CPAD3_11(int iIndex1, Route *pRoute2, int iIndex2, double *delay);
-    double CPAD3_10(int iIndex1, Route *pRoute2, int iIndex2, double *delay);
-    double CPAD3_01(int iIndex1, Route *pRoute2, int iIndex2, double *delay);
-    double CPAD3_00(int iIndex1, Route *pRoute2, int iIndex2, double *delay);
-    double CPAD4(int iIndex1, Route *pRoute2, int iIndex2, double sigma1, double sigma2,
-                 double *delay, bool *ind);
-    double CPAD4_11(int iIndex1, Route *pRoute2, int iIndex2,  double sigma_1, double sigma_2, double *delay);
-    double CPAD4_10(int iIndex1, Route *pRoute2, int iIndex2,  double sigma_1, double sigma_2, double *delay);
-    double CPAD4_01(int iIndex1, Route *pRoute2, int iIndex2,  double sigma_1, double sigma_2, double *delay);
-    double CPAD4_00(int iIndex1, Route *pRoute2, int iIndex2,  double sigma_1, double sigma_2, double *delay);
-    /**
-     * Gaussian method: Calculate the conflict probability and the delay time to avoid this conflict.
-     * @param iIndex1       The index of point in current route
-     * @param pRoute2       The pointer of a given route
-     * @param iIndex2       The index of point in given route
-     * @param mu1           The mean value of current route departure time
-     * @param sigma1        The deviation of current route departure time
-     * @param mu2           The mean value of a given route departure time
-     * @param sigma2        The deviation of a given route departure time
-     * @param delay         output: The delay to avoid the conflict for the two point.
-     * @return
-     */
-    double CPAD2(int iIndex1, Route *pRoute2, int iIndex2, double mu1, double sigma1, double mu2, double sigma2,
-                 double *delay, bool *ind);
+    Route *GenerateNewRoute2(Time iNewDepartureTime);
     bool selfCheck();
+
+    double CalculationProbabilityAndDelay(int iIndex1, Route *pRoute2, int iIndex2, double *pdDelayTime, bool *pbWait,
+                                          bool bGeometricMethod, double dSigma1, double dSigma2);
 private:
     /**
      * each route have a constant altitude.
@@ -211,6 +180,13 @@ private:
      * the point passed in the route.
      */
     PointVector vpPointsList;
+
+    double
+    probabilityAndDelay(double dT1, double dT2, double dV1, double dV2, double dCosA, double *pdDelayTime, bool bFlag,
+                        bool bGeometricMethod, double dSigma1, double dSigma2);
+
+    double calculateProbabilityAndDelay(int iIndex1, Route *pRoute2, int iIndex2, double *pdDelayTime, bool bFlag1,
+                                        bool bFlag2, bool bGeometricMethod, double dSigma1, double dSigma2);
 };
 
 #endif //ROUTE_H

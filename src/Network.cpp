@@ -8,7 +8,7 @@ void Network::InitFlightLevelsList() {
     std::cout << "[INFO] Initialize Processing Flight Level..." << std::flush;
     FlightLevelMap levelMap;
     for(auto &&flight: vpFlightsList){
-        for(auto && level: flight->getFeasibleLevelsList()){
+        for (auto &&level: flight->getFeasibleLevelList()) {
             auto it = levelMap.find(level);
             if (level == flight->getDefaultLevel()){
                 if (it != levelMap.end()){

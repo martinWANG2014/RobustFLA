@@ -1,56 +1,79 @@
 #include "../include/Network.h"
 #include "../include/Input.h"
 #include "../include/Solution.h"
+
 double Position::EARTH_RADIUS = 6378.16;
 double Route::K = 1.8520108;
 double Route::MIN_SEPARATION_DISTANCE = 5.0;
 double Route::A_BAR = 5;
-double Route::MIN_ANGLE = sin(5 / 180 * M_PI);
+double Route::MIN_ANGLE = cos(5.0 / 180.0 * M_PI);
 double Flight::MIN_PROBA = 0.00001;
-double Flight::ALPHA = 15;
-double Flight::BETA = 60;
-double Flight::GAMMA = 0.95;
-double Flight::W1 = 1.0/3;
-double Flight::W2 = 1.0/3;
-double Flight::RATIO = 0.5;
-double Flight::mu_1_1 = -Flight::W1 * Flight::ALPHA;
-double Flight::mu_1_2 = Flight::W2 * Flight::BETA;
-double Flight::sigma_1_1 = (Flight::ALPHA) / (sqrt(2) * boost::math::erf_inv(Flight::GAMMA));
-double Flight::sigma_1_2 = (Flight::BETA) / (sqrt(2) * boost::math::erf_inv(Flight::GAMMA));
-double Flight:: mu_1 = (Flight::sigma_1_1 * sqrt(2.0 / M_PI) * exp(-pow(Flight::mu_1_1 / (sqrt(2.0) * Flight::sigma_1_1), 2)) +
-        Flight::mu_1_1 * boost::math::erf(Flight::mu_1_1 / (sqrt(2.0) * Flight::sigma_1_1)));
-double Flight::mu_2 = (Flight::sigma_1_2 * sqrt(2.0 / M_PI) * exp(-pow(Flight::mu_1_2 / (sqrt(2.0) * Flight::sigma_1_2), 2)) +
-        Flight::mu_1_2 * boost::math::erf(Flight::mu_1_2 / (sqrt(2.0) * Flight::sigma_1_2)));
-double Flight::sigma_1 = pow(Flight::mu_1_1, 2) + pow(Flight::sigma_1_1, 2) - pow(Flight::mu_1, 2);
-double Flight::sigma_2 = pow(Flight::mu_1_2, 2) + pow(Flight::sigma_1_2, 2) - pow(Flight::mu_2, 2);
-double Flight::HYBRID_MU = Flight::RATIO * Flight::mu_1 + (1 - Flight::RATIO) * Flight::mu_2;
-double Flight::HYBRID_SIGMA = sqrt(Flight::RATIO * Flight::sigma_1 + (1 - Flight::RATIO) * Flight::sigma_2);
-Time Input::PERIOD_UNIT = 30;
+Time Point::PERIOD_UNIT = 30;
 int main(int argc, char *argv[]) {
     using std::invalid_argument;
     try {
-//        if (argc < 2) {
-//            throw invalid_argument("airport file required");
-//        }
-//        else if (argc < 3) {
-//            throw invalid_argument("beacon file required");
-//        }
-//        else if (argc < 4) {
-//            throw invalid_argument("flight file required");
-//        }
-//        else if (argc < 5) {
-//            throw invalid_argument("PeriodUnit required");
-//        }
-//        else if (argc < 6) {
-//            throw invalid_argument("MethodMode required");
-//        }
+        if (argc < 1) {
+            std::cout
+                    << "Usage mainProgram airportJsonFile beaconJsonFile flightJsonFile "
+                    << "MethodMode RandomMode epsilon coefPi coefPij "
+                    << "alpha beta gamma w1 w2 p" << std::endl
+                    << "Method mode:" << std::endl
+                    << "\t0\tHoeffding Inequalities" << std::endl
+                    << "\t1\tMonte-Carlo Simulation" << std::endl
+                    << "\t2\tGaussian Method" << std::endl
+                    << "RandomMode:" << std::endl
+                    << "\t0\t Normal distribution" << std::endl
+                    << "\t1\t Folded Normal distribution" << std::endl
+                    << "\t\2\t Hybrid Folded Normal distribution" << std::endl
+                    << "epsilon\tinteger in [0, 100]" << std::endl
+                    << "coefPi\tinteger in [0,100]" << std::endl
+                    << "coefPij\tinteger in [0, 100]" << std::endl;
+        }
+        if (argc < 2) {
+            throw invalid_argument("airport file required");
+        } else if (argc < 3) {
+            throw invalid_argument("beacon file required");
+        } else if (argc < 4) {
+            throw invalid_argument("flight file required");
+        } else if (argc < 5) {
+            throw invalid_argument("MethodMode required");
+        } else if (argc < 6) {
+            throw invalid_argument("RandomMode required");
+        } else if (argc < 7) {
+            throw invalid_argument("epsilon required");
+        } else if (argc < 8) {
+            throw invalid_argument("coefPi required");
+        } else if (argc < 9) {
+            throw invalid_argument("coefPij required");
+        } else if (argc < 10) {
+            throw invalid_argument("alpha required");
+        } else if (argc < 11) {
+            throw invalid_argument("beta required");
+        } else if (argc < 12) {
+            throw invalid_argument("gamma required");
+        } else if (argc < 13) {
+            throw invalid_argument("w1 required");
+        } else if (argc < 14) {
+            throw invalid_argument("w2 required");
+        } else if (argc < 15) {
+            throw invalid_argument("p required");
+        }
         Network network;
-        //Input input(argv[1], argv[2], argv[3], boost::lexical_cast<Time>(argv[4]));
-        Input input("airport.json","beacon.json", "flight.json");
-        input.initNetwork(&network);
-        double *somme_objectif = new double(0);
-        double *maxConflictCount = new double(0);
-        ApproximateFLA(&network, somme_objectif, maxConflictCount, true, 0,0);
+        DoubleVector viParameter;
+        viParameter.push_back(boost::lexical_cast<double>(argv[9]));
+        viParameter.push_back(boost::lexical_cast<double>(argv[10]));
+        viParameter.push_back(boost::lexical_cast<double>(argv[11]));
+        viParameter.push_back(boost::lexical_cast<double>(argv[12]));
+        viParameter.push_back(boost::lexical_cast<double>(argv[13]));
+        viParameter.push_back(boost::lexical_cast<double>(argv[14]));
+        Input input(argv[1], argv[2], argv[3]);
+        input.initNetwork(&network, 0, viParameter);
+        double dSumBenefits;
+        int iMaxNbConflict;
+        ApproximateFLA(&network, &dSumBenefits, &iMaxNbConflict, boost::lexical_cast<int>(argv[4]),
+                       boost::lexical_cast<int>(argv[5]), boost::lexical_cast<double>(argv[6]) / 100.0,
+                       boost::lexical_cast<double>(argv[7]) / 100.0, boost::lexical_cast<double>(argv[8]) / 100.0,
+                       viParameter);
     }
     catch (const invalid_argument &e) {
         std::cerr << "Error: " << e.what() << std::endl;

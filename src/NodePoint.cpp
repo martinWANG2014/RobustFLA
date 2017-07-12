@@ -7,11 +7,15 @@
 
 bool Point::operator==(const Point &rhs) const {
     return *pWayPoint == *rhs.pWayPoint &&
-           fabs(iArrivingTime - rhs.iArrivingTime) < Input::PERIOD_UNIT;
+           fabs(iArrivingTime - rhs.iArrivingTime) < PERIOD_UNIT;
 }
 
 bool Point::operator!=(const Point &rhs) const {
     return !(rhs == *this);
+}
+
+Point::~Point() {
+    delete pWayPoint;
 }
 
 

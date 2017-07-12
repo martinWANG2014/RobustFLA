@@ -25,7 +25,7 @@ class Flight{
     -String sCode
     -Airport *pAOrigin
     -Airport *pADestination
-    -Time iDepartureTime
+    -Time dDepartureTime
     -int iDefaultRoute
     -int iCurrentRoute
     -FLevelVector vpFeasibleLevelList

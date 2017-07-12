@@ -81,6 +81,12 @@ public:
      */
     friend double distanceBetween(const Position &p1, const Position &p2);
 
+    friend double getCosA(const Position &position1, const Position &position3, const Position &position4) {
+        double b = distanceBetween(position1, position3);
+        double c = distanceBetween(position1, position4);
+        double a = distanceBetween(position3, position4);
+        return (pow(b, 2) + pow(c, 2) - pow(a, 2)) / (2 * b * c);
+    }
 private:
     /**
      * the latitude of a position.

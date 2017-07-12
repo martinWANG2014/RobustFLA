@@ -15,11 +15,18 @@ typedef double Time;
 class Point {
 public:
     /**
+     * A coefficient parameter: the unit length of period.
+     */
+    static Time PERIOD_UNIT;
+
+    /**
      * Constructor with parameters
      * @param pWayPoint         A pointer links to the given wayPoint.
      * @param iArrivingTime     The arriving time at the given wayPoint.
      */
     Point(WayPoint *pWayPoint, Time iArrivingTime) : pWayPoint(pWayPoint), iArrivingTime(iArrivingTime) {}
+
+    virtual ~Point();
 
     /**
      * Getter for pWayPoint.
