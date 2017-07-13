@@ -7,6 +7,7 @@
 
 #include "ProcessClock.h"
 #include "Solver.h"
+#include "Input.h"
 
 #undef IL_STD
 #define  IL_STD
@@ -432,7 +433,7 @@ void GetMaxConflictCount(double **probability, int iConflictedFlightsSize, int *
     }
 }
 
-void ApproximateFLA(Network *pNetwork, double *dSumBenefits, int *iMaxNbConflict, int iModeRandom, int iModeMethod,
+void ApproximateFLA(Network *pNetwork, double *dSumBenefits, int *iMaxNbConflict, int iModeMethod, int iModeRandom,
                     double epsilon, double dCoefPI, double dCoefPij, DoubleVector vdParameter) {
     std::ofstream cplexLogFile("cplexLog.txt", std::ios::out|std::ios::app);
     LevelExamine levelEx;

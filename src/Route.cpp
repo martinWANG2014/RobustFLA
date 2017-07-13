@@ -4,6 +4,7 @@
 
 #include "../include/Route.h"
 #include "../include/Input.h"
+#include <numeric>
 
 Route *Route::GenerateNewRoute(Time iNewDepartureTime) {
     std::default_random_engine generator;
@@ -61,10 +62,10 @@ double Route::probabilityAndDelay(double dT1, double dT2, double dV1, double dV2
         dCosA = (dCosA > 0) ? MIN_ANGLE : -MIN_ANGLE;
     }
     double dSinA = sqrt(1 - pow(dCosA, 2));
-    double dLambda = dSinA / sqrt(pow(dRho, 2) - 2 * dRho * dCosA * (bFlag) ? 1 : -1 + 1);
+    double dLambda = dSinA / sqrt(pow(dRho, 2) - 2 * dRho * dCosA * ((bFlag) ? 1 : -1) + 1);
     double dMu = dLambda * dV2 * fabs(dT2 - dT1);
-    double dSigma = dLambda * (bGeometricMethod) ? A_BAR * sqrt(1 + pow(dRho, 2)) : dV2 * sqrt(pow(dSigma1, 2) +
-                                                                                               pow(dSigma2, 2));
+    double dSigma = dLambda * ((bGeometricMethod) ? A_BAR * sqrt(1 + pow(dRho, 2)) : dV2 * sqrt(pow(dSigma1, 2) +
+                                                                                                pow(dSigma2, 2)));
     double dRight = (MIN_SEPARATION_DISTANCE * K - dMu) / (sqrt(2.0) * dSigma);
     double dLeft = dMu / (sqrt(2.0) * dSigma);
     *pdDelayTime = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - fabs(dT2 - dT1);
@@ -75,23 +76,23 @@ double Route::probabilityAndDelay(double dT1, double dT2, double dV1, double dV2
 double Route::calculateProbabilityAndDelay(int iIndex1, Route *pRoute2, int iIndex2, double *pdDelayTime, bool bFlag1,
                                            bool bFlag2, bool bGeometricMethod, double dSigma1,
                                            double dSigma2) {
-    double dT1 = getArrivingTimeAtPoint(iIndex1 + bFlag1 ? 0 : 1);
-    double dT2 = pRoute2->getArrivingTimeAtPoint(iIndex2 + bFlag2 ? 0 : 1);
-    double dV1 = getVelocityFromPoint(iIndex1 + bFlag1 ? 0 : 1);
-    double dV2 = pRoute2->getVelocityFromPoint(iIndex2 + bFlag1 ? 0 : 1);
-    double dCosA = getCosA(getPositionAtPoint(iIndex1), getPositionAtPoint(iIndex1 + bFlag1 ? -1 : 1),
-                           pRoute2->getPositionAtPoint(iIndex2 + bFlag2 ? -1 : 1));
+    double dT1 = getArrivingTimeAtPoint(iIndex1 + (bFlag1 ? 0 : 1));
+    double dT2 = pRoute2->getArrivingTimeAtPoint(iIndex2 + (bFlag2 ? 0 : 1));
+    double dV1 = getVelocityFromPoint(iIndex1 + (bFlag1 ? 0 : 1));
+    double dV2 = pRoute2->getVelocityFromPoint(iIndex2 + (bFlag1 ? 0 : 1));
+    double dCosA = getCosA(getPositionAtPoint(iIndex1), getPositionAtPoint(iIndex1 + (bFlag1 ? -1 : 1)),
+                           pRoute2->getPositionAtPoint(iIndex2 + (bFlag2 ? -1 : 1)));
     return probabilityAndDelay(dT1, dT2, dV1, dV2, dCosA, pdDelayTime, bFlag1 == bFlag2, bGeometricMethod, dSigma1,
                                dSigma2);
 }
 
 double Route::CalculationProbabilityAndDelay(int iIndex1, Route *pRoute2, int iIndex2, double *pdDelayTime,
                                              bool *pbWait, bool bGeometricMethod, double dSigma1, double dSigma2) {
-    if (*getPointAtI(iIndex1) != *pRoute2->getPointAtI(iIndex2)) {
-        *pdDelayTime = 0;
-        *pbWait = true;
-        return 0;
-    }
+//    if (*getPointAtI(iIndex1) != *pRoute2->getPointAtI(iIndex2)) {
+//        *pdDelayTime = 0;
+//        *pbWait = true;
+//        return 0;
+//    }
     DoubleVector vdConflictProbabilityList;
     DoubleVector vdDelayTime;
     double pdDelay;
@@ -201,7 +202,10 @@ double Route::CalculationProbabilityAndDelay(int iIndex1, Route *pRoute2, int iI
     }
     *pdDelayTime = *std::max_element(vdDelayTime.begin(), vdDelayTime.end());
     *pbWait = getArrivingTimeAtPoint(iIndex1) > pRoute2->getArrivingTimeAtPoint(iIndex2);
-    double dConflictProbability = std::accumulate(vdConflictProbabilityList.begin(), vdConflictProbabilityList.end(),
-                                                  0);
+    double dConflictProbability = std::min(
+            std::accumulate(vdConflictProbabilityList.begin(), vdConflictProbabilityList.end(), 0.0), 1.0);
+    std::copy(vdConflictProbabilityList.begin(), vdConflictProbabilityList.end(),
+              std::ostream_iterator<double>(std::cout, "\t"));
+    std::cout << std::endl << "proba: " << dConflictProbability << ", delay:" << *pdDelayTime << std::endl;
     return dConflictProbability;
 }

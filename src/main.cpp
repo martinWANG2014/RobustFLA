@@ -1,8 +1,13 @@
-#include "../include/Network.h"
-#include "../include/Input.h"
+
 #include "../include/Solution.h"
 
 double Position::EARTH_RADIUS = 6378.16;
+
+std::ostream &operator<<(std::ostream &os, const Position &position) {
+    os << "dLatitude: " << position.dLatitude << " dLongitude: " << position.dLongitude;
+    return os;
+}
+
 double Route::K = 1.8520108;
 double Route::MIN_SEPARATION_DISTANCE = 5.0;
 double Route::A_BAR = 5;

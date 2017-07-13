@@ -6,6 +6,7 @@
 #define POSITION_H
 
 #include <math.h>
+#include <iostream>
 
 /**
  * A Position is denoted by a latitude and a longitude.
@@ -86,7 +87,11 @@ public:
         double c = distanceBetween(position1, position4);
         double a = distanceBetween(position3, position4);
         return (pow(b, 2) + pow(c, 2) - pow(a, 2)) / (2 * b * c);
+
     }
+
+    friend std::ostream &operator<<(std::ostream &os, const Position &position);
+
 private:
     /**
      * the latitude of a position.

@@ -24,11 +24,14 @@ double Flight::getProbabilityConflictAndDelay(Flight *pFlight2, double *pdDelay,
     Route *route2 = pFlight2->getRoute();
         for (int i = 1; i < pRoute->getPointListSize(); i++) {
             for (int j = 1; j < route2->getPointListSize(); j++) {
-                double prob = pRoute->CalculationProbabilityAndDelay(i, route2, j, pdDelay, pbWait, bGeometricMethod,
-                                                                     dSigma,
-                                                                     pFlight2->getSigma());
-                if (prob > MIN_PROBA) {
-                    return prob;
+                if (*pRoute->getPointAtI(i) == *route2->getPointAtI(j)) {
+                    double prob = pRoute->CalculationProbabilityAndDelay(i, route2, j, pdDelay, pbWait,
+                                                                         bGeometricMethod,
+                                                                         dSigma,
+                                                                         pFlight2->getSigma());
+                    if (prob > MIN_PROBA) {
+                        return prob;
+                    }
                 }
             }
         }
