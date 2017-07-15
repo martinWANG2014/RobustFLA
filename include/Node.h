@@ -6,11 +6,7 @@
 #define NODE_H
 
 #include "Position.h"
-#include <string>
-#include <vector>
-
-typedef std::string String;
-
+#include "Configuration.h"
 /**
  * A Node is specified by an unique code, a name and a corresponding position.
  */

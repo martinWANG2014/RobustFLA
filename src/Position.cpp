@@ -3,6 +3,7 @@
 //
 
 #include "../include/Position.h"
+#include "../include/Configuration.h"
 
 bool Position::operator==(const Position &rhs) const {
     return dLatitude == rhs.getLatitude() &&
@@ -28,7 +29,7 @@ double distanceBetween(const Position &p1, const Position &p2) {
     double a = pow(sin(dDeltaLatRadian / 2), 2) +
                cos(dLat1Radian) * cos(dLat2Radian) * pow(sin(dDeltaLngRadian / 2), 2);
     double c = 2 * atan2(sqrt(a), sqrt(1 - a));
-    return Position::EARTH_RADIUS * c;
+    return EARTH_RADIUS * c;
 }
 
 

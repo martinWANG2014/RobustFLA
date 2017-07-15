@@ -12,12 +12,9 @@ bool Flight::operator!=(const Flight &rhs) const {
     return !(rhs == *this);
 }
 
-Flight *Flight::GenerateNewFlight(Time iNewDepartureTime, bool bGeometricMethod) {
-    Route *pNewRoute = (bGeometricMethod) ? pRoute->GenerateNewRoute(iNewDepartureTime) : pRoute->GenerateNewRoute2(
+void Flight::GenerateNewFlight(Time iNewDepartureTime, bool bGeometricMethod) {
+    (bGeometricMethod) ? pRoute->GenerateNewRoute(iNewDepartureTime) : pRoute->GenerateNewRoute2(
             iNewDepartureTime);
-    Flight *pNewFlight = new Flight(sCode, pAOrigin->clone(), pADestination->clone(), iNewDepartureTime, pNewRoute,
-                                    viFeasibleLevelList, dSigma);
-    return pNewFlight;
 }
 
 double Flight::getProbabilityConflictAndDelay(Flight *pFlight2, double *pdDelay, bool *pbWait, bool bGeometricMethod) {
@@ -39,3 +36,4 @@ double Flight::getProbabilityConflictAndDelay(Flight *pFlight2, double *pdDelay,
     *pdDelay = 0;
     return 0;
 }
+

@@ -14,11 +14,6 @@
 class Position {
 public:
     /**
-     * A coefficient parameter: earth radius.
-     */
-    static double EARTH_RADIUS;
-
-    /**
      * Copy Constructor.
      * @param position      The position object.
      */
@@ -89,8 +84,6 @@ public:
         return (pow(b, 2) + pow(c, 2) - pow(a, 2)) / (2 * b * c);
 
     }
-
-    friend std::ostream &operator<<(std::ostream &os, const Position &position);
 
 private:
     /**

@@ -2,91 +2,6 @@
 // Created by chenghaowang on 06/07/17.
 //
 #include "../include/Input.h"
-
-static double MIN_SIGMA = 0.1;
-static double PRECISION_SIGMA = 0.001;
-
-double getSigma2Recursive(double alpha, double beta, double gamma, double sigma1, double sigma2) {
-    double sigma = (sigma1 + sigma2) / 2.0;
-    double gamma1 = 0.5 * (boost::math::erf(alpha / (sqrt(2) * sigma)) + boost::math::erf(beta / (sqrt(2) * sigma)));
-    if (fabs(gamma1 - gamma) < PRECISION_SIGMA) {
-        return gamma1;
-    }
-    if (gamma1 < gamma) {
-        return getSigma2Recursive(alpha, beta, gamma, sigma, sigma2);
-    } else {
-        return getSigma2Recursive(alpha, beta, gamma, sigma1, sigma);
-    }
-}
-
-double getSigma3Recursive(double alpha, double beta, double gamma, double w1, double w2, double p, double sigma1,
-                          double sigma2) {
-    double sigma = (sigma1 + sigma2) / 2.0;
-    double gamma1 = 0.5 * p * (boost::math::erf((1 + w1 * alpha) / (sqrt(2) * sigma)) +
-                               boost::math::erf((1 - w1 * alpha) / (sqrt(2) * sigma))) + 0.5 * (1 - p) *
-                                                                                         (boost::math::erf(
-                                                                                                 (1 + w2 * beta) /
-                                                                                                 (sqrt(2) * sigma)) +
-                                                                                          boost::math::erf(
-                                                                                                  (1 - w2 * beta) /
-                                                                                                  (sqrt(2) * sigma)));
-    if (fabs(gamma1 - gamma) < PRECISION_SIGMA) {
-        return gamma1;
-    }
-    if (gamma1 < gamma) {
-        return getSigma3Recursive(alpha, beta, gamma, w1, w2, p, sigma, sigma2);
-    } else {
-        return getSigma3Recursive(alpha, beta, gamma, w1, w2, p, sigma1, sigma);
-    }
-}
-
-double getSigmaRecursive(double alpha, double gamma, double w1, double sigma1, double sigma2) {
-    double sigma = (sigma1 + sigma2) / 2.0;
-    double gamma1 = 0.5 * (boost::math::erf((1 + w1 * alpha) / (sqrt(2) * sigma)) +
-                           boost::math::erf((1 - w1 * alpha) / (sqrt(2) * sigma)));
-    if (fabs(gamma1 - gamma) < PRECISION_SIGMA) {
-        return gamma1;
-    }
-    if (gamma1 < gamma) {
-        return getSigmaRecursive(alpha, gamma, w1, sigma, sigma2);
-    } else {
-        return getSigmaRecursive(alpha, gamma, w1, sigma1, sigma);
-    }
-}
-
-double getSigma(double alpha, double gamma, double w1) {
-    double sigma1 = alpha * (1 - w1) / (sqrt(2) * boost::math::erf_inv(gamma));
-    double sigma2 = alpha * (1 + w1) / (sqrt(2) * boost::math::erf_inv(gamma));
-    double dMaxSigma = getSigmaRecursive(alpha, gamma, w1, sigma1, sigma2);
-    uni_dist UniformDistribution(MIN_SIGMA, dMaxSigma);
-    std::default_random_engine generator;
-    return UniformDistribution(generator);
-}
-
-double getSigma1(double alpha, double beta, double gamma) {
-    double dMaxSigma = (beta + alpha) / (2 * sqrt(2) * boost::math::erf_inv(gamma));
-    uni_dist UniformDistribution(MIN_SIGMA, dMaxSigma);
-    std::default_random_engine generator;
-    return UniformDistribution(generator);
-}
-
-double getSigma2(double alpha, double beta, double gamma) {
-    double sigma1 = alpha / (sqrt(2) * boost::math::erf_inv(gamma));
-    double sigma2 = beta / (sqrt(2) * boost::math::erf_inv(gamma));
-    double dMaxSigma = getSigma2Recursive(alpha, beta, gamma, sigma1, sigma2);
-    uni_dist UniformDistribution(MIN_SIGMA, dMaxSigma);
-    std::default_random_engine generator;
-    return UniformDistribution(generator);
-}
-
-double getSigma3(double alpha, double beta, double gamma, double w1, double w2, double p) {
-    double sigma1 = alpha / (sqrt(2) * boost::math::erf_inv(gamma));
-    double sigma2 = beta / (sqrt(2) * boost::math::erf_inv(gamma));
-    double dMaxSigma = getSigma3Recursive(alpha, beta, gamma, w1, w2, p, sigma1, sigma2);
-    uni_dist UniformDistribution(MIN_SIGMA, dMaxSigma);
-    std::default_random_engine generator;
-    return UniformDistribution(generator);
-}
 void Input::parseWayPoints(Network *pNetwork) {
     using boost::property_tree::ptree;
     using boost::property_tree::read_json;
@@ -176,15 +91,15 @@ void Input::parseAirports(Network *pNetwork) {
               << "\tValid Airports: " << pNetwork->getNbAirports() << std::endl;
 }
 
-void Input::parseFlights(Network *pNetwork, int iRandomMode, const DoubleVector &vdParameter) {
+void Input::parseFlights(Network *pNetwork, int iRandomMode, const vdList &vdParameter) {
     using boost::property_tree::ptree;
     using boost::property_tree::read_json;
     std::cout << "[INFO] Parsing flights file... " << std::flush;
-    if (iRandomMode < 2 && (int) vdParameter.size() < 4) {
+    if (iRandomMode < 2 && (int) vdParameter.size() < 3) {
         std::cerr << "[ERROR] the parameter list for random method is not correct!" << std::endl;
         abort();
     }
-    if (iRandomMode == 2 && (int) vdParameter.size() < 7) {
+    if (iRandomMode == 2 && (int) vdParameter.size() < 6) {
         std::cerr << "[ERROR] the parameter list for random method is not correct!" << std::endl;
         abort();
     }
@@ -194,6 +109,26 @@ void Input::parseFlights(Network *pNetwork, int iRandomMode, const DoubleVector 
         abort();
     }
 
+    double dSigma;
+    switch (iRandomMode) {
+        case 0:
+            dSigma = getSigma1(vdParameter[0], vdParameter[1], vdParameter[2]);
+            break;
+        case 1:
+            dSigma = getSigma2(vdParameter[0], vdParameter[1], vdParameter[2]);
+            break;
+        case 2:
+            dSigma = getSigma3(vdParameter[0], vdParameter[1], vdParameter[2], vdParameter[4],
+                               vdParameter[5], vdParameter[6]);
+            break;
+        default:
+            std::cout << std::endl
+                      << "[Warning]: the random mode is not supported, use the default one systemically!"
+                      << std::endl;
+            dSigma = getSigma1(vdParameter[0], vdParameter[1], vdParameter[2]);
+    }
+    std::default_random_engine generator;
+    uni_dist UniformDistribution(MIN_SIGMA, dSigma);
     // Parse the json file with boost property tree.
     ptree root;
     // Read the json file by the read_json method offered by the boost library.
@@ -267,27 +202,9 @@ void Input::parseFlights(Network *pNetwork, int iRandomMode, const DoubleVector 
                 // Verify whether the network has contained the flight or not. If not, then add it into network.
                 bool bIsRouteValid = pFlight->selfCheck();
                 if (bIsRouteValid && !contains(pNetwork->getFlightsList(), pFlight)) {
-                    IntVector feasibleList = findFeasibleLevels(iLevel);
+                    viList feasibleList = findFeasibleLevels(iLevel);
                     pFlight->setFeasibleLevelList(feasibleList);
-                    double dSigma;
-                    switch (iRandomMode) {
-                        case 0:
-                            dSigma = getSigma1(vdParameter[0], vdParameter[1], vdParameter[2]);
-                            break;
-                        case 1:
-                            dSigma = getSigma2(vdParameter[0], vdParameter[1], vdParameter[2]);
-                            break;
-                        case 2:
-                            dSigma = getSigma3(vdParameter[0], vdParameter[1], vdParameter[2], vdParameter[4],
-                                               vdParameter[5], vdParameter[6]);
-                            break;
-                        default:
-                            std::cout << std::endl
-                                      << "[Warning]: the random mode is not supported, use the default one systemically!"
-                                      << std::endl;
-                            dSigma = getSigma1(vdParameter[0], vdParameter[1], vdParameter[2]);
-                    }
-                    pFlight->setSigma(dSigma);
+                    pFlight->setSigma(dSigma);//UniformDistribution(generator));
                     pNetwork->addNewFlight(pFlight);
                 } else if (bIsRouteValid) {
                     std::cout << std::endl

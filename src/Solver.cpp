@@ -50,7 +50,7 @@ void Solver::initFunctionObjective(int iProcessingLevel, FlightVector &Conflicte
     std::cout << "OK" << std::endl;
 }
 
-void Solver::initConstraints(IntVector &viConstraintList, int iNbConflictedFlights, DoubleVector &Mi, DoubleVector &Pi,
+void Solver::initConstraints(viList &viConstraintList, int iNbConflictedFlights, vdList &Mi, vdList &Pi,
                              double **penalCost) {
     std::cout << "\t\tInitialize constraints... " << std::flush;
     for(auto &&i : viConstraintList){

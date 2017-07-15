@@ -10,8 +10,8 @@
 #include <ilcplex/ilocplex.h>
 #include "Flight.h"
 
-typedef std::vector<int> IntVector;
-typedef std::vector<double> DoubleVector;
+typedef std::vector<int> viList;
+typedef std::vector<double> vdList;
 
 /**
  * The solver class for purpose to solve the ILP model, then give a corresponding result.
@@ -74,7 +74,7 @@ private:
      * @param Pi                    A list of Pi, which means the admissible cumulative cost for a given flight i at current flight level.
      * @param penalCost
      */
-    void initConstraints(IntVector &viConstraintList, int iNbConflictedFlights, DoubleVector &Mi, DoubleVector &Pi,
+    void initConstraints(viList &viConstraintList, int iNbConflictedFlights, vdList &Mi, vdList &Pi,
                          double **penalCost);
 
     /**
@@ -99,8 +99,8 @@ public:
      * @param viConstraintList      A list of flight index, for which should respect the constraint.
      * @param log                   The log file stream
      */
-    Solver(IloEnv env, FlightVector &ConflictedFlightList, int iProcessingLevel, DoubleVector &Mi, DoubleVector &Pi,
-           double **penalCost, IntVector &viConstraintList, std::ofstream &log) {
+    Solver(IloEnv env, FlightVector &ConflictedFlightList, int iProcessingLevel, vdList &Mi, vdList &Pi,
+           double **penalCost, viList &viConstraintList, std::ofstream &log) {
         Solver::env = env;
         IloModel model_temp(env);
         Solver::model = model_temp;

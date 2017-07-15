@@ -6,11 +6,12 @@
 #include "../include/Input.h"
 #include <numeric>
 
-Route *Route::GenerateNewRoute(Time iNewDepartureTime) {
+void Route::GenerateNewRoute(Time dNewDepartureTime) {
     std::default_random_engine generator;
-    Route *newRoute = new Route(getDefaultLevel(), getPointAtI(0)->clone(iNewDepartureTime));
+    vdTimeList[0] = dNewDepartureTime;
     for (int i = 1; i < getPointListSize(); i++) {
-        double velocity = getVelocityFromPoint(i - 1);
+        double velocity = getVelocityFromPoint(i,
+                                               vpPointsList[i]->getArrivingTime() - vpPointsList[i]->getArrivingTime());
         normal_dist NormalDistribution(0, 1.0 / 300);
         uni_dist UniformDistribution(0.0, 1.0);
         double dRandom = UniformDistribution(generator);
@@ -18,26 +19,37 @@ Route *Route::GenerateNewRoute(Time iNewDepartureTime) {
                 generator)));
         double dDistance = distanceBetween(getPointAtI(i)->getPosition(), getPointAtI(i - 1)->getPosition());
         Time dDeltaT = (Time) (dDistance / velocity);
-        newRoute->addNewPoint(getPointAtI(i)->clone(newRoute->getArrivingTimeAtPoint(i - 1) + dDeltaT));
+        vdTimeList[i] = vpPointsList[i - 1]->getArrivingTime() + dDeltaT;
     }
-    return newRoute;
 }
 
-Route *Route::GenerateNewRoute2(Time iNewDepartureTime) {
-    Route *newRoute = new Route(getDefaultLevel(), getPointAtI(0)->clone(iNewDepartureTime));
-    Time dDeltaT = iNewDepartureTime - getArrivingTimeAtPoint(0);
+void Route::GenerateNewRoute2(Time dNewDepartureTime) {
+    vdTimeList[0] = dNewDepartureTime;
+    Time dDeltaT = dNewDepartureTime - vpPointsList[0]->getArrivingTime();
     for (int i = 1; i < getPointListSize(); i++) {
-        newRoute->addNewPoint(getPointAtI(i)->clone(newRoute->getArrivingTimeAtPoint(i - 1) + dDeltaT));
+        vdTimeList[i] = vpPointsList[i]->getArrivingTime() + dDeltaT;
     }
-    return newRoute;
 }
+
+double Route::getVelocityFromPoint(int iIndexPoint, double dDeltaT) {
+    if (iIndexPoint == 0) {
+        return -1;
+    }
+    double dDistance = distanceBetween(getPositionAtPoint(iIndexPoint), getPositionAtPoint(iIndexPoint-1));
+    if (dDeltaT != 0) {
+        return dDistance / dDeltaT;
+    }
+    std::cerr << "[Fatal Error] the arriving time between two consecutive points is 0." << std::endl;
+    return -1;
+}
+
 
 double Route::getVelocityFromPoint(int iIndexPoint) {
     if (iIndexPoint == 0) {
         return -1;
     }
-    double dDeltaT = getArrivingTimeAtPoint(iIndexPoint) - getArrivingTimeAtPoint(iIndexPoint - 1);
-    double dDistance = distanceBetween(getPositionAtPoint(iIndexPoint), getPositionAtPoint(iIndexPoint-1));
+    double dDeltaT = vdTimeList[iIndexPoint] - vdTimeList[iIndexPoint - 1];
+    double dDistance = distanceBetween(getPositionAtPoint(iIndexPoint), getPositionAtPoint(iIndexPoint - 1));
     if (dDeltaT != 0) {
         return dDistance / dDeltaT;
     }
@@ -64,8 +76,8 @@ double Route::probabilityAndDelay(double dT1, double dT2, double dV1, double dV2
     double dSinA = sqrt(1 - pow(dCosA, 2));
     double dLambda = dSinA / sqrt(pow(dRho, 2) - 2 * dRho * dCosA * ((bFlag) ? 1 : -1) + 1);
     double dMu = dLambda * dV2 * fabs(dT2 - dT1);
-    double dSigma = dLambda * ((bGeometricMethod) ? A_BAR * sqrt(1 + pow(dRho, 2)) : dV2 * sqrt(pow(dSigma1, 2) +
-                                                                                                pow(dSigma2, 2)));
+    double dSigma = dLambda * ((bGeometricMethod) ? getA_Bar() * sqrt(1 + pow(dRho, 2)) : dV2 * sqrt(pow(dSigma1, 2) +
+                                                                                                     pow(dSigma2, 2)));
     double dRight = (MIN_SEPARATION_DISTANCE * K - dMu) / (sqrt(2.0) * dSigma);
     double dLeft = dMu / (sqrt(2.0) * dSigma);
     *pdDelayTime = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - fabs(dT2 - dT1);
@@ -88,13 +100,8 @@ double Route::calculateProbabilityAndDelay(int iIndex1, Route *pRoute2, int iInd
 
 double Route::CalculationProbabilityAndDelay(int iIndex1, Route *pRoute2, int iIndex2, double *pdDelayTime,
                                              bool *pbWait, bool bGeometricMethod, double dSigma1, double dSigma2) {
-//    if (*getPointAtI(iIndex1) != *pRoute2->getPointAtI(iIndex2)) {
-//        *pdDelayTime = 0;
-//        *pbWait = true;
-//        return 0;
-//    }
-    DoubleVector vdConflictProbabilityList;
-    DoubleVector vdDelayTime;
+    vdList vdConflictProbabilityList;
+    vdList vdDelayTime;
     double pdDelay;
     double dProbability;
     if (iIndex1 > 0 && iIndex1 < getPointListSize() - 1) {
@@ -204,8 +211,8 @@ double Route::CalculationProbabilityAndDelay(int iIndex1, Route *pRoute2, int iI
     *pbWait = getArrivingTimeAtPoint(iIndex1) > pRoute2->getArrivingTimeAtPoint(iIndex2);
     double dConflictProbability = std::min(
             std::accumulate(vdConflictProbabilityList.begin(), vdConflictProbabilityList.end(), 0.0), 1.0);
-    std::copy(vdConflictProbabilityList.begin(), vdConflictProbabilityList.end(),
-              std::ostream_iterator<double>(std::cout, "\t"));
-    std::cout << std::endl << "proba: " << dConflictProbability << ", delay:" << *pdDelayTime << std::endl;
+//    std::copy(vdConflictProbabilityList.begin(), vdConflictProbabilityList.end(),
+//              std::ostream_iterator<double>(std::cout, "\t"));
+//    std::cout << std::endl << "proba: " << dConflictProbability << ", delay:" << *pdDelayTime << std::endl;
     return dConflictProbability;
 }

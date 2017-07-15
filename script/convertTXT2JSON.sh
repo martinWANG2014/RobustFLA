@@ -1,31 +1,9 @@
 #!/usr/bin/env bash
-
 if [[ $# -eq 1 ]] ; then
     outfile=$(echo $1 | sed -e 's/txt/json/g')
-    echo "target file: $outfile"
     case $(basename $1) in
-#        "config.txt")
-#            echo "convert config file"
-#            awk 'BEGIN{ print "{" }
-#                NR == 2 {
-#                    print "\t\42Periods\42: " $1 ","
-#                }
-#                NR == 3 {
-#                    gsub ("txt", "json", $1);
-#                    print "\t\42Airport\42: \42" $1 "\42,"
-#                }
-#                NR == 4 {
-#                    gsub ("txt", "json", $1);
-#                    print "\t\42Beacon\42: \42" $1 "\42,"
-#                }
-#                NR == 5 {
-#                    gsub ("txt", "json", $1);
-#                    print "\t\42Flight\42: \42" $1 "\42,"
-#                }
-#                END{print "}" }' $1 | sed 'N;$s/,\n/\n/;P;D' > ${outfile}
-#            ;;
         "flight.txt")
-            echo "convert flight file"
+            echo "[INFO] convert flight.txt to flight.json"
             awk -F ';' 'BEGIN{ print "{" }
                 NR == 2 {
                     print "\t\42FN\42: " $1","
@@ -61,7 +39,7 @@ if [[ $# -eq 1 ]] ; then
                 END{print "}" }' $1 | sed 'N;$s/,\n/\n/;P;D' > ${outfile}
             ;;
         "beacon.txt")
-            echo "convert beacon file"
+            echo "[INFO] convert beacon.txt to beacon.json"
             awk 'BEGIN{ print "{" }
                 NR == 2 {
                     split($0, a, ";");
@@ -84,7 +62,7 @@ if [[ $# -eq 1 ]] ; then
                 END{print "}" }' $1 | sed 'N;$s/,\n/\n/;P;D' > ${outfile}
             ;;
         "airport.txt")
-            echo "convert airport file"
+            echo "[INFO] convert airport.txt to airport.json"
             awk 'BEGIN{ print "{" }
                 NR == 2 {
                     split($0, a, ";");
@@ -110,6 +88,7 @@ if [[ $# -eq 1 ]] ; then
             echo "not support such file"
             exit 1
     esac
+    echo "[INFO] target file: $outfile has been created successfully!"
 else
     echo "Usage: convertTXT2JSON.sh filename"
 fi

@@ -8,21 +8,13 @@
 #include "Node.h"
 #include "NodePoint.h"
 #include "Route.h"
+#include "Configuration.h"
 #include <set>
 #include <map>
 #include <jmorecfg.h>
 #include <ostream>
-
-typedef int Level;
-typedef std::set<Level> LevelSet;
-typedef std::vector<Level> LevelVector;
-
 class Flight {
 public:
-    /**
-     * A coefficient parameter: MIN_PORBA, the mininal considering conflict probability.
-     */
-    static double MIN_PROBA;
     /**
      * Constructor with parameters
      * @param sCode             The flight id.
@@ -151,7 +143,7 @@ public:
      * @param bGeometricMethod      Whether use the geometric method
      * @return  The pointer of a new flight.
      */
-    Flight *GenerateNewFlight(Time iNewDepartureTime, bool bGeometricMethod);
+    void GenerateNewFlight(Time iNewDepartureTime, bool bGeometricMethod);
 
     /**
      * override == operand.
@@ -171,8 +163,6 @@ public:
         return pRoute->selfCheck();
     }
 
-    friend std::ostream &operator<<(std::ostream &os, const Flight &flight);
-
     double getSigma() const {
         return dSigma;
     }
@@ -180,6 +170,10 @@ public:
     void setSigma(double dSigma) {
         Flight::dSigma = dSigma;
     }
+
+    const vdList &getTimeList() const;
+
+
 private:
     /**
      * the flight id
@@ -218,7 +212,6 @@ private:
 
     double dSigma;
 };
-
 typedef std::vector<Flight *> FlightVector;
 typedef std::map<Flight *, bool> FlightAssignmentMap;
 #endif //FLIGHT_H

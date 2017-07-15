@@ -10,35 +10,12 @@
 #include <boost/math/special_functions/erf.hpp>
 #include "NodePoint.h"
 
-typedef std::normal_distribution<double> normal_dist;
-typedef std::uniform_real_distribution<double> uni_dist;
-typedef int Level;
 
 /**
  * The route class is composed by a default flight level and a list of point.
  */
 class Route {
 public:
-    /**
-     * A coefficient parameter: K, 1(nmi)=K*1(km)
-     */
-    static double K;
-
-    /**
-     * A coefficient parameter: MIN_SEPARATION_DISTANCE, =5.0 nmi.
-     */
-    static double MIN_SEPARATION_DISTANCE;
-
-    /**
-     * A coefficient parameter: MIN_ANGLE, the protected angle of motion for the flight.
-     */
-    static double MIN_ANGLE;
-
-    /**
-     * A coefficient parameter: A_BAR, from article "A Geometrical Approach to Conflict Probability Estimation, Richard Irvine"
-     */
-    static double A_BAR;
-
     /**
      * Constructor with parameters.
      * @param iDefaultLevel     The default flight level
@@ -109,7 +86,7 @@ public:
      * @param iArrivingTime     The new arriving time value
      */
     void setArrivingTimeAtPoint(int iIndex, Time iArrivingTime) {
-        vpPointsList[iIndex]->setArrivingTime(iArrivingTime);
+        vdTimeList[iIndex] = iArrivingTime;//vpPointsList[iIndex]->setArrivingTime(iArrivingTime);
     }
 
     /**
@@ -118,7 +95,7 @@ public:
      * @return the ith Point's arriving time.
      */
     Time getArrivingTimeAtPoint(int iIndex) {
-        return vpPointsList[iIndex]->getArrivingTime();
+        return vdTimeList[iIndex];//vpPointsList[iIndex]->getArrivingTime();
     }
 
     /**
@@ -143,6 +120,7 @@ public:
      * @param iIndexPoint       The index of queried Point.
      * @return the velocity between the current point and its precedent one.
      */
+    double getVelocityFromPoint(int iIndexPoint, double dDeltaT);
     double getVelocityFromPoint(int iIndexPoint);
 
     /**
@@ -158,18 +136,32 @@ public:
      * @param iNewDepartureTime    The new departure time.
      * @return A new route.
      */
-    Route *GenerateNewRoute(Time iNewDepartureTime);
+    void GenerateNewRoute(Time iNewDepartureTime);
 
     /**
      * Gaussian method: Generate a new route with different times compared with current route.
-     * @param iNewDepartureTime    The new departure time.
+     * @param dNewDepartureTime    The new departure time.
      * @return A new route.
      */
-    Route *GenerateNewRoute2(Time iNewDepartureTime);
+    void GenerateNewRoute2(Time dNewDepartureTime);
     bool selfCheck();
 
     double CalculationProbabilityAndDelay(int iIndex1, Route *pRoute2, int iIndex2, double *pdDelayTime, bool *pbWait,
                                           bool bGeometricMethod, double dSigma1, double dSigma2);
+
+    const vdList &getTimeList() const {
+        return vdTimeList;
+    }
+
+    void setTimeList(const vdList &vdTimeList) {
+        Route::vdTimeList = vdTimeList;
+    }
+
+    void initTimeList() {
+        for (int i = 0; i < getPointListSize(); i++) {
+            vdTimeList[i] = vpPointsList[i]->getArrivingTime();
+        }
+    }
 private:
     /**
      * each route have a constant altitude.
@@ -180,6 +172,8 @@ private:
      * the point passed in the route.
      */
     PointVector vpPointsList;
+
+    vdList vdTimeList;
 
     double
     probabilityAndDelay(double dT1, double dT2, double dV1, double dV2, double dCosA, double *pdDelayTime, bool bFlag,

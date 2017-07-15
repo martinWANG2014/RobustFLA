@@ -29,6 +29,12 @@ if(Boost_FOUND)
     LINK_LIBRARIES(${Boost_LIBRARIES})
 endif()
 
+######## Python dependency
+FIND_PACKAGE(PythonInterp)
+FIND_PACKAGE(PythonLibs)
+INCLUDE_DIRECTORIES(${PYTHON_INCLUDE_DIRS})
+LINK_LIBRARIES(${PYTHON_LIBRARIES})
+
 ######## Complier message
 set(CMAKE_BUILD_TYPE Release)
 message(STATUS "System: ${CMAKE_SYSTEM}")

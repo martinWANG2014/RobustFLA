@@ -6,62 +6,10 @@
 #define NETWORK_H
 
 #include "Flight.h"
-typedef std::vector<int> IntVector;
-typedef std::vector<double> DoubleVector;
-typedef std::vector<Level> LevelVector;
-typedef std::map<Level, std::pair<int, int>> FlightLevelMap;
-typedef std::vector<std::pair<Level, std::pair<int, int>>> LevelNumberList;
-////////////Method template////////////////////////////////////////////////////
-/**
- * A template of the method to find an object by providing its code.
- * @tparam T                    The general type of object
- * @param vpObjectsVector       The object list
- * @param sCode                 The given code of an object
- * @return The pointer of corresponding object.
- */
-template<typename T> T* findByCode(std::vector<T*> vpObjectsVector, const String &sCode){
-    if (vpObjectsVector.size() < 1) return nullptr;
-    for (auto &&item : vpObjectsVector) {
-        if ( item->getCode() == sCode) {
-            return item;
-        }
-    }
-    return nullptr;
-}
-
-
-/**
- * A template of Comparator for a pair object in a vector.
- * @tparam T1   The type of key in a pair object
- * @tparam T2   The type of value in a pair object
- */
-template <typename T1, typename T2, typename T3>
-struct greater_second {
-    typedef std::pair<T1,  std::pair<T2, T3>> type;
-    bool operator ()(type const& a, type const& b) const {
-        return (a.second.second > b.second.second) ||
-                (a.second.second == b.second.second && a.second.first > b.second.first);
-    }
-};
-
-
-/**
- * A template to retrieve key from a pair object in a vector.
- * @tparam T1   The type of key in a pair object
- * @tparam T2   The type of value in a pair object
- */
-template <typename T1, typename T2, typename T3>
-struct retrieve_key
-{
-    typedef std::pair<T1, std::pair<T2, T3>> type;
-    T1 operator ()(type const& a) const {
-        return a.first;
-    }
-};
-////////////Method template////////////////////////////////////////////////////
 
 class Network {
 public:
+    static double PERIOD_LENGTH;
     /**
      * Default Constructor.
      */

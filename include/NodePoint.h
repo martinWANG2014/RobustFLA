@@ -7,18 +7,12 @@
 
 #include "Node.h"
 
-typedef double Time;
 
 /**
  * the Point contains the wayPoint and the arriving time of a given wayPoint.
  */
 class Point {
 public:
-    /**
-     * A coefficient parameter: the unit length of period.
-     */
-    static Time PERIOD_UNIT;
-
     /**
      * Constructor with parameters
      * @param pWayPoint         A pointer links to the given wayPoint.
