@@ -128,13 +128,13 @@ case $1 in
     ;;
     2)
         echo "[INFO] Call Monte-Carlo Simulation Method"
-        if [[ $# -lt 9 ]]; then
+        if [[ $# -lt 8 ]]; then
             echo "[ERROR] invalid parameters list."
             Usage
             exit
         else
             if [[ $5 -eq 2 ]]; then
-                if [[ $# -ne 11 ]]; then
+                if [[ $# -ne 10 ]]; then
                     echo "[ERROR] invalid parameters list."
                     Usage
                     exit
@@ -150,13 +150,13 @@ case $1 in
     ;;
     3)
         echo "[INFO] Call Gaussian Method"
-        if [[ $# -lt 9 ]]; then
+        if [[ $# -lt 8 ]]; then
             echo "[ERROR] invalid parameters list."
             Usage
             exit
         else
             if [[ $5 -eq 2 ]]; then
-                if [[ $# -ne 11 ]]; then
+                if [[ $# -ne 10 ]]; then
                     echo "[ERROR] invalid parameters list."
                     Usage
                     exit

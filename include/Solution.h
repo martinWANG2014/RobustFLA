@@ -16,15 +16,16 @@ std::default_random_engine generator;
 
 qviList Combination(viList viConstraintList, int k) {
     qviList qviCombinationList;
-    for (int i = 0; i < (int) viConstraintList.size() - k; i++) {
+    for (int i = 0; i < (int) viConstraintList.size() - k + 1; i++) {
         viList candidateList;
-        candidateList.push_back(viConstraintList[i]);
+        candidateList.push_back(i);
         qviCombinationList.push_back(candidateList);
     }
-    while ((int) qviCombinationList.front().size() != k) {
+    while ((int) qviCombinationList.front().size() < k) {
         int iValue = qviCombinationList.front()[qviCombinationList.front().size() - 1];
-        for (int i = iValue + 1; i < (int) viConstraintList.size(); i++) {
-            viList candidateList = (std::vector<int> &&) qviCombinationList.front();
+        for (int i = iValue + 1;
+             i < (int) viConstraintList.size() - k + 1 + (int) qviCombinationList.front().size(); i++) {
+            viList candidateList = viList((viList &&) qviCombinationList.front());
             candidateList.push_back(i);
             qviCombinationList.push_back(candidateList);
         }
@@ -33,15 +34,13 @@ qviList Combination(viList viConstraintList, int k) {
     return qviCombinationList;
 }
 
-viList getComplement(viList hostList, viList candidateList) {
-    viList resultList(hostList.begin(), hostList.end());
-    for (auto element: candidateList) {
-        auto index = std::find(resultList.begin(), resultList.end(), element);
-        if (index == resultList.end()) {
-            std::cerr << "[ERROR] the candidate list is not the sublist of the host one" << std::endl;
-            abort();
+viList getComplement(int iSize, viList candidateList) {
+    viList resultList;
+    for (int i = 0; i < iSize; i++) {
+        auto index = std::find(candidateList.begin(), candidateList.end(), i);
+        if (index == candidateList.end()) {
+            resultList.push_back(i);
         }
-        resultList.erase(index);
     }
     return resultList;
 }
@@ -255,18 +254,20 @@ bool FeasibilityEnumeration(double epsilon, IloNumArray x, vdList Pi, double **d
             int k = nombre;
             //Si la somme est supérieur à Pi
             if (temp_somme > Pi[i]) {
-                while (bNotFinish) {
+                while (bNotFinish && k > 0) {
                     qviList combinationList = Combination(candidateList, k);
                     bool bValid = false;
                     for (auto element: combinationList) {
                         double temp_prod = 1;
                         double sum_delay = 0.0;
-                        viList complement = getComplement(candidateList, element);
-                        for (auto j: element) {
+                        viList complement = getComplement((int) candidateList.size(), element);
+                        for (auto indexJ: element) {
+                            int j = candidateList[indexJ];
                             temp_prod *= probability[i][j];
                             sum_delay += delay[i][j];
                         }
-                        for (auto j: complement) {
+                        for (auto indexJ: complement) {
+                            int j = candidateList[indexJ];
                             temp_prod *= 1 - probability[i][j];
                         }
                         if (sum_delay > Pi[i]) {
@@ -276,6 +277,7 @@ bool FeasibilityEnumeration(double epsilon, IloNumArray x, vdList Pi, double **d
                     }
                     bNotFinish = bValid;
                     k--;
+                    std::cout << "ok k==>" << k << "\n";
                 }
                 if (somme > epsilon) {
                     return false;

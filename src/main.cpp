@@ -47,7 +47,6 @@ int main(int argc, char *argv[]) {
             case 2:
             case 3:
                 iRandomMode = boost::lexical_cast<int>(argv[8]);
-
                 if(iRandomMode > 0){
                     vdParameters.push_back(boost::lexical_cast<double>(argv[9]) / 100.0);
                     vdParameters.push_back(boost::lexical_cast<double>(argv[10]) / 100.0);
