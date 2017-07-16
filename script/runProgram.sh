@@ -177,4 +177,5 @@ case $1 in
 esac
 
 # call the program.
-${executable_target} $@ >> ${solution_dir}/$(getResultFileName $@)
+echo  " ${executable_target} ${airport_json} ${beacon_json} ${flight_json} $@"
+${executable_target} ${airport_json} ${beacon_json} ${flight_json} $@ > ${solution_dir}/$(getResultFileName $@)

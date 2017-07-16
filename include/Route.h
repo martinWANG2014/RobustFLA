@@ -24,7 +24,7 @@ public:
      * @param iPeriodUnit       The length of a period
      */
     Route(Level iDefaultLevel, Airport *pAirOrigin, Time iDepartureTime) : iDefaultLevel(iDefaultLevel),
-                                                                           vpPointsList() {
+                                                                           vpPointsList() , vdTimeList(){
         vpPointsList.push_back(new Point(pAirOrigin, iDepartureTime));
     }
 
@@ -33,7 +33,7 @@ public:
      * @param iDefaultLevel     The default flight level
      * @param pPoint            A pointer of departure point.
      */
-    Route(Level iDefaultLevel, Point *pPoint) : iDefaultLevel(iDefaultLevel), vpPointsList() {
+    Route(Level iDefaultLevel, Point *pPoint) : iDefaultLevel(iDefaultLevel), vpPointsList() , vdTimeList(){
         vpPointsList.push_back(pPoint);
     }
 
@@ -159,9 +159,17 @@ public:
 
     void initTimeList() {
         for (int i = 0; i < getPointListSize(); i++) {
+            vdTimeList.push_back(vpPointsList[i]->getArrivingTime());
+        }
+    }
+
+    void resetTimeList() {
+        for (int i = 0; i < getPointListSize(); i++) {
             vdTimeList[i] = vpPointsList[i]->getArrivingTime();
         }
     }
+
+
 private:
     /**
      * each route have a constant altitude.

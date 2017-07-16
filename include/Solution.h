@@ -134,7 +134,7 @@ void CalculatePi(FlightVector &vpConflictFlightList, vdList *pvdPi, double dCoef
 }
 
 void CalculateConflictProbability(FlightVector &vpConflictFlightList, double **probabilityConflict,
-                                  double **delayWithoutConflict, double dCoefPij, bool bMethod) {
+                                  double **delayWithoutConflict, bool bMethod) {
     int iSize = (int) vpConflictFlightList.size();
     bool bWait = true;
     double dDelay = 0;
@@ -145,11 +145,11 @@ void CalculateConflictProbability(FlightVector &vpConflictFlightList, double **p
             probabilityConflict[i][j] = probabilityConflict[j][i] = fi->getProbabilityConflictAndDelay(fj, &dDelay,
                                                                                                        &bWait, bMethod);
             if (bWait) {
-                delayWithoutConflict[i][j] = dCoefPij * dDelay;
+                delayWithoutConflict[i][j] = dDelay;
                 delayWithoutConflict[j][i] = 0;
             } else {
                 delayWithoutConflict[i][j] = 0;
-                delayWithoutConflict[j][i] = dCoefPij * dDelay;
+                delayWithoutConflict[j][i] = dDelay;
             }
         }
     }
@@ -338,7 +338,7 @@ bool FeasibilityGaussian(double dEpsilon, IloNumArray &decisionVariables, vdList
 }
 
 bool FeasibilityMonteCarlo(double dEpsilon, IloNumArray &decisionVariables, FlightVector &vpConflictedFlightList,
-                           int *piIndex, viList &viSearchList, vdList &vdPi, int iModeRandom, double dCoefPij,
+                           int *piIndex, viList &viSearchList, vdList &vdPi, int iModeRandom,
                            vdList &vdParameter) {
     int iConflictedFlightsSize = (int)vpConflictedFlightList.size();
     int iConflictedCounter=0;
@@ -378,7 +378,7 @@ bool FeasibilityMonteCarlo(double dEpsilon, IloNumArray &decisionVariables, Flig
                 fj->GenerateNewFlight(iOldDepartureTime + iDelta, true);
             }
         }
-        CalculateConflictProbability(vpConflictedFlightList, probabilityConflict, delayWithoutConflict, dCoefPij, true);
+        CalculateConflictProbability(vpConflictedFlightList, probabilityConflict, delayWithoutConflict, true);
         for (int i = 0; i < iConflictedFlightsSize; i++) {
             double sum=0;
             for (int j = 0; j < iConflictedFlightsSize; j++) {
@@ -392,6 +392,13 @@ bool FeasibilityMonteCarlo(double dEpsilon, IloNumArray &decisionVariables, Flig
         }
         if (!test){
             iConflictedCounter ++;
+        }
+        for (int k = 0; k < (int) viSearchList.size(); k++) {
+            int j = viSearchList[k];
+            if (decisionVariables[j] == 1) {
+                Flight *fj = vpConflictedFlightList[j];
+                fj->resetRouteTimeList();
+            }
         }
     }
     for(auto && item : viSearchList){
@@ -518,8 +525,8 @@ void GetMaxConflictCount(double **probability, int iConflictedFlightsSize, int *
     std::cout << std::endl << std::endl;
 }
 
-void ApproximateFLA(Network *pNetwork, double *dSumBenefits, int *iMaxNbConflict, int iModeMethod, int iModeRandom,
-                    double epsilon, double dCoefPI, double dCoefPij, vdList vdParameter) {
+void ApproximateFLA(Network *pNetwork, double *dSumBenefits, int *iMaxNbConflict, int iModeMethod,
+                    double epsilon, double dCoefPi, vdList vdParameter, int iModeRandom=-1) {
     std::ofstream cplexLogFile("cplexLog.txt", std::ios::out|std::ios::app);
     LevelExamine levelEx;
     ProcessClock processClock;
@@ -564,13 +571,13 @@ void ApproximateFLA(Network *pNetwork, double *dSumBenefits, int *iMaxNbConflict
             std::cout << "OK" << std::endl;
             std::cout << "\tCalculate the conflict probability and delay time to avoid the conflict..." << std::flush;
 
-            CalculateConflictProbability(ConflictFlightList, probability, delai, dCoefPij, iModeMethod < 2);
+            CalculateConflictProbability(ConflictFlightList, probability, delai,iModeMethod < 2);
             std::cout << "OK" << std::endl;
             std::cout << "\tCalculate the p_ij and Mi vector..." << std::flush;
             CalculateMi(probability, delai, (int) ConflictFlightList.size(), &Mi);
             std::cout << "OK" << std::endl;
             std::cout << "\tCalculate Pi vector..." << std::flush;
-            CalculatePi(ConflictFlightList, &Pi, dCoefPI);
+            CalculatePi(ConflictFlightList, &Pi, dCoefPi);
             std::cout << "OK" << std::endl;
             bool bIsAssignedPreferred = false;
             for (auto &&flight: ConflictFlightList) {
@@ -606,7 +613,7 @@ void ApproximateFLA(Network *pNetwork, double *dSumBenefits, int *iMaxNbConflict
             int iIndexFromSimulation;
             /*Test de feasibility of each constraint*/
             switch (iModeMethod) {
-                case 0:
+                case 1:
                     /*Hoeffding*/
                     std::cout << "[INFO] Using Hoeffding method" << std::endl;
                     while (!FeasibilityHoeffding(epsilon, decisionVariablesValues, Pi, delai,
@@ -629,11 +636,11 @@ void ApproximateFLA(Network *pNetwork, double *dSumBenefits, int *iMaxNbConflict
                         delete solver;
                     }
                     break;
-                case 1:/*MonteCarlo*/
+                case 2:/*MonteCarlo*/
                     std::cout << "[INFO] Using Monte-Carlo method" << std::endl;
                     while (!FeasibilityMonteCarlo(epsilon, decisionVariablesValues, ConflictFlightList,
                                                   &iIndexFromSimulation,
-                                                  viSearchList, Pi, iModeRandom, dCoefPij, vdParameter) &&
+                                                  viSearchList, Pi, iModeRandom, vdParameter) &&
                            viSearchList.size() > 0) {
                         //Si on ne trouve pas une bonne index dans la test, on utilise la formule
                         std::cout << "\tGo to step two:" << std::endl;
@@ -656,7 +663,7 @@ void ApproximateFLA(Network *pNetwork, double *dSumBenefits, int *iMaxNbConflict
                         delete solver;
                     }
                     break;
-                case 2:/*Gaussian*/
+                case 3:/*Gaussian*/
                     std::cout << "[INFO] Using Gaussian method" << std::endl;
                     while (!FeasibilityGaussian(epsilon, decisionVariablesValues, Pi, ConflictFlightList, delai) &&
                            viSearchList.size() > 0) {
@@ -677,7 +684,7 @@ void ApproximateFLA(Network *pNetwork, double *dSumBenefits, int *iMaxNbConflict
                         delete solver;
                     }
                     break;
-                default :
+                case 0:
                     /*enumeration method*/
                     while (!FeasibilityEnumeration(epsilon, decisionVariablesValues, Pi, delai, probability,
                                                    ConflictFlightList.size(),
@@ -703,6 +710,10 @@ void ApproximateFLA(Network *pNetwork, double *dSumBenefits, int *iMaxNbConflict
                         decisionVariablesValues = solver->getDecisionVariablesValues();
                         delete solver;
                     }
+                    break;
+                default:
+                    std::cerr<<"Not support ! "<<std::endl;
+                    abort();
                     break;
             }
             if (viSearchList.size() == 0) {
@@ -735,7 +746,7 @@ void ApproximateFLA(Network *pNetwork, double *dSumBenefits, int *iMaxNbConflict
         }
         std::cout << "OK" <<std::endl;
         std::cout << "epsilon: " << epsilon << std::endl;
-        std::cout << "coefPi: " << dCoefPI << std::endl;
+        std::cout << "coefPi: " << dCoefPi << std::endl;
         std::cout << "Nb of flights change level: " << iNbFlightChangeLevel << std::endl;
         std::cout << "Nb of flights not be assigned: " << iNbFlightNotAssigned << std::endl;
         std::cout << "Sum of benefits: " << *dSumBenefits << std::endl;

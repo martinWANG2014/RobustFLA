@@ -91,11 +91,11 @@ void Input::parseAirports(Network *pNetwork) {
               << "\tValid Airports: " << pNetwork->getNbAirports() << std::endl;
 }
 
-void Input::parseFlights(Network *pNetwork, int iRandomMode, const vdList &vdParameter) {
+void Input::parseFlights(Network *pNetwork, const vdList &vdParameter, int iRandomMode) {
     using boost::property_tree::ptree;
     using boost::property_tree::read_json;
-    std::cout << "[INFO] Parsing flights file... " << std::flush;
-    if (iRandomMode < 2 && (int) vdParameter.size() < 3) {
+    std::cout << "[INFO] Parsing flights file... " << std::endl;
+    if (0< iRandomMode && iRandomMode < 2 && (int) vdParameter.size() < 3) {
         std::cerr << "[ERROR] the parameter list for random method is not correct!" << std::endl;
         abort();
     }
@@ -108,8 +108,7 @@ void Input::parseFlights(Network *pNetwork, int iRandomMode, const vdList &vdPar
         std::cerr << "[ERROR] Not exist " << sFlightPath << std::endl;
         abort();
     }
-
-    double dSigma;
+    double dSigma=MIN_SIGMA;
     switch (iRandomMode) {
         case 0:
             dSigma = getSigma1(vdParameter[0], vdParameter[1], vdParameter[2]);
@@ -120,6 +119,9 @@ void Input::parseFlights(Network *pNetwork, int iRandomMode, const vdList &vdPar
         case 2:
             dSigma = getSigma3(vdParameter[0], vdParameter[1], vdParameter[2], vdParameter[4],
                                vdParameter[5], vdParameter[6]);
+            break;
+        case -1:
+            dSigma = MIN_SIGMA;
             break;
         default:
             std::cout << std::endl
@@ -133,7 +135,6 @@ void Input::parseFlights(Network *pNetwork, int iRandomMode, const vdList &vdPar
     ptree root;
     // Read the json file by the read_json method offered by the boost library.
     read_json(sFlightPath, root);
-
     // Start to parse the content of json object.
     int nbFlights = root.get<int>("FN");
     for (int i = 0; i < nbFlights; i++) {
@@ -178,11 +179,12 @@ void Input::parseFlights(Network *pNetwork, int iRandomMode, const vdList &vdPar
             int nbPoints = root.get<int>(sPrefixed + ".PointList.PLN");
             bool bValid = true;
             int iIndexPoint = 0;
+
             // Parse the flight default route.
             while (bValid && iIndexPoint < nbPoints) {
                 String sPrefixedPath(sPrefixed + ".PointList." + std::to_string(iIndexPoint));
                 // Parse the wayPoint in the route.
-                WayPoint *pWayPoint = pNetwork->findWayPointByCode(root.get<String>(sPrefixedPath + ".Code"));
+                WayPoint*pWayPoint = pNetwork->findWayPointByCode(root.get<String>(sPrefixedPath + ".Code"));
                 // Verify the wayPoint, if it is empty, then pop up an error message.
                 if (pWayPoint == nullptr) {
                     std::cout << std::endl << "[Warning]: the code of " << iIndexPoint << "th point in " << i
@@ -205,6 +207,7 @@ void Input::parseFlights(Network *pNetwork, int iRandomMode, const vdList &vdPar
                     viList feasibleList = findFeasibleLevels(iLevel);
                     pFlight->setFeasibleLevelList(feasibleList);
                     pFlight->setSigma(dSigma);//UniformDistribution(generator));
+                    pFlight->initRouteTimeList();
                     pNetwork->addNewFlight(pFlight);
                 } else if (bIsRouteValid) {
                     std::cout << std::endl

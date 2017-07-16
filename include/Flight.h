@@ -171,7 +171,16 @@ public:
         Flight::dSigma = dSigma;
     }
 
-    const vdList &getTimeList() const;
+    void initRouteTimeList(){
+        pRoute->initTimeList();
+    }
+
+    void resetRouteTimeList(){
+        pRoute->resetTimeList();
+    }
+
+
+
 
 
 private:

@@ -60,7 +60,7 @@ double Route::getVelocityFromPoint(int iIndexPoint) {
 bool Route::selfCheck() {
     bool bValid = true;
     for(int i =1; i < getPointListSize(); i++){
-        if (getArrivingTimeAtPoint(i) <= getArrivingTimeAtPoint(i-1))
+        if (vpPointsList[i]->getArrivingTime() <= vpPointsList[i-1]->getArrivingTime())
             bValid = false;
     }
     return bValid;
