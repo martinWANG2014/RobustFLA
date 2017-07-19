@@ -5,14 +5,14 @@
 #include "../include/Solver.h"
 
 void Solver::initDecisionVariables(int iSize) {
-    std::cout << "\t\tInitialize decision variables... " << std::flush;
+//    std::cout << "\t\tInitialize decision variables... " << std::flush;
     IloNumVarArray x(env, iSize, 0, 1, ILOBOOL);
     decisionVariables = x;
-    std::cout << "OK" << std::endl;
+//    std::cout << "OK" << std::endl;
 }
 
 void Solver::initFunctionObjective(int iProcessingLevel, FlightVector &ConflictedFlightList) {
-    std::cout << "\t\tInitialize function objective... " << std::flush;
+//    std::cout << "\t\tInitialize function objective... " << std::flush;
     IloExpr obj(env);
     for (int i = 0; i < (int) ConflictedFlightList.size(); i++) {
         Flight *pFlight = ConflictedFlightList[i];
@@ -47,12 +47,12 @@ void Solver::initFunctionObjective(int iProcessingLevel, FlightVector &Conflicte
     }
     functionObjective = obj;
     model.add(IloMaximize(env, obj));
-    std::cout << "OK" << std::endl;
+//    std::cout << "OK" << std::endl;
 }
 
 void Solver::initConstraints(viList &viConstraintList, int iNbConflictedFlights, vdList &Mi, vdList &Pi,
                              double **penalCost) {
-    std::cout << "\t\tInitialize constraints... " << std::flush;
+//    std::cout << "\t\tInitialize constraints... " << std::flush;
     for(auto &&i : viConstraintList){
         IloExpr constraint(env);
         for (int j = 0; j < iNbConflictedFlights; j++) {
@@ -62,8 +62,9 @@ void Solver::initConstraints(viList &viConstraintList, int iNbConflictedFlights,
                 constraint += penalCost[i][j]*decisionVariables[j];
             }
         }
+//        std::cout << Mi[i] + Pi[i] << "\n";
         IloConstraint c(constraint <= Mi[i] + Pi[i]);
         model.add(c);
     }
-    std::cout << "OK" << std::endl;
+//    std::cout << "OK" << std::endl;
 }

@@ -65,7 +65,7 @@ double getSigma3(double alpha, double beta, double gamma, double w1, double w2, 
             return sigma;
         } else {
             Py_DECREF(pFunc);
-            std::cout << "[ERROR] Can't call the inverse_var_sigma_1 function!" << std::endl;
+            std::cout << "[ERROR] Can't call the inverse_var_sigma_2 function!" << std::endl;
             abort();
         }
     } else {

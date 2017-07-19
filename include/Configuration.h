@@ -42,6 +42,15 @@ const double MIN_PROBA = 0.00001;
 #define MIN_SIGMA_CONST
 const double MIN_SIGMA = 0.1;
 #endif
+#ifndef COEF_PIJ
+#define COEF_PIJ
+const double Coef_Pij = 1;
+#endif
+
+#ifndef COEF_PI
+#define COEF_PI
+const double Coef_Pi = 3;
+#endif
 typedef std::vector<int> viList;
 typedef std::vector<std::vector<int>> vviList;
 typedef std::vector<double> vdList;

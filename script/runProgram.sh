@@ -134,7 +134,7 @@ case $1 in
             exit
         else
             if [[ $5 -eq 2 ]]; then
-                if [[ $# -ne 10 ]]; then
+                if [[ $# -ne 11 ]]; then
                     echo "[ERROR] invalid parameters list."
                     Usage
                     exit
@@ -156,7 +156,7 @@ case $1 in
             exit
         else
             if [[ $5 -eq 2 ]]; then
-                if [[ $# -ne 10 ]]; then
+                if [[ $# -ne 11 ]]; then
                     echo "[ERROR] invalid parameters list."
                     Usage
                     exit

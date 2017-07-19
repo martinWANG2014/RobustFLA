@@ -32,10 +32,10 @@ public:
      * Initialize the air management network
      * @param pNetwork      A pointer of network
      */
-    void initNetwork(Network *pNetwork,  const vdList &vdParameter, int iRandomMode=-1) {
+    void initNetwork(Network *pNetwork, double dCoefPi, const vdList &vdParameter, int iRandomMode = -1) {
         parseAirports(pNetwork);
         parseWayPoints(pNetwork);
-        parseFlights(pNetwork, vdParameter, iRandomMode);
+        parseFlights(pNetwork, dCoefPi, vdParameter, iRandomMode);
         pNetwork->InitFlightLevelsList();
         std::cout << "\tFlight Level size: " << pNetwork->getNbLevels() << std::endl;
     }
@@ -59,7 +59,7 @@ private:
      * Parse the flight file.
      * @param pNetwork      A pointer of network
      */
-    void parseFlights(Network *pNetwork, const vdList &vdParameter, int iRandomMode=-1);
+    void parseFlights(Network *pNetwork, double dCoefPi, const vdList &vdParameter, int iRandomMode = -1);
 
     /**
      * Parse the airport file.

@@ -81,9 +81,14 @@ private:
      * Configure the solver.
      * @param log       The log file stream
      */
-    void configureSolver(std::ofstream &log) {
-        env.setOut(log);
-        solver.setOut(log);
+    void configureSolver(std::ofstream &log, bool display) {
+        if (display) {
+            env.setOut(log);
+            solver.setOut(log);
+        } else {
+            env.setOut(env.getNullStream());
+            solver.setOut(env.getNullStream());
+        }
         solver.setParam(IloCplex::Threads, 1);
     }
 
@@ -100,13 +105,13 @@ public:
      * @param log                   The log file stream
      */
     Solver(IloEnv env, FlightVector &ConflictedFlightList, int iProcessingLevel, vdList &Mi, vdList &Pi,
-           double **penalCost, viList &viConstraintList, std::ofstream &log) {
+           double **penalCost, viList &viConstraintList, std::ofstream &log, bool display) {
         Solver::env = env;
         IloModel model_temp(env);
         Solver::model = model_temp;
         IloCplex solver_temp(model);
         Solver::solver = solver_temp;
-        configureSolver(log);
+        configureSolver(log, display);
         initDecisionVariables((int) ConflictedFlightList.size());
         initConstraints(viConstraintList, (int) ConflictedFlightList.size(), Mi, Pi, penalCost);
         initFunctionObjective(iProcessingLevel, ConflictedFlightList);
@@ -126,13 +131,20 @@ public:
      * solve method, call explicitly to solve the ILP model.
      */
     void solve() {
-        std::cout << "\t\tSolving..." << std::flush;
+//        std::cout << "\t\tSolving..." << std::flush;
         IloNumArray values(env);
-        solver.solve();
-        solver.getValues(values, decisionVariables);
-        decisionVariablesValues = values;
-        dFunctionObjectiveValue = solver.getObjValue();
-        std::cout << "Ok" << std::endl;
+//        solver.exportModel("model.lp");
+        if (solver.solve()) {
+            solver.getValues(values, decisionVariables);
+            decisionVariablesValues = values;
+            dFunctionObjectiveValue = solver.getObjValue();
+
+//            std::cout << "Ok" << std::endl;
+        } else {
+
+//            std::cout << "Failed" << std::endl;
+            abort();
+        }
     }
 
     /**

@@ -91,10 +91,10 @@ void Input::parseAirports(Network *pNetwork) {
               << "\tValid Airports: " << pNetwork->getNbAirports() << std::endl;
 }
 
-void Input::parseFlights(Network *pNetwork, const vdList &vdParameter, int iRandomMode) {
+void Input::parseFlights(Network *pNetwork, double dCoefPi, const vdList &vdParameter, int iRandomMode) {
     using boost::property_tree::ptree;
     using boost::property_tree::read_json;
-    std::cout << "[INFO] Parsing flights file... " << std::endl;
+    std::cout << "[INFO] Parsing flights file... " << std::flush;
     if (0< iRandomMode && iRandomMode < 2 && (int) vdParameter.size() < 3) {
         std::cerr << "[ERROR] the parameter list for random method is not correct!" << std::endl;
         abort();
@@ -207,22 +207,23 @@ void Input::parseFlights(Network *pNetwork, const vdList &vdParameter, int iRand
                     viList feasibleList = findFeasibleLevels(iLevel);
                     pFlight->setFeasibleLevelList(feasibleList);
                     pFlight->setSigma(dSigma);//UniformDistribution(generator));
+                    pFlight->setCoefPi(dCoefPi);
                     pFlight->initRouteTimeList();
                     pNetwork->addNewFlight(pFlight);
                 } else if (bIsRouteValid) {
-                    std::cout << std::endl
-                              << "[Warning]: the route of " << i
-                              << " flight is not correct, it is ignored automatically!"
-                              << std::endl;
+//                    std::cout << std::endl
+//                              << "[Warning]: the route of " << i
+//                              << " flight is not correct, it is ignored automatically!"
+//                              << std::endl;
                 } else {
-                    std::cout << std::endl
-                              << "[Warning]: the " << i << " flight was redundant, it is ignored automatically!"
-                              << std::endl;
+//                    std::cout << std::endl
+//                              << "[Warning]: the " << i << " flight was redundant, it is ignored automatically!"
+//                              << std::endl;
                 }
             } else {
-                std::cout << std::endl
-                          << "[Warning]: the route of " << i << " flight is not complete, it is ignored automatically!"
-                          << std::endl;
+//                std::cout << std::endl
+//                          << "[Warning]: the route of " << i << " flight is not complete, it is ignored automatically!"
+//                          << std::endl;
             }
         }
     }

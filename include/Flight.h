@@ -179,10 +179,17 @@ public:
         pRoute->resetTimeList();
     }
 
+    double getCoefPi() const {
+        return dCoefPi;
+    }
 
+    void setCoefPi(double dCoefPi) {
+        Flight::dCoefPi = dCoefPi;
+    }
 
-
-
+    void resetLevel() {
+        iCurrentLevel = getDefaultLevel();
+    }
 private:
     /**
      * the flight id
@@ -220,6 +227,8 @@ private:
     Route *pRoute;
 
     double dSigma;
+
+    double dCoefPi;
 };
 typedef std::vector<Flight *> FlightVector;
 typedef std::map<Flight *, bool> FlightAssignmentMap;
