@@ -11,7 +11,7 @@ double getSigma1(double alpha, double beta, double gamma) {
 double getSigma2(double alpha, double beta, double gamma) {
     Py_Initialize();
     PyRun_SimpleString("import sys");
-    PyRun_SimpleString("sys.path.append(\"../../script\")");
+    PyRun_SimpleString("sys.path.append(\".\")");
     PyObject *pModule = PyImport_ImportModule("inverse_sigma");
     if (pModule != NULL) {
         PyObject *pFunc = PyObject_GetAttrString(pModule, "inverse_var_sigma_1");
@@ -44,12 +44,12 @@ double getSigma2(double alpha, double beta, double gamma) {
 double getSigma3(double alpha, double beta, double gamma, double w1, double w2, double p) {
     Py_Initialize();
     PyRun_SimpleString("import sys");
-    PyRun_SimpleString("sys.path.append(\"../../script\")");
+    PyRun_SimpleString("sys.path.append(\".\")");
     PyObject *pModule = PyImport_ImportModule("inverse_sigma");
     if (pModule != NULL) {
         PyObject *pFunc = PyObject_GetAttrString(pModule, "inverse_var_sigma_2");
         if (pFunc && PyCallable_Check(pFunc)) {
-            PyObject *pArgs = PyTuple_New(3);
+            PyObject *pArgs = PyTuple_New(6);
             PyTuple_SetItem(pArgs, 0, PyFloat_FromDouble(alpha));
             PyTuple_SetItem(pArgs, 1, PyFloat_FromDouble(beta));
             PyTuple_SetItem(pArgs, 2, PyFloat_FromDouble(gamma));
@@ -65,7 +65,7 @@ double getSigma3(double alpha, double beta, double gamma, double w1, double w2, 
             return sigma;
         } else {
             Py_DECREF(pFunc);
-            std::cout << "[ERROR] Can't call the inverse_var_sigma_2 function!" << std::endl;
+            std::cout << "[ERROR] Can't call the inverse_var_sigma_1 function!" << std::endl;
             abort();
         }
     } else {

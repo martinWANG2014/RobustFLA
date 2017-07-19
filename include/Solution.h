@@ -747,7 +747,6 @@ int SolveFLA(const FlightVector &vpFlightList, LevelVector viLevelsList, IloEnv 
     }
     return iNbFlightNotAssigned;
 }
-
 void ApproximateFLA(Network *pNetwork, double *dSumBenefits, int *iMaxNbConflict, int iModeMethod,
                     double epsilon, vdList vdParameter, int iModeRandom = -1) {
     std::ofstream cplexLogFile("cplexLog.txt", std::ios::out | std::ios::app);
@@ -763,22 +762,22 @@ void ApproximateFLA(Network *pNetwork, double *dSumBenefits, int *iMaxNbConflict
     try {
 //        iNbFlightNotAssigned =  SolveFLA(vpFlightList, viLevelsList, env, cplexLogFile, dSumBenefits, iMaxNbConflict, iModeMethod,
 //                       epsilon, vdParameter,iModeRandom);
-//        while(bNotFinish){
-        iNbFlightNotAssigned = SolveFLA(vpFlightList, viLevelsList, env, cplexLogFile, dSumBenefits, iMaxNbConflict,
-                                        iModeMethod,
-                                        epsilon, vdParameter, iModeRandom);
-        std::cout << "[Solved] Nb of flights not be assigned: " << iNbFlightNotAssigned << std::endl << std::endl;
+        while (bNotFinish) {
+            iNbFlightNotAssigned = SolveFLA(vpFlightList, viLevelsList, env, cplexLogFile, dSumBenefits, iMaxNbConflict,
+                                            iModeMethod,
+                                            epsilon, vdParameter, iModeRandom);
+            std::cout << "[Solved] Nb of flights not be assigned: " << iNbFlightNotAssigned << std::endl << std::endl;
 
-//            for(auto&& fi: vpFlightList){
-//                if (fi->getCoefPi() > 0.50){
-//                    bNotFinish = false;
-//                    break;
-//                }
-//            }
-//            if (iNbFlightNotAssigned == 0){
-//                bNotFinish = false;
-//            }
-//        }
+            for (auto &&fi: vpFlightList) {
+                if (fi->getCoefPi() > 0.50) {
+                    bNotFinish = false;
+                    break;
+                }
+            }
+            if (iNbFlightNotAssigned == 0) {
+                bNotFinish = false;
+            }
+        }
     }
     catch (IloException &e) { std::cerr << e.getMessage() << std::endl; }
     catch (...) { std::cerr << "error" << std::endl; }

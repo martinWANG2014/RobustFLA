@@ -11,7 +11,8 @@ void Route::GenerateNewRoute(Time dNewDepartureTime) {
     vdTimeList[0] = dNewDepartureTime;
     for (int i = 1; i < getPointListSize(); i++) {
         double velocity = getVelocityFromPoint(i,
-                                               vpPointsList[i]->getArrivingTime() - vpPointsList[i]->getArrivingTime());
+                                               vpPointsList[i]->getArrivingTime() -
+                                               vpPointsList[i - 1]->getArrivingTime());
         normal_dist NormalDistribution(0, 1.0 / 300);
         uni_dist UniformDistribution(0.0, 1.0);
         double dRandom = UniformDistribution(generator);

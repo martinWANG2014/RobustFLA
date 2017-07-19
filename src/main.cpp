@@ -15,12 +15,13 @@ void EchoUsage(){
             << "random_mode 0 \t\t\t the generated departure time follows a normal distribution, where the mean is t+(beta-alpha)/2, and that the generated departure time has a confident of gamma at an interval [t-alpha, t+beta]."<< std::endl
             << "random_mode 1 \t\t\t the generated departure time follows a normal distribution, where the mean is t, and that the generated departure time has a confident of gamma at an interval [t-alpha, t+beta]."<< std::endl
             <<"random_mode 2 \t\t\t the generated departure time follows a normal distribution, where the mean is t-w1*alpha in left part Pr(x<t)=p and is t+w12*beta in right part Pr(x>=t)=1-p, and that the generated departure time has a confident of gamma at an interval [t-alpha, t+beta]."<< std::endl
-            << "alpha \t\t\t An integer, the lower bound for the interval [t-alpha, t+beta]"<< std::endl
-            <<"beta \t\t\t An integer, the upper bound for the interval [t-alpha, t+beta]"<< std::endl
-            << "gamma \t\t\t An integer in [0, 100], Pr(t-alpha<=x<=t+beta)>=gamma%, the confident that generated departure time fall in an interval [t-alpha, t+beta]"<< std::endl
-            << "w1 \t\t\t An integer in [0, 100], the mean u=t-w1*alpha of the left part x<t"<< std::endl
-            << "w2 \t\t\t An integer in [0, 100], the mean u=t+w2*beta of the right part x>=t"<< std::endl
-            <<"p \t\t\t An integer in [0, 100], the probability that Pr(x<t)=p%"<< std::endl;
+            << "alpha \t\t\t An integer, the lower bound for the interval [t-alpha, t+beta]" << std::endl
+                                                                                             << "beta \t\t\t An integer, the upper bound for the interval [t-alpha, t+beta]" << std::endl
+                                                                                             << "gamma \t\t\t An integer in [0, 100], Pr(t-alpha<=x<=t+beta)>=gamma%, the confident that generated departure time fall in an interval [t-alpha, t+beta]" << std::endl
+                                                                                             << "w1 \t\t\t An integer in [0, 100], the mean u=t-w1*alpha of the left part x<t" << std::endl
+                                                                                             << "w2 \t\t\t An integer in [0, 100], the mean u=t+w2*beta of the right part x>=t" << std::endl
+                                                                                             << "p \t\t\t An integer in [0, 100], the probability that Pr(x<t)=p%"
+                                                                                             << std::endl;
 }
 int main(int argc, char *argv[]) {
     using std::invalid_argument;
@@ -47,10 +48,9 @@ int main(int argc, char *argv[]) {
             case 2:
             case 3:
                 iRandomMode = boost::lexical_cast<int>(argv[8]);
-
-                if(iRandomMode > 0){
-                    vdParameters.push_back(boost::lexical_cast<double>(argv[9]) / 100.0);
-                    vdParameters.push_back(boost::lexical_cast<double>(argv[10]) / 100.0);
+                if (iRandomMode > -1) {
+                    vdParameters.push_back(boost::lexical_cast<double>(argv[9]));
+                    vdParameters.push_back(boost::lexical_cast<double>(argv[10]));
                     vdParameters.push_back(boost::lexical_cast<double>(argv[11]) / 100.0);
                 }
                 if (iRandomMode > 1){
@@ -58,9 +58,10 @@ int main(int argc, char *argv[]) {
                     vdParameters.push_back(boost::lexical_cast<double>(argv[13]) / 100.0);
                     vdParameters.push_back(boost::lexical_cast<double>(argv[14]) / 100.0);
                 }
+//                std::copy(vdParameters.begin(), vdParameters.end(), std::ostream_iterator<double>(std::cout, "\t"));
                 input.initNetwork(&network, boost::lexical_cast<double>(argv[7]) / 100.0, vdParameters, iRandomMode);
-                ApproximateFLA(&network, &dSumBenefits, &iMaxNbConflict, boost::lexical_cast<int>(argv[4]), boost::lexical_cast<double>(argv[6]) / 100.0,
-                               vdParameters, iRandomMode);
+                ApproximateFLA(&network, &dSumBenefits, &iMaxNbConflict, boost::lexical_cast<int>(argv[4]),
+                               boost::lexical_cast<double>(argv[6]) / 100.0, vdParameters, iRandomMode);
                 break;
             default:
                 std::cerr<<"[ERROR] Don't support this method" <<std::endl;
