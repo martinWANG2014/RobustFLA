@@ -128,7 +128,7 @@ void CalculateMi(double **probabilityConflict, double **delayWithoutConflict,
 void CalculatePi(FlightVector &vpConflictFlightList, vdList *pvdPi) {
     for(auto &&fi: vpConflictFlightList){
         double time = (fi->getArrivingTime() - fi->getDepartureTime());
-        pvdPi->push_back(time * fi->getCoefPi());
+        pvdPi->push_back(std::max(90.0, time) * fi->getCoefPi());
     }
 }
 
@@ -747,6 +747,16 @@ int SolveFLA(const FlightVector &vpFlightList, LevelVector viLevelsList, IloEnv 
     }
     return iNbFlightNotAssigned;
 }
+
+int getNbFlightsChangeLevel(const FlightVector &vpFlightList) {
+    int iNbFlightChangeLevel = 0;
+    for (auto &&fi : vpFlightList) {
+        if (fi->getCurrentLevel() != fi->getDefaultLevel()) {
+            iNbFlightChangeLevel++;
+        }
+    }
+    return iNbFlightChangeLevel;
+}
 void ApproximateFLA(Network *pNetwork, double *dSumBenefits, int *iMaxNbConflict, int iModeMethod,
                     double epsilon, vdList vdParameter, int iModeRandom = -1) {
     std::ofstream cplexLogFile("cplexLog.txt", std::ios::out | std::ios::app);
@@ -757,6 +767,9 @@ void ApproximateFLA(Network *pNetwork, double *dSumBenefits, int *iMaxNbConflict
     const FlightVector &vpFlightList = pNetwork->getFlightsList();
     LevelVector viLevelsList = pNetwork->getFlightLevelsList();
     int iNbFlightNotAssigned = 0;
+    int iLastNbFlightNotAssigned = 0;
+    int iNbFlightChangeLevel = 0;
+    int iLastNbFlightChangeLevel = 0;
     bool bNotFinish = true;
     std::cout << "[INFO] Starting ApproximateFLA method..." << std::endl;
     try {
@@ -766,8 +779,9 @@ void ApproximateFLA(Network *pNetwork, double *dSumBenefits, int *iMaxNbConflict
             iNbFlightNotAssigned = SolveFLA(vpFlightList, viLevelsList, env, cplexLogFile, dSumBenefits, iMaxNbConflict,
                                             iModeMethod,
                                             epsilon, vdParameter, iModeRandom);
-            std::cout << "[Solved] Nb of flights not be assigned: " << iNbFlightNotAssigned << std::endl << std::endl;
-
+            iNbFlightChangeLevel = getNbFlightsChangeLevel(vpFlightList);
+            std::cout << "[Solved] Nb of flights not be assigned: " << iNbFlightNotAssigned << std::endl;
+            std::cout << "[Solved] Nb of flights change level: " << iNbFlightChangeLevel << std::endl << std::endl;
             for (auto &&fi: vpFlightList) {
                 if (fi->getCoefPi() > 0.50) {
                     bNotFinish = false;
@@ -776,6 +790,13 @@ void ApproximateFLA(Network *pNetwork, double *dSumBenefits, int *iMaxNbConflict
             }
             if (iNbFlightNotAssigned == 0) {
                 bNotFinish = false;
+            } else if (iNbFlightNotAssigned == iLastNbFlightNotAssigned) {
+                if (iNbFlightChangeLevel == iLastNbFlightChangeLevel) {
+                    bNotFinish = false;
+                }
+            } else {
+                iLastNbFlightChangeLevel = iNbFlightChangeLevel;
+                iLastNbFlightNotAssigned = iNbFlightNotAssigned;
             }
         }
     }
@@ -783,12 +804,7 @@ void ApproximateFLA(Network *pNetwork, double *dSumBenefits, int *iMaxNbConflict
     catch (...) { std::cerr << "error" << std::endl; }
 //    std::cout << "OK" <<std::endl;
 
-    int iNbFlightChangeLevel = 0;
-    for (auto &&fi : vpFlightList) {
-        if (fi->getCurrentLevel() != fi->getDefaultLevel()) {
-            iNbFlightChangeLevel++;
-        }
-    }
+
     std::cout << "Nb of flights change level: " << iNbFlightChangeLevel << std::endl;
     std::cout << "Nb of flights not be assigned: " << iNbFlightNotAssigned << std::endl;
     std::cout << "Sum of benefits: " << *dSumBenefits << std::endl;
