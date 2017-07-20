@@ -20,7 +20,7 @@ void Solver::initFunctionObjective(int iProcessingLevel, FlightVector &Conflicte
                                iProcessingLevel);
         if (index != pFlight->getFeasibleLevelList().end()) {
             long lIndex = index - pFlight->getFeasibleLevelList().begin();
-            obj += decisionVariables[i] * exp(pFlight->getFeasibleLevelList().size() - lIndex);
+            obj += decisionVariables[i] * exp(3 - lIndex);
 //            switch (lIndex) {
 //                case 0:
 //                    obj += 10 * decisionVariables[i];

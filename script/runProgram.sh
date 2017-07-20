@@ -133,7 +133,7 @@ case $1 in
             Usage
             exit
         else
-            if [[ $5 -eq 2 ]]; then
+            if [[ $6 -eq 2 ]]; then
                 if [[ $# -ne 12 ]]; then
                     echo "[ERROR] invalid parameters list."
                     Usage
@@ -155,7 +155,7 @@ case $1 in
             Usage
             exit
         else
-            if [[ $5 -eq 2 ]]; then
+            if [[ $6 -eq 2 ]]; then
                 if [[ $# -ne 12 ]]; then
                     echo "[ERROR] invalid parameters list."
                     Usage

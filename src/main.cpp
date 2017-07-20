@@ -33,7 +33,7 @@ int main(int argc, char *argv[]) {
         Network network;
         Input input(argv[1], argv[2], argv[3]);
         int iMethodMode = boost::lexical_cast<int>(argv[4]);
-//        double dSumBenefits = 0;
+        double dSumBenefits = 0;
         int iMaxNbConflict = 0;
         vdList vdParameters;
         int iRandomMode;
@@ -41,7 +41,7 @@ int main(int argc, char *argv[]) {
             case 0:
             case 1:
                 input.initNetwork(&network);
-                ApproximateFLA(&network, &iMaxNbConflict, boost::lexical_cast<int>(argv[4]),
+                ApproximateFLA(&network, &dSumBenefits, &iMaxNbConflict, boost::lexical_cast<int>(argv[4]),
                                boost::lexical_cast<double>(argv[6]) / 100.0, boost::lexical_cast<int>(argv[7]),
                                boost::lexical_cast<double>(argv[8]) / 100.0, vdParameters);
                 break;
@@ -60,7 +60,7 @@ int main(int argc, char *argv[]) {
                 }
 //                std::copy(vdParameters.begin(), vdParameters.end(), std::ostream_iterator<double>(std::cout, "\t"));
                 input.initNetwork(&network);
-                ApproximateFLA(&network, &iMaxNbConflict, boost::lexical_cast<int>(argv[4]),
+                ApproximateFLA(&network, &dSumBenefits, &iMaxNbConflict, boost::lexical_cast<int>(argv[4]),
                                boost::lexical_cast<double>(argv[6]) / 100.0, boost::lexical_cast<int>(argv[7]),
                                boost::lexical_cast<double>(argv[8]) / 100.0, vdParameters, iRandomMode);
                 break;
