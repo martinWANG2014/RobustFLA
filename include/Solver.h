@@ -138,7 +138,7 @@ public:
             solver.getValues(values, decisionVariables);
             decisionVariablesValues = values;
             dFunctionObjectiveValue = solver.getObjValue();
-            solver.writeSolutions("solution.sl");
+//            solver.writeSolutions("solution.sl");
 //            std::cout << "Ok" << std::endl;
         } else {
 
