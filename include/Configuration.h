@@ -42,15 +42,6 @@ const double MIN_PROBA = 0.00001;
 #define MIN_SIGMA_CONST
 const double MIN_SIGMA = 0.1;
 #endif
-#ifndef COEF_PIJ
-#define COEF_PIJ
-const double Coef_Pij = 1;
-#endif
-
-#ifndef COEF_PI
-#define COEF_PI
-const double Coef_Pi = 3;
-#endif
 typedef std::vector<int> viList;
 typedef std::vector<std::vector<int>> vviList;
 typedef std::vector<double> vdList;
@@ -181,4 +172,10 @@ double getSigma2(double alpha, double beta, double gamma);
 
 double getSigma3(double alpha, double beta, double gamma, double w1, double w2, double p);
 
+/**
+     * Find the feasible flight level list.
+     * @param iDefaultLevel     A given default flight level
+     * @return A three elements list.
+     */
+viList findFeasibleLevels(int iDefaultLevel, int iSize);
 #endif //CONFIGURATION_H

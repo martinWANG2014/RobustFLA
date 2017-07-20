@@ -175,7 +175,9 @@ int MinIndexArgs0(viList &viSearchList, int iConflictedFlightSize, double **prob
         for (auto &&index: viSearchList) {
             double dSumPenalCost = 0;
             for (int j = 0; j < iConflictedFlightSize; j++) {
-                dSumPenalCost += delayWithoutConflict[index][j] * delayWithoutConflict[index][j];
+                if (probabilityConflict[index][j] > 0) {
+                    dSumPenalCost += delayWithoutConflict[index][j];
+                }
             }
             //i : min Pi-E[sum{p_ij}]
             dSumPenalCost = vdPi[index] - dSumPenalCost;
@@ -202,7 +204,7 @@ int MinIndexArgs1(viList &viSearchList, int iConflictedFlightSize, double **prob
             double dSumPenalCost = 0;
             for (int j = 0; j < iConflictedFlightSize; j++) {
                 dSumPenalCost +=
-                        delayWithoutConflict[index][j] * (probabilityConflict[index][j]) * decisionVariables[j] / 2;
+                        delayWithoutConflict[index][j] * probabilityConflict[index][j] * decisionVariables[j] / 2;
             }
             //i : min Pi-E[sum{p_ij}]
             dSumPenalCost = vdPi[index] - dSumPenalCost;
@@ -215,8 +217,9 @@ int MinIndexArgs1(viList &viSearchList, int iConflictedFlightSize, double **prob
         for (auto &&index: viSearchList) {
             double dSumPenalCost = 0;
             for (int j = 0; j < iConflictedFlightSize; j++) {
-                dSumPenalCost +=
-                        delayWithoutConflict[index][j] * (probabilityConflict[index][j]) * decisionVariables[j];
+                if (probabilityConflict[index][j] > 0) {
+                    dSumPenalCost += delayWithoutConflict[index][j] * decisionVariables[j];
+                }
             }
             //i : min Pi-E[sum{p_ij}]
             dSumPenalCost = vdPi[index] - dSumPenalCost;
@@ -234,9 +237,9 @@ int MinIndexArgs1(viList &viSearchList, int iConflictedFlightSize, double **prob
 
 bool FeasibilityEnumeration(double epsilon, IloNumArray x, vdList Pi, double **delay, double **probability,
                             int iConflictedFlightsSize,
-                            int *ind, viList Constraint_list) {
+                            int *ind, viList search_list) {
     *ind = -1;
-    double max_somme = -1;
+    double dMinFeasibility = std::numeric_limits<double>::max();
     //double min_somme=MAXDOUBLE;
     for (int i = 0; i < iConflictedFlightsSize; i++) {//parcourir les vols dans cette niveau
         if (x[i] == 1) {//traiter seulement les vols qui ont x[i]=1
@@ -286,8 +289,8 @@ bool FeasibilityEnumeration(double epsilon, IloNumArray x, vdList Pi, double **d
                     return false;
                 }
 
-                if (somme != 0 && somme > max_somme && !contains(Constraint_list, i)) {
-                    max_somme = somme;
+                if (1 - somme < dMinFeasibility && contains(search_list, i)) {
+                    dMinFeasibility = somme;
                     *ind = i;
                 }
             }
@@ -298,21 +301,26 @@ bool FeasibilityEnumeration(double epsilon, IloNumArray x, vdList Pi, double **d
 }
 
 bool FeasibilityHoeffding(double dEpsilon, IloNumArray &decisionVariables, vdList &vdPi, double **delayWithoutConflict,
-                          int iConflictedFlightSize, double **probabilityConflict) {
+                          int iConflictedFlightSize, double **probabilityConflict, viList search_list, int *piIndex) {
+    double dMinFeasibility = std::numeric_limits<double>::max();
+    *piIndex = -1;
     for (int i = 0; i <iConflictedFlightSize; i++) {
         double temp = 0;
         double temp2 = 0;
         if (decisionVariables[i] == 1) {
             for (int j = 0; j < iConflictedFlightSize; j++) {
-                if (j != i) {
+                if (probabilityConflict[i][j] > 0) {
                     temp +=probabilityConflict[i][j] * delayWithoutConflict[i][j] * decisionVariables[j] / 2;
                     temp2 +=pow(delayWithoutConflict[i][j] ,2) * decisionVariables[j];
                 }
             }
-            temp = 2 * pow(vdPi[i] - temp, 2);
-            temp = exp(-temp / temp2);
+            temp = exp(-(2 * pow(vdPi[i] - temp, 2)) / temp2);
             if (temp > dEpsilon) {
                 return false;
+            }
+            if (1 - temp < dMinFeasibility && contains(search_list, i)) {
+                dMinFeasibility = temp;
+                *piIndex = i;
             }
         }
     }
@@ -320,14 +328,17 @@ bool FeasibilityHoeffding(double dEpsilon, IloNumArray &decisionVariables, vdLis
 }
 
 bool FeasibilityGaussian(double dEpsilon, IloNumArray &decisionVariables, vdList &vdPi,
-                         FlightVector vpConflictedFlightList, double **ppdPenalCost) {
+                         FlightVector vpConflictedFlightList, double **ppdProba, double **ppdPenalCost,
+                         viList search_list, int *piIndex) {
     int iSize = (int) vpConflictedFlightList.size();
+    double dMinFeasibility = std::numeric_limits<double>::max();
+    *piIndex = -1;
     for (int i = 0; i < iSize; i++) {
         if (decisionVariables[i] == 1) {
             double exp_mu = 0.0;
             double exp_sigma_2 = 0.0;
             for (int j = 0; j < iSize; j++) {
-                if (j != i) {
+                if (ppdProba[i][j] > 0) {
                     exp_mu += ppdPenalCost[i][j] * decisionVariables[j];
                     exp_sigma_2 += (pow(vpConflictedFlightList[i]->getSigma(), 2) +
                                     pow(vpConflictedFlightList[j]->getSigma(), 2)) * pow(decisionVariables[j], 2);
@@ -336,6 +347,10 @@ bool FeasibilityGaussian(double dEpsilon, IloNumArray &decisionVariables, vdList
             double prob = 0.5 * (boost::math::erf((vdPi[i] - exp_mu) / (sqrt(2 * exp_sigma_2))) + 1);
             if (prob < 1 - dEpsilon) {
                 return false;
+            }
+            if (prob < dMinFeasibility && contains(search_list, i)) {
+                dMinFeasibility = prob;
+                *piIndex = i;
             }
         }
     }
@@ -348,7 +363,6 @@ bool FeasibilityMonteCarlo(double dEpsilon, IloNumArray &decisionVariables, Flig
     int iConflictedFlightsSize = (int)vpConflictedFlightList.size();
     int iConflictedCounter=0;
     int iMaxConflict = -1;
-    int iMaxIndex = -1;
 
     double **delayWithoutConflict = CreateTable(iConflictedFlightsSize);
     double **probabilityConflict = CreateTable(iConflictedFlightsSize);
@@ -363,9 +377,9 @@ bool FeasibilityMonteCarlo(double dEpsilon, IloNumArray &decisionVariables, Flig
         InitTable(delayWithoutConflict, iConflictedFlightsSize);
         bool test=true;
         // to generate a new scenario from current flight list.
-        for (int k = 0; k < (int) viSearchList.size(); k++) {
-            int j = viSearchList[k];
-            if (decisionVariables[j] == 1){
+        for (int j = 0; j < iConflictedFlightsSize; j++) {
+//            int j = viSearchList[k];
+//            if (decisionVariables[j] == 1){
                 Flight *fj = vpConflictedFlightList[j];
                 Time iOldDepartureTime = fj->getDepartureTime();
                 Time iDelta = 0;
@@ -381,13 +395,13 @@ bool FeasibilityMonteCarlo(double dEpsilon, IloNumArray &decisionVariables, Flig
                         break;
                 }
                 fj->GenerateNewFlight(iOldDepartureTime + iDelta, true);
-            }
+//            }
         }
         CalculateConflictProbability(vpConflictedFlightList, probabilityConflict, delayWithoutConflict, true);
         for (int i = 0; i < iConflictedFlightsSize; i++) {
             double sum=0;
             for (int j = 0; j < iConflictedFlightsSize; j++) {
-                sum += delayWithoutConflict[i][j];
+                sum += decisionVariables[j] * delayWithoutConflict[i][j];
             }
             if (sum > vdPi[i]) {
                 test = false;
@@ -398,21 +412,16 @@ bool FeasibilityMonteCarlo(double dEpsilon, IloNumArray &decisionVariables, Flig
         if (!test){
             iConflictedCounter ++;
         }
-        for (int k = 0; k < (int) viSearchList.size(); k++) {
-            int j = viSearchList[k];
-            if (decisionVariables[j] == 1) {
-                Flight *fj = vpConflictedFlightList[j];
+        for (auto &&fj: vpConflictedFlightList) {
                 fj->resetRouteTimeList();
-            }
         }
     }
     for(auto && item : viSearchList){
         if (decisionVariables[item] ==1 && table[item]> iMaxConflict){
             iMaxConflict = table[item];
-            iMaxIndex = item;
+            *piIndex = item;
         }
     }
-    *piIndex=iMaxIndex;
     delete table;
     DestroyTable(probabilityConflict, iConflictedFlightsSize);
     DestroyTable(delayWithoutConflict, iConflictedFlightsSize);
@@ -478,34 +487,10 @@ void InitCandidateFlights(const FlightVector &vpFlightList, FlightAssignmentMap 
 }
 
 void InitAssignedFlights(int iProcessingLevel, FlightVector &CandidateFlightList, FlightVector &ConflictFlightList,
-                         double *somme_objectif, FlightAssignmentMap *flightAssignmentMap){
+                         FlightAssignmentMap *flightAssignmentMap) {
     for(auto &&flight: CandidateFlightList){
         // if the flight is not in the actual candidate list.
         if (!contains(ConflictFlightList, flight)) {
-            auto index = std::find(flight->getFeasibleLevelList().begin(), flight->getFeasibleLevelList().end(),
-                                   iProcessingLevel);
-            if (index != flight->getFeasibleLevelList().end()) {
-                long lIndex = index - flight->getFeasibleLevelList().begin();
-                switch (lIndex) {
-                    case 0:
-                        *somme_objectif += 10;
-                        break;
-                    case 1:
-                        *somme_objectif += 3;
-                        break;
-                    case 2:
-                        *somme_objectif += 1;
-                        break;
-                    default:
-                        std::cerr << "[Fatal Error]: the feasible flight level list size is not correct!" << std::endl;
-                        abort();
-                }
-            } else {
-                std::cerr << std::endl
-                          << "[Fatal Error]: the flight is processing out of it feasible flight level list !"
-                          << std::endl;
-                abort();
-            }
             flight->setCurrentLevel(iProcessingLevel);
 //            if (flight->getDefaultLevel() != iProcessingLevel)
 //                std::cout << "[INFO] flight: " << flight->getCode() << " change the level from "
@@ -530,21 +515,21 @@ void GetMaxConflictCount(double **probability, int iConflictedFlightsSize, int *
 //    std::cout << std::endl << std::endl;
 }
 
-int SolveFLA(const FlightVector &vpFlightList, LevelVector viLevelsList, IloEnv env, std::ofstream &cplexLogFile,
-             double *dSumBenefits, int *iMaxNbConflict, int iModeMethod,
-             double epsilon, vdList vdParameter, int iModeRandom) {
+FlightVector
+SolveFLA(const FlightVector &vpFlightList, LevelVector viLevelsList, IloEnv env, std::ofstream &cplexLogFile,
+         int *iMaxNbConflict, int iModeMethod,
+         double epsilon, vdList vdParameter, int iModeRandom) {
     LevelExamine levelEx;
     FlightAssignmentMap flightAssignmentMap;
     InitFlightAssignmentMap(vpFlightList, &flightAssignmentMap);
     InitExamineLevel(viLevelsList, &levelEx);
-    *dSumBenefits = 0;
     *iMaxNbConflict = 0;
     for (auto &&fi: vpFlightList) {
         fi->resetLevel();
     }
     for (auto itA = viLevelsList.begin(); itA != viLevelsList.end(); itA++) {
         int iProcessingLevel = (*itA);
-        std::cout << "[INFO] Processing Level: " << iProcessingLevel << std::endl;
+//        std::cout << "[INFO] Processing Level: " << iProcessingLevel << std::endl;
         FlightVector CandidateFlightList;
         FlightVector ConflictFlightList;
         vdList Mi, Pi;
@@ -558,7 +543,7 @@ int SolveFLA(const FlightVector &vpFlightList, LevelVector viLevelsList, IloEnv 
         levelEx[iProcessingLevel] = true;
 //        std::cout << "\tAssign the flights which have no conflict with the other flights in current level..."
 //                  << std::endl;
-        InitAssignedFlights(iProcessingLevel, CandidateFlightList, ConflictFlightList, dSumBenefits,
+        InitAssignedFlights(iProcessingLevel, CandidateFlightList, ConflictFlightList,
                             &flightAssignmentMap);
 //        std::cout << "OK" << std::endl << "\t\tNon-Conflicted flights size: "
 //                  << CandidateFlightList.size() - ConflictFlightList.size() << std::endl;
@@ -609,11 +594,11 @@ int SolveFLA(const FlightVector &vpFlightList, LevelVector viLevelsList, IloEnv 
         Solver *solver = new Solver(env, ConflictFlightList, iProcessingLevel, Mi, Pi, delai, viConstraintList,
                                     cplexLogFile, false);
         solver->solve();
-        double dFunctionObjectiveValue = solver->getFunctionObjectiveValue();
+//        double dFunctionObjectiveValue = solver->getFunctionObjectiveValue();
         IloNumArray decisionVariablesValues = solver->getDecisionVariablesValues();
         delete solver;
         //finish step one////////////////////////////////////////////////////////////////
-        int iIndexFromSimulation;
+        int iIndexFromFeasibilityCheck = -1;
         /*Test de feasibility of each constraint*/
         switch (iModeMethod) {
             case 0:
@@ -621,15 +606,15 @@ int SolveFLA(const FlightVector &vpFlightList, LevelVector viLevelsList, IloEnv 
 //                std::cout << "[INFO] Using Enumeration method" << std::endl;
                 while (!FeasibilityEnumeration(epsilon, decisionVariablesValues, Pi, delai, probability,
                                                (int) ConflictFlightList.size(),
-                                               &iIndexFromSimulation, viConstraintList) &&
+                                               &iIndexFromFeasibilityCheck, viConstraintList) &&
                        viSearchList.size() > 0) {
                     //Si on ne trouve pas une bonne index dans la test, on utilise la formule
 //                    std::cout << "\tGo to step two:" << std::endl;
-                    if (iIndexFromSimulation == -1) {
+                    if (iIndexFromFeasibilityCheck == -1) {
                         index = MinIndexArgs1(viSearchList, (int) ConflictFlightList.size(), probability, delai, Pi,
                                               decisionVariablesValues, true);
                     } else {
-                        index = iIndexFromSimulation;
+                        index = iIndexFromFeasibilityCheck;
                     }
 //                    std::cout << "\t\tMin index:" << index << std::endl;
                     viConstraintList.push_back(index);
@@ -638,7 +623,7 @@ int SolveFLA(const FlightVector &vpFlightList, LevelVector viLevelsList, IloEnv 
                     solver = new Solver(env, ConflictFlightList, iProcessingLevel, Mi, Pi, delai,
                                         viConstraintList, cplexLogFile, false);
                     solver->solve();
-                    dFunctionObjectiveValue = solver->getFunctionObjectiveValue();
+//                    dFunctionObjectiveValue = solver->getFunctionObjectiveValue();
                     decisionVariablesValues.end();
                     decisionVariablesValues = solver->getDecisionVariablesValues();
                     delete solver;
@@ -648,11 +633,16 @@ int SolveFLA(const FlightVector &vpFlightList, LevelVector viLevelsList, IloEnv 
                 /*Hoeffding*/
 //                std::cout << "[INFO] Using Hoeffding method" << std::endl;
                 while (!FeasibilityHoeffding(epsilon, decisionVariablesValues, Pi, delai,
-                                             (int) ConflictFlightList.size(), probability) &&
+                                             (int) ConflictFlightList.size(), probability, viSearchList,
+                                             &iIndexFromFeasibilityCheck) &&
                        viSearchList.size() > 0) {
 //                    std::cout << "\tGo to step two:" << std::endl;
-                    index = MinIndexArgs1(viSearchList, (int) ConflictFlightList.size(), probability, delai, Pi,
-                                          decisionVariablesValues, true);
+                    if (iIndexFromFeasibilityCheck == -1) {
+                        index = MinIndexArgs1(viSearchList, (int) ConflictFlightList.size(), probability, delai, Pi,
+                                              decisionVariablesValues, true);
+                    } else {
+                        index = iIndexFromFeasibilityCheck;
+                    }
 //                    std::cout << "\t\tMin index:" << index << std::endl;
                     viConstraintList.push_back(index);
                     viSearchList.erase(std::remove(viSearchList.begin(), viSearchList.end(), index),
@@ -661,7 +651,7 @@ int SolveFLA(const FlightVector &vpFlightList, LevelVector viLevelsList, IloEnv 
                                         viConstraintList, cplexLogFile, false);
 
                     solver->solve();
-                    dFunctionObjectiveValue = solver->getFunctionObjectiveValue();
+//                    dFunctionObjectiveValue = solver->getFunctionObjectiveValue();
                     decisionVariablesValues.end();
                     decisionVariablesValues = solver->getDecisionVariablesValues();
                     delete solver;
@@ -670,16 +660,16 @@ int SolveFLA(const FlightVector &vpFlightList, LevelVector viLevelsList, IloEnv 
             case 2:/*MonteCarlo*/
 //                std::cout << "[INFO] Using Monte-Carlo method" << std::endl;
                 while (!FeasibilityMonteCarlo(epsilon, decisionVariablesValues, ConflictFlightList,
-                                              &iIndexFromSimulation,
+                                              &iIndexFromFeasibilityCheck,
                                               viSearchList, Pi, iModeRandom, vdParameter) &&
                        viSearchList.size() > 0) {
                     //Si on ne trouve pas une bonne index dans la test, on utilise la formule
 //                    std::cout << "\tGo to step two:" << std::endl;
-                    if (iIndexFromSimulation == -1) {
+                    if (iIndexFromFeasibilityCheck == -1) {
                         index = MinIndexArgs1(viSearchList, (int) ConflictFlightList.size(), probability, delai, Pi,
                                               decisionVariablesValues, true);
                     } else {
-                        index = iIndexFromSimulation;
+                        index = iIndexFromFeasibilityCheck;
                     }
 //                    std::cout << "\t\tMin index:" << index << std::endl;
                     viConstraintList.push_back(index);
@@ -688,7 +678,7 @@ int SolveFLA(const FlightVector &vpFlightList, LevelVector viLevelsList, IloEnv 
                     solver = new Solver(env, ConflictFlightList, iProcessingLevel, Mi, Pi, delai,
                                         viConstraintList, cplexLogFile, false);
                     solver->solve();
-                    dFunctionObjectiveValue = solver->getFunctionObjectiveValue();
+//                    dFunctionObjectiveValue = solver->getFunctionObjectiveValue();
                     decisionVariablesValues.end();
                     decisionVariablesValues = solver->getDecisionVariablesValues();
                     delete solver;
@@ -696,12 +686,17 @@ int SolveFLA(const FlightVector &vpFlightList, LevelVector viLevelsList, IloEnv 
                 break;
             case 3:/*Gaussian*/
 //                std::cout << "[INFO] Using Gaussian method" << std::endl;
-                while (!FeasibilityGaussian(epsilon, decisionVariablesValues, Pi, ConflictFlightList, delai) &&
+                while (!FeasibilityGaussian(epsilon, decisionVariablesValues, Pi, ConflictFlightList, probability,
+                                            delai, viSearchList, &iIndexFromFeasibilityCheck) &&
                        viSearchList.size() > 0) {
                     //Si on ne trouve pas une bonne index dans la test, on utilise la formule
 //                    std::cout << "\tGo to step two:" << std::endl;
-                    index = MinIndexArgs1(viSearchList, (int) ConflictFlightList.size(), probability, delai, Pi,
-                                          decisionVariablesValues, false);
+                    if (iIndexFromFeasibilityCheck == -1) {
+                        index = MinIndexArgs1(viSearchList, (int) ConflictFlightList.size(), probability, delai, Pi,
+                                              decisionVariablesValues, false);
+                    } else {
+                        index = iIndexFromFeasibilityCheck;
+                    }
 //                    std::cout << "\t\tMin index:" << index << std::endl;
                     viConstraintList.push_back(index);
                     viSearchList.erase(std::remove(viSearchList.begin(), viSearchList.end(), index),
@@ -709,7 +704,7 @@ int SolveFLA(const FlightVector &vpFlightList, LevelVector viLevelsList, IloEnv 
                     solver = new Solver(env, ConflictFlightList, iProcessingLevel, Mi, Pi, delai,
                                         viConstraintList, cplexLogFile, false);
                     solver->solve();
-                    dFunctionObjectiveValue = solver->getFunctionObjectiveValue();
+//                    dFunctionObjectiveValue = solver->getFunctionObjectiveValue();
                     decisionVariablesValues.end();
                     decisionVariablesValues = solver->getDecisionVariablesValues();
                     delete solver;
@@ -733,19 +728,18 @@ int SolveFLA(const FlightVector &vpFlightList, LevelVector viLevelsList, IloEnv 
                 flightAssignmentMap[fi] = true;
             }
         }
-        *dSumBenefits += dFunctionObjectiveValue;
         DestroyTable(probability, (int) ConflictFlightList.size());
         DestroyTable(delai, (int) ConflictFlightList.size());
 //        std::cout<< "Ok" << std::endl;
     }// end loop of level list
-    int iNbFlightNotAssigned = 0;
+    FlightVector vpFlightNotAssigned;
     for (auto &&fi : vpFlightList) {
         if (flightAssignmentMap[fi] == false) {
-            fi->setCoefPi(fi->getCoefPi() + 0.05);
-            iNbFlightNotAssigned++;
+            fi->setCoefPi(std::min(fi->getCoefPi() + 0.05, 0.50));
+            vpFlightNotAssigned.push_back(fi);
         }
     }
-    return iNbFlightNotAssigned;
+    return vpFlightNotAssigned;
 }
 
 int getNbFlightsChangeLevel(const FlightVector &vpFlightList) {
@@ -757,10 +751,17 @@ int getNbFlightsChangeLevel(const FlightVector &vpFlightList) {
     }
     return iNbFlightChangeLevel;
 }
-void ApproximateFLA(Network *pNetwork, double *dSumBenefits, int *iMaxNbConflict, int iModeMethod,
-                    double epsilon, vdList vdParameter, int iModeRandom = -1) {
-    std::ofstream cplexLogFile("cplexLog.txt", std::ios::out | std::ios::app);
 
+void ApproximateFLA(Network *pNetwork, int *iMaxNbConflict, int iModeMethod,
+                    double epsilon, int iFeasibleSize, double dCoefPi, vdList vdParameter, int iModeRandom = -1) {
+//    int iFeasibleSize=5;
+    pNetwork->InitCoefPi(dCoefPi);
+    pNetwork->InitFeasibleList(iFeasibleSize);
+    pNetwork->InitFlightLevelsList();
+    if (iModeRandom > -1) {
+        pNetwork->SetSigma(vdParameter, iModeRandom);
+    }
+    std::ofstream cplexLogFile("cplexLog.txt", std::ios::out | std::ios::app);
     ProcessClock processClock;
     IloEnv env;
     processClock.start();
@@ -769,33 +770,31 @@ void ApproximateFLA(Network *pNetwork, double *dSumBenefits, int *iMaxNbConflict
     int iNbFlightNotAssigned = 0;
     int iLastNbFlightNotAssigned = 0;
     int iNbFlightChangeLevel = 0;
-    int iLastNbFlightChangeLevel = 0;
+//    int iLastNbFlightChangeLevel = 0;
     bool bNotFinish = true;
     std::cout << "[INFO] Starting ApproximateFLA method..." << std::endl;
     try {
-//        iNbFlightNotAssigned =  SolveFLA(vpFlightList, viLevelsList, env, cplexLogFile, dSumBenefits, iMaxNbConflict, iModeMethod,
-//                       epsilon, vdParameter,iModeRandom);
         while (bNotFinish) {
-            iNbFlightNotAssigned = SolveFLA(vpFlightList, viLevelsList, env, cplexLogFile, dSumBenefits, iMaxNbConflict,
-                                            iModeMethod,
-                                            epsilon, vdParameter, iModeRandom);
+            FlightVector vpFlightNotAssigned = SolveFLA(vpFlightList, viLevelsList, env, cplexLogFile, iMaxNbConflict,
+                                                        iModeMethod,
+                                                        epsilon, vdParameter, iModeRandom);
             iNbFlightChangeLevel = getNbFlightsChangeLevel(vpFlightList);
+            iNbFlightNotAssigned = (int) vpFlightNotAssigned.size();
             std::cout << "[Solved] Nb of flights not be assigned: " << iNbFlightNotAssigned << std::endl;
             std::cout << "[Solved] Nb of flights change level: " << iNbFlightChangeLevel << std::endl << std::endl;
-            for (auto &&fi: vpFlightList) {
-                if (fi->getCoefPi() > 0.50) {
-                    bNotFinish = false;
-                    break;
-                }
-            }
             if (iNbFlightNotAssigned == 0) {
                 bNotFinish = false;
             } else if (iNbFlightNotAssigned == iLastNbFlightNotAssigned) {
-                if (iNbFlightChangeLevel == iLastNbFlightChangeLevel) {
-                    bNotFinish = false;
+                for (auto &&fi :vpFlightNotAssigned) {
+                    fi->setFeasibleLevelList(
+                            findFeasibleLevels(fi->getDefaultLevel(), (int) fi->getFeasibleLevelList().size() + 1));
                 }
+                pNetwork->InitFlightLevelsList();
+                viLevelsList.clear();
+                viLevelsList = pNetwork->getFlightLevelsList();
+//                    bNotFinish = false;
             } else {
-                iLastNbFlightChangeLevel = iNbFlightChangeLevel;
+//                iLastNbFlightChangeLevel = iNbFlightChangeLevel;
                 iLastNbFlightNotAssigned = iNbFlightNotAssigned;
             }
         }
@@ -807,11 +806,13 @@ void ApproximateFLA(Network *pNetwork, double *dSumBenefits, int *iMaxNbConflict
 
     std::cout << "Nb of flights change level: " << iNbFlightChangeLevel << std::endl;
     std::cout << "Nb of flights not be assigned: " << iNbFlightNotAssigned << std::endl;
-    std::cout << "Sum of benefits: " << *dSumBenefits << std::endl;
     std::cout << "Max conflict: " << *iMaxNbConflict << std::endl;
     cplexLogFile.close();
     env.end();
     processClock.end();
     std::cout << "Elapsed time:" << processClock.getCpuTime() << std::endl;
+    for (auto &&fi :vpFlightList) {
+        std::cout << fi->getFeasibleLevelList().size() << "\n";
+    }
 }
 #endif //SOLUTION_H

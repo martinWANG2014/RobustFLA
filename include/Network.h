@@ -146,6 +146,55 @@ public:
      * Init the flight level list.
      */
     void InitFlightLevelsList();
+
+    void InitFeasibleList(int iSize) {
+        for (auto &&fi: vpFlightsList) {
+            fi->setFeasibleLevelList(findFeasibleLevels(fi->getDefaultLevel(), iSize));
+        }
+    }
+
+    void InitCoefPi(double dCoefPi) {
+        for (auto &&fi: vpFlightsList) {
+            fi->setCoefPi(dCoefPi);
+        }
+    }
+
+    void SetSigma(vdList parameter, int iRandomMode) {
+        double dSigma = MIN_SIGMA;
+        switch (iRandomMode) {
+            case 0:
+                if (parameter.size() != 3) {
+                    std::cerr << "the parameter list invalid!" << std::endl;
+                    abort();
+                }
+                dSigma = getSigma1(parameter[0], parameter[1], parameter[2]);
+                break;
+            case 1:
+                if (parameter.size() != 3) {
+                    std::cerr << "the parameter list invalid!" << std::endl;
+                    abort();
+                }
+                dSigma = getSigma2(parameter[0], parameter[1], parameter[2]);
+                break;
+            case 2:
+                if (parameter.size() != 3) {
+                    std::cerr << "the parameter list invalid!" << std::endl;
+                    abort();
+                }
+                dSigma = getSigma3(parameter[0], parameter[1], parameter[2], parameter[3], parameter[4], parameter[5]);
+                break;
+            default:
+                std::cerr << "the random mode is not supported!" << std::endl;
+                abort();
+        }
+        uni_dist UniformDist(MIN_SIGMA, dSigma);
+        //Will be used to obtain a seed for the random number engine
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        for (auto &&fi : vpFlightsList) {
+            fi->setSigma(UniformDist(gen));
+        }
+    }
 private:
     /**
      * The flight list in the air traffic management network.

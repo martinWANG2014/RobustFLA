@@ -91,46 +91,15 @@ void Input::parseAirports(Network *pNetwork) {
               << "\tValid Airports: " << pNetwork->getNbAirports() << std::endl;
 }
 
-void Input::parseFlights(Network *pNetwork, double dCoefPi, const vdList &vdParameter, int iRandomMode) {
+void Input::parseFlights(Network *pNetwork) {
     using boost::property_tree::ptree;
     using boost::property_tree::read_json;
-    std::cout << "[INFO] Parsing flights file... " << std::endl;
-    if (0< iRandomMode && iRandomMode < 2 && (int) vdParameter.size() < 3) {
-        std::cerr << "[ERROR] the parameter list for random method is not correct!" << std::endl;
-        abort();
-    }
-    if (iRandomMode == 2 && (int) vdParameter.size() < 6) {
-        std::cerr << "[ERROR] the parameter list for random method is not correct!" << std::endl;
-        abort();
-    }
+    std::cout << "[INFO] Parsing flights file... " << std::flush;
     // Verify whether the data file exists or not: if not, pop up an error message.
     if (!exists(sFlightPath)) {
         std::cerr << "[ERROR] Not exist " << sFlightPath << std::endl;
         abort();
     }
-    double dSigma=MIN_SIGMA;
-    switch (iRandomMode) {
-        case 0:
-            dSigma = getSigma1(vdParameter[0], vdParameter[1], vdParameter[2]);
-            break;
-        case 1:
-            dSigma = getSigma2(vdParameter[0], vdParameter[1], vdParameter[2]);
-            break;
-        case 2:
-            dSigma = getSigma3(vdParameter[0], vdParameter[1], vdParameter[2], vdParameter[3],
-                               vdParameter[4], vdParameter[5]);
-            break;
-        case -1:
-            dSigma = MIN_SIGMA;
-            break;
-        default:
-            std::cout << std::endl
-                      << "[Warning]: the random mode is not supported, use the default one systemically!"
-                      << std::endl;
-            dSigma = getSigma1(vdParameter[0], vdParameter[1], vdParameter[2]);
-    }
-    std::default_random_engine generator;
-    uni_dist UniformDistribution(MIN_SIGMA, dSigma);
     // Parse the json file with boost property tree.
     ptree root;
     // Read the json file by the read_json method offered by the boost library.
@@ -204,116 +173,29 @@ void Input::parseFlights(Network *pNetwork, double dCoefPi, const vdList &vdPara
                 // Verify whether the network has contained the flight or not. If not, then add it into network.
                 bool bIsRouteValid = pFlight->selfCheck();
                 if (bIsRouteValid && !contains(pNetwork->getFlightsList(), pFlight)) {
-                    viList feasibleList = findFeasibleLevels(iLevel);
-                    pFlight->setFeasibleLevelList(feasibleList);
-                    pFlight->setSigma(dSigma);//UniformDistribution(generator));
-                    pFlight->setCoefPi(dCoefPi);
                     pFlight->initRouteTimeList();
                     pNetwork->addNewFlight(pFlight);
-                } else if (bIsRouteValid) {
-                    std::cout << std::endl
-                              << "[Warning]: the route of " << i
-                              << " flight is not correct, it is ignored automatically!"
-                              << std::endl;
-                } else {
-                    std::cout << std::endl
-                              << "[Warning]: the " << i << " flight was redundant, it is ignored automatically!"
-                              << std::endl;
                 }
-            } else {
-                std::cout << std::endl
-                          << "[Warning]: the route of " << i << " flight is not complete, it is ignored automatically!"
-                          << std::endl;
+//                else if (bIsRouteValid) {
+//                    std::cout << std::endl
+//                              << "[Warning]: the route of " << i
+//                              << " flight is not correct, it is ignored automatically!"
+//                              << std::endl;
+//                } else {
+//                    std::cout << std::endl
+//                              << "[Warning]: the " << i << " flight was redundant, it is ignored automatically!"
+//                              << std::endl;
+//                }
             }
+//            else {
+//                std::cout << std::endl
+//                          << "[Warning]: the route of " << i << " flight is not complete, it is ignored automatically!"
+//                          << std::endl;
+//            }
         }
     }
     std::cout << "OK" << std::endl
               << "\tFlights file data:" << std::endl
               << "\tFlights: " << nbFlights << std::endl
               << "\tValid Flights: " << pNetwork->getNbFlights() << std::endl;
-}
-
-LevelVector Input::findFeasibleLevels(Level iDefaultLevel) {
-    LevelVector feasibleList;
-    feasibleList.push_back(iDefaultLevel);
-#ifdef NRVSM
-    if (iDefaultLevel < 290){
-#else
-    if (iDefaultLevel < 410) {
-#endif
-        auto position = LevelIFRB.end();
-        switch (iDefaultLevel % 4) {
-            // in IFR B group
-            case 0:
-                position = std::find(LevelIFRB.begin(), LevelIFRB.end(), iDefaultLevel);
-                if (position== LevelIFRB.begin()) {
-                    feasibleList.push_back(*(position + 1));
-                    feasibleList.push_back(*(position + 2));
-                } else {
-                    feasibleList.push_back(*(position + 1));
-                    feasibleList.push_back(*(position - 1));
-                }
-                break;
-                // in VFR B group
-            case 1:
-                position = std::find(LevelVFRB.begin(), LevelVFRB.end(), iDefaultLevel);
-                if (position == LevelVFRB.begin()) {
-                    feasibleList.push_back(*(position + 1));
-                    feasibleList.push_back(*(position + 2));
-                } else if (position == LevelVFRB.end() - 1) {
-                    feasibleList.push_back(*(position - 1));
-                    feasibleList.push_back(*(position - 2));
-                } else {
-                    feasibleList.push_back(*(position + 1));
-                    feasibleList.push_back(*(position - 1));
-                }
-                break;
-                // in IFR A group
-            case 2:
-                position = std::find(LevelIFRA.begin(), LevelIFRA.end(), iDefaultLevel);
-                if (position == LevelIFRA.begin()) {
-                    feasibleList.push_back(*(position + 1));
-                    feasibleList.push_back(*(position + 2));
-                } else {
-                    feasibleList.push_back(*(position + 1));
-                    feasibleList.push_back(*(position - 1));
-                }
-                break;
-                // in VFR A group
-            default:
-                position = std::find(LevelVFRA.begin(), LevelVFRA.end(), iDefaultLevel);
-                if (position == LevelVFRA.begin()) {
-                    feasibleList.push_back(*(position + 1));
-                    feasibleList.push_back(*(position + 2));
-                } else if (position== LevelVFRA.end() - 1) {
-                    feasibleList.push_back(*(position - 1));
-                    feasibleList.push_back(*(position - 2));
-                } else {
-                    feasibleList.push_back(*(position + 1));
-                    feasibleList.push_back(*(position - 1));
-                }
-                break;
-        }
-    } else if (iDefaultLevel % 40 == 10) {
-        // in IFR A group
-        auto position = std::find(LevelIFRA.begin(), LevelIFRA.end(), iDefaultLevel);
-        if (position == LevelIFRA.end() - 1) {
-            feasibleList.push_back(*(position - 1));
-            feasibleList.push_back(*(position - 2));
-        } else {
-            feasibleList.push_back(*(position + 1));
-            feasibleList.push_back(*(position - 1));
-        }
-    } else {
-        // in IFR B group
-        auto position = std::find(LevelIFRB.begin(), LevelIFRB.end(), iDefaultLevel);
-        if (position == LevelIFRB.end() - 1) {
-            feasibleList.push_back(*(position - 1));
-            feasibleList.push_back(*(position - 2));
-        } else {
-            feasibleList.push_back(*(position + 1));
-            feasibleList.push_back(*(position - 1));
-        }
-    }
-    return feasibleList;
 }

@@ -81,3 +81,115 @@ double getSigma3(double alpha, double beta, double gamma, double w1, double w2, 
 double getA_Bar() {
     return 0.25 * (Network::PERIOD_LENGTH);
 }
+
+LevelVector findFeasibleLevels(Level iDefaultLevel, int iSize) {
+    LevelVector feasibleList;
+    feasibleList.push_back(iDefaultLevel);
+    int iCount;
+    bool notFinish;
+    bool hasElement;
+    auto position = LevelIFRB.end();
+    switch (iDefaultLevel % 4) {
+        // in IFR B group
+        case 0:
+            position = std::find(LevelIFRB.begin(), LevelIFRB.end(), iDefaultLevel);
+            iCount = 1;
+            notFinish = true;
+            hasElement = true;
+            while (notFinish) {
+                if (position + iCount < LevelIFRB.end()) {
+                    feasibleList.push_back(*(position + iCount));
+                } else {
+                    hasElement = false;
+                }
+                if ((int) feasibleList.size() == iSize) {
+                    notFinish = false;
+                }
+                if (notFinish && (position - iCount > LevelIFRB.begin() - 1)) {
+                    feasibleList.push_back(*(position - iCount));
+                    hasElement = true;
+                }
+                if (!hasElement || (int) feasibleList.size() == iSize) {
+                    notFinish = false;
+                }
+                iCount++;
+            }
+            break;
+            // in VFR B group
+        case 1:
+            position = std::find(LevelVFRB.begin(), LevelVFRB.end(), iDefaultLevel);
+            iCount = 1;
+            notFinish = true;
+            hasElement = true;
+            while (notFinish) {
+                if (position + iCount < LevelVFRB.end()) {
+                    feasibleList.push_back(*(position + iCount));
+                } else {
+                    hasElement = false;
+                }
+                if ((int) feasibleList.size() == iSize) {
+                    notFinish = false;
+                }
+                if (notFinish && (position - iCount > LevelVFRB.begin() - 1)) {
+                    feasibleList.push_back(*(position - iCount));
+                    hasElement = true;
+                }
+                if (!hasElement || (int) feasibleList.size() == iSize) {
+                    notFinish = false;
+                }
+                iCount++;
+            }
+            break;
+            // in IFR A group
+        case 2:
+            position = std::find(LevelIFRA.begin(), LevelIFRA.end(), iDefaultLevel);
+            iCount = 1;
+            notFinish = true;
+            hasElement = true;
+            while (notFinish) {
+                if (position + iCount < LevelIFRA.end()) {
+                    feasibleList.push_back(*(position + iCount));
+                } else {
+                    hasElement = false;
+                }
+                if ((int) feasibleList.size() == iSize) {
+                    notFinish = false;
+                }
+                if (notFinish && (position - iCount > LevelIFRA.begin() - 1)) {
+                    feasibleList.push_back(*(position - iCount));
+                    hasElement = true;
+                }
+                if (!hasElement || (int) feasibleList.size() == iSize) {
+                    notFinish = false;
+                }
+                iCount++;
+            }
+            break;
+            // in VFR A group
+        default:
+            position = std::find(LevelVFRA.begin(), LevelVFRA.end(), iDefaultLevel);
+            iCount = 1;
+            notFinish = true;
+            hasElement = true;
+            while (notFinish) {
+                if (position + iCount < LevelVFRA.end()) {
+                    feasibleList.push_back(*(position + iCount));
+                } else {
+                    hasElement = false;
+                }
+                if ((int) feasibleList.size() == iSize) {
+                    notFinish = false;
+                }
+                if (notFinish && (position - iCount > LevelVFRA.begin() - 1)) {
+                    feasibleList.push_back(*(position - iCount));
+                    hasElement = true;
+                }
+                if (!hasElement || (int) feasibleList.size() == iSize) {
+                    notFinish = false;
+                }
+                iCount++;
+            }
+            break;
+    }
+    return feasibleList;
+}

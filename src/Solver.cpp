@@ -20,20 +20,21 @@ void Solver::initFunctionObjective(int iProcessingLevel, FlightVector &Conflicte
                                iProcessingLevel);
         if (index != pFlight->getFeasibleLevelList().end()) {
             long lIndex = index - pFlight->getFeasibleLevelList().begin();
-            switch (lIndex) {
-                case 0:
-                    obj += 10 * decisionVariables[i];
-                    break;
-                case 1:
-                    obj += 3 * decisionVariables[i];
-                    break;
-                case 2:
-                    obj += 1 * decisionVariables[i];
-                    break;
-                default:
-                    std::cerr << "[Fatal Error]: the feasible flight level list size is not correct!" << std::endl;
-                    abort();
-            }
+            obj += decisionVariables[i] * exp(pFlight->getFeasibleLevelList().size() - lIndex);
+//            switch (lIndex) {
+//                case 0:
+//                    obj += 10 * decisionVariables[i];
+//                    break;
+//                case 1:
+//                    obj += 3 * decisionVariables[i];
+//                    break;
+//                case 2:
+//                    obj += 1 * decisionVariables[i];
+//                    break;
+//                default:
+//                    std::cerr << "[Fatal Error]: the feasible flight level list size is not correct!" << std::endl;
+//                    abort();
+//            }
         } else {
             std::cerr << std::endl << "[Fatal Error]: the flight is processing out of it feasible flight level list !"
                       << std::endl;
@@ -46,7 +47,7 @@ void Solver::initFunctionObjective(int iProcessingLevel, FlightVector &Conflicte
 //        }
     }
     functionObjective = obj;
-    model.add(IloMaximize(env, obj));
+    model.add(IloMaximize(env, functionObjective));
 //    std::cout << "OK" << std::endl;
 }
 

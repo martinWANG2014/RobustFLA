@@ -30,10 +30,12 @@ void Network::InitFlightLevelsList() {
     LevelNumberList levelsList(levelMap.begin(), levelMap.end());
     std::sort(levelsList.begin(), levelsList.end(), greater_second<Level, int, int>());
     std::cout << "OK" << std::endl;
-    std::cout << "\tFlightLevel: NbFeasible, NbPreferred" << std::endl;
-    for(auto item=levelsList.begin(); item!=levelsList.end();item++){
-        std::cout << "\t"<< (*item).first << ": " << (*item).second.first << "," <<(*item).second.second << std::endl;
-    }
-
+//    std::cout << "\tFlightLevel: NbFeasible, NbPreferred" << std::endl;
+//    for(auto item=levelsList.begin(); item!=levelsList.end();item++){
+//        std::cout << "\t"<< (*item).first << ": " << (*item).second.first << "," <<(*item).second.second << std::endl;
+//    }
+    viFlightLevelsList.clear();
     std::transform(levelsList.begin(), levelsList.end(), std::back_inserter(viFlightLevelsList), retrieve_key<Level, int, int>());
+
+    std::cout << "\tFlight Level size: " << getNbLevels() << std::endl;
 }

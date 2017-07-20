@@ -82,7 +82,8 @@ double Route::probabilityAndDelay(double dT1, double dT2, double dV1, double dV2
     double dRight = (MIN_SEPARATION_DISTANCE * K - dMu) / (sqrt(2.0) * dSigma);
     double dLeft = dMu / (sqrt(2.0) * dSigma);
     *pdDelayTime = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - fabs(dT2 - dT1);
-    double dConflictProbability = fabs(0.5 * (boost::math::erf(dRight) + boost::math::erf(dLeft)));
+    double dConflictProbability = 0.5 * (boost::math::erf(dRight) + boost::math::erf(dLeft));
+//    std::cout<< "prob: " <<  dConflictProbability << std::endl;
     return dConflictProbability;
 }
 
