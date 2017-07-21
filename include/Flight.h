@@ -190,6 +190,14 @@ public:
     void resetLevel() {
         iCurrentLevel = getDefaultLevel();
     }
+
+    Level getLastFeasibleLevel() {
+        return viFeasibleLevelList[viFeasibleLevelList.size() - 1];
+    }
+
+    void addNewFeasibleLevel(Level newLevel) {
+        viFeasibleLevelList.push_back(newLevel);
+    }
 private:
     /**
      * the flight id

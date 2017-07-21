@@ -193,3 +193,99 @@ LevelVector findFeasibleLevels(Level iDefaultLevel, int iSize) {
     }
     return feasibleList;
 }
+
+Level findNextFeasibleLevel(int iDefaultLevel, Level lastLevel) {
+    int iOffset;
+    auto position = LevelIFRB.end();
+    auto postiionLast = LevelIFRB.end();
+    switch (iDefaultLevel % 4) {
+        // in IFR B group
+        case 0:
+            position = std::find(LevelIFRB.begin(), LevelIFRB.end(), iDefaultLevel);
+            postiionLast = std::find(LevelIFRB.begin(), LevelIFRB.end(), lastLevel);
+            iOffset = (int) (postiionLast - position);
+            if (iOffset < 0) {
+                if (position - iOffset + 1 < LevelIFRB.end()) {
+                    return *(position - iOffset + 1);
+                } else if (position + iOffset - 1 > LevelIFRB.begin() - 1) {
+                    return *(position + iOffset - 1);
+                } else {
+                    return -1;
+                }
+            } else {
+                if (position - iOffset > LevelIFRB.begin() - 1) {
+                    return *(position - iOffset);
+                } else if (position + iOffset + 1 < LevelIFRB.end()) {
+                    return *(position + iOffset + 1);
+                } else {
+                    return -1;
+                }
+            }
+            // in VFR B group
+        case 1:
+            position = std::find(LevelVFRB.begin(), LevelVFRB.end(), iDefaultLevel);
+            postiionLast = std::find(LevelVFRB.begin(), LevelVFRB.end(), lastLevel);
+            iOffset = (int) (postiionLast - position);
+            if (iOffset < 0) {
+                if (position - iOffset + 1 < LevelVFRB.end()) {
+                    return *(position - iOffset + 1);
+                } else if (position + iOffset - 1 > LevelVFRB.begin() - 1) {
+                    return *(position + iOffset - 1);
+                } else {
+                    return -1;
+                }
+            } else {
+                if (position - iOffset > LevelVFRB.begin() - 1) {
+                    return *(position - iOffset);
+                } else if (position + iOffset + 1 < LevelVFRB.end()) {
+                    return *(position + iOffset + 1);
+                } else {
+                    return -1;
+                }
+            }
+            // in IFR A group
+        case 2:
+            position = std::find(LevelIFRA.begin(), LevelIFRA.end(), iDefaultLevel);
+            postiionLast = std::find(LevelIFRA.begin(), LevelIFRA.end(), lastLevel);
+            iOffset = (int) (postiionLast - position);
+            if (iOffset < 0) {
+                if (position - iOffset + 1 < LevelIFRA.end()) {
+                    return *(position - iOffset + 1);
+                } else if (position + iOffset - 1 > LevelIFRA.begin() - 1) {
+                    return *(position + iOffset - 1);
+                } else {
+                    return -1;
+                }
+            } else {
+                if (position - iOffset > LevelIFRA.begin() - 1) {
+                    return *(position - iOffset);
+                } else if (position + iOffset + 1 < LevelIFRA.end()) {
+                    return *(position + iOffset + 1);
+                } else {
+                    return -1;
+                }
+            }
+            // in VFR A group
+        default:
+            position = std::find(LevelVFRA.begin(), LevelVFRA.end(), iDefaultLevel);
+            postiionLast = std::find(LevelVFRA.begin(), LevelVFRA.end(), lastLevel);
+            iOffset = (int) (postiionLast - position);
+            if (iOffset < 0) {
+                if (position - iOffset + 1 < LevelVFRA.end()) {
+                    return *(position - iOffset + 1);
+                } else if (position + iOffset - 1 > LevelVFRA.begin() - 1) {
+                    return *(position + iOffset - 1);
+                } else {
+                    return -1;
+                }
+            } else {
+                if (position - iOffset > LevelVFRA.begin() - 1) {
+                    return *(position - iOffset);
+                } else if (position + iOffset + 1 < LevelVFRA.end()) {
+                    return *(position + iOffset + 1);
+                } else {
+                    return -1;
+                }
+            }
+    }
+}

@@ -814,12 +814,10 @@ void ApproximateFLA(Network *pNetwork, double *dSumBenefits, int *iMaxNbConflict
                 bNotFinish = false;
             } else if (iNbFlightNotAssigned == iLastNbFlightNotAssigned) {
                 for (auto &&fi :vpFlightNotAssigned) {
-                    fi->setFeasibleLevelList(
-                            findFeasibleLevels(fi->getDefaultLevel(), (int) fi->getFeasibleLevelList().size() + 1));
-                    for (auto &&level : fi->getFeasibleLevelList()) {
-                        if (!contains(viLevelsList, level)) {
-                            viLevelsList.push_back(level);
-                        }
+                    fi->addNewFeasibleLevel(findNextFeasibleLevel(fi->getDefaultLevel(), fi->getLastFeasibleLevel()));
+                    Level level = fi->getLastFeasibleLevel();
+                    if (!contains(viLevelsList, level)) {
+                        viLevelsList.push_back(level);
                     }
                 }
 //                pNetwork->InitFlightLevelsList();

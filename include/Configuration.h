@@ -178,4 +178,6 @@ double getSigma3(double alpha, double beta, double gamma, double w1, double w2, 
      * @return A three elements list.
      */
 viList findFeasibleLevels(int iDefaultLevel, int iSize);
+
+Level findNextFeasibleLevel(int iDefaultLevel, Level lastLevel);
 #endif //CONFIGURATION_H
