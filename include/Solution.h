@@ -327,6 +327,9 @@ bool FeasibilityHoeffding(double dEpsilon, IloNumArray &decisionVariables, vdLis
     return true;
 }
 
+double getProbaGaussian(double x) {
+    return 0.5 * (boost::math::erf(x) + 1);
+}
 bool FeasibilityGaussian(double dEpsilon, IloNumArray &decisionVariables, vdList &vdPi,
                          FlightVector vpConflictedFlightList, double **ppdProba, double **ppdPenalCost,
                          viList search_list, int *piIndex) {
@@ -337,14 +340,25 @@ bool FeasibilityGaussian(double dEpsilon, IloNumArray &decisionVariables, vdList
         if (decisionVariables[i] == 1) {
             double exp_mu = 0.0;
             double exp_sigma_2 = 0.0;
+            int iCounnter = 0;
+            double dLeftProba = 1;
+            double mu = 0.0;
+            double sigma_2 = 0.0;
             for (int j = 0; j < iSize; j++) {
                 if (ppdProba[i][j] > 0) {
-                    exp_mu += ppdPenalCost[i][j] * decisionVariables[j];
-                    exp_sigma_2 += (pow(vpConflictedFlightList[i]->getSigma(), 2) +
-                                    pow(vpConflictedFlightList[j]->getSigma(), 2)) * pow(decisionVariables[j], 2);
+                    mu = ppdPenalCost[i][j] * decisionVariables[j];
+                    sigma_2 = (pow(vpConflictedFlightList[i]->getSigma(), 2) +
+                               pow(vpConflictedFlightList[j]->getSigma(), 2)) * pow(decisionVariables[j], 2);
+                    dLeftProba *= getProbaGaussian((vdPi[i] - mu) / (sqrt(2 * sigma_2)));
+                    exp_mu += mu;
+                    exp_sigma_2 += sigma_2;
+                    iCounnter++;
                 }
             }
             double prob = 0.5 * (boost::math::erf((vdPi[i] - exp_mu) / (sqrt(2 * exp_sigma_2))) + 1);
+            if (iCounnter > 1) {
+                prob *= dLeftProba;
+            }
             if (prob < 1 - dEpsilon) {
                 return false;
             }
@@ -399,16 +413,18 @@ bool FeasibilityMonteCarlo(double dEpsilon, IloNumArray &decisionVariables, Flig
         }
         CalculateConflictProbability(vpConflictedFlightList, probabilityConflict, delayWithoutConflict, true);
         for (int i = 0; i < iConflictedFlightsSize; i++) {
-            double sum=0;
-            for (int j = 0; j < iConflictedFlightsSize; j++) {
-                if (probabilityConflict[i][j] > 0) {
-                    sum += decisionVariables[j] * delayWithoutConflict[i][j];
+            if (decisionVariables[i] == 1) {
+                double sum = 0;
+                for (int j = 0; j < iConflictedFlightsSize; j++) {
+                    if (probabilityConflict[i][j] > 0) {
+                        sum += decisionVariables[j] * delayWithoutConflict[i][j];
+                    }
                 }
-            }
-            if (sum > vdPi[i]) {
-                test = false;
-                table[i]=table[i]+1;
-                break;
+                if (sum > vdPi[i]) {
+                    test = false;
+                    table[i] = table[i] + 1;
+                    break;
+                }
             }
         }
         if (!test){
