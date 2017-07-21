@@ -144,11 +144,11 @@ void CalculateConflictProbability(FlightVector &vpConflictFlightList, double **p
             probabilityConflict[i][j] = probabilityConflict[j][i] = fi->getProbabilityConflictAndDelay(fj, &dDelay,
                                                                                                        &bWait, bMethod);
             if (bWait) {
-                delayWithoutConflict[i][j] = dDelay;
+                delayWithoutConflict[i][j] = std::max(dDelay, 0.0);
                 delayWithoutConflict[j][i] = 0;
             } else {
                 delayWithoutConflict[i][j] = 0;
-                delayWithoutConflict[j][i] = dDelay;
+                delayWithoutConflict[j][i] = std::max(dDelay, 0.0);
             }
         }
     }
@@ -330,6 +330,7 @@ bool FeasibilityHoeffding(double dEpsilon, IloNumArray &decisionVariables, vdLis
 double getProbaGaussian(double x) {
     return 0.5 * (boost::math::erf(x) + 1);
 }
+
 bool FeasibilityGaussian(double dEpsilon, IloNumArray &decisionVariables, vdList &vdPi,
                          FlightVector vpConflictedFlightList, double **ppdProba, double **ppdPenalCost,
                          viList search_list, int *piIndex) {
@@ -342,20 +343,20 @@ bool FeasibilityGaussian(double dEpsilon, IloNumArray &decisionVariables, vdList
             double exp_sigma_2 = 0.0;
             int iCounnter = 0;
             double dLeftProba = 1;
-            double mu = 0.0;
-            double sigma_2 = 0.0;
+            double mu;
+            double sigma_2;
             for (int j = 0; j < iSize; j++) {
-                if (ppdProba[i][j] > 0) {
-                    mu = ppdPenalCost[i][j] * decisionVariables[j];
-                    sigma_2 = (pow(vpConflictedFlightList[i]->getSigma(), 2) +
-                               pow(vpConflictedFlightList[j]->getSigma(), 2)) * pow(decisionVariables[j], 2);
+                if (ppdProba[i][j] > 0 && decisionVariables[j] == 1) {
+                    mu = ppdPenalCost[i][j];
+                    sigma_2 = pow(vpConflictedFlightList[i]->getSigma(), 2) +
+                              pow(vpConflictedFlightList[j]->getSigma(), 2);
                     dLeftProba *= getProbaGaussian((vdPi[i] - mu) / (sqrt(2 * sigma_2)));
                     exp_mu += mu;
                     exp_sigma_2 += sigma_2;
                     iCounnter++;
                 }
             }
-            double prob = 0.5 * (boost::math::erf((vdPi[i] - exp_mu) / (sqrt(2 * exp_sigma_2))) + 1);
+            double prob = getProbaGaussian((vdPi[i] - exp_mu) / (sqrt(2 * exp_sigma_2)));
             if (iCounnter > 1) {
                 prob *= dLeftProba;
             }
