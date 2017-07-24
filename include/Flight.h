@@ -9,233 +9,211 @@
 #include "NodePoint.h"
 #include "Route.h"
 #include "Configuration.h"
-#include <set>
-#include <map>
-#include <jmorecfg.h>
-#include <ostream>
 class Flight {
 public:
     /**
      * Constructor with parameters
-     * @param sCode             The flight id.
-     * @param pAOrigin          The flight departure airport.
-     * @param pADestination     The flight destination airport.
-     * @param iDepartureTime    The flight departure time.
-     * @param pRoute            The flight default route.
+     * @param sCode             The flight id
+     * @param pAOrigin          The flight departure airport
+     * @param pADestination     The flight destination airport
+     * @param iDepartureTime    The flight departure time
+     * @param pRoute            The flight default route
      */
-    Flight(const String &sCode, Airport *pAOrigin, Airport *pADestination, Time iDepartureTime, Route *pRoute,
-           const LevelVector &viFeasibleLevelList, double dSigma) {
-        Flight::sCode = sCode;
-        Flight::pAOrigin = pAOrigin;
-        Flight::pADestination = pADestination;
-        Flight::dDepartureTime = iDepartureTime;
-        Flight::pRoute = pRoute;
-        Flight::iCurrentLevel = pRoute->getDefaultLevel();
-        Flight::viFeasibleLevelList = viFeasibleLevelList;
-        Flight::dSigma = dSigma;
-    }
-
-    Flight(const String &sCode, Airport *pAOrigin, Airport *pADestination, Time iDepartureTime, Route *pRoute){
-        Flight::sCode = sCode;
-        Flight::pAOrigin  = pAOrigin;
-        Flight::pADestination = pADestination;
-        Flight::dDepartureTime = iDepartureTime;
-        Flight::pRoute = pRoute;
-        Flight::iCurrentLevel = pRoute->getDefaultLevel();
-    }
+    Flight(const String &sCode, Airport *pAOrigin, Airport *pADestination, Time iDepartureTime, Route *pRoute);
 
     /***
      * Destructor.
      */
-    virtual ~Flight() {
-        delete pAOrigin;
-        delete pADestination;
-        delete pRoute;
-        viFeasibleLevelList.clear();
-    }
+    virtual ~Flight();
 
     /**
      * Getter for sCode.
      * @return the flight code.
      */
-    const String &getCode() const {
-        return sCode;
-    }
+    const String &getCode() const;
 
     /**
      * Getter for iDepartureTime.
      * @return the flight departure time.
      */
-    Time getDepartureTime() const {
-        return dDepartureTime;
-    }
+    Time getDepartureTime() const;
 
     /**
      * Get flight default flight level.
      * @return the flight default flight level.
      */
-    Level getDefaultLevel() const {
-        return pRoute->getDefaultLevel();
-    }
+    Level getDefaultLevel() const;
 
     /**
      * Getter for pRoute.
      * @return the flight default route.
      */
-    Route *getRoute() const {
-        return pRoute;
-    }
+    Route *getRoute() const;
 
     /**
      * Getter for vpFeasibleLevelsList.
      * @return the feasible list of flight level.
      */
-    const LevelVector &getFeasibleLevelList() const {
-        return viFeasibleLevelList;
-    }
+    const LevelVector &getFeasibleLevelList() const;
 
     /**
      * Getter for iCurrentLevel.
      * @return the flight current flight level.
      */
-    Level getCurrentLevel() const {
-        return iCurrentLevel;
-    }
+    Level getCurrentLevel() const;
 
     /**
      * Setter for iCurrentLevel.
-     * @param iCurrentLevel     The new currrent flight level value.
+     * @param iCurrentLevel     The new current flight level value.
      */
-    void setCurrentLevel(Level iCurrentLevel) {
-        Flight::iCurrentLevel = iCurrentLevel;
-    }
+    void setCurrentLevel(Level iCurrentLevel);
 
     /**
      * Get the arriving time for a flight.
      * @return  the arriving time of a flight
      */
-    Time getArrivingTime() {
-        return pRoute->getFinalArrivingTime();
-    }
+    Time getArrivingTime();
 
     /**
      * Setter for vpFeasibleLevelsList.
      * @param levelList     The new feasible flight levels list.
      */
-    void setFeasibleLevelList(const LevelVector levelList) {
-        Flight::viFeasibleLevelList = levelList;
-    }
+    void setFeasibleLevelList(const LevelVector levelList);
 
     /**
      * Get the conflict probability between two flights.
-     * @param pFlight2      The pointer of a compared flight
-     * @param pdDelay       The delay time to avoid the
-     * @param pbWait        Output: Which flight will wait for another one. True, current flight wait for a given flight; False, A given flight wait for current one.
-     * @param bGeometricMethod       Whether use the geometric method to estimate the conflict probability
+     * @param pFlight2              The pointer of a compared flight
+     * @param pdDelay               Output: The delay time to avoid the conflict
+     * @param pbWait                Output: Which flight will wait for another one. True, current flight wait for a given flight; False, A given flight wait for current one
+     * @param bGeometricMethod      Whether use the geometric method to estimate the conflict probability
      * @return the conflict probability between two flights.
      */
-    double getProbabilityConflictAndDelay(Flight *pFlight2, double *pdDelay, bool *pbWait, bool bGeometricMethod);
+    double CalculateProbabilityConflictAndDelayForFlight(Flight *pFlight2, double *pdDelay, bool *pbWait,
+                                                         bool bGeometricMethod);
 
 
     /**
      * Generate a new flight with a different departure time.
-     * @param iNewDepartureTime        The new flight departure time
+     * @param iNewDepartureTime     The new flight departure time
      * @param bGeometricMethod      Whether use the geometric method
-     * @return  The pointer of a new flight.
+     * @return  the pointer of a new flight.
      */
     void GenerateNewFlight(Time iNewDepartureTime, bool bGeometricMethod);
 
     /**
      * override == operand.
-     * @param rhs       the other compared Flight
+     * @param rhs       The other compared Flight
      * @return true, if the two flights have same id, same departure time;false, otherwise.
      */
     bool operator==(const Flight &rhs) const;
 
     /**
      * override != operand.
-     * @param rhs       the other compared Flight
+     * @param rhs       The other compared Flight
      * @return false, if the two flights have same id, same departure time;true, otherwise.
      */
     bool operator!=(const Flight &rhs) const;
 
-    bool selfCheck(){
-        return pRoute->selfCheck();
-    }
+    /**
+     * Check whether the route of flight is valid.
+     * @return true, if the route is valid; false, otherwise.
+     */
+    bool selfCheck();
 
-    double getSigma() const {
-        return dSigma;
-    }
+    /**
+     * Getter for dSigma.
+     * @return the  sigma value.
+     */
+    double getSigma() const;
 
-    void setSigma(double dSigma) {
-        Flight::dSigma = dSigma;
-    }
+    /**
+     * Setter for dSigma.
+     * @param dSigma    The new sigma value
+     */
+    void setSigma(double dSigma);
 
-    void initRouteTimeList(){
-        pRoute->initTimeList();
-    }
+    /**
+     * Initialize the route time list.
+     */
+    void initRouteTimeList();
 
-    void resetRouteTimeList(){
-        pRoute->resetTimeList();
-    }
+    /**
+     * Reset the route time list.
+     */
+    void resetRouteTimeList();
 
-    double getCoefPi() const {
-        return dCoefPi;
-    }
+    /**
+     * Getter for dCoefPi.
+     * @return the coefficient of admissible cost
+     */
+    double getCoefPi() const;
 
-    void setCoefPi(double dCoefPi) {
-        Flight::dCoefPi = dCoefPi;
-    }
+    /**
+     * Setter for dCoefPi.
+     * @param dCoefPi A new value of coefficient of admissible cost
+     */
+    void setCoefPi(double dCoefPi);
 
-    void resetLevel() {
-        iCurrentLevel = getDefaultLevel();
-    }
+    /**
+     * Reset the current flight level as the default one.
+     */
+    void resetLevel();
 
-    Level getLastFeasibleLevel() {
-        return viFeasibleLevelList[viFeasibleLevelList.size() - 1];
-    }
+    /**
+     * Get the last feasible flight level in the feasible list.
+     * @return the last feasible flight level in the feasible list.
+     */
+    Level getLastFeasibleLevel();
 
-    void addNewFeasibleLevel(Level newLevel) {
-        viFeasibleLevelList.push_back(newLevel);
-    }
+    /**
+     * Add a new feasible flight level.
+     * @param newLevel      The new feasible flight level
+     */
+    void addNewFeasibleLevel(Level newLevel);
 private:
     /**
-     * the flight id
+     * The flight id
      */
     String sCode;
 
     /**
-     * the original airport.
+     * The original airport.
      */
     Airport *pAOrigin;
 
     /**
-     * the destination airport.
+     * The destination airport.
      */
     Airport *pADestination;
 
     /**
-     * the departure time of flight.
+     * The departure time of flight.
      */
     Time dDepartureTime;
 
     /**
-     * the current flight level.
+     * The current flight level.
      */
     Level iCurrentLevel;
 
     /**
-     * the feasible list of flight levels.
+     * The feasible list of flight levels.
      */
     LevelVector viFeasibleLevelList;
 
     /**
-     * the chosen route of flight.
+     * The chosen route of flight.
      */
     Route *pRoute;
 
+    /**
+     * The deviation of departure time.
+     */
     double dSigma;
 
+    /**
+     * The coefficient of admissible cost.
+     */
     double dCoefPi;
 };
 typedef std::vector<Flight *> FlightVector;

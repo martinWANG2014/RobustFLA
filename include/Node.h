@@ -14,88 +14,65 @@ class Node {
 public:
     /**
      * Constructor with parameters.
-     * @param sCode         the point code.
-     * @param sName         the point name.
-     * @param position      the point position.
+     * @param sCode         The point code
+     * @param sName         The point name
+     * @param position      The point position
      */
-    Node(const String &sCode, const String &sName, const Position &position) : sCode(sCode), sName(sName),
-                                                                               position(position) {}
+    Node(const String &sCode, const String &sName, const Position &position);
 
     /**
      * Constructor with parameters.
-     * @param sCode             the point code.
-     * @param sName             the point name.
-     * @param dLatitude         the point latitude.
-     * @param dLongitude        the point longitude.
+     * @param sCode             The point code
+     * @param sName             The point name
+     * @param dLatitude         The point latitude
+     * @param dLongitude        The point longitude
      */
-    Node(const String &sCode, const String &sName, double dLatitude, double dLongitude) : sCode(sCode), sName(sName),
-                                                                                          position(dLatitude,
-                                                                                                   dLongitude) {}
+    Node(const String &sCode, const String &sName, double dLatitude, double dLongitude);
 
     /**
      * Destructor.
      */
-    virtual ~Node() {}
+    virtual ~Node();
 
     /**
      * Getter for point code.
      * @return the code of corresponding point.
      */
-    const String &getCode() const {
-        return sCode;
-    }
-
-    /**
-     * Getter for point name.
-     * @return the name of corresponding point.
-     */
-    const String &getName() const {
-        return sName;
-    }
+    const String &getCode() const;
 
     /**
      * Getter for point position.
      * @return the position of corresponding point.
      */
-    const Position &getPosition() const {
-        return position;
-    }
+    const Position &getPosition() const;
 
     /**
      * Override of == operand.
-     * @param rhs       the other compared Node.
+     * @param rhs       The other compared Node
      * @return true, if the two points have same code; false, otherwise.
      */
     bool operator==(const Node &rhs) const;
 
     /**
-     * Override of != operand. see == operand override.
-     * @param rhs       the other compared Node.
+     * Override of != operand. see == operand override
+     * @param rhs       The other compared Node
      * @return true, if the two points don't have same code; false, otherwise.
      */
     bool operator!=(const Node &rhs) const;
 
-    /**
-     * Clone a Node object
-     * @return The pointer of a new object.
-     */
-    Node *clone() {
-        return new Node(this->getCode(), this->getName(), this->getPosition());
-    }
-
 private:
     /**
-     * the point code.
+     * The point code.
      */
     String sCode;
 
     /**
-     * the point name.
+     * The point name.
      */
     String sName;
 
     /**
-     * the point position, see{@link Position}.
+     * The point position, see{@link Position}.
      */
     Position position;
 };

@@ -18,4 +18,14 @@ Point::~Point() {
     delete pWayPoint;
 }
 
+const Position &Point::getPosition() const {
+    return pWayPoint->getPosition();
+}
+
+Time Point::getArrivingTime() const {
+    return iArrivingTime;
+}
+
+Point::Point(WayPoint *pWayPoint, Time iArrivingTime) : pWayPoint(pWayPoint), iArrivingTime(iArrivingTime) {}
+
 

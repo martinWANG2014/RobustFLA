@@ -1,11 +1,11 @@
 #include "../include/Solution.h"
 
-double Network::PERIOD_LENGTH = 30;
-
 void EchoUsage(){
-    std::cout << "[USAGE] RobustFLA airport_json_File beacon_json_file flight_json_file method_mode period_length epsilon coefficient_Pi [random_mode alpha beta gamma [w1 w2 p]]"<< std::endl
-            << "method_mode 0 \t\t\t Enumeration Method, the parameters: method_mode period_length epsilon coefficient_Pi required. "<< std::endl
-            << "method_mode 1 \t\t\t Hoeffding Inequalities Method, the parameters: method_mode period_length epsilon coefficient_Pi required. "<< std::endl
+    std::cout
+            << "[USAGE] RobustFLA airport_json_File beacon_json_file flight_json_file method_mode period_length epsilon FeasibleListSize coefficient_Pi [random_mode alpha beta gamma [w1 w2 p]]"
+            << std::endl
+            << "method_mode 0 \t\t\t Enumeration Method, the parameters: method_mode period_length epsilon coefficient_Pi required. " << std::endl
+            << "method_mode 1 \t\t\t Hoeffding Inequalities Method, the parameters: method_mode period_length epsilon coefficient_Pi required. " << std::endl
             << "method_mode 2 \t\t\t Monte-Carlo Simulation Method, the parameters: method_mode period_length epsilon coefficient_Pi random_mode alpha beta gamma required. if random_mode is 2, then the parameters: w1 w2 p required."<< std::endl
             << "method_mode 3 \t\t\t Gaussian Method, the parameters: method_mode period_length epsilon coefficient_Pi random_mode alpha beta gamma required. if random_mode is 2, then the parameters: w1 w2 p required."<< std::endl
             << "period_length \t\t\t An integer, the length of period that consider en-route conflict occurs at a waypoint."<< std::endl
@@ -41,9 +41,10 @@ int main(int argc, char *argv[]) {
             case 0:
             case 1:
                 input.initNetwork(&network);
-                ApproximateFLA(&network, &dSumBenefits, &iMaxNbConflict, boost::lexical_cast<int>(argv[4]),
-                               boost::lexical_cast<double>(argv[6]) / 100.0, boost::lexical_cast<int>(argv[7]),
-                               boost::lexical_cast<double>(argv[8]) / 100.0, vdParameters);
+                ApproximateFLA(&network, vdParameters, boost::lexical_cast<double>(argv[6]) / 100.0,
+                               boost::lexical_cast<double>(argv[8]) / 100.0, &dSumBenefits, &iMaxNbConflict,
+                               boost::lexical_cast<int>(argv[4]),
+                               boost::lexical_cast<int>(argv[7]));
                 break;
             case 2:
             case 3:
@@ -58,11 +59,11 @@ int main(int argc, char *argv[]) {
                     vdParameters.push_back(boost::lexical_cast<double>(argv[14]) / 100.0);
                     vdParameters.push_back(boost::lexical_cast<double>(argv[15]) / 100.0);
                 }
-//                std::copy(vdParameters.begin(), vdParameters.end(), std::ostream_iterator<double>(std::cout, "\t"));
                 input.initNetwork(&network);
-                ApproximateFLA(&network, &dSumBenefits, &iMaxNbConflict, boost::lexical_cast<int>(argv[4]),
-                               boost::lexical_cast<double>(argv[6]) / 100.0, boost::lexical_cast<int>(argv[7]),
-                               boost::lexical_cast<double>(argv[8]) / 100.0, vdParameters, iRandomMode);
+                ApproximateFLA(&network, vdParameters, boost::lexical_cast<double>(argv[6]) / 100.0,
+                               boost::lexical_cast<double>(argv[8]) / 100.0, &dSumBenefits, &iMaxNbConflict,
+                               boost::lexical_cast<int>(argv[4]),
+                               boost::lexical_cast<int>(argv[7]), iRandomMode);
                 break;
             default:
                 std::cerr<<"[ERROR] Don't support this method" <<std::endl;

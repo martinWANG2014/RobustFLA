@@ -100,9 +100,9 @@ bool contains(std::vector<T> vObjectsVector, T object) {
 
 /**
  * A template of the method to verify whether the a vector contains an element, where the element is a pointer.
- * @tparam T                    the general type of data
- * @param vpObjectsVector       the target vector
- * @param pObject               the queried object
+ * @tparam T                    The general type of data
+ * @param vpObjectsVector       The target vector
+ * @param pObject               The queried object
  * @return true, if the vector contains the queried object; false, otherwise.
  */
 template<typename T>
@@ -166,18 +166,49 @@ struct retrieve_key {
 };
 
 ////////////Method template////////////////////////////////////////////////////
+/**
+ * Get maximal value of sigma that make the Pr(-alpha <= y <= beta) >= gamma
+ * @param alpha     The absolute of lower bound for random variables
+ * @param beta      The upper bound for random variables
+ * @param gamma     The probability for -alpha<= y <= beta
+ * @return the maximal value of sigma that make the Pr(-alpha <= y <= beta) >= gamma
+ */
 double getSigma1(double alpha, double beta, double gamma);
 
+/**
+ * Get maximal value of sigma that make the Pr(-alpha <= y <= beta) >= gamma
+ * @param alpha     The absolute of lower bound for random variables
+ * @param beta      The upper bound for random variables
+ * @param gamma     The probability for -alpha<= y <= beta
+ * @return  the maximal value of sigma that make the Pr(-alpha <= y <= beta) >= gamma
+ */
 double getSigma2(double alpha, double beta, double gamma);
 
+/**
+ * Get maximal value of sigma that make the Pr(-alpha <= y <= beta) >= gamma
+ * @param alpha     The absolute of lower bound for random variables
+ * @param beta      The upper bound for random variables
+ * @param gamma     The probability for -alpha<= y <= beta
+ * @param w1        The related position of mean for the random variable in left part
+ * @param w2        The related position of mean for the random variable in right part
+ * @param p         The probability of random variables in left part
+ * @return  the maximal value of sigma that make the Pr(-alpha <= y <= beta) >= gamma
+ */
 double getSigma3(double alpha, double beta, double gamma, double w1, double w2, double p);
 
 /**
-     * Find the feasible flight level list.
-     * @param iDefaultLevel     A given default flight level
-     * @return A three elements list.
-     */
+ * Find the feasible flight level list.
+ * @param iDefaultLevel     A given default flight level
+ * @return A three elements list.
+ */
 viList findFeasibleLevels(int iDefaultLevel, int iSize);
 
+
+/**
+ * Find the next feasible flight level
+ * @param iDefaultLevel     A given default flight level
+ * @param lastLevel         The last flight level in the feasible flihgt levels list
+ * @return the next feasible flight level
+ */
 Level findNextFeasibleLevel(int iDefaultLevel, Level lastLevel);
 #endif //CONFIGURATION_H

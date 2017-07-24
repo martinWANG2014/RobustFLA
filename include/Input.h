@@ -20,23 +20,18 @@ public:
      * @param sWayPointPath     The filename of wayPoint
      * @param sFlightPath       The filename of flight
      */
-    explicit Input(const String &sAirportPath, const String &sWayPointPath, const String &sFlightPath)
-            : sAirportPath(sAirportPath), sWayPointPath(sWayPointPath), sFlightPath(sFlightPath){}
+    explicit Input(const String &sAirportPath, const String &sWayPointPath, const String &sFlightPath);
 
     /**
      * Destructor.
      */
-    ~Input() {}
+    ~Input();
 
     /**
      * Initialize the air management network
      * @param pNetwork      A pointer of network
      */
-    void initNetwork(Network *pNetwork) {
-        parseAirports(pNetwork);
-        parseWayPoints(pNetwork);
-        parseFlights(pNetwork);
-    }
+    void initNetwork(Network *pNetwork);
 private:
     /**
      * The airport filename.
@@ -76,10 +71,7 @@ private:
      * @param name      The filename
      * @return true, if exists; false, otherwise.
      */
-    bool exists(const String &name) {
-        std::ifstream f(name.c_str());
-        return f.good();
-    }
+    bool exists(const String &name);
 };
 
 #endif //INPUT_H

@@ -5,14 +5,11 @@
 #include "../include/Solver.h"
 
 void Solver::initDecisionVariables(int iSize) {
-//    std::cout << "\t\tInitialize decision variables... " << std::flush;
     IloNumVarArray x(env, iSize, 0, 1, ILOBOOL);
     decisionVariables = x;
-//    std::cout << "OK" << std::endl;
 }
 
-void Solver::initFunctionObjective(int iProcessingLevel, FlightVector &ConflictedFlightList) {
-//    std::cout << "\t\tInitialize function objective... " << std::flush;
+void Solver::initFunctionObjective(const FlightVector &ConflictedFlightList, int iProcessingLevel) {
     IloExpr obj(env);
     for (int i = 0; i < (int) ConflictedFlightList.size(); i++) {
         Flight *pFlight = ConflictedFlightList[i];
@@ -21,51 +18,76 @@ void Solver::initFunctionObjective(int iProcessingLevel, FlightVector &Conflicte
         if (index != pFlight->getFeasibleLevelList().end()) {
             long lIndex = index - pFlight->getFeasibleLevelList().begin();
             obj += decisionVariables[i] * exp(3 - lIndex);
-//            switch (lIndex) {
-//                case 0:
-//                    obj += 10 * decisionVariables[i];
-//                    break;
-//                case 1:
-//                    obj += 3 * decisionVariables[i];
-//                    break;
-//                case 2:
-//                    obj += 1 * decisionVariables[i];
-//                    break;
-//                default:
-//                    std::cerr << "[Fatal Error]: the feasible flight level list size is not correct!" << std::endl;
-//                    abort();
-//            }
         } else {
             std::cerr << std::endl << "[Fatal Error]: the flight is processing out of it feasible flight level list !"
                       << std::endl;
             abort();
         }
-//        if (pFlight->getDefaultLevel() == iProcessingLevel) {
-//            obj += 3 * decisionVariables[i];
-//        } else {
-//            obj += decisionVariables[i];
-//        }
     }
     functionObjective = obj;
     model.add(IloMaximize(env, functionObjective));
-//    std::cout << "OK" << std::endl;
 }
 
-void Solver::initConstraints(viList &viConstraintList, int iNbConflictedFlights, vdList &Mi, vdList &Pi,
-                             double **penalCost) {
-//    std::cout << "\t\tInitialize constraints... " << std::flush;
-    for(auto &&i : viConstraintList){
-        IloExpr constraint(env);
-        for (int j = 0; j < iNbConflictedFlights; j++) {
-            if (i == j) {
-                constraint += Mi[j] * decisionVariables[j];
-            } else{
-                constraint += penalCost[i][j]*decisionVariables[j];
-            }
-        }
-//        std::cout << Mi[i] + Pi[i] << "\n";
-        IloConstraint c(constraint <= Mi[i] + Pi[i]);
-        model.add(c);
-    }
-//    std::cout << "OK" << std::endl;
+IloNumArray Solver::getDecisionVariablesValues() const {
+    return decisionVariablesValues;
 }
+
+double Solver::getFunctionObjectiveValue() const {
+    return dFunctionObjectiveValue;
+}
+
+void
+Solver::addNewConstraint(const vdList &Mi, const vdList &Pi, double **ppdDelayTime, int i, int iNbConflictedFlights) {
+    IloExpr constraint(env);
+    for (int j = 0; j < iNbConflictedFlights; j++) {
+        if (i == j) {
+            constraint += Mi[j] * decisionVariables[j];
+        } else {
+            constraint += std::max(0.0, ppdDelayTime[i][j]) * decisionVariables[j];
+        }
+    }
+    IloConstraint c(constraint <= Mi[i] + Pi[i]);
+    model.add(c);
+}
+
+void Solver::solve() {
+    IloNumArray values(env);
+    if (solver.solve()) {
+        solver.getValues(values, decisionVariables);
+        decisionVariablesValues = values;
+        dFunctionObjectiveValue = solver.getObjValue();
+    } else {
+        std::cerr << "[ERROR] Solved Failed!" << std::endl;
+        abort();
+    }
+}
+
+Solver::~Solver() {
+    functionObjective.end();
+    decisionVariables.end();
+    solver.end();
+    model.end();
+}
+
+Solver::Solver(IloEnv env) {
+    Solver::env = env;
+    IloModel model_temp(env);
+    Solver::model = model_temp;
+    IloCplex solver_temp(model);
+    Solver::solver = solver_temp;
+    env.setOut(env.getNullStream());
+    solver.setOut(env.getNullStream());
+    solver.setParam(IloCplex::Threads, 2);
+}
+
+Solver::Solver(IloEnv env, std::ofstream &log) {
+    Solver::env = env;
+    IloModel model_temp(env);
+    Solver::model = model_temp;
+    IloCplex solver_temp(model);
+    Solver::solver = solver_temp;
+    env.setOut(log);
+    solver.setOut(log);
+    solver.setParam(IloCplex::Threads, 2);
+}
+

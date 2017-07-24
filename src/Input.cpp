@@ -199,3 +199,19 @@ void Input::parseFlights(Network *pNetwork) {
               << "\tFlights: " << nbFlights << std::endl
               << "\tValid Flights: " << pNetwork->getNbFlights() << std::endl;
 }
+
+Input::Input(const String &sAirportPath, const String &sWayPointPath, const String &sFlightPath)
+        : sAirportPath(sAirportPath), sWayPointPath(sWayPointPath), sFlightPath(sFlightPath) {}
+
+Input::~Input() {}
+
+void Input::initNetwork(Network *pNetwork) {
+    parseAirports(pNetwork);
+    parseWayPoints(pNetwork);
+    parseFlights(pNetwork);
+}
+
+bool Input::exists(const String &name) {
+    std::ifstream f(name.c_str());
+    return f.good();
+}
