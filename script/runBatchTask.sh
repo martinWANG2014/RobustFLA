@@ -16,10 +16,10 @@ for k in 30; do
                         for w1 in 25;  do
                             for w2 in 25; do
                                 for p in 40 50 60; do
-                                    ./runProgram.sh 0 ${k} ${i} ${m} ${j} 2 ${a} ${b} 95 w1 w2 p
-                                    ./runProgram.sh 1 ${k} ${i} ${m} ${j} 2 ${a} ${b} 95 w1 w2 p
-                                    ./runProgram.sh 3 ${k} ${i} ${m} ${j} 2 ${a} ${b} 95 w1 w2 p
-                                    ./runProgram.sh 2 ${k} ${i} ${m} ${j} 2 ${a} ${b} 95 w1 w2 p
+                                    ./runProgram.sh 0 ${k} ${i} ${m} ${j} 2 ${a} ${b} 95 ${w1} ${w2} ${p}
+                                    ./runProgram.sh 1 ${k} ${i} ${m} ${j} 2 ${a} ${b} 95 ${w1} ${w2} ${p}
+                                    ./runProgram.sh 3 ${k} ${i} ${m} ${j} 2 ${a} ${b} 95 ${w1} ${w2} ${p}
+                                    ./runProgram.sh 2 ${k} ${i} ${m} ${j} 2 ${a} ${b} 95 ${w1} ${w2} ${p}
                                 done
                             done
                         done

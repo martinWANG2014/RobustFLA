@@ -266,7 +266,8 @@ FlightVector SolveFLA(const FlightVector &vpFlightList, const IloEnv &env, const
                 }
                 break;
             case 1:/*Hoeffding*/
-                while (!FeasibilityHoeffding(viSearchList, Pi, decisionVariablesValues, ppdConflictProbability,
+                while (!FeasibilityHoeffding(ConflictFlightList, viSearchList, Pi, decisionVariablesValues,
+                                             ppdConflictProbability,
                                              ppdDelayTime,
                                              epsilon, iConflictFlightsSize, &iMinIndexArgsFromFeaCheck) &&
                        viSearchList.size() > 0) {
@@ -511,7 +512,8 @@ bool FeasibilityGaussian(const FlightVector &vpConflictedFlightList, const viLis
     return true;
 }
 
-bool FeasibilityHoeffding(const viList &viSearchList, const vdList &vdPi, const IloNumArray &decisionVariables,
+bool FeasibilityHoeffding(const FlightVector &vpConflictedFlightList, const viList &viSearchList, const vdList &vdPi,
+                          const IloNumArray &decisionVariables,
                           double **ppdConflictProbability, double **ppdDelayTime, double dEpsilon,
                           int iConflictedFlightSize, int *piIndex) {
     double dMinFeasibility = std::numeric_limits<double>::max();
@@ -522,8 +524,11 @@ bool FeasibilityHoeffding(const viList &viSearchList, const vdList &vdPi, const 
         if (decisionVariables[i] == 1) {
             for (int j = 0; j < iConflictedFlightSize; j++) {
                 if (ppdConflictProbability[i][j] > 0 && decisionVariables[j] == 1) {
-                    dFeasibility += ppdConflictProbability[i][j] * std::max(0.0, ppdDelayTime[i][j]) / 2;
-                    temp2 += pow(std::max(0.0, ppdDelayTime[i][j]), 2);
+                    double sigma_2 = pow(vpConflictedFlightList[i]->getSigma(), 2) +
+                                     pow(vpConflictedFlightList[j]->getSigma(), 2);
+                    double maxPenalCost = std::max(0.0, ppdDelayTime[i][j]) + 3 * sqrt(sigma_2);
+                    dFeasibility += ppdConflictProbability[i][j] * maxPenalCost / 2;
+                    temp2 += pow(maxPenalCost, 2);
                 }
             }
             dFeasibility = exp(-(2 * pow(vdPi[i] - dFeasibility, 2)) / temp2);

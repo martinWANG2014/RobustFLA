@@ -128,6 +128,7 @@ bool FeasibilityEnumeration(const viList &viSearchList, const vdList &vdPi, cons
 
 /**
  * Check the constraint feasibility
+ * @param vpConflictedFlightList    The conflict flight list
  * @param viSearchList              The search list
  * @param vdPi                      The admissible cost list
  * @param decisionVariables         The decision variable value of last solution
@@ -138,7 +139,8 @@ bool FeasibilityEnumeration(const viList &viSearchList, const vdList &vdPi, cons
  * @param piIndexMostInfeasible     The index of most infeasible constraint
  * @return Whether the solution has a high confidence of feasibility.
  */
-bool FeasibilityHoeffding(const viList &viSearchList, const vdList &vdPi, const IloNumArray &decisionVariables,
+bool FeasibilityHoeffding(const FlightVector &vpConflictedFlightList, const viList &viSearchList, const vdList &vdPi,
+                          const IloNumArray &decisionVariables,
                           double **ppdConflictProbability, double **ppdDelayTime,
                           double dEpsilon, int iConflictedFlightSize, int *piIndex);
 
