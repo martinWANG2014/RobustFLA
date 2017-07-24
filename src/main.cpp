@@ -25,50 +25,36 @@ void EchoUsage(){
 int main(int argc, char *argv[]) {
     using std::invalid_argument;
     try {
-        if (argc < 9) {
+        if (argc < 12) {
             EchoUsage();
             abort();
         }
         Network::PERIOD_LENGTH = boost::lexical_cast<double>(argv[5]);
         Network network;
         Input input(argv[1], argv[2], argv[3]);
-        int iMethodMode = boost::lexical_cast<int>(argv[4]);
         double dSumBenefits = 0;
         int iMaxNbConflict = 0;
         vdList vdParameters;
         int iRandomMode;
-        switch (iMethodMode){
-            case 0:
-            case 1:
-                input.initNetwork(&network);
-                ApproximateFLA(&network, vdParameters, boost::lexical_cast<double>(argv[6]) / 100.0,
-                               boost::lexical_cast<double>(argv[8]) / 100.0, &dSumBenefits, &iMaxNbConflict,
-                               boost::lexical_cast<int>(argv[4]),
-                               boost::lexical_cast<int>(argv[7]));
-                break;
-            case 2:
-            case 3:
-                iRandomMode = boost::lexical_cast<int>(argv[9]);
-                if (iRandomMode > -1) {
-                    vdParameters.push_back(boost::lexical_cast<double>(argv[10]));
-                    vdParameters.push_back(boost::lexical_cast<double>(argv[11]));
-                    vdParameters.push_back(boost::lexical_cast<double>(argv[12]) / 100.0);
-                }
-                if (iRandomMode > 1) {
-                    vdParameters.push_back(boost::lexical_cast<double>(argv[13]) / 100.0);
-                    vdParameters.push_back(boost::lexical_cast<double>(argv[14]) / 100.0);
-                    vdParameters.push_back(boost::lexical_cast<double>(argv[15]) / 100.0);
-                }
-                input.initNetwork(&network);
-                ApproximateFLA(&network, vdParameters, boost::lexical_cast<double>(argv[6]) / 100.0,
-                               boost::lexical_cast<double>(argv[8]) / 100.0, &dSumBenefits, &iMaxNbConflict,
-                               boost::lexical_cast<int>(argv[4]),
-                               boost::lexical_cast<int>(argv[7]), iRandomMode);
-                break;
-            default:
-                std::cerr<<"[ERROR] Don't support this method" <<std::endl;
-                break;
+
+        iRandomMode = boost::lexical_cast<int>(argv[9]);
+        if (iRandomMode > -1) {
+            vdParameters.push_back(boost::lexical_cast<double>(argv[10]));
+            vdParameters.push_back(boost::lexical_cast<double>(argv[11]));
+            vdParameters.push_back(boost::lexical_cast<double>(argv[12]) / 100.0);
         }
+        if (iRandomMode > 1) {
+            vdParameters.push_back(boost::lexical_cast<double>(argv[13]) / 100.0);
+            vdParameters.push_back(boost::lexical_cast<double>(argv[14]) / 100.0);
+            vdParameters.push_back(boost::lexical_cast<double>(argv[15]) / 100.0);
+        }
+        input.initNetwork(&network);
+        ApproximateFLA(&network, vdParameters, boost::lexical_cast<double>(argv[6]) / 100.0,
+                       boost::lexical_cast<double>(argv[8]) / 100.0, &dSumBenefits, &iMaxNbConflict,
+                       boost::lexical_cast<int>(argv[4]),
+                       boost::lexical_cast<int>(argv[7]), iRandomMode);
+
+
     }
     catch (const invalid_argument &e) {
         std::cerr << "Error: " << e.what() << std::endl;

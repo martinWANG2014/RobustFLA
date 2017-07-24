@@ -76,14 +76,15 @@ public:
     void solve();
 
     /**
-     * Add new constraint into model
+     * Initialize the constraint for model
+     * @param constraintList            The list of constraints
      * @param Mi                        The Mi list
      * @param Pi                        The Pi list
-     * @param ppdDelayTime                 The pointer of delay time matrix
-     * @param i                         The index of new constraint
+     * @param ppdDelayTime              The pointer of delay time matrix
      * @param iNbConflictedFlights      The number of conflict flights
      */
-    void addNewConstraint(const vdList &Mi, const vdList &Pi, double **ppdDelayTime, int i, int iNbConflictedFlights);
+    void initConstraint(const viList &constraintList, const vdList &Mi, const vdList &Pi, double **ppdDelayTime,
+                        int iNbConflictedFlights);
 
     /**
     * Initialize the decision variables array.

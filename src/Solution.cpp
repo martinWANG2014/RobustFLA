@@ -21,10 +21,9 @@ void ApproximateFLA(Network *pNetwork, const vdList &vdParameter, double dEpsilo
     pNetwork->InitFeasibleList(iFeasibleSize);
     // Initialize  the flight levels list of the network.
     pNetwork->InitFlightLevelsList();
-    // If the random has been set, then initialize the sigma for the random departure time.
-    if (iModeRandom > -1) {
-        pNetwork->SetSigma(vdParameter, iModeRandom);
-    }
+    // Initialize the sigma for the random departure time.
+    pNetwork->SetSigma(vdParameter, iModeRandom);
+
     FlightVector vpFlightList = pNetwork->getFlightsList();
     LevelVector viLevelsList = pNetwork->getFlightLevelsList();
 
@@ -123,6 +122,7 @@ FlightVector SolveFLA(const FlightVector &vpFlightList, const IloEnv &env, const
     //Process the assignment problem for each flight level
     for (auto itA = viLevelsList.begin(); itA != viLevelsList.end(); itA++) {
         int iProcessingLevel = (*itA);
+        std::cout << "[INFO] Level: " << iProcessingLevel << std::endl;
         FlightVector CandidateFlightList;
         FlightVector ConflictFlightList;
         vdList Mi, Pi;
@@ -215,20 +215,24 @@ FlightVector SolveFLA(const FlightVector &vpFlightList, const IloEnv &env, const
         }
 
         viList viSearchList;
+        viList viConstraintList;
         for (int i = 0; i < iConflictFlightsSize; i++) {
             viSearchList.push_back(i);
         }
         //Relax the most infeasible constraint.
         int iMinIndexArgs = MinIndexArgs0(ConflictFlightList, viSearchList, Pi, ppdConflictProbability, ppdDelayTime,
                                           false);
+        std::cout << "\t[INFO] Index: " << iMinIndexArgs << std::endl;
+        viConstraintList.push_back(iMinIndexArgs);
         viSearchList.erase(std::remove(viSearchList.begin(), viSearchList.end(), iMinIndexArgs), viSearchList.end());
         Solver *solver = new Solver(env, cplexLogFile);
         solver->initDecisionVariables(iConflictFlightsSize);
         solver->initFunctionObjective(ConflictFlightList, iProcessingLevel);
-        solver->addNewConstraint(Mi, Pi, ppdDelayTime, iMinIndexArgs, iConflictFlightsSize);
+        solver->initConstraint(viConstraintList, Mi, Pi, ppdDelayTime, iConflictFlightsSize);
         solver->solve();
         double dFunctionObjectiveValue = solver->getFunctionObjectiveValue();
         IloNumArray decisionVariablesValues = solver->getDecisionVariablesValues();
+        delete solver;
         int iMinIndexArgsFromFeaCheck = -1;
         //Test de feasibility of each constraint.
         //Relax the most infeasible constraint, until the solutionC has a high expected confidence.
@@ -245,14 +249,20 @@ FlightVector SolveFLA(const FlightVector &vpFlightList, const IloEnv &env, const
                     } else {
                         iMinIndexArgs = iMinIndexArgsFromFeaCheck;
                     }
+                    std::cout << "\t[INFO] Index: " << iMinIndexArgs << std::endl;
+                    viConstraintList.push_back(iMinIndexArgs);
                     //Remove the most infeasible constraint from search list.
                     viSearchList.erase(std::remove(viSearchList.begin(), viSearchList.end(), iMinIndexArgs),
                                        viSearchList.end());
-                    //Add the new constraint into model, then resolve it.
-                    solver->addNewConstraint(Mi, Pi, ppdDelayTime, iMinIndexArgs, iConflictFlightsSize);
+                    //ReInitialize the model, then resolve it.
+                    solver = new Solver(env, cplexLogFile);
+                    solver->initDecisionVariables(iConflictFlightsSize);
+                    solver->initFunctionObjective(ConflictFlightList, iProcessingLevel);
+                    solver->initConstraint(viConstraintList, Mi, Pi, ppdDelayTime, iConflictFlightsSize);
                     solver->solve();
                     dFunctionObjectiveValue = solver->getFunctionObjectiveValue();
                     decisionVariablesValues = solver->getDecisionVariablesValues();
+                    delete solver;
                 }
                 break;
             case 1:/*Hoeffding*/
@@ -267,14 +277,20 @@ FlightVector SolveFLA(const FlightVector &vpFlightList, const IloEnv &env, const
                     } else {
                         iMinIndexArgs = iMinIndexArgsFromFeaCheck;
                     }
+                    std::cout << "\t[INFO] Index: " << iMinIndexArgs << std::endl;
+                    viConstraintList.push_back(iMinIndexArgs);
                     //Remove the most infeasible constraint from search list.
                     viSearchList.erase(std::remove(viSearchList.begin(), viSearchList.end(), iMinIndexArgs),
                                        viSearchList.end());
-                    //Add the new constraint into model, then resolve it.
-                    solver->addNewConstraint(Mi, Pi, ppdDelayTime, iMinIndexArgs, iConflictFlightsSize);
+                    //ReInitialize the model, then resolve it.
+                    solver = new Solver(env, cplexLogFile);
+                    solver->initDecisionVariables(iConflictFlightsSize);
+                    solver->initFunctionObjective(ConflictFlightList, iProcessingLevel);
+                    solver->initConstraint(viConstraintList, Mi, Pi, ppdDelayTime, iConflictFlightsSize);
                     solver->solve();
                     dFunctionObjectiveValue = solver->getFunctionObjectiveValue();
                     decisionVariablesValues = solver->getDecisionVariablesValues();
+                    delete solver;
                 }
                 break;
             case 2:/*MonteCarlo*/
@@ -289,14 +305,20 @@ FlightVector SolveFLA(const FlightVector &vpFlightList, const IloEnv &env, const
                     } else {
                         iMinIndexArgs = iMinIndexArgsFromFeaCheck;
                     }
+                    std::cout << "\t[INFO] Index: " << iMinIndexArgs << std::endl;
+                    viConstraintList.push_back(iMinIndexArgs);
                     //Remove the most infeasible constraint from search list.
                     viSearchList.erase(std::remove(viSearchList.begin(), viSearchList.end(), iMinIndexArgs),
                                        viSearchList.end());
-                    //Add the new constraint into model, then resolve it.
-                    solver->addNewConstraint(Mi, Pi, ppdDelayTime, iMinIndexArgs, iConflictFlightsSize);
+                    //ReInitialize the model, then resolve it.
+                    solver = new Solver(env, cplexLogFile);
+                    solver->initDecisionVariables(iConflictFlightsSize);
+                    solver->initFunctionObjective(ConflictFlightList, iProcessingLevel);
+                    solver->initConstraint(viConstraintList, Mi, Pi, ppdDelayTime, iConflictFlightsSize);
                     solver->solve();
                     dFunctionObjectiveValue = solver->getFunctionObjectiveValue();
                     decisionVariablesValues = solver->getDecisionVariablesValues();
+                    delete solver;
                 }
                 break;
             case 3:/*Gaussian*/
@@ -311,14 +333,20 @@ FlightVector SolveFLA(const FlightVector &vpFlightList, const IloEnv &env, const
                     } else {
                         iMinIndexArgs = iMinIndexArgsFromFeaCheck;
                     }
+                    std::cout << "\t[INFO] Index: " << iMinIndexArgs << std::endl;
+                    viConstraintList.push_back(iMinIndexArgs);
                     //Remove the most infeasible constraint from search list.
                     viSearchList.erase(std::remove(viSearchList.begin(), viSearchList.end(), iMinIndexArgs),
                                        viSearchList.end());
-                    //Add the new constraint into model, then resolve it.
-                    solver->addNewConstraint(Mi, Pi, ppdDelayTime, iMinIndexArgs, iConflictFlightsSize);
+                    //ReInitialize the model, then resolve it.
+                    solver = new Solver(env, cplexLogFile);
+                    solver->initDecisionVariables(iConflictFlightsSize);
+                    solver->initFunctionObjective(ConflictFlightList, iProcessingLevel);
+                    solver->initConstraint(viConstraintList, Mi, Pi, ppdDelayTime, iConflictFlightsSize);
                     solver->solve();
                     dFunctionObjectiveValue = solver->getFunctionObjectiveValue();
                     decisionVariablesValues = solver->getDecisionVariablesValues();
+                    delete solver;
                 }
                 break;
 
@@ -327,7 +355,6 @@ FlightVector SolveFLA(const FlightVector &vpFlightList, const IloEnv &env, const
                 abort();
                 break;
         }
-        delete solver;
         *dSumBenefits += dFunctionObjectiveValue;
         for (int i = 0; i < iConflictFlightsSize; i++) {
             if ((decisionVariablesValues)[i] == 1) {

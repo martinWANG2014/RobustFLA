@@ -36,19 +36,6 @@ double Solver::getFunctionObjectiveValue() const {
     return dFunctionObjectiveValue;
 }
 
-void
-Solver::addNewConstraint(const vdList &Mi, const vdList &Pi, double **ppdDelayTime, int i, int iNbConflictedFlights) {
-    IloExpr constraint(env);
-    for (int j = 0; j < iNbConflictedFlights; j++) {
-        if (i == j) {
-            constraint += Mi[j] * decisionVariables[j];
-        } else {
-            constraint += std::max(0.0, ppdDelayTime[i][j]) * decisionVariables[j];
-        }
-    }
-    IloConstraint c(constraint <= Mi[i] + Pi[i]);
-    model.add(c);
-}
 
 void Solver::solve() {
     IloNumArray values(env);
@@ -65,8 +52,8 @@ void Solver::solve() {
 Solver::~Solver() {
     functionObjective.end();
     decisionVariables.end();
-    solver.end();
     model.end();
+    solver.end();
 }
 
 Solver::Solver(IloEnv env) {
@@ -89,5 +76,21 @@ Solver::Solver(IloEnv env, std::ofstream &log) {
     env.setOut(log);
     solver.setOut(log);
     solver.setParam(IloCplex::Threads, 2);
+}
+
+void Solver::initConstraint(const viList &constraintList, const vdList &Mi, const vdList &Pi, double **ppdDelayTime,
+                            int iNbConflictedFlights) {
+    for (auto &&i: constraintList) {
+        IloExpr constraint(env);
+        for (int j = 0; j < iNbConflictedFlights; j++) {
+            if (i == j) {
+                constraint += Mi[j] * decisionVariables[j];
+            } else {
+                constraint += std::max(0.0, ppdDelayTime[i][j]) * decisionVariables[j];
+            }
+        }
+        IloConstraint c(constraint <= Mi[i] + Pi[i]);
+        model.add(c);
+    }
 }
 
