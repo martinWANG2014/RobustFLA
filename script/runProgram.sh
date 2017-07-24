@@ -112,40 +112,115 @@ fi
 case $1 in
     0)
         echo "[INFO] Call Enumeration Method"
+        if [[ $# -ne 5 ]]; then
+            echo "[ERROR] invalid parameters list."
+            Usage
+            exit
+        fi
     ;;
     1)
+
         echo "[INFO] Call Hoeffding Inequalities Method"
+        if [[ $# -ne 5 ]]; then
+            echo "[ERROR] invalid parameters list."
+            Usage
+            exit
+        fi
     ;;
     2)
         echo "[INFO] Call Monte-Carlo Simulation Method"
+        if [[ $# -lt 9 ]]; then
+            echo "[ERROR] invalid parameters list."
+            Usage
+            exit
+        else
+            if [[ $6 -eq 2 ]]; then
+                if [[ $# -ne 12 ]]; then
+                    echo "[ERROR] invalid parameters list."
+                    Usage
+                    exit
+                fi
+            else
+                if [[ $# -ne 9 ]]; then
+                    echo "[ERROR] invalid parameters list."
+                    Usage
+                    exit
+                fi
+            fi
+        fi
     ;;
     3)
-        echo "[INFO] Call Gaussian Method"
+        echo "[INFO] Call Gaussian Method with uncertain departure time"
+        if [[ $# -lt 9 ]]; then
+            echo "[ERROR] invalid parameters list."
+            Usage
+            exit
+        else
+            if [[ $6 -eq 2 ]]; then
+                if [[ $# -ne 12 ]]; then
+                    echo "[ERROR] invalid parameters list."
+                    Usage
+                    exit
+                fi
+            else
+                if [[ $# -ne 9 ]]; then
+                    echo "[ERROR] invalid parameters list."
+                    Usage
+                    exit
+                fi
+            fi
+        fi
+    ;;
+    4)
+        echo "[INFO] Call Monte-Carlo Method with uncertain departure time"
+        if [[ $# -lt 9 ]]; then
+            echo "[ERROR] invalid parameters list."
+            Usage
+            exit
+        else
+            if [[ $6 -eq 2 ]]; then
+                if [[ $# -ne 12 ]]; then
+                    echo "[ERROR] invalid parameters list."
+                    Usage
+                    exit
+                fi
+            else
+                if [[ $# -ne 9 ]]; then
+                    echo "[ERROR] invalid parameters list."
+                    Usage
+                    exit
+                fi
+            fi
+        fi
+    ;;
+    5)
+        echo "[INFO] Call Enumeration Method with uncertain departure time"
+        if [[ $# -lt 9 ]]; then
+            echo "[ERROR] invalid parameters list."
+            Usage
+            exit
+        else
+            if [[ $6 -eq 2 ]]; then
+                if [[ $# -ne 12 ]]; then
+                    echo "[ERROR] invalid parameters list."
+                    Usage
+                    exit
+                fi
+            else
+                if [[ $# -ne 9 ]]; then
+                    echo "[ERROR] invalid parameters list."
+                    Usage
+                    exit
+                fi
+            fi
+        fi
     ;;
     *)
         echo "[ERROR] Not support such method"
         Usage
         exit
 esac
-if [[ $# -lt 9 ]]; then
-        echo "[ERROR] invalid parameters list."
-        Usage
-        exit
-else
-    if [[ $6 -eq 2 ]]; then
-        if [[ $# -ne 12 ]]; then
-            echo "[ERROR] invalid parameters list."
-            Usage
-            exit
-        fi
-    else
-        if [[ $# -ne 9 ]]; then
-            echo "[ERROR] invalid parameters list."
-            Usage
-            exit
-        fi
-    fi
-fi
+
 # call the program.
 echo  " ${executable_target} ${airport_json} ${beacon_json} ${flight_json} $@"
 ${executable_target} ${airport_json} ${beacon_json} ${flight_json} $@ > ${solution_dir}/$(getResultFileName $@)

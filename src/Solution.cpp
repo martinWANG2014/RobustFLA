@@ -22,7 +22,9 @@ void ApproximateFLA(Network *pNetwork, const vdList &vdParameter, double dEpsilo
     // Initialize  the flight levels list of the network.
     pNetwork->InitFlightLevelsList();
     // Initialize the sigma for the random departure time.
-    pNetwork->SetSigma(vdParameter, iModeRandom);
+    if (iModeMethod > 1) {
+        pNetwork->SetSigma(vdParameter, iModeRandom);
+    }
 
     FlightVector vpFlightList = pNetwork->getFlightsList();
     LevelVector viLevelsList = pNetwork->getFlightLevelsList();
@@ -152,7 +154,8 @@ FlightVector SolveFLA(const FlightVector &vpFlightList, const IloEnv &env, const
                 if (*fi == *fj) {
                     continue;
                 }
-                double prob = fi->CalculateProbabilityConflictAndDelayForFlight(fj, &dDelayTime, &bWait, false);
+                double prob = fi->CalculateProbabilityConflictAndDelayForFlight(fj, &dDelayTime, &bWait,
+                                                                                iModeMethod < 3);
                 if (prob > 0) {
                     ConflictFlightList.push_back(fi);
                     break;
@@ -191,7 +194,7 @@ FlightVector SolveFLA(const FlightVector &vpFlightList, const IloEnv &env, const
         double **ppdDelayTime = CreateTable(iConflictFlightsSize);
         InitTable(ppdConflictProbability, iConflictFlightsSize);
         InitTable(ppdDelayTime, iConflictFlightsSize);
-        CalculateConflictProbability(ConflictFlightList, ppdConflictProbability, ppdDelayTime, false);
+        CalculateConflictProbability(ConflictFlightList, ppdConflictProbability, ppdDelayTime, iModeMethod < 3);
 
         //Calculate Mi list and maximal conflict couunt.
         for (int i = 0; i < iConflictFlightsSize; i++) {
@@ -221,7 +224,7 @@ FlightVector SolveFLA(const FlightVector &vpFlightList, const IloEnv &env, const
         }
         //Relax the most infeasible constraint.
         int iMinIndexArgs = MinIndexArgs0(ConflictFlightList, viSearchList, Pi, ppdConflictProbability, ppdDelayTime,
-                                          false);
+                                          iModeMethod < 3);
         std::cout << "\t[INFO] Index: " << iMinIndexArgs << std::endl;
         viConstraintList.push_back(iMinIndexArgs);
         viSearchList.erase(std::remove(viSearchList.begin(), viSearchList.end(), iMinIndexArgs), viSearchList.end());
@@ -245,7 +248,7 @@ FlightVector SolveFLA(const FlightVector &vpFlightList, const IloEnv &env, const
                     if (iMinIndexArgsFromFeaCheck == -1) {
                         iMinIndexArgs = MinIndexArgs1(ConflictFlightList, viSearchList, Pi, decisionVariablesValues,
                                                       ppdConflictProbability,
-                                                      ppdDelayTime, false);
+                                                      ppdDelayTime, true);
                     } else {
                         iMinIndexArgs = iMinIndexArgsFromFeaCheck;
                     }
@@ -266,7 +269,7 @@ FlightVector SolveFLA(const FlightVector &vpFlightList, const IloEnv &env, const
                 }
                 break;
             case 1:/*Hoeffding*/
-                while (!FeasibilityHoeffding(ConflictFlightList, viSearchList, Pi, decisionVariablesValues,
+                while (!FeasibilityHoeffding(viSearchList, Pi, decisionVariablesValues,
                                              ppdConflictProbability,
                                              ppdDelayTime,
                                              epsilon, iConflictFlightsSize, &iMinIndexArgsFromFeaCheck) &&
@@ -274,7 +277,7 @@ FlightVector SolveFLA(const FlightVector &vpFlightList, const IloEnv &env, const
                     if (iMinIndexArgsFromFeaCheck == -1) {
                         iMinIndexArgs = MinIndexArgs1(ConflictFlightList, viSearchList, Pi, decisionVariablesValues,
                                                       ppdConflictProbability,
-                                                      ppdDelayTime, false);
+                                                      ppdDelayTime, true);
                     } else {
                         iMinIndexArgs = iMinIndexArgsFromFeaCheck;
                     }
@@ -297,12 +300,12 @@ FlightVector SolveFLA(const FlightVector &vpFlightList, const IloEnv &env, const
             case 2:/*MonteCarlo*/
                 while (!FeasibilityMonteCarlo(ConflictFlightList, viSearchList, Pi, decisionVariablesValues,
                                               vdParameter,
-                                              epsilon, &iMinIndexArgsFromFeaCheck, iModeRandom, false) &&
+                                              epsilon, &iMinIndexArgsFromFeaCheck, iModeRandom, true) &&
                        viSearchList.size() > 0) {
                     if (iMinIndexArgsFromFeaCheck == -1) {
                         iMinIndexArgs = MinIndexArgs1(ConflictFlightList, viSearchList, Pi, decisionVariablesValues,
                                                       ppdConflictProbability,
-                                                      ppdDelayTime, false);
+                                                      ppdDelayTime, true);
                     } else {
                         iMinIndexArgs = iMinIndexArgsFromFeaCheck;
                     }
@@ -350,7 +353,62 @@ FlightVector SolveFLA(const FlightVector &vpFlightList, const IloEnv &env, const
                     delete solver;
                 }
                 break;
-
+            case 4:/*MonteCarlo with departure time*/
+                while (!FeasibilityMonteCarlo(ConflictFlightList, viSearchList, Pi, decisionVariablesValues,
+                                              vdParameter,
+                                              epsilon, &iMinIndexArgsFromFeaCheck, iModeRandom, false) &&
+                       viSearchList.size() > 0) {
+                    if (iMinIndexArgsFromFeaCheck == -1) {
+                        iMinIndexArgs = MinIndexArgs1(ConflictFlightList, viSearchList, Pi, decisionVariablesValues,
+                                                      ppdConflictProbability,
+                                                      ppdDelayTime, false);
+                    } else {
+                        iMinIndexArgs = iMinIndexArgsFromFeaCheck;
+                    }
+                    std::cout << "\t[INFO] Index: " << iMinIndexArgs << std::endl;
+                    viConstraintList.push_back(iMinIndexArgs);
+                    //Remove the most infeasible constraint from search list.
+                    viSearchList.erase(std::remove(viSearchList.begin(), viSearchList.end(), iMinIndexArgs),
+                                       viSearchList.end());
+                    //ReInitialize the model, then resolve it.
+                    solver = new Solver(env, cplexLogFile);
+                    solver->initDecisionVariables(iConflictFlightsSize);
+                    solver->initFunctionObjective(ConflictFlightList, iProcessingLevel);
+                    solver->initConstraint(viConstraintList, Mi, Pi, ppdDelayTime, iConflictFlightsSize);
+                    solver->solve();
+                    dFunctionObjectiveValue = solver->getFunctionObjectiveValue();
+                    decisionVariablesValues = solver->getDecisionVariablesValues();
+                    delete solver;
+                }
+                break;
+            case 5:/*enumeration method with departure time*/
+                while (!FeasibilityEnumeration(viSearchList, Pi, decisionVariablesValues, ppdConflictProbability,
+                                               ppdDelayTime,
+                                               epsilon, iConflictFlightsSize, &iMinIndexArgsFromFeaCheck) &&
+                       viSearchList.size() > 0) {
+                    if (iMinIndexArgsFromFeaCheck == -1) {
+                        iMinIndexArgs = MinIndexArgs1(ConflictFlightList, viSearchList, Pi, decisionVariablesValues,
+                                                      ppdConflictProbability,
+                                                      ppdDelayTime, false);
+                    } else {
+                        iMinIndexArgs = iMinIndexArgsFromFeaCheck;
+                    }
+                    std::cout << "\t[INFO] Index: " << iMinIndexArgs << std::endl;
+                    viConstraintList.push_back(iMinIndexArgs);
+                    //Remove the most infeasible constraint from search list.
+                    viSearchList.erase(std::remove(viSearchList.begin(), viSearchList.end(), iMinIndexArgs),
+                                       viSearchList.end());
+                    //ReInitialize the model, then resolve it.
+                    solver = new Solver(env, cplexLogFile);
+                    solver->initDecisionVariables(iConflictFlightsSize);
+                    solver->initFunctionObjective(ConflictFlightList, iProcessingLevel);
+                    solver->initConstraint(viConstraintList, Mi, Pi, ppdDelayTime, iConflictFlightsSize);
+                    solver->solve();
+                    dFunctionObjectiveValue = solver->getFunctionObjectiveValue();
+                    decisionVariablesValues = solver->getDecisionVariablesValues();
+                    delete solver;
+                }
+                break;
             default:
                 std::cerr << "Not support ! " << std::endl;
                 abort();
@@ -400,13 +458,13 @@ bool FeasibilityMonteCarlo(const FlightVector &vpConflictedFlightList, const viL
             Time iDelta = 0;
             switch (iModeRandom) {
                 case 0:
-                    iDelta = GaussianDistribution1(vdParameter);
+                    iDelta = GaussianDistribution1(vdParameter, fj->getSigma());
                     break;
                 case 1:
-                    iDelta = GaussianDistribution2(vdParameter);
+                    iDelta = GaussianDistribution2(vdParameter, fj->getSigma());
                     break;
                 default:
-                    iDelta = GaussianDistribution3(vdParameter);
+                    iDelta = GaussianDistribution3(vdParameter, fj->getSigma());
                     break;
             }
             fj->GenerateNewFlight(iOldDepartureTime + iDelta, bGeoMethod);
@@ -512,7 +570,7 @@ bool FeasibilityGaussian(const FlightVector &vpConflictedFlightList, const viLis
     return true;
 }
 
-bool FeasibilityHoeffding(const FlightVector &vpConflictedFlightList, const viList &viSearchList, const vdList &vdPi,
+bool FeasibilityHoeffding(const viList &viSearchList, const vdList &vdPi,
                           const IloNumArray &decisionVariables,
                           double **ppdConflictProbability, double **ppdDelayTime, double dEpsilon,
                           int iConflictedFlightSize, int *piIndex) {
@@ -524,9 +582,9 @@ bool FeasibilityHoeffding(const FlightVector &vpConflictedFlightList, const viLi
         if (decisionVariables[i] == 1) {
             for (int j = 0; j < iConflictedFlightSize; j++) {
                 if (ppdConflictProbability[i][j] > 0 && decisionVariables[j] == 1) {
-                    double sigma_2 = pow(vpConflictedFlightList[i]->getSigma(), 2) +
-                                     pow(vpConflictedFlightList[j]->getSigma(), 2);
-                    double maxPenalCost = std::max(0.0, ppdDelayTime[i][j]) + 3 * sqrt(sigma_2);
+//                    double sigma_2 = pow(vpConflictedFlightList[i]->getSigma(), 2) +
+//                                     pow(vpConflictedFlightList[j]->getSigma(), 2);
+                    double maxPenalCost = std::max(0.0, ppdDelayTime[i][j]);
                     dFeasibility += ppdConflictProbability[i][j] * maxPenalCost / 2;
                     temp2 += pow(maxPenalCost, 2);
                 }
@@ -748,10 +806,9 @@ double **CreateTable(int iSize) {
     return ppdDouble;
 }
 
-double GaussianDistribution3(const vdList &vdParameter) {
+double GaussianDistribution3(const vdList &vdParameter, double dSigma) {
     std::default_random_engine generator;
-    double dSigma = getSigma3(vdParameter[0], vdParameter[1], vdParameter[2], vdParameter[3], vdParameter[4],
-                              vdParameter[5]);
+
     uni_dist UniformDist(0, 1);
     double p = UniformDist(generator);
     if (p < vdParameter[5]) {
@@ -765,16 +822,16 @@ double GaussianDistribution3(const vdList &vdParameter) {
     }
 }
 
-double GaussianDistribution2(const vdList &vdParameter) {
+double GaussianDistribution2(const vdList &vdParameter, double dSigma) {
     std::default_random_engine generator;
-    normal_dist NormalDist(0, getSigma2(vdParameter[0], vdParameter[1], vdParameter[2]));
+    normal_dist NormalDist(0, dSigma);
     return NormalDist(generator);
 }
 
-double GaussianDistribution1(const vdList &vdParameter) {
+double GaussianDistribution1(const vdList &vdParameter, double dSigma) {
     std::default_random_engine generator;
     normal_dist NormalDist((vdParameter[1] - vdParameter[0]) / 2,
-                           getSigma1(vdParameter[0], vdParameter[1], vdParameter[2]));
+                           dSigma);
     return NormalDist(generator);
 }
 

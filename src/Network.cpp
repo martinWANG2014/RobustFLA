@@ -116,39 +116,42 @@ void Network::InitCoefPi(double dCoefPi) {
     }
 }
 
-void Network::SetSigma(vdList parameter, int iRandomMode) {
+void Network::SetSigma(const vdList &vdParameters, int iRandomMode) {
     double dSigma = MIN_SIGMA;
+//    std::copy(vdParameters.begin(), vdParameters.end(), std::ostream_iterator<double>(std::cout, "\t "));
     switch (iRandomMode) {
         case 0:
-            if (parameter.size() != 3) {
-                std::cerr << "the parameter list invalid!" << std::endl;
+            if (vdParameters.size() != 3) {
+                std::cerr << "the vdParameters list invalid!" << std::endl;
                 abort();
             }
-            dSigma = getSigma1(parameter[0], parameter[1], parameter[2]);
+            dSigma = getSigma1(vdParameters[0], vdParameters[1], vdParameters[2]);
             break;
         case 1:
-            if (parameter.size() != 3) {
-                std::cerr << "the parameter list invalid!" << std::endl;
+            if (vdParameters.size() != 3) {
+                std::cerr << "the vdParameters list invalid!" << std::endl;
                 abort();
             }
-            dSigma = getSigma2(parameter[0], parameter[1], parameter[2]);
+            dSigma = getSigma2(vdParameters[0], vdParameters[1], vdParameters[2]);
             break;
         case 2:
-            if (parameter.size() != 3) {
-                std::cerr << "the parameter list invalid!" << std::endl;
+            if (vdParameters.size() != 6) {
+                std::cerr << "the vdParameters list invalid!" << std::endl;
                 abort();
             }
-            dSigma = getSigma3(parameter[0], parameter[1], parameter[2], parameter[3], parameter[4], parameter[5]);
+            dSigma = getSigma3(vdParameters[0], vdParameters[1], vdParameters[2], vdParameters[3], vdParameters[4],
+                               vdParameters[5]);
             break;
         default:
             std::cerr << "the random mode is not supported!" << std::endl;
             abort();
     }
-    uni_dist UniformDist(MIN_SIGMA, dSigma);
-    //Will be used to obtain a seed for the random number engine
-    std::random_device rd;
-    std::mt19937 gen(rd());
+//    uni_dist UniformDist(MIN_SIGMA, dSigma);
+//    //Will be used to obtain a seed for the random number engine
+//    std::random_device rd;
+//    std::mt19937 gen(rd());
     for (auto &&fi : vpFlightsList) {
-        fi->setSigma(UniformDist(gen));
+//        fi->setSigma(UniformDist(gen));
+        fi->setSigma(dSigma);
     }
 }
