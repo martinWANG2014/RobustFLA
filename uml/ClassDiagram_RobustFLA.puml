@@ -1,193 +1,211 @@
 @startuml
 
 class Input{
-    -String sConfigPath
-    +explict Input(const String &configPath, Network *network)
+    -String sAirportPath
+    -String sWayPointPath
+    -String sFlightPath
+    -void parseFlights(Network *pNetwork)
+    -void parseAirports(Network *pNetwork)
+    -void parseWayPoints(Network *pNetwork)
+    -bool exists(const String &name)
+    +explicit Input(const String &sAirportPath, \n const String &sWayPointPath, \n const String &sFlightPath)
     +~Input()
-    -void parseFlights()
-    -void parseAirports()
-    -void parseWayPoints()
-    +void initNetwork()
+    +void initNetwork(Network *pNetwork)
 }
 class Network{
     -FlightsVector vpFlightsList
     -AirportsVector vpAirportsList
     -WayPointsVector vpWayPointsList
-    +FlightsVector &getFlights()
-    +AirportsVector &getAirports()
-    +WayPointsVector &getWayPoints()
-    -Flight *findFlightById(const String &sCode)
-    -Airport *findAirportByCode(const String &sCode)
-    -WayPoint *findWayPointByCode(const String &sCode)
-    +Flight * getFlightAtI(int index) const
+    -LevelVector viFlightLevelsList
+    +static double PERIOD_LENGTH
+    +Network()
+    +virtual ~Network()
     +void addNewFlight(Flight *pFlight)
     +void addNewAirport(Airport *pAirport)
     +void addNewWayPoint(WayPoint *pWayPoint)
-    +Network* clone()
+    +int getNbAirports() const
+    +int getNbWayPoints() const
+    +int getNbFlights() const
+    +int getNbLevels() const
+    +Airport *findAirportByCode(String sCode)
+    +WayPoint *findWayPointByCode(String sCode)
+    +const FlightVector &getFlightsList() const
+    +const LevelVector &getFlightLevelsList() const
+    +const AirportVector &getAirportsList() const
+    +const WayPointVector &getWayPointsList() const
+    +void InitFlightLevelsList()
+    +void InitFeasibleList(int iSize)
+    +void InitCoefPi(double dCoefPi)
+    +void SetSigma(const vdList &vdParameters, \n int iRandomMode)
 }
 class Position{
     -double dLatitude
     -double dLongitude
     +Position(const Position &position)
     +Position(double dLatitude, double dLongitude)
-    +~Position()
+    +virtual ~Position()
     +double getLatitude() cost
     +double getLongitude() cost
     +bool operator==(const Position &rhs) const
     +bool operator!=(const Position &rhs) const
-    +Position *clone()
+    +friend double distanceBetween(const Position &p1, \n const Position &p2)
+    +friend double getCosA(const Position &position1,  \n const Position &position3, const Position &position4)
 }
 class Node{
-    #String sCode
-    #String  sName
-    #Position position
+    -String sCode
+    -String  sName
+    -Position position
     +Node(const Node &node)
     +Node(const String &sCode, const String &sName, \n const Position &position)
     +Node(const String &sCode, const String &sName, \n const double dLatitude, const double dLongitude)
-    +~Node()
+    +virtual ~Node()
     +const String &getCode() const
-    +const String &getName() const
     +const Position &getPosition() const
     +bool operator==(const Node &rhs) const
     +bool operator!=(const Node &rhs) const
-    +Node *clone()
 }
-class FLevel{
-    -ALevel iFlightLevel
-    -double dPenalCost
-    +FLevel(const FLevel &level)
-    +FLevel(ALevel iFlightLevel)
-    +FLevel(ALevel iFlightLevel, double dPenalCost)
-    +~FLevel()
-    +double getFlightLevel() const;
-    +double getPenalCost() const;
-    +void setPenalCost(double dPenalCost);
-    +bool operator==(const FLevel &rhs) const
-    +bool operator!=(const FLevel &rhs) const
-    +FLevel *clone()
-}
+
 class Flight{
     -String sCode
     -Airport *pAOrigin
     -Airport *pADestination
     -Time dDepartureTime
-    -int iDefaultRoute
-    -int iCurrentRoute
-    -FLevelVector vpFeasibleLevelList
-    -RouteVector vpPossibleRouteList
-    +Flight(const Flight &flight)
-    +Flight(const String &sCode, Airport *pAOrigin, \n Airport *pADestination, Time dDepartureTime, Route *pRouteDefault)
-    +~Flight()
-    +setCurrentRoute(int iCurrentRoute)
-    +Route *getCurrentRoute() const
-    +void addNewRoute(Route *pActiveRoute)
+    -Level iCurrentLevel
+    -LevelVector viFeasibleLevelList
+    -Route *pRoute
+    -double dSigma
+    +Flight(const String &sCode, Airport *pAOrigin, \n Airport *pADestination, Time iDepartureTime, \n Route *pRoute)
+    +virtual ~Flight()
+    +const String &getCode() const
+    +Time getDepartureTime() const
+    +Level getDefaultLevel() const
+    +Route *getRoute() const
+    +const LevelVector &getFeasibleLevelList() const
+    +Level getCurrentLevel() const
+    +void setCurrentLevel(Level iCurrentLevel)
+    +Time getArrivingTime()
+    +void setFeasibleLevelList(const LevelVector levelList)
+    +double CalculateProbabilityConflictAndDelayForFlight(Flight \n*pFlight2, double *pdDelay, bool *pbWait,\n bool bGeometricMethod)
+    +void GenerateNewFlight(Time iNewDepartureTime, \n bool bGeometricMethod)
     +bool operator==(const Flight &rhs) const
     +bool operator!=(const Flight &rhs) const
-    +Flight *clone()
+    +bool selfCheck()
+    +double getSigma() const
+    +void setSigma(double dSigma)
+    +void initRouteTimeList()
+    +void resetRouteTimeList()
+    +double getCoefPi() const
+    +void setCoefPi(double dCoefPi)
+    +void resetLevel()
+    +Level getLastFeasibleLevel()
+    +double dCoefPivoid addNewFeasibleLevel(Level newLevel)
 }
 class Point{
     -WayPoint *pWayPoint
     -Time iArrivingTime
-    +Point(Point &point)
     +Point(WayPoint *pWayPoint, Time iArrivingTime)
-    +~Point()
+    +virtual ~Point()
     +Time getArrivingTime() const
-    +WayPoint *getWayPoint() const
-    +void setArrivingTime(Time iArrivingTime)
+    +const Position &getPosition() const
     +bool operator==(const Point &rhs) const
     +bool operator!=(const Point &rhs) const
-    +Point* clone()
 }
 class Route{
-    -FLevel *pFlightLevel
+    -Level iDefaultLevel
     -PointVector vpPointsList
-    +Route(Route &route)
-    +Route(FLevel *pFlightLevel)
-    +Route(FLevel *pFlightLevel, PointVector vpPointsList)
-    +~Route()
+    -vdList vdTimeList
+    -double CalculateProbabilityAndDelayForPart(double dT1, \n double dT2, double dV1, double dV2, double dCosA, \n  double *pdDelayTime, bool bFlag, bool bGeometricMethod, \n double dSigma1, double dSigma2)
+    -double CalculatePartialProbabilityAndDelay(int iIndex1, \n  Route *pRoute2, int iIndex2, double *pdDelayTime, \n bool bFlag1, bool bFlag2, bool bGeometricMethod, \n double dSigma1, double dSigma2)
+    +Route(Level iDefaultLevel, Airport *pAirOrigin, \n Time iDepartureTime)
+    +Route(Level iDefaultLevel, Point *pPoint)
+    +virtual ~Route()
     +void addNewPoint(Point *pPoint)
-    +void setFlightLevel(FLevel *pFlightLevel)
-    +ALevel getFlightLevel() const
-    +PointVector getPointsList() const
-    +Point *getPointAtI(int index) const
-    +Point *getPointNextOfI(int index) const
-    +Point *getPointBeforeI(int index) const
-    +bool operator==(const Route &rhs) const
-    +bool operator!=(const Route &rhs) const
-    +Route* clone()
+    +const Level getDefaultLevel(void) const
+    +Point *getPointAtI(int iIndex)
+    +Time getArrivingTimeAtPoint(int iIndex)
+    +const Position &getPositionAtPoint(int iIndex)
+    +int getPointListSize()
+    +double getVelocityFromPoint(int iIndexPoint, double dDeltaT)
+    +double getVelocityFromPoint(int iIndexPoint)
+    +Time getFinalArrivingTime()
+    +void GenerateNewRoute(Time iNewDepartureTime)
+    +void GenerateNewRoute2(Time dNewDepartureTime)
+    +bool selfCheck()
+    +double CalculationProbabilityAndDelayAtPoint(int iIndex1, \n Route *pRoute2, int iIndex2, double *pdDelayTime, \n bool *pbWait, bool bGeometricMethod, \n double dSigma1, double dSigma2)
+    +void initTimeList()
+    +void resetTimeList()
 }
 
 class Solver{
-    #ProcessClock clock
-    #IloModel model
-    #IloNumVarArray x
-    #IloCplex solver
-    #Network *pNetwork
-    +Solver(IloEnv &env, Network *pNetwork)
+    -IloEnv env
+    -IloModel model
+    -IloCplex solver
+    -IloNumVarArray decisionVariables
+    -IloNumArray decisionVariablesValues
+    -IloExpr functionObjective
+    -double dFunctionObjectiveValue
+    +Solver(IloEnv env, std::ofstream &log)
+    +Solver(IloEnv env)
     +virtual ~Solver()
-    +void initDecisionVariable()
-    +void initFunctionObjective()
-    +void initConstraints()
-    +virtual bool feasibilityEstimation()
     +void solve()
-    +IloNumArray getDecisionVariable() const
+    +void initConstraint(const viList &constraintList,\n const vdList &Mi, const vdList &Pi, \n double **ppdDelayTime, int iNbConflictedFlights)
+    +void initDecisionVariables(int iSize)
+    +void initFunctionObjective(const FlightVector \n &ConflictedFlightList, int iProcessingLevel)
+    +IloNumArray getDecisionVariablesValues() const
+    +double getFunctionObjectiveValue() const
 }
-class MonteCarloMethod{
-    +bool feasibilityEstimation()
-    +~Solver()
+class ProcessClock{
+    -ProcessTime oStartTime
+    -ProcessTime oEndTime
+    -double dUserTime
+    -double dSysTime
+    -double dCreateTime
+    -double dExitTime
+    -double dCpuTime
+    +void start()
+    +void end()
+    +double getCpuTime() const
 }
-class HoeffdingMethod{
-    +bool feasibilityEstimation()
-    +~Solver()
+
+class Main {
+    +int main(int argc, char *argv[])
+    +void EchoUsage()
 }
-class EnumerationMethod{
-    +bool feasibilityEstimation()
-    +~Solver()
+class Solution{
+    +qviList Combination(viList viConstraintList, int k)
+    +viList getComplement(int iSize, viList candidateList)
+    +double GaussianDistribution1(const vdList &vdParameter, \n double dSigma)
+    +double GaussianDistribution2(const vdList &vdParameter, \n double dSigma)
+    +double GaussianDistribution3(const vdList &vdParameter, \n double dSigma)
+    +double **CreateTable(int iSize)
+    +void InitTable(double **ppdTable, int iSize)
+    +void DestroyTable(double **ppdTable, int iSize)
+    +void CalculateConflictProbability(const FlightVector \n &vpConflictFlightList, double **ppdConflictProbability, \n  double **ppdDelayTime, bool bGeometricMethod)
+    +int MinIndexArgs0(const FlightVector \n &vpConflictFlightList, const viList &viSearchList, \n const vdList &vdPi, double **ppdConflictProbability, \n double **ppdDelayTime, bool bGeoMethod)
+    +int MinIndexArgs1(const FlightVector \n &vpConflictFlightList, const viList &viSearchList, \n const vdList &vdPi, const IloNumArray &decisionVariables, \n double **ppdConflictProbability, \n double **ppdDelayTime, bool bMethod)
+    +bool FeasibilityEnumeration(const viList &viSearchList, \n const vdList &vdPi, const IloNumArray &decisionVariables, \n double **ppdConflictProbability, \n double **ppdDelayTime, double dEpsilon, \n int iConflictedFlightsSize, int *piIndexMostInfeasible)
+    +bool FeasibilityHoeffding(const viList &viSearchList, \n const vdList &vdPi, const IloNumArray &decisionVariables, \n double **ppdConflictProbability, \n double **ppdDelayTime, double dEpsilon, \n int iConflictedFlightSize, int *piIndex)
+    +bool FeasibilityGaussian(const FlightVector \n &vpConflictedFlightList, const viList &viSearchList, \n const vdList &vdPi, const IloNumArray &decisionVariables, \n double **ppdConflictProbability, \n double **ppdDelayTime, double dEpsilon, int *piIndex)
+    +bool FeasibilityMonteCarlo(const FlightVector \n &vpConflictedFlightList, const viList &viSearchList, \n const vdList &vdPi, const IloNumArray &decisionVariables, \n const vdList &vdParameter, double dEpsilon, int *piIndex, \n int iModeRandom, bool bGeoMethod)
+    +FlightVector SolveFLA(const FlightVector &vpFlightList, \n const IloEnv &env, const vdList &vdParameter,\n const LevelVector &viLevelsList, double epsilon, \n double *dSumBenefits, int *iMaxNbConflict, int iModeMethod, \n int iModeRandom, std::ofstream &cplexLogFile)
+    +int getNbFlightsChangeLevel(const FlightVector &vpFlightList)
+    +void ApproximateFLA(Network *pNetwork, const vdList \n &vdParameter,  double dEpsilon, double dCoefPi, \n double *dSumBenefits, int *iMaxNbConflict, int iModeMethod,  \n int iFeasibleSize, int iModeRandom = -1)
+    +void ApproximateFLAEstimation(Network *pNetwork, const vdList \n &vdParameter, double dEpsilon, double dCoefPi, \n double *dSumBenefits, int *iMaxNbConflict, int iModeMethod, \n int iFeasibleSize, int iModeRandom = -1)
+
 }
-class GaussianMethod{
-    +bool feasibilityEstimation()
-    +~Solver()
-}
-Airport -u-|> Node
-WayPoint --|> Node
-Route *-u- Point:(1:*)
-Route *-l-> FLevel:(1:1)
-Point *-u->WayPoint:(1:1)
-Flight *-u->Route:(1:*)
-Flight *-l->Airport:(2:1)
-Node *-u->Position:(1:1)
-Input o-->Network:(1:1)
-Network o--Flight:(1:*)
-Network o-d-Airport:(1:*)
-Network o--WayPoint:(1:*)
-Solver *-->Network:(1:1)
-MonteCarloMethod --|> Solver
-HoeffdingMethod --|> Solver
-EnumerationMethod --|> Solver
-GaussianMethod -r-|> Solver
-Main -d- MonteCarloMethod
-Main -d- HoeffdingMethod
-Main -u- EnumerationMethod
-Main -r- GaussianMethod
-'Airport --|> Node
-'WayPoint --|> Node
-'Route *-- Point:(1:*)
-'Route *--> FLevel:(1:1)
-'Point *-u->WayPoint:(1:1)
-'Flight *-->Route:(1:*)
-'Flight *-->Airport:(1:2)
-'Node *-->Position:(1:1)
-'Input o-->Network:(1:1)
-'Network o-r-Flight:(1:*)
-'Network o--Airport:(1:*)
-'Network o-l-WayPoint:(*:1)
-'Solver *-->Network:(1:1)
-'MonteCarloMethod --|> Solver
-'HoeffdingMethod --|> Solver
-'EnumerationMethod --|> Solver
-'GaussianMethod --|> Solver
-'Main -- MonteCarloMethod
-'Main -- HoeffdingMethod
-'Main -- EnumerationMethod
-'Main -- GaussianMethod
+Route *-l- Point
+Point *-->Node:(WayPoint)
+Flight *-->Route
+Flight *-->Node:(Airport)
+Node *-->Position
+Input -->Network
+Network o--Flight
+Network o-l-Node:(Airport)
+Network o-l-Node:(WayPoint)
+Main -->Solution
+Main -->Input
+Main -->Network
+Solution -->Network
+Solution -->Solver
+Solution -->ProcessClock
 @enduml

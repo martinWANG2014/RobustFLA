@@ -14,43 +14,6 @@
  * The solver class for purpose to solve the ILP model, then give a corresponding result.
  */
 class Solver {
-private:
-    /**
-     * Cplex environment.
-     */
-    IloEnv env;
-
-    /**
-     * The model entity.
-     */
-    IloModel model;
-
-    /**
-     * Cplex Solver.
-     */
-    IloCplex solver;
-
-    /**
-     * Decision variables array.
-     */
-    IloNumVarArray decisionVariables;
-
-    /**
-     * Decision variables's value array.
-     */
-    IloNumArray decisionVariablesValues;
-
-    /**
-     * Function objective expression.
-     */
-    IloExpr functionObjective;
-
-    /**
-     * Function objective value.
-     */
-    double dFunctionObjectiveValue;
-
-
 public:
     /**
      * Constructor with parameters.
@@ -111,6 +74,42 @@ public:
      * @return the function objective value
      */
     double getFunctionObjectiveValue() const;
+
+private:
+    /**
+     * Cplex environment.
+     */
+    IloEnv env;
+
+    /**
+     * The model entity.
+     */
+    IloModel model;
+
+    /**
+     * Cplex Solver.
+     */
+    IloCplex solver;
+
+    /**
+     * Decision variables array.
+     */
+    IloNumVarArray decisionVariables;
+
+    /**
+     * Decision variables's value array.
+     */
+    IloNumArray decisionVariablesValues;
+
+    /**
+     * Function objective expression.
+     */
+    IloExpr functionObjective;
+
+    /**
+     * Function objective value.
+     */
+    double dFunctionObjectiveValue;
 };
 
 #endif //SOLVER_H

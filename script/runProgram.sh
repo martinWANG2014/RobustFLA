@@ -29,7 +29,7 @@ executable_target="../build/bin/RobustFLA"
 
 # the program usage message.
 function Usage {
-    echo -e "[USAGE] RobustFLA method_mode period_length epsilon sizeFeasList coefficient_Pi [random_mode alpha beta gamma [w1 w2 p]]"
+    echo -e "[USAGE] RobustFLA method_mode period_length epsilon sizeFeasList coefficient_Pi fast [random_mode alpha beta gamma [w1 w2 p]]"
     echo -e "method_mode 0 \t\t\t Enumeration Method, the parameters: method_mode period_length epsilon coefficient_Pi required. "
     echo -e "method_mode 1 \t\t\t Hoeffding Inequalities Method, the parameters: method_mode period_length epsilon coefficient_Pi required. "
     echo -e "method_mode 2 \t\t\t Monte-Carlo Simulation Method, the parameters: method_mode period_length epsilon coefficient_Pi random_mode alpha beta gamma required. if random_mode is 2, then the parameters: w1 w2 p required."
@@ -112,7 +112,7 @@ fi
 case $1 in
     0)
         echo "[INFO] Call Enumeration Method"
-        if [[ $# -ne 5 ]]; then
+        if [[ $# -ne 6 ]]; then
             echo "[ERROR] invalid parameters list."
             Usage
             exit
@@ -121,7 +121,7 @@ case $1 in
     1)
 
         echo "[INFO] Call Hoeffding Inequalities Method"
-        if [[ $# -ne 5 ]]; then
+        if [[ $# -ne 6 ]]; then
             echo "[ERROR] invalid parameters list."
             Usage
             exit
@@ -129,19 +129,19 @@ case $1 in
     ;;
     2)
         echo "[INFO] Call Monte-Carlo Simulation Method"
-        if [[ $# -lt 9 ]]; then
+        if [[ $# -lt 10 ]]; then
             echo "[ERROR] invalid parameters list."
             Usage
             exit
         else
-            if [[ $6 -eq 2 ]]; then
-                if [[ $# -ne 12 ]]; then
+            if [[ $7 -eq 2 ]]; then
+                if [[ $# -ne 13 ]]; then
                     echo "[ERROR] invalid parameters list."
                     Usage
                     exit
                 fi
             else
-                if [[ $# -ne 9 ]]; then
+                if [[ $# -ne 10 ]]; then
                     echo "[ERROR] invalid parameters list."
                     Usage
                     exit
@@ -151,19 +151,19 @@ case $1 in
     ;;
     3)
         echo "[INFO] Call Gaussian Method with uncertain departure time"
-        if [[ $# -lt 9 ]]; then
+        if [[ $# -lt 10 ]]; then
             echo "[ERROR] invalid parameters list."
             Usage
             exit
         else
-            if [[ $6 -eq 2 ]]; then
-                if [[ $# -ne 12 ]]; then
+            if [[ $7 -eq 2 ]]; then
+                if [[ $# -ne 13 ]]; then
                     echo "[ERROR] invalid parameters list."
                     Usage
                     exit
                 fi
             else
-                if [[ $# -ne 9 ]]; then
+                if [[ $# -ne 10 ]]; then
                     echo "[ERROR] invalid parameters list."
                     Usage
                     exit
@@ -173,19 +173,19 @@ case $1 in
     ;;
     4)
         echo "[INFO] Call Monte-Carlo Method with uncertain departure time"
-        if [[ $# -lt 9 ]]; then
+        if [[ $# -lt 10 ]]; then
             echo "[ERROR] invalid parameters list."
             Usage
             exit
         else
-            if [[ $6 -eq 2 ]]; then
-                if [[ $# -ne 12 ]]; then
+            if [[ $7 -eq 2 ]]; then
+                if [[ $# -ne 13 ]]; then
                     echo "[ERROR] invalid parameters list."
                     Usage
                     exit
                 fi
             else
-                if [[ $# -ne 9 ]]; then
+                if [[ $# -ne 10 ]]; then
                     echo "[ERROR] invalid parameters list."
                     Usage
                     exit
@@ -195,19 +195,19 @@ case $1 in
     ;;
     5)
         echo "[INFO] Call Enumeration Method with uncertain departure time"
-        if [[ $# -lt 9 ]]; then
+        if [[ $# -lt 10 ]]; then
             echo "[ERROR] invalid parameters list."
             Usage
             exit
         else
-            if [[ $6 -eq 2 ]]; then
-                if [[ $# -ne 12 ]]; then
+            if [[ $7 -eq 2 ]]; then
+                if [[ $# -ne 13 ]]; then
                     echo "[ERROR] invalid parameters list."
                     Usage
                     exit
                 fi
             else
-                if [[ $# -ne 9 ]]; then
+                if [[ $# -ne 10 ]]; then
                     echo "[ERROR] invalid parameters list."
                     Usage
                     exit

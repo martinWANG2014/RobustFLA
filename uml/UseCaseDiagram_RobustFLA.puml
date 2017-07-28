@@ -10,9 +10,11 @@ end note
 (Solve FLA problem) --> (Solver):<<include>>
 note left of (Solver)
 Estimation feasibility:
-    Hoeffding
-    Montre-Carlo
-    Numeration
+    Hoeffding's Inequalities Method
+    Gaussian Method
+    Monte-Carlo Simulation Method
+    Numeration Method
+
 end note
 (Solve FLA problem) -r-> (Exporter Solution):<<include>>
 @enduml

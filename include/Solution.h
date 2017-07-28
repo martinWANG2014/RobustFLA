@@ -19,7 +19,7 @@
  * @param k                 The number of selecting items.
  * @return All combinations of k items from n items.
  */
-qviList Combination(viList viConstraintList, int k);
+qviList Combination(const viList &viConstraintList, int k);
 
 /**
  * Get the complement list of a candidate list
@@ -27,7 +27,7 @@ qviList Combination(viList viConstraintList, int k);
  * @param candidateList     The candidate list
  * @return A complement list of the candidate list
  */
-viList getComplement(int iSize, viList candidateList);
+viList getComplement(int iSize, const viList &candidateList);
 
 /**
  * Get a random data from the first type gaussian distribution
@@ -216,4 +216,22 @@ int getNbFlightsChangeLevel(const FlightVector &vpFlightList);
 void ApproximateFLA(Network *pNetwork, const vdList &vdParameter, double dEpsilon, double dCoefPi, double *dSumBenefits,
                     int *iMaxNbConflict, int iModeMethod,
                     int iFeasibleSize, int iModeRandom = -1);
+
+/**
+ * Approximate FLA method
+ * @param pNetwork          The pointer of network
+ * @param vdParameter       The distribution parameter list
+ * @param dEpsilon          The robust parameter
+ * @param dCoefPi           The coefficient parameter for each flight
+ * @param dSumBenefits      The sum of benefits
+ * @param iMaxNbConflict    The maximal number of potential conflict
+ * @param iModeMethod       The method mode
+ * @param iFeasibleSize     The feasibile flight size
+ * @param iModeRandom       The random mode
+ */
+void ApproximateFLAEstimation(Network *pNetwork, const vdList &vdParameter, double dEpsilon, double dCoefPi,
+                              double *dSumBenefits,
+                              int *iMaxNbConflict, int iModeMethod,
+                              int iFeasibleSize, int iModeRandom = -1);
+
 #endif //SOLUTION_H

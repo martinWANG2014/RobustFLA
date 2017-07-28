@@ -1,81 +1,78 @@
 @startuml
 
 class Input{
-    -String sConfigPath
+    -String sAirportPath
+    -String sWayPointPath
+    -String sFlightPath
 }
 class Network{
     -FlightsVector vpFlightsList
     -AirportsVector vpAirportsList
     -WayPointsVector vpWayPointsList
+    -LevelVector viFlightLevelsList
 }
 class Position{
     -double dLatitude
     -double dLongitude
 }
 class Node{
-    #String sCode
-    #String  sName
-    #Position position
-}
-class FLevel{
-    -ALevel iFlightLevel
-    -double dPenalCost
+    -String sCode
+    -String  sName
+    -Position position
 }
 class Flight{
     -String sCode
     -Airport *pAOrigin
     -Airport *pADestination
     -Time dDepartureTime
-    -int iDefaultRoute
-    -int iCurrentRoute
-    -FLevelVector vpFeasibleLevelList
-    -RouteVector vpPossibleRouteList
+    -Level iCurrentLevel
+    -LevelVector viFeasibleLevelList
+    -Route *pRoute
+    -double dSigma
+    -double dCoefPi
 }
 class Point{
     -WayPoint *pWayPoint
     -Time iArrivingTime
-
 }
 class Route{
-    -FLevel *pFlightLevel
+    -Level iDefaultLevel
     -PointVector vpPointsList
+    -vdList vdTimeList
 }
 
 class Solver{
-    #ProcessClock clock
-    #IloModel model
-    #IloNumVarArray x
-    #IloCplex solver
-    #Network *pNetwork
-}
-class MonteCarloMethod{
-}
-class HoeffdingMethod{
-}
-class EnumerationMethod{
-}
-class GaussianMethod{
+    -IloEnv env
+    -IloModel model
+    -IloCplex solver
+    -IloNumVarArray decisionVariables
+    -IloNumArray decisionVariablesValues
+    -IloExpr functionObjective
+    -double dFunctionObjectiveValue
 }
 
-Airport -u-|> Node
-WayPoint --|> Node
-Route *-u- Point:(1:*)
-Route *-l-> FLevel:(1:1)
-Point *-u->WayPoint:(1:1)
-Flight *-u->Route:(1:*)
-Flight *-l->Airport:(1:2)
-Node *-u->Position:(1:1)
-Input o-->Network:(1:1)
-Network o--Flight:(1:*)
-Network o--Airport:(1:*)
-Network o--WayPoint:(*:1)
-Solver *-->Network:(1:1)
-MonteCarloMethod -u-|> Solver
-HoeffdingMethod -d-|> Solver
-EnumerationMethod --|> Solver
-GaussianMethod -r-|> Solver
-Main -u- MonteCarloMethod
-Main -d- HoeffdingMethod
-Main -- EnumerationMethod
-Main -r- GaussianMethod
+class ProcessClock{
+    -ProcessTime oStartTime
+    -ProcessTime oEndTime
+    -double dUserTime
+    -double dSysTime
+    -double dCreateTime
+    -double dExitTime
+    -double dCpuTime
+}
+Route *-l- Point
+Point *-->Node:(WayPoint)
+Flight *-->Route
+Flight *-->Node:(Airport)
+Node *-->Position
+Input -->Network
+Network o--Flight
+Network o-l-Node:(Airport)
+Network o--Node:(WayPoint)
+Main -->Solution
+Main -->Input
+Main -->Network
+Solution -->Network
+Solution -->Solver
+Solution -->ProcessClock
 @enduml

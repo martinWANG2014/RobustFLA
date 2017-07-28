@@ -80,7 +80,16 @@ void ApproximateFLA(Network *pNetwork, const vdList &vdParameter, double dEpsilo
     cplexLogFile.close();
     env.end();
     processClock.end();
+    std::cout << "Flight Code:Current Level(default)" << std::endl;
+    if (iNbFlightNotAssigned == 0) {
+        for (auto &&fi: vpFlightList) {
+            std::cout << fi->getCode() << ":" << fi->getCurrentLevel() << "(" << fi->getDefaultLevel() << ")"
+                      << std::endl;
 
+        }
+    } else {
+        std::cout << "No Solution..." << std::endl;
+    }
     std::cout << "Nb of flights change level: " << iNbFlightChangeLevel << std::endl;
     std::cout << "Nb of flights not be assigned: " << iNbFlightNotAssigned << std::endl;
     std::cout << "Max conflict: " << *iMaxNbConflict << std::endl;
@@ -124,7 +133,7 @@ FlightVector SolveFLA(const FlightVector &vpFlightList, const IloEnv &env, const
     //Process the assignment problem for each flight level
     for (auto itA = viLevelsList.begin(); itA != viLevelsList.end(); itA++) {
         int iProcessingLevel = (*itA);
-        std::cout << "[INFO] Level: " << iProcessingLevel << std::endl;
+//        std::cout << "[INFO] Level: " << iProcessingLevel << std::endl;
         FlightVector CandidateFlightList;
         FlightVector ConflictFlightList;
         vdList Mi, Pi;
@@ -225,7 +234,7 @@ FlightVector SolveFLA(const FlightVector &vpFlightList, const IloEnv &env, const
         //Relax the most infeasible constraint.
         int iMinIndexArgs = MinIndexArgs0(ConflictFlightList, viSearchList, Pi, ppdConflictProbability, ppdDelayTime,
                                           iModeMethod < 3);
-        std::cout << "\t[INFO] Index: " << iMinIndexArgs << std::endl;
+//        std::cout << "\t[INFO] Index: " << iMinIndexArgs << std::endl;
         viConstraintList.push_back(iMinIndexArgs);
         viSearchList.erase(std::remove(viSearchList.begin(), viSearchList.end(), iMinIndexArgs), viSearchList.end());
         Solver *solver = new Solver(env, cplexLogFile);
@@ -252,7 +261,7 @@ FlightVector SolveFLA(const FlightVector &vpFlightList, const IloEnv &env, const
                     } else {
                         iMinIndexArgs = iMinIndexArgsFromFeaCheck;
                     }
-                    std::cout << "\t[INFO] Index: " << iMinIndexArgs << std::endl;
+//                    std::cout << "\t[INFO] Index: " << iMinIndexArgs << std::endl;
                     viConstraintList.push_back(iMinIndexArgs);
                     //Remove the most infeasible constraint from search list.
                     viSearchList.erase(std::remove(viSearchList.begin(), viSearchList.end(), iMinIndexArgs),
@@ -281,7 +290,7 @@ FlightVector SolveFLA(const FlightVector &vpFlightList, const IloEnv &env, const
                     } else {
                         iMinIndexArgs = iMinIndexArgsFromFeaCheck;
                     }
-                    std::cout << "\t[INFO] Index: " << iMinIndexArgs << std::endl;
+//                    std::cout << "\t[INFO] Index: " << iMinIndexArgs << std::endl;
                     viConstraintList.push_back(iMinIndexArgs);
                     //Remove the most infeasible constraint from search list.
                     viSearchList.erase(std::remove(viSearchList.begin(), viSearchList.end(), iMinIndexArgs),
@@ -309,7 +318,7 @@ FlightVector SolveFLA(const FlightVector &vpFlightList, const IloEnv &env, const
                     } else {
                         iMinIndexArgs = iMinIndexArgsFromFeaCheck;
                     }
-                    std::cout << "\t[INFO] Index: " << iMinIndexArgs << std::endl;
+//                    std::cout << "\t[INFO] Index: " << iMinIndexArgs << std::endl;
                     viConstraintList.push_back(iMinIndexArgs);
                     //Remove the most infeasible constraint from search list.
                     viSearchList.erase(std::remove(viSearchList.begin(), viSearchList.end(), iMinIndexArgs),
@@ -337,7 +346,7 @@ FlightVector SolveFLA(const FlightVector &vpFlightList, const IloEnv &env, const
                     } else {
                         iMinIndexArgs = iMinIndexArgsFromFeaCheck;
                     }
-                    std::cout << "\t[INFO] Index: " << iMinIndexArgs << std::endl;
+//                    std::cout << "\t[INFO] Index: " << iMinIndexArgs << std::endl;
                     viConstraintList.push_back(iMinIndexArgs);
                     //Remove the most infeasible constraint from search list.
                     viSearchList.erase(std::remove(viSearchList.begin(), viSearchList.end(), iMinIndexArgs),
@@ -365,7 +374,7 @@ FlightVector SolveFLA(const FlightVector &vpFlightList, const IloEnv &env, const
                     } else {
                         iMinIndexArgs = iMinIndexArgsFromFeaCheck;
                     }
-                    std::cout << "\t[INFO] Index: " << iMinIndexArgs << std::endl;
+//                    std::cout << "\t[INFO] Index: " << iMinIndexArgs << std::endl;
                     viConstraintList.push_back(iMinIndexArgs);
                     //Remove the most infeasible constraint from search list.
                     viSearchList.erase(std::remove(viSearchList.begin(), viSearchList.end(), iMinIndexArgs),
@@ -393,7 +402,7 @@ FlightVector SolveFLA(const FlightVector &vpFlightList, const IloEnv &env, const
                     } else {
                         iMinIndexArgs = iMinIndexArgsFromFeaCheck;
                     }
-                    std::cout << "\t[INFO] Index: " << iMinIndexArgs << std::endl;
+//                    std::cout << "\t[INFO] Index: " << iMinIndexArgs << std::endl;
                     viConstraintList.push_back(iMinIndexArgs);
                     //Remove the most infeasible constraint from search list.
                     viSearchList.erase(std::remove(viSearchList.begin(), viSearchList.end(), iMinIndexArgs),
@@ -835,7 +844,7 @@ double GaussianDistribution1(const vdList &vdParameter, double dSigma) {
     return NormalDist(generator);
 }
 
-viList getComplement(int iSize, viList candidateList) {
+viList getComplement(int iSize, const viList &candidateList) {
     viList resultList;
     for (int i = 0; i < iSize; i++) {
         auto index = std::find(candidateList.begin(), candidateList.end(), i);
@@ -846,7 +855,7 @@ viList getComplement(int iSize, viList candidateList) {
     return resultList;
 }
 
-qviList Combination(viList viConstraintList, int k) {
+qviList Combination(const viList &viConstraintList, int k) {
     qviList qviCombinationList;
     //Initialize the deque with one item.
     for (int i = 0; i < (int) viConstraintList.size() - k + 1; i++) {
@@ -866,4 +875,55 @@ qviList Combination(viList viConstraintList, int k) {
         qviCombinationList.pop_front();
     }
     return qviCombinationList;
+}
+
+void ApproximateFLAEstimation(Network *pNetwork, const vdList &vdParameter, double dEpsilon, double dCoefPi,
+                              double *dSumBenefits, int *iMaxNbConflict, int iModeMethod, int iFeasibleSize,
+                              int iModeRandom) {
+    int iNbFlightNotAssigned = 0;
+//    int iLastNbFlightNotAssigned = 0;
+    int iNbFlightChangeLevel = 0;
+//    int iLastNbFlightChangeLevel = 0;
+//    int maxLoopTime = 5;
+//    int iLoopTime = 0;
+//    bool bNotFinish = true;
+    IloEnv env;
+    std::ofstream cplexLogFile("cplexLog.txt", std::ios::out | std::ios::app);
+
+    // Initialize the coefficient Pi for all flight in the network.
+    pNetwork->InitCoefPi(dCoefPi);
+    // Initialize the feasible flight levels for all flights in the network.
+    pNetwork->InitFeasibleList(iFeasibleSize);
+    // Initialize  the flight levels list of the network.
+    pNetwork->InitFlightLevelsList();
+    // Initialize the sigma for the random departure time.
+    if (iModeMethod > 1) {
+        pNetwork->SetSigma(vdParameter, iModeRandom);
+    }
+
+    FlightVector vpFlightList = pNetwork->getFlightsList();
+    LevelVector viLevelsList = pNetwork->getFlightLevelsList();
+
+    std::cout << "[INFO] Starting ApproximateFLA method..." << std::endl;
+    ProcessClock processClock;
+    //Start the process clock.
+    processClock.start();
+    try {
+        FlightVector vpFlightNotAssigned = SolveFLA(vpFlightList, env, vdParameter, viLevelsList, dEpsilon,
+                                                    dSumBenefits, iMaxNbConflict, iModeMethod,
+                                                    iModeRandom, cplexLogFile);
+        // Get the number of flights that change its most preferred flight level.
+        iNbFlightChangeLevel = getNbFlightsChangeLevel(vpFlightList);
+        // Get the number of unassigned flights.
+        iNbFlightNotAssigned = (int) vpFlightNotAssigned.size();
+    } catch (IloException &e) { std::cerr << e.getMessage() << std::endl; }
+    catch (...) { std::cerr << "error" << std::endl; }
+    cplexLogFile.close();
+    env.end();
+    processClock.end();
+    std::cout << "Nb of flights change level: " << iNbFlightChangeLevel << std::endl;
+    std::cout << "Nb of flights not be assigned: " << iNbFlightNotAssigned << std::endl;
+    std::cout << "Max conflict: " << *iMaxNbConflict << std::endl;
+    std::cout << "Sum benefits: " << *dSumBenefits << std::endl;
+    std::cout << "Elapsed time:" << processClock.getCpuTime() << std::endl;
 }
