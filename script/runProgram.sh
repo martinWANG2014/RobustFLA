@@ -29,14 +29,16 @@ executable_target="../build/bin/RobustFLA"
 
 # the program usage message.
 function Usage {
-    echo -e "[USAGE] RobustFLA method_mode period_length epsilon sizeFeasList coefficient_Pi fast [random_mode alpha beta gamma [w1 w2 p]]"
+    echo -e "[USAGE] RobustFLA method_mode period_length epsilon feasible_list_size coefficient_Pi root_solution [random_mode alpha beta gamma [w1 w2 p]]"
     echo -e "method_mode 0 \t\t\t Enumeration Method, the parameters: method_mode period_length epsilon coefficient_Pi required. "
     echo -e "method_mode 1 \t\t\t Hoeffding Inequalities Method, the parameters: method_mode period_length epsilon coefficient_Pi required. "
     echo -e "method_mode 2 \t\t\t Monte-Carlo Simulation Method, the parameters: method_mode period_length epsilon coefficient_Pi random_mode alpha beta gamma required. if random_mode is 2, then the parameters: w1 w2 p required."
     echo -e "method_mode 3 \t\t\t Gaussian Method, the parameters: method_mode period_length epsilon coefficient_Pi random_mode alpha beta gamma required. if random_mode is 2, then the parameters: w1 w2 p required."
     echo -e "period_length \t\t\t An integer, the length of period that consider en-route conflict occurs at a waypoint."
     echo -e "epsilon \t\t\t An integer in [0, 100],  the tolerance of infeasibility of separated constraints in FLA problem."
+    echo -e "feasible_list_size \t\t\t An integer, the size of feasible flight level list."
     echo -e "coefficient_Pi \t\t\t An integer in [0, 100], the percentage of aircraft's flight time to induce an admissible penal cost"
+    echo -e "root_solution \t\t\t A boolean, 1, get the root solution;  0, get the optimal solution."
     echo -e "random_mode 0 \t\t\t the generated departure time follows a normal distribution, where the mean is t+(beta-alpha)/2, and that the generated departure time has a confident of gamma at an interval [t-alpha, t+beta]."
     echo -e "random_mode 1 \t\t\t the generated departure time follows a normal distribution, where the mean is t, and that the generated departure time has a confident of gamma at an interval [t-alpha, t+beta]."
     echo -e "random_mode 2 \t\t\t the generated departure time follows a normal distribution, where the mean is t-w1*alpha in left part Pr(x<t)=p and is t+w12*beta in right part Pr(x>=t)=1-p, and that the generated departure time has a confident of gamma at an interval [t-alpha, t+beta]."

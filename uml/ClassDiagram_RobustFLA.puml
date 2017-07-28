@@ -114,7 +114,10 @@ class Route{
     -Level iDefaultLevel
     -PointVector vpPointsList
     -vdList vdTimeList
-    -double CalculateProbabilityAndDelayForPart(double dT1, \n double dT2, double dV1, double dV2, double dCosA, \n  double *pdDelayTime, bool bFlag, bool bGeometricMethod, \n double dSigma1, double dSigma2)
+    -double CalculateProbabilityAndDelayForPartA(double dT1, \n double dT2, double dV1, double dV2, double dCosA, \n  double *pdDelayTime, bool bGeometricMethod, \n double dSigma1, double dSigma2)
+    -double CalculateProbabilityAndDelayForPartB(double dT1, \n double dT2, double dV1, double dV2, double dCosA, \n  double *pdDelayTime, bool bGeometricMethod, \n double dSigma1, double dSigma2)
+    -double CalculateProbabilityAndDelayForPartC(double dT1, \n double dT2, double dV1, double dV2, double dCosA, \n  double *pdDelayTime, bool bGeometricMethod, \n double dSigma1, double dSigma2)
+    -double CalculateProbabilityAndDelayForPartD(double dT1, \n double dT2, double dV1, double dV2, double dCosA, \n  double *pdDelayTime, bool bGeometricMethod, \n double dSigma1, double dSigma2)
     -double CalculatePartialProbabilityAndDelay(int iIndex1, \n  Route *pRoute2, int iIndex2, double *pdDelayTime, \n bool bFlag1, bool bFlag2, bool bGeometricMethod, \n double dSigma1, double dSigma2)
     +Route(Level iDefaultLevel, Airport *pAirOrigin, \n Time iDepartureTime)
     +Route(Level iDefaultLevel, Point *pPoint)
