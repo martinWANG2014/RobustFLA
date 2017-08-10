@@ -27,7 +27,7 @@ qviList Combination(const viList &viConstraintList, int k);
  * @param candidateList     The candidate list
  * @return A complement list of the candidate list
  */
-viList getComplement(int iSize, const viList &candidateList);
+viList getComplement(int iSize, viList &candidateList);
 
 /**
  * Get a random data from the first type gaussian distribution
@@ -78,7 +78,7 @@ void DestroyTable(double **ppdTable, int iSize);
  * @param ppdDelayTime              The delay time matrix
  * @param bGeometricMethod          A flag whether use the geometric method
  */
-void CalculateConflictProbability(const FlightVector &vpConflictFlightList, double **ppdConflictProbability,
+void CalculateConflictProbability(FlightVector &vpConflictFlightList, double **ppdConflictProbability,
                                   double **ppdDelayTime, bool bGeometricMethod);
 
 /**
@@ -91,7 +91,7 @@ void CalculateConflictProbability(const FlightVector &vpConflictFlightList, doub
  * @param bGeoMethod                A flag whether use the geometric method
  * @return the index of most infeasible constraint.
  */
-int MinIndexArgs0(const FlightVector &vpConflictFlightList, const viList &viSearchList, const vdList &vdPi,
+int MinIndexArgs0(FlightVector &vpConflictFlightList, const viList &viSearchList, const vdList &vdPi,
                   double **ppdConflictProbability,
                   double **ppdDelayTime, bool bGeoMethod);
 
@@ -106,7 +106,7 @@ int MinIndexArgs0(const FlightVector &vpConflictFlightList, const viList &viSear
  * @param bGeoMethod                A flag whether use the geometric method
  * @return the index of most infeasible constraint.
  */
-int MinIndexArgs1(const FlightVector &vpConflictFlightList, const viList &viSearchList, const vdList &vdPi,
+int MinIndexArgs1(FlightVector &vpConflictFlightList, const viList &viSearchList, const vdList &vdPi,
                   const IloNumArray &decisionVariables, double **ppdConflictProbability,
                   double **ppdDelayTime, bool bMethod);
 
@@ -155,7 +155,7 @@ bool FeasibilityHoeffding(const viList &viSearchList, const vdList &vdPi,
  * @param piIndexMostInfeasible     The index of most infeasible constraint
  * @return Whether the solution has a high confidence of feasibility.
  */
-bool FeasibilityGaussian(const FlightVector &vpConflictedFlightList, const viList &viSearchList, const vdList &vdPi,
+bool FeasibilityGaussian(FlightVector &vpConflictedFlightList, const viList &viSearchList, const vdList &vdPi,
                          const IloNumArray &decisionVariables, double **ppdConflictProbability, double **ppdDelayTime,
                          double dEpsilon, int *piIndex);
 
@@ -169,7 +169,7 @@ bool FeasibilityGaussian(const FlightVector &vpConflictedFlightList, const viLis
  * @param piIndexMostInfeasible     The index of most infeasible constraint
  * @return Whether the solution has a high confidence of feasibility.
  */
-bool FeasibilityMonteCarlo(const FlightVector &vpConflictedFlightList, const viList &viSearchList, const vdList &vdPi,
+bool FeasibilityMonteCarlo(FlightVector &vpConflictedFlightList, const viList &viSearchList, const vdList &vdPi,
                            const IloNumArray &decisionVariables, const vdList &vdParameter,
                            double dEpsilon, int *piIndex, int iModeRandom, bool bGeoMethod);
 
@@ -189,8 +189,8 @@ bool FeasibilityMonteCarlo(const FlightVector &vpConflictedFlightList, const viL
  * @return  A unassigned flights list
  */
 FlightVector
-SolveFLA(const FlightVector &vpFlightList, const IloEnv &env, const vdList &vdParameter,
-         const LevelVector &viLevelsList, double epsilon,
+SolveFLA(FlightVector &vpFlightList, const IloEnv &env, const vdList &vdParameter,
+         LevelVector &viLevelsList, double epsilon,
          double *dSumBenefits, int *iMaxNbConflict, int iModeMethod,
          int iModeRandom, std::ofstream &cplexLogFile);
 
@@ -199,8 +199,29 @@ SolveFLA(const FlightVector &vpFlightList, const IloEnv &env, const vdList &vdPa
  * @param vpFlightList the conflict flight list
  * @return the number of flights that change it flight level.
  */
-int getNbFlightsChangeLevel(const FlightVector &vpFlightList);
+int getNbFlightsChangeLevel(FlightVector &vpFlightList);
 
+
+/**
+ * Approximate FLA method by each level.
+ * @param vpFlightList
+ * @param env
+ * @param vdParameter
+ * @param levelEx
+ * @param flightAssignmentMap
+ * @param epsilon
+ * @param dSumBenefits
+ * @param iMaxNbConflict
+ * @param iProcessingLevel
+ * @param iModeMethod
+ * @param iModeRandom
+ * @param cplexLogFile
+ * @return
+ */
+bool SolvingFLAByLevel(FlightVector &vpFlightList, const IloEnv &env, const vdList &vdParameter, LevelExamine &levelEx,
+                       FlightLevelAssignmentMap &flightLevelAssignmentMap, double epsilon, double *dSumBenefits,
+                       int *iMaxNbConflict,
+                       Level iProcessingLevel, int iModeMethod, int iModeRandom, std::ofstream &cplexLogFile);
 /**
  * Approximate FLA method
  * @param pNetwork          The pointer of network

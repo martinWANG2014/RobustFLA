@@ -20,9 +20,11 @@ void Flight::GenerateNewFlight(Time iNewDepartureTime, bool bGeometricMethod) {
 double Flight::CalculateProbabilityConflictAndDelayForFlight(Flight *pFlight2, double *pdDelay, bool *pbWait,
                                                              bool bGeometricMethod) {
     Route *route2 = pFlight2->getRoute();
-        for (int i = 1; i < pRoute->getPointListSize(); i++) {
-            for (int j = 1; j < route2->getPointListSize(); j++) {
+    for (int i = 0; i < pRoute->getPointListSize(); i++) {
+        for (int j = 0; j < route2->getPointListSize(); j++) {
                 if (*pRoute->getPointAtI(i) == *route2->getPointAtI(j)) {
+//                    std::cout << "Flight: " << getCode() << " and Flight: " << pFlight2->getCode()
+//                              << " has conflict at (" << i << ", " << j << "):" ;
                     double prob = pRoute->CalculationProbabilityAndDelayAtPoint(i, route2, j, pdDelay, pbWait,
                                                                                 bGeometricMethod,
                                                                                 dSigma,

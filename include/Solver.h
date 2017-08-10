@@ -60,7 +60,7 @@ public:
      * @param iProcessingLevel      the current processing flight level
      * @param ConflictedFlightList  the conflicted flights list
      */
-    void initFunctionObjective(const FlightVector &ConflictedFlightList, int iProcessingLevel);
+    void initFunctionObjective(FlightVector &ConflictedFlightList, int iProcessingLevel);
 
 
     /**
@@ -74,6 +74,8 @@ public:
      * @return the function objective value
      */
     double getFunctionObjectiveValue() const;
+
+    void prefixAssignedFlight(FlightVector &ConflictedFlightList, FlightLevelAssignmentMap &flightLevelAssignmentMap);
 
 private:
     /**

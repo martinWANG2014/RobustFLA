@@ -9,7 +9,7 @@ void Solver::initDecisionVariables(int iSize) {
     decisionVariables = x;
 }
 
-void Solver::initFunctionObjective(const FlightVector &ConflictedFlightList, int iProcessingLevel) {
+void Solver::initFunctionObjective(FlightVector &ConflictedFlightList, int iProcessingLevel) {
     IloExpr obj(env);
     for (int i = 0; i < (int) ConflictedFlightList.size(); i++) {
         Flight *pFlight = ConflictedFlightList[i];
@@ -93,4 +93,14 @@ void Solver::initConstraint(const viList &constraintList, const vdList &Mi, cons
         model.add(c);
     }
 }
+
+void
+Solver::prefixAssignedFlight(FlightVector &ConflictedFlightList, FlightLevelAssignmentMap &flightLevelAssignmentMap) {
+    for (int i = 0; i < (int) ConflictedFlightList.size(); i++) {
+        if (flightLevelAssignmentMap.at(ConflictedFlightList[i]).first) {
+            model.add(decisionVariables[i] == 1);
+        }
+    }
+}
+
 

@@ -218,4 +218,5 @@ private:
 };
 typedef std::vector<Flight *> FlightVector;
 typedef std::map<Flight *, bool> FlightAssignmentMap;
+typedef std::map<Flight *, std::pair<bool, Level>> FlightLevelAssignmentMap;
 #endif //FLIGHT_H

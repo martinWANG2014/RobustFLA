@@ -94,7 +94,7 @@ void Input::parseAirports(Network *pNetwork) {
 void Input::parseFlights(Network *pNetwork) {
     using boost::property_tree::ptree;
     using boost::property_tree::read_json;
-    std::cout << "[INFO] Parsing flights file... " << std::flush;
+    std::cout << "[INFO] Parsing flights file... OK" << std::endl;
     // Verify whether the data file exists or not: if not, pop up an error message.
     if (!exists(sFlightPath)) {
         std::cerr << "[ERROR] Not exist " << sFlightPath << std::endl;
@@ -175,27 +175,25 @@ void Input::parseFlights(Network *pNetwork) {
                 if (bIsRouteValid && !contains(pNetwork->getFlightsList(), pFlight)) {
                     pFlight->initRouteTimeList();
                     pNetwork->addNewFlight(pFlight);
+                } else if (bIsRouteValid) {
+                    std::cout << std::endl
+                              << "[Warning]: the route of " << i
+                              << "th flight is not correct, it is ignored automatically!"
+                              << std::endl;
+                } else {
+                    std::cout << std::endl
+                              << "[Warning]: the " << i << "th flight was redundant, it is ignored automatically!"
+                              << std::endl;
                 }
-//                else if (bIsRouteValid) {
-//                    std::cout << std::endl
-//                              << "[Warning]: the route of " << i
-//                              << " flight is not correct, it is ignored automatically!"
-//                              << std::endl;
-//                } else {
-//                    std::cout << std::endl
-//                              << "[Warning]: the " << i << " flight was redundant, it is ignored automatically!"
-//                              << std::endl;
-//                }
+            } else {
+                std::cout << std::endl
+                          << "[Warning]: the route of " << i
+                          << "th flight is not complete, it is ignored automatically!"
+                          << std::endl;
             }
-//            else {
-//                std::cout << std::endl
-//                          << "[Warning]: the route of " << i << " flight is not complete, it is ignored automatically!"
-//                          << std::endl;
-//            }
         }
     }
-    std::cout << "OK" << std::endl
-              << "\tFlights file data:" << std::endl
+    std::cout << "\tFlights file data:" << std::endl
               << "\tFlights: " << nbFlights << std::endl
               << "\tValid Flights: " << pNetwork->getNbFlights() << std::endl;
 }

@@ -29,7 +29,7 @@ const double MIN_SEPARATION_DISTANCE = 5.0;
 #endif
 #ifndef MIN_ANGLE_CONST
 #define MIN_ANGLE_CONST
-const double MIN_ANGLE = cos(5.0 / 180.0 * M_PI);
+const double MIN_ANGLE = cos(0.1 / 180.0 * M_PI);
 #endif
 #ifndef MIN_PROBA_CONST
 #define MIN_PROBA_CONST
@@ -47,6 +47,7 @@ typedef std::vector<std::vector<int>> vviList;
 typedef std::vector<double> vdList;
 typedef std::deque<std::vector<int>> qviList;
 typedef int Level;
+typedef std::deque<Level> LevelQueue;
 typedef std::set<Level> LevelSet;
 typedef std::vector<Level> LevelVector;
 typedef std::map<Level, std::pair<int, int>> FlightLevelMap;
@@ -145,6 +146,7 @@ struct greater_second {
     typedef std::pair<T1, std::pair<T2, T3>> type;
 
     bool operator()(type const &a, type const &b) const {
+//        return ((a.second.first > b.second.first)||(a.second.first == b.second.first &&a.second.second > b.second.second));
         return (a.second.second > b.second.second) ||
                (a.second.second == b.second.second && a.second.first > b.second.first);
     }
