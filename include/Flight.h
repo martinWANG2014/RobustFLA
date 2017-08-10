@@ -217,6 +217,7 @@ private:
     double dCoefPi;
 };
 typedef std::vector<Flight *> FlightVector;
+typedef std::map<Level, std::vector<Flight *>> FlightsLevelMap;
 typedef std::map<Flight *, bool> FlightAssignmentMap;
 typedef std::map<Flight *, std::pair<bool, Level>> FlightLevelAssignmentMap;
 #endif //FLIGHT_H

@@ -188,11 +188,10 @@ bool FeasibilityMonteCarlo(FlightVector &vpConflictedFlightList, const viList &v
  * @param cplexLogFile      The cplex log file
  * @return  A unassigned flights list
  */
-FlightVector
-SolveFLA(FlightVector &vpFlightList, const IloEnv &env, const vdList &vdParameter,
-         LevelVector &viLevelsList, double epsilon,
-         double *dSumBenefits, int *iMaxNbConflict, int iModeMethod,
-         int iModeRandom, std::ofstream &cplexLogFile);
+void SolveFLA(FlightVector &vpFlightList, const IloEnv &env, const vdList &vdParameter,
+              LevelVector &viLevelsList, double epsilon,
+              double *dSumBenefits, int *iMaxNbConflict, int iModeMethod,
+              int iModeRandom, std::ofstream &cplexLogFile);
 
 /**
  * Get the number of flights that change it flight level.
@@ -218,10 +217,19 @@ int getNbFlightsChangeLevel(FlightVector &vpFlightList);
  * @param cplexLogFile
  * @return
  */
-bool SolvingFLAByLevel(FlightVector &vpFlightList, const IloEnv &env, const vdList &vdParameter, LevelExamine &levelEx,
-                       FlightLevelAssignmentMap &flightLevelAssignmentMap, double epsilon, double *dSumBenefits,
-                       int *iMaxNbConflict,
-                       Level iProcessingLevel, int iModeMethod, int iModeRandom, std::ofstream &cplexLogFile);
+bool
+SolvingFLAByLevelP(FlightVector &vpFlightList, FlightsLevelMap &infeasibleFlightMap, FlightsLevelMap &conflictFreeMap,
+                   const IloEnv &env, const vdList &vdParameter, LevelExamine &levelEx,
+                   FlightLevelAssignmentMap &flightLevelAssignmentMap, double epsilon, double *dSumBenefits,
+                   int *iMaxNbConflict,
+                   Level iProcessingLevel, int iModeMethod, int iModeRandom, std::ofstream &cplexLogFile);
+
+bool
+SolvingFLAByLevelPP(FlightVector &vpFlightList, FlightsLevelMap &infeasibleFlightMap, FlightsLevelMap &conflictFreeMap,
+                    const IloEnv &env, const vdList &vdParameter, LevelExamine &levelEx,
+                    FlightLevelAssignmentMap &flightLevelAssignmentMap, double epsilon, double *dSumBenefits,
+                    int *iMaxNbConflict,
+                    Level iProcessingLevel, int iModeMethod, int iModeRandom, std::ofstream &cplexLogFile);
 /**
  * Approximate FLA method
  * @param pNetwork          The pointer of network

@@ -75,7 +75,8 @@ public:
      */
     double getFunctionObjectiveValue() const;
 
-    void prefixAssignedFlight(FlightVector &ConflictedFlightList, FlightLevelAssignmentMap &flightLevelAssignmentMap);
+    void prefixAssignedFlight(FlightVector &ConflictedFlightList, FlightLevelAssignmentMap &flightLevelAssignmentMap,
+                              Level iProcessingLevel);
 
 private:
     /**

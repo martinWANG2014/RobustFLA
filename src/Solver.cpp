@@ -95,9 +95,11 @@ void Solver::initConstraint(const viList &constraintList, const vdList &Mi, cons
 }
 
 void
-Solver::prefixAssignedFlight(FlightVector &ConflictedFlightList, FlightLevelAssignmentMap &flightLevelAssignmentMap) {
+Solver::prefixAssignedFlight(FlightVector &ConflictedFlightList, FlightLevelAssignmentMap &flightLevelAssignmentMap,
+                             Level iProcessingLevel) {
     for (int i = 0; i < (int) ConflictedFlightList.size(); i++) {
-        if (flightLevelAssignmentMap.at(ConflictedFlightList[i]).first) {
+        if (flightLevelAssignmentMap.at(ConflictedFlightList[i]).second == iProcessingLevel &&
+            flightLevelAssignmentMap.at(ConflictedFlightList[i]).first) {
             model.add(decisionVariables[i] == 1);
         }
     }
