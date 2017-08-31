@@ -146,12 +146,12 @@ void Network::SetSigma(const vdList &vdParameters, int iRandomMode) {
             std::cerr << "the random mode is not supported!" << std::endl;
             abort();
     }
-//    uni_dist UniformDist(MIN_SIGMA, dSigma);
+    uni_dist UniformDist(MIN_SIGMA, dSigma);
 //    //Will be used to obtain a seed for the random number engine
-//    std::random_device rd;
-//    std::mt19937 gen(rd());
+    std::random_device rd;
+    std::mt19937 gen(rd());
     for (auto &&fi : vpFlightsList) {
 //        fi->setSigma(UniformDist(gen));
-        fi->setSigma(dSigma);
+        fi->setSigma(1);
     }
 }

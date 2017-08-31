@@ -227,7 +227,7 @@ SolvingFLAByLevelP(FlightVector &vpFlightList, FlightsLevelMap &infeasibleFlight
 bool
 SolvingFLAByLevelPP(FlightVector &vpFlightList, FlightsLevelMap &infeasibleFlightMap, FlightsLevelMap &conflictFreeMap,
                     const IloEnv &env, const vdList &vdParameter, LevelExamine &levelEx,
-                    FlightLevelAssignmentMap &flightLevelAssignmentMap, double epsilon, double *dSumBenefits,
+                    FlightLevelAssignmentMap &flightLevelAssignmentMap, double epsilon,
                     int *iMaxNbConflict,
                     Level iProcessingLevel, int iModeMethod, int iModeRandom, std::ofstream &cplexLogFile);
 /**
