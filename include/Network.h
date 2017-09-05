@@ -125,7 +125,7 @@ public:
      * @param vdParameters         The parameter list for distribution
      * @param iRandomMode       The mode of distribution
      */
-    void SetSigma(const vdList &vdParameters, int iRandomMode);
+    void SetSigma(const vdList &vdParameters, int iRandomMode, bool modeGenerateSigma);
 private:
     /**
      * The flight list in the air traffic management network.

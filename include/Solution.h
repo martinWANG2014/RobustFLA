@@ -189,7 +189,7 @@ bool FeasibilityMonteCarlo(FlightVector &vpConflictedFlightList, const viList &v
  * @return  A unassigned flights list
  */
 void SolveFLA(FlightVector &vpFlightList, const IloEnv &env, const vdList &vdParameter,
-              LevelVector &viLevelsList, double epsilon,
+              LevelVector &viLevelsList, double epsilon, double dCoefPi,
               double *dSumBenefits, int *iMaxNbConflict, int iModeMethod,
               int iModeRandom, std::ofstream &cplexLogFile);
 
@@ -218,14 +218,14 @@ int getNbFlightsChangeLevel(FlightVector &vpFlightList);
  * @return
  */
 bool
-SolvingFLAByLevelP(FlightVector &vpFlightList, FlightsLevelMap &infeasibleFlightMap, FlightsLevelMap &conflictFreeMap,
+SolvingFLAByLevelP(FlightVector &vpFlightList, FlightsLevelMap &infeasibleFlightMap,
                    const IloEnv &env, const vdList &vdParameter, LevelExamine &levelEx,
-                   FlightLevelAssignmentMap &flightLevelAssignmentMap, double epsilon, double *dSumBenefits,
-                   int *iMaxNbConflict,
+                   FlightLevelAssignmentMap &flightLevelAssignmentMap, double epsilon, int *iMaxNbConflict,
                    Level iProcessingLevel, int iModeMethod, int iModeRandom, std::ofstream &cplexLogFile);
 
 bool
-SolvingFLAByLevelPP(FlightVector &vpFlightList, FlightsLevelMap &infeasibleFlightMap, FlightsLevelMap &conflictFreeMap,
+SolvingFLAByLevelPP(FlightVector &vpFlightList, FlightsLevelMap &infeasibleFlightMap,
+                    FlightVector &vpPreviousFlightList,
                     const IloEnv &env, const vdList &vdParameter, LevelExamine &levelEx,
                     FlightLevelAssignmentMap &flightLevelAssignmentMap, double epsilon,
                     int *iMaxNbConflict,
@@ -244,23 +244,5 @@ SolvingFLAByLevelPP(FlightVector &vpFlightList, FlightsLevelMap &infeasibleFligh
  */
 void ApproximateFLA(Network *pNetwork, const vdList &vdParameter, double dEpsilon, double dCoefPi, double *dSumBenefits,
                     int *iMaxNbConflict, int iModeMethod,
-                    int iFeasibleSize, int iModeRandom = -1);
-
-/**
- * Approximate FLA method
- * @param pNetwork          The pointer of network
- * @param vdParameter       The distribution parameter list
- * @param dEpsilon          The robust parameter
- * @param dCoefPi           The coefficient parameter for each flight
- * @param dSumBenefits      The sum of benefits
- * @param iMaxNbConflict    The maximal number of potential conflict
- * @param iModeMethod       The method mode
- * @param iFeasibleSize     The feasibile flight size
- * @param iModeRandom       The random mode
- */
-void ApproximateFLAEstimation(Network *pNetwork, const vdList &vdParameter, double dEpsilon, double dCoefPi,
-                              double *dSumBenefits,
-                              int *iMaxNbConflict, int iModeMethod,
-                              int iFeasibleSize, int iModeRandom = -1);
-
+                    int iFeasibleSize, bool modeGeneateSigma, int iModeRandom = -1);
 #endif //SOLUTION_H

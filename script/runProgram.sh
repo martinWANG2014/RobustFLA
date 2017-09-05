@@ -3,7 +3,7 @@
 # data directory path
 data_dir="../data"
 
-# the solution directory path
+# the solutionS directory path
 solution_dir="../solution"
 
 # the original flight txt data file path
@@ -38,7 +38,7 @@ function Usage {
     echo -e "epsilon \t\t\t An integer in [0, 100],  the tolerance of infeasibility of separated constraints in FLA problem."
     echo -e "feasible_list_size \t\t\t An integer, the size of feasible flight level list."
     echo -e "coefficient_Pi \t\t\t An integer in [0, 100], the percentage of aircraft's flight time to induce an admissible penal cost"
-    echo -e "root_solution \t\t\t A boolean, 1, get the root solution;  0, get the optimal solution."
+    echo -e "root_solution \t\t\t A boolean, 1, get the root solutionS;  0, get the optimal solutionS."
     echo -e "random_mode 0 \t\t\t the generated departure time follows a normal distribution, where the mean is t+(beta-alpha)/2, and that the generated departure time has a confident of gamma at an interval [t-alpha, t+beta]."
     echo -e "random_mode 1 \t\t\t the generated departure time follows a normal distribution, where the mean is t, and that the generated departure time has a confident of gamma at an interval [t-alpha, t+beta]."
     echo -e "random_mode 2 \t\t\t the generated departure time follows a normal distribution, where the mean is t-w1*alpha in left part Pr(x<t)=p and is t+w12*beta in right part Pr(x>=t)=1-p, and that the generated departure time has a confident of gamma at an interval [t-alpha, t+beta]."
@@ -66,7 +66,7 @@ if [[ ! -e ${data_dir} ]]; then
     exit
 fi
 
-#  check the solution directory, if not exists, then create it!
+#  check the solutionS directory, if not exists, then create it!
 if [[ ! -e ${solution_dir} ]]; then
     mkdir -p ${solution_dir}
 fi

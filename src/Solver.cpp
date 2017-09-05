@@ -45,6 +45,7 @@ void Solver::solve() {
         dFunctionObjectiveValue = solver.getObjValue();
     } else {
         std::cerr << "[ERROR] Solved Failed!" << std::endl;
+        solver.exportModel("model.lp");
         abort();
     }
 }
@@ -84,12 +85,12 @@ void Solver::initConstraint(const viList &constraintList, const vdList &Mi, cons
         IloExpr constraint(env);
         for (int j = 0; j < iNbConflictedFlights; j++) {
             if (i == j) {
-                constraint += Mi[j] * decisionVariables[j];
+                constraint += Mi[i] * decisionVariables[i];
             } else {
                 constraint += std::max(0.0, ppdDelayTime[i][j]) * decisionVariables[j];
             }
         }
-        IloConstraint c(constraint <= Mi[i] + Pi[i]);
+        IloConstraint c(constraint <= (Mi[i] + Pi[i]));
         model.add(c);
     }
 }

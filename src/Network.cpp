@@ -116,7 +116,7 @@ void Network::InitCoefPi(double dCoefPi) {
     }
 }
 
-void Network::SetSigma(const vdList &vdParameters, int iRandomMode) {
+void Network::SetSigma(const vdList &vdParameters, int iRandomMode, bool modeGenerateSigma) {
     double dSigma = MIN_SIGMA;
 //    std::copy(vdParameters.begin(), vdParameters.end(), std::ostream_iterator<double>(std::cout, "\t "));
     switch (iRandomMode) {
@@ -151,7 +151,10 @@ void Network::SetSigma(const vdList &vdParameters, int iRandomMode) {
     std::random_device rd;
     std::mt19937 gen(rd());
     for (auto &&fi : vpFlightsList) {
-//        fi->setSigma(UniformDist(gen));
-        fi->setSigma(1);
+        if (modeGenerateSigma) {
+            fi->setSigma(UniformDist(gen));
+        } else {
+            fi->setSigma(dSigma);
+        }
     }
 }
