@@ -154,7 +154,7 @@ void Network::SetSigma(const vdList &vdParameters, int iRandomMode, bool modeGen
         if (modeGenerateSigma) {
             fi->setSigma(UniformDist(gen));
         } else {
-            fi->setSigma(dSigma);
+            fi->setSigma(dSigma / 10.0);
         }
     }
 }

@@ -65,7 +65,7 @@ Solver::Solver(IloEnv env) {
     Solver::solver = solver_temp;
     env.setOut(env.getNullStream());
     solver.setOut(env.getNullStream());
-    solver.setParam(IloCplex::Threads, 2);
+    solver.setParam(IloCplex::Threads, 1);
 }
 
 Solver::Solver(IloEnv env, std::ofstream &log) {
@@ -76,17 +76,17 @@ Solver::Solver(IloEnv env, std::ofstream &log) {
     Solver::solver = solver_temp;
     env.setOut(log);
     solver.setOut(log);
-    solver.setParam(IloCplex::Threads, 2);
+    solver.setParam(IloCplex::Threads, 1);
 }
 
-void Solver::initConstraint(const viList &constraintList, const vdList &Mi, const vdList &Pi, double **ppdDelayTime,
+void Solver::initConstraint(const viList &constraintList, const vdList &Mi, const vdList &Pi,
+                            double **ppdConflictProbability, double **ppdDelayTime,
                             int iNbConflictedFlights) {
     for (auto &&i: constraintList) {
         IloExpr constraint(env);
+        constraint += Mi[i] * decisionVariables[i];
         for (int j = 0; j < iNbConflictedFlights; j++) {
-            if (i == j) {
-                constraint += Mi[i] * decisionVariables[i];
-            } else {
+            if (i != j && ppdConflictProbability[i][j] > 0) {
                 constraint += std::max(0.0, ppdDelayTime[i][j]) * decisionVariables[j];
             }
         }

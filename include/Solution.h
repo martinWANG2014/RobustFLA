@@ -189,7 +189,7 @@ bool FeasibilityMonteCarlo(FlightVector &vpConflictedFlightList, const viList &v
  * @return  A unassigned flights list
  */
 void SolveFLA(FlightVector &vpFlightList, const IloEnv &env, const vdList &vdParameter,
-              LevelVector &viLevelsList, double epsilon, double dCoefPi,
+              LevelVector &viLevelsList, ProcessClock &processClock, double epsilon, double dCoefPi,
               double *dSumBenefits, int *iMaxNbConflict, int iModeMethod,
               int iModeRandom, std::ofstream &cplexLogFile);
 
