@@ -2,7 +2,8 @@
 // Created by chenghaowang on 06/07/17.
 //
 #include "../include/Input.h"
-void Input::parseWayPoints(Network *pNetwork) {
+
+void Input::parseWayPoints(Network *pNetwork, bool modeDisplay) {
     using boost::property_tree::ptree;
     using boost::property_tree::read_json;
 
@@ -26,8 +27,10 @@ void Input::parseWayPoints(Network *pNetwork) {
         String sCode = root.get<String>(sPrefixed + ".Code");
         // Verify the wayPoint code, if it's empty, then pop up an error message.
         if (sCode.empty()) {
-            std::cout << std::endl << "[Warning]: the " << i
-                      << "th wayPoint's code is unknown, it is ignored automatically!" << std::endl;
+            if (modeDisplay) {
+                std::cout << std::endl << "[Warning]: the " << i
+                          << "th wayPoint's code is unknown, it is ignored automatically!" << std::endl;
+            }
         } else {
             // Parse the wayPoint name and its position.
             WayPoint *wayPoint = new WayPoint(sCode,
@@ -47,7 +50,7 @@ void Input::parseWayPoints(Network *pNetwork) {
               << "\tValid WayPoints: " << pNetwork->getNbWayPoints() << std::endl;
 }
 
-void Input::parseAirports(Network *pNetwork) {
+void Input::parseAirports(Network *pNetwork, bool modeDisplay) {
     using boost::property_tree::ptree;
     using boost::property_tree::read_json;
 
@@ -71,8 +74,10 @@ void Input::parseAirports(Network *pNetwork) {
         String sCode = root.get<String>(sPrefixed + ".ICAO");
         // Verify the airport icao code, if it's empty, then pop up an error message.
         if (sCode.empty()) {
-            std::cout << "[Warning]: the " << i << "th airport's icao code is unknown, it is ignored automatically!"
-                      << std::endl;
+            if (modeDisplay) {
+                std::cout << "[Warning]: the " << i << "th airport's icao code is unknown, it is ignored automatically!"
+                          << std::endl;
+            }
         } else {
             // Parse the airport name and its position.
             Airport *airport = new Airport(sCode,
@@ -91,7 +96,7 @@ void Input::parseAirports(Network *pNetwork) {
               << "\tValid Airports: " << pNetwork->getNbAirports() << std::endl;
 }
 
-void Input::parseFlights(Network *pNetwork) {
+void Input::parseFlights(Network *pNetwork, bool modeDisplay) {
     using boost::property_tree::ptree;
     using boost::property_tree::read_json;
     std::cout << "[INFO] Parsing flights file... OK" << std::endl;
@@ -117,27 +122,27 @@ void Input::parseFlights(Network *pNetwork) {
         // Parse the flight departure time.
         Time iDepartureTime = root.get<Time>(sPrefixed + ".DTime", -1);
         // Verify the icao code of a flight, if it is empty, then pop up an error message.
-        if (sCode.empty()) {
+        if (modeDisplay && sCode.empty()) {
             std::cout << std::endl << "[Warning]: the " << i
                       << "th flight's code is unknown, it is ignored automatically!" << std::endl;
         }
             // Verify the flight departure time, if it is not positive, then pop up an error message.
-        else if (iDepartureTime < 0) {
+        else if (modeDisplay && iDepartureTime < 0) {
             std::cout << std::endl << "[Warning]: the " << i
                       << "th flight's departure time is not valid, it is ignored automatically!" << std::endl;
         }
             // Verify flight depart airport, if it is empty, then pop up an error message.
-        else if (pAirportOrigin == nullptr) {
+        else if (modeDisplay && pAirportOrigin == nullptr) {
             std::cout << std::endl << "[Warning]: the " << i
                       << "th flight's origin airport is unknown, it is ignored automatically!" << std::endl;
         }
             // Verify flight destination airport, if it is empty, then pop up an error message.
-        else if (pAirportDestination == nullptr) {
+        else if (modeDisplay && pAirportDestination == nullptr) {
             std::cout << std::endl << "[Warning]: the " << i
                       << "th flight's destination is unknown, it is ignored automatically!" << std::endl;
         }
             // Verify whether the departure airport is the same as the destination airport or not, if yes then pop up an error message.
-        else if (*pAirportOrigin == *pAirportDestination) {
+        else if (modeDisplay && *pAirportOrigin == *pAirportDestination) {
             std::cout << std::endl << "[Warning]: the " << i
                       << "th flight's destination is identical with the departure, it is ignored automatically!"
                       << std::endl;
@@ -155,7 +160,7 @@ void Input::parseFlights(Network *pNetwork) {
                 // Parse the wayPoint in the route.
                 WayPoint*pWayPoint = pNetwork->findWayPointByCode(root.get<String>(sPrefixedPath + ".Code"));
                 // Verify the wayPoint, if it is empty, then pop up an error message.
-                if (pWayPoint == nullptr) {
+                if (modeDisplay && pWayPoint == nullptr) {
                     std::cout << std::endl << "[Warning]: the code of " << iIndexPoint << "th point in " << i
                               << "th flight's route is unknown, it is ignored automatically!"
                               << std::endl;
@@ -175,21 +180,25 @@ void Input::parseFlights(Network *pNetwork) {
                 if (bIsRouteValid && !contains(pNetwork->getFlightsList(), pFlight)) {
                     pFlight->initRouteTimeList();
                     pNetwork->addNewFlight(pFlight);
-                } else if (bIsRouteValid) {
+                } else if (modeDisplay && bIsRouteValid) {
                     std::cout << std::endl
                               << "[Warning]: the route of " << i
                               << "th flight is not correct, it is ignored automatically!"
                               << std::endl;
                 } else {
-                    std::cout << std::endl
-                              << "[Warning]: the " << i << "th flight was redundant, it is ignored automatically!"
-                              << std::endl;
+                    if (modeDisplay) {
+                        std::cout << std::endl
+                                  << "[Warning]: the " << i << "th flight was redundant, it is ignored automatically!"
+                                  << std::endl;
+                    }
                 }
             } else {
-                std::cout << std::endl
-                          << "[Warning]: the route of " << i
-                          << "th flight is not complete, it is ignored automatically!"
-                          << std::endl;
+                if (modeDisplay) {
+                    std::cout << std::endl
+                              << "[Warning]: the route of " << i
+                              << "th flight is not complete, it is ignored automatically!"
+                              << std::endl;
+                }
             }
         }
     }
@@ -203,10 +212,10 @@ Input::Input(const String &sAirportPath, const String &sWayPointPath, const Stri
 
 Input::~Input() {}
 
-void Input::initNetwork(Network *pNetwork) {
-    parseAirports(pNetwork);
-    parseWayPoints(pNetwork);
-    parseFlights(pNetwork);
+void Input::initNetwork(Network *pNetwork, bool modeDisplay) {
+    parseAirports(pNetwork, modeDisplay);
+    parseWayPoints(pNetwork, modeDisplay);
+    parseFlights(pNetwork, modeDisplay);
 }
 
 bool Input::exists(const String &name) {

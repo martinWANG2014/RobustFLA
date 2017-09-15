@@ -106,7 +106,7 @@ public:
     /**
      * Initialize the flight level list.
      */
-    void InitFlightLevelsList();
+    void InitFlightLevelsList(bool modeDisplay);
 
     /**
      * Initialize the feasible flight levels list with the list size.

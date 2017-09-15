@@ -39,7 +39,7 @@ int Network::getNbFlights() const {
     return (int) vpFlightsList.size();
 }
 
-void Network::InitFlightLevelsList() {
+void Network::InitFlightLevelsList(bool modeDisplay) {
     std::cout << "[INFO] Initialize Processing Flight Level..." << std::flush;
     FlightLevelMap levelMap;
     for(auto &&flight: vpFlightsList){
@@ -65,9 +65,12 @@ void Network::InitFlightLevelsList() {
     LevelNumberList levelsList(levelMap.begin(), levelMap.end());
     std::sort(levelsList.begin(), levelsList.end(), greater_second<Level, int, int>());
     std::cout << "OK" << std::endl;
-    std::cout << "\tFlightLevel: NbFeasible, NbPreferred" << std::endl;
-    for (auto item = levelsList.begin(); item != levelsList.end(); item++) {
-        std::cout << "\t" << (*item).first << ": " << (*item).second.first << "," << (*item).second.second << std::endl;
+    if (modeDisplay) {
+        std::cout << "\tFlightLevel: NbFeasible, NbPreferred" << std::endl;
+        for (auto item = levelsList.begin(); item != levelsList.end(); item++) {
+            std::cout << "\t" << (*item).first << ": " << (*item).second.first << "," << (*item).second.second
+                      << std::endl;
+        }
     }
     viFlightLevelsList.clear();
     std::transform(levelsList.begin(), levelsList.end(), std::back_inserter(viFlightLevelsList), retrieve_key<Level, int, int>());
@@ -152,7 +155,7 @@ void Network::SetSigma(const vdList &vdParameters, int iRandomMode, bool modeGen
     std::mt19937 gen(rd());
     for (auto &&fi : vpFlightsList) {
         if (modeGenerateSigma) {
-            fi->setSigma(UniformDist(gen));
+            fi->setSigma(UniformDist(gen) / 5.0);
         } else {
             fi->setSigma(dSigma / 10.0);
         }

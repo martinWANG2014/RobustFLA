@@ -29,14 +29,14 @@ const double MIN_SEPARATION_DISTANCE = 5.0;
 #endif
 #ifndef MIN_ANGLE_CONST
 #define MIN_ANGLE_CONST
-const double MIN_ANGLE = cos(0.1 / 180.0 * M_PI);
+const double MIN_ANGLE = cos(10.0 / 180.0 * M_PI);
 #endif
 #ifndef MIN_PROBA_CONST
 #define MIN_PROBA_CONST
 /**
 * A coefficient parameter: MIN_PORBA, the minimal considering conflict probability.
 */
-const double MIN_PROBA = 0.00001;
+const double MIN_PROBA = 0.0001;
 #endif
 #ifndef MIN_SIGMA_CONST
 #define MIN_SIGMA_CONST
