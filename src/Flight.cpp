@@ -12,23 +12,20 @@ bool Flight::operator!=(const Flight &rhs) const {
     return !(rhs == *this);
 }
 
-void Flight::GenerateNewFlight(Time iNewDepartureTime, bool bGeometricMethod) {
-    (bGeometricMethod) ? pRoute->GenerateNewRoute(iNewDepartureTime) : pRoute->GenerateNewRoute2(
-            iNewDepartureTime);
+void Flight::GenerateNewFlight(Time iNewDepartureTime) {
+    pRoute->GenerateNewRoute2(iNewDepartureTime);
 }
 
-double Flight::CalculateProbabilityConflictAndDelayForFlight(Flight *pFlight2, double *pdDelay, bool *pbWait,
-                                                             bool bGeometricMethod) {
+double Flight::CalculateProbabilityConflictAndDelayForFlight(Flight *pFlight2, double *pdDelay, double *pdDelayMax,
+                                                             bool *pbWait) {
     Route *route2 = pFlight2->getRoute();
     for (int i = 0; i < pRoute->getPointListSize(); i++) {
         for (int j = 0; j < route2->getPointListSize(); j++) {
                 if (*pRoute->getPointAtI(i) == *route2->getPointAtI(j)) {
 //                    std::cout << "Flight: " << getCode() << " and Flight: " << pFlight2->getCode()
 //                              << " has conflict at (" << i << ", " << j << "):" ;
-                    double prob = pRoute->CalculationProbabilityAndDelayAtPoint(i, route2, j, pdDelay, pbWait,
-                                                                                bGeometricMethod,
-                                                                                dSigma,
-                                                                                pFlight2->getSigma());
+                    double prob = pRoute->CalculationProbabilityAndDelayAtPoint(i, route2, j, pdDelay, pdDelayMax,
+                                                                                pbWait, dSigma, pFlight2->getSigma());
                     if (prob > MIN_PROBA) {
                         return prob;
                     }
@@ -37,6 +34,7 @@ double Flight::CalculateProbabilityConflictAndDelayForFlight(Flight *pFlight2, d
         }
     *pbWait = true;
     *pdDelay = 0;
+    *pdDelayMax = 0;
     return 0;
 }
 
@@ -75,6 +73,15 @@ void Flight::setSigma(double dSigma) {
 double Flight::getSigma() const {
     return dSigma;
 }
+
+void Flight::setSigmaPrime(double dSigma) {
+    Flight::dSigmaPrime = dSigma;
+}
+
+double Flight::getSigmaPrime() const {
+    return dSigmaPrime;
+}
+
 
 bool Flight::selfCheck() {
     return pRoute->selfCheck();

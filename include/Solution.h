@@ -72,15 +72,8 @@ void InitTable(double **ppdTable, int iSize);
  */
 void DestroyTable(double **ppdTable, int iSize);
 
-/**
- * Calculate the conflict probability and delay time.
- * @param vpConflictFlightList      The conflict flights list
- * @param ppdConflictProbability    The conflict probability matrix
- * @param ppdDelayTime              The delay time matrix
- * @param bGeometricMethod          A flag whether use the geometric method
- */
 void CalculateConflictProbability(FlightVector &vpConflictFlightList, double **ppdConflictProbability,
-                                  double **ppdDelayTime, bool bGeometricMethod);
+                                  double **ppdDelayTime, double **ppdDelayTimeMax);
 
 /**
  * Get the index of most infeasible constraint.
@@ -94,7 +87,7 @@ void CalculateConflictProbability(FlightVector &vpConflictFlightList, double **p
  */
 int MinIndexArgs0(FlightVector &vpConflictFlightList, const vdList &vdPi,
                   double **ppdConflictProbability,
-                  double **ppdDelayTime, bool bGeoMethod, bool modeDisplay);
+                  double **ppdDelayTime, bool modeDisplay);
 
 /**
  * Get the index of most infeasible constraint for last solution.
@@ -140,8 +133,8 @@ bool FeasibilityEnumeration(const vdList &vdPi, const IloNumArray &decisionVaria
  * @return Whether the solution has a high confidence of feasibility.
  */
 bool FeasibilityHoeffding(const vdList &vdPi,
-                          const IloNumArray &decisionVariables,
-                          double **ppdConflictProbability, double **ppdDelayTime,
+                          const IloNumArray &decisionVariables, const vdList &vdParameter,
+                          double **ppdConflictProbability, double **ppdDelayTime, double **ppdDelayTimeMax,
                           double dEpsilon, int iConflictedFlightSize, int *piIndex, bool modeDisplay);
 
 /**
@@ -170,9 +163,9 @@ bool FeasibilityGaussian(FlightVector &vpConflictedFlightList, const vdList &vdP
  * @param piIndexMostInfeasible     The index of most infeasible constraint
  * @return Whether the solution has a high confidence of feasibility.
  */
-bool FeasibilityMonteCarlo(FlightVector &vpConflictedFlightList, const vdList &vdPi,
-                           const IloNumArray &decisionVariables, const vdList &vdParameter,
-                           double dEpsilon, int *piIndex, int iModeRandom, bool bGeoMethod, bool modeDisplay);
+bool FeasibilityMonteCarlo(FlightVector &vpConflictedFlightList, const viList &viConstraintList, const vdList &vdPi,
+                           const IloNumArray &decisionVariables, const vdList &vdParameter, double dEpsilon,
+                           int *piIndex, bool modeDisplay);
 
 
 /**
@@ -189,11 +182,10 @@ bool FeasibilityMonteCarlo(FlightVector &vpConflictedFlightList, const vdList &v
  * @param cplexLogFile      The cplex log file
  * @return  A unassigned flights list
  */
-void SolveFLA(FlightVector &vpFlightList, FlightLevelAssignmentMap &flightLevelAssignmentMap, const IloEnv &env,
-              const vdList &vdParameter,
-              LevelVector &viLevelsList, ProcessClock &processClock, double epsilon, double dCoefPi,
-              double *dSumBenefits, int *iMaxNbConflict, int iModeMethod,
-              int iModeRandom, std::ofstream &cplexLogFile, bool modeDisplay);
+int SolveFLA(FlightVector &vpFlightList, FlightLevelAssignmentMap &flightLevelAssignmentMap, const IloEnv &env,
+             const vdList &vdParameter,
+             LevelVector &viLevelsList, ProcessClock &processClock, double epsilon, double dCoefPi,
+             double *dSumBenefits, int *iMaxNbConflict, int iModeMethod, bool modeDisplay);
 
 /**
  * Get the number of flights that change it flight level.
@@ -202,6 +194,7 @@ void SolveFLA(FlightVector &vpFlightList, FlightLevelAssignmentMap &flightLevelA
  */
 int getNbFlightsChangeLevel(FlightVector &flightVector);
 
+int getMaxDiverseLevel(FlightVector &flightVector);
 
 /**
  * Approximate FLA method by each level.
@@ -225,7 +218,7 @@ SolvingFLAByLevelPP(FlightVector &vpFlightList, FlightsLevelMap &infeasibleFligh
                     const IloEnv &env, const vdList &vdParameter, LevelExamine &levelEx,
                     FlightLevelAssignmentMap &flightLevelAssignmentMap, double epsilon,
                     int *iMaxNbConflict,
-                    Level iProcessingLevel, int iModeMethod, int iModeRandom, std::ofstream &cplexLogFile,
+                    Level iProcessingLevel, int iModeMethod,
                     bool modeDisplay);
 
 /**
@@ -237,11 +230,9 @@ SolvingFLAByLevelPP(FlightVector &vpFlightList, FlightsLevelMap &infeasibleFligh
  * @param dSumBenefits      The sum of benefits
  * @param iMaxNbConflict    The maximal number of potential conflict
  * @param iModeMethod       The method mode
- * @param iFeasibleSize     The feasibile flight size
- * @param iModeRandom       The random mode
+ * @param iFeasibleSize     The feasible flight size
  */
-void ApproximateFLA(Network *pNetwork, const vdList &vdParameter, double dEpsilon, double dCoefPi, double *dSumBenefits,
-                    int *iMaxNbConflict, int iModeMethod,
-                    int iFeasibleSize, bool modeGenerateSigma, bool modeDisplay, int iModeRandom = -1);
+void ApproximateFLA(const Network *pNetwork, const vdList &vdParameter, double dEpsilon, double dCoefPi,
+                    double *dSumBenefits, int *iMaxNbConflict, int iModeMethod, bool modeDisplay);
 
 #endif //SOLUTION_H

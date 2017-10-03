@@ -75,11 +75,6 @@ const viList LevelVFRB{45, 65, 85, 105, 125, 145, 165, 185};
 #endif
 ////////////Definition of Flight Level/////////////////////////////////////////
 
-/**
- * A coefficient parameter: A_BAR, from article "A Geometrical Approach to Conflict Probability Estimation, Richard Irvine"
- */
-double getA_Bar();
-
 ////////////Method template////////////////////////////////////////////////////
 /**
  * A template of the method to verify whether the a vector contains an element.
@@ -168,23 +163,23 @@ struct retrieve_key {
 };
 
 ////////////Method template////////////////////////////////////////////////////
-/**
- * Get maximal value of sigma that make the Pr(-alpha <= y <= beta) >= gamma
- * @param alpha     The absolute of lower bound for random variables
- * @param beta      The upper bound for random variables
- * @param gamma     The probability for -alpha<= y <= beta
- * @return the maximal value of sigma that make the Pr(-alpha <= y <= beta) >= gamma
- */
-double getSigma1(double alpha, double beta, double gamma);
-
-/**
- * Get maximal value of sigma that make the Pr(-alpha <= y <= beta) >= gamma
- * @param alpha     The absolute of lower bound for random variables
- * @param beta      The upper bound for random variables
- * @param gamma     The probability for -alpha<= y <= beta
- * @return  the maximal value of sigma that make the Pr(-alpha <= y <= beta) >= gamma
- */
-double getSigma2(double alpha, double beta, double gamma);
+///**
+// * Get maximal value of sigma that make the Pr(-alpha <= y <= beta) >= gamma
+// * @param alpha     The absolute of lower bound for random variables
+// * @param beta      The upper bound for random variables
+// * @param gamma     The probability for -alpha<= y <= beta
+// * @return the maximal value of sigma that make the Pr(-alpha <= y <= beta) >= gamma
+// */
+//double getSigma1(double alpha, double beta, double gamma);
+//
+///**
+// * Get maximal value of sigma that make the Pr(-alpha <= y <= beta) >= gamma
+// * @param alpha     The absolute of lower bound for random variables
+// * @param beta      The upper bound for random variables
+// * @param gamma     The probability for -alpha<= y <= beta
+// * @return  the maximal value of sigma that make the Pr(-alpha <= y <= beta) >= gamma
+// */
+//double getSigma2(double alpha, double beta, double gamma);
 
 /**
  * Get maximal value of sigma that make the Pr(-alpha <= y <= beta) >= gamma
@@ -213,4 +208,20 @@ viList findFeasibleLevels(int iDefaultLevel, int iSize);
  * @return the next feasible flight level
  */
 Level findNextFeasibleLevel(int iDefaultLevel, Level lastLevel);
+
+/**
+ *
+ * @param mu
+ * @param sigma
+ * @return
+ */
+double getRealPartSigma_2(double mu, double sigma);
+
+/**
+ *
+ * @param vdParameters
+ * @param dSigma
+ * @return
+ */
+double getSigmaReal(const vdList &vdParameters, double dSigma);
 #endif //CONFIGURATION_H

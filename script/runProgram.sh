@@ -29,26 +29,24 @@ executable_target="../build/bin/RobustFLA"
 
 # the program usage message.
 function Usage {
-    echo -e "[USAGE] runProgram.sh method_mode period_length epsilon feasible_list_size coefficient_Pi modeSigma modeDisplay [random_mode alpha beta gamma [w1 w2 p]]"
-    echo -e "method_mode 0 \t\t\t Enumeration Method, the parameters: method_mode period_length epsilon coefficient_Pi required. "
-    echo -e "method_mode 1 \t\t\t Hoeffding Inequalities Method, the parameters: method_mode period_length epsilon coefficient_Pi required. "
-    echo -e "method_mode 2 \t\t\t Monte-Carlo Simulation Method, the parameters: method_mode period_length epsilon coefficient_Pi random_mode alpha beta gamma required. if random_mode is 2, then the parameters: w1 w2 p required."
-    echo -e "method_mode 3 \t\t\t Gaussian Method, the parameters: method_mode period_length epsilon coefficient_Pi random_mode alpha beta gamma required. if random_mode is 2, then the parameters: w1 w2 p required."
-    echo -e "period_length \t\t\t An integer, the length of period that consider en-route conflict occurs at a waypoint."
+    echo -e "[USAGE] runProgram.sh method_mode period_length epsilon feasible_list_size coefficient_Pi alpha beta gamma w1 w2 p modeSigma modeDisplay"
+    echo -e "method_mode 0 \t\t\t Deterministic Method"
+    echo -e "method_mode 1 \t\t\t Hoeffding Inequalities Method"
+    echo -e "method_mode 2 \t\t\t Monte-Carlo Simulation Method"
+    echo -e "method_mode 3 \t\t\t Gaussian Method"
+    echo -e "period_length \t\t\t An integer, the length of period that consider en-route conflict occurs at a wayPoint."
     echo -e "epsilon \t\t\t An integer in [0, 100],  the tolerance of infeasibility of separated constraints in FLA problem."
     echo -e "feasible_list_size \t\t\t An integer, the size of feasible flight level list."
     echo -e "coefficient_Pi \t\t\t An integer in [0, 100], the percentage of aircraft's flight time to induce an admissible penal cost"
-    echo -e "modeSigma \t\t\t A boolean, 1, set the dynamic sigma value;  0, set the statistic sigma value."
-    echo -e "modeDisplay \t\t\t A boolean, 1, show the details;  0, don't display the detaills."
-    echo -e "random_mode 0 \t\t\t the generated departure time follows a normal distribution, where the mean is t+(beta-alpha)/2, and that the generated departure time has a confident of gamma at an interval [t-alpha, t+beta]."
-    echo -e "random_mode 1 \t\t\t the generated departure time follows a normal distribution, where the mean is t, and that the generated departure time has a confident of gamma at an interval [t-alpha, t+beta]."
-    echo -e "random_mode 2 \t\t\t the generated departure time follows a normal distribution, where the mean is t-w1*alpha in left part Pr(x<t)=p and is t+w12*beta in right part Pr(x>=t)=1-p, and that the generated departure time has a confident of gamma at an interval [t-alpha, t+beta]."
     echo -e "alpha \t\t\t An integer, the lower bound for the interval [t-alpha, t+beta]"
     echo -e "beta \t\t\t An integer, the upper bound for the interval [t-alpha, t+beta]"
     echo -e "gamma \t\t\t An integer in [0, 10000], Pr(t-alpha<=x<=t+beta)>=gamma/10000*100%, the confident that generated departure time fall in an interval [t-alpha, t+beta]"
     echo -e "w1 \t\t\t An integer in [0, 100], the mean u=t-w1*alpha of the left part x<t"
     echo -e "w2 \t\t\t An integer in [0, 100], the mean u=t+w2*beta of the right part x>=t"
     echo -e "p \t\t\t An integer in [0, 100], the probability that Pr(x<t)=p%"
+    echo -e "modeSigma \t\t\t A boolean, 1, set the dynamic sigma value;  0, set the statistic sigma value."
+    echo -e "modeDisplay \t\t\t A boolean, 1, show the details;  0, don't display the details."
+
 }
 
 # method to generate the result filename.
@@ -112,111 +110,28 @@ if [[ ! -e ${executable_target} ]]; then
 fi
 
 # check the parameters list
+if [[ $# -ne 13 ]]; then
+    echo "[ERROR] invalid parameters list."
+    Usage
+    exit
+fi
+
+# echo method
 case $1 in
     0)
-        echo "[INFO] Call Enumeration Method"
-        if [[ $# -ne 7 ]]; then
-            echo "[ERROR] invalid parameters list."
-            Usage
-            exit
-        fi
+        echo "[INFO] Call Deterministic Method"
     ;;
     1)
-
         echo "[INFO] Call Hoeffding Inequalities Method"
-        if [[ $# -ne 7 ]]; then
-            echo "[ERROR] invalid parameters list."
-            Usage
-            exit
-        fi
     ;;
     2)
         echo "[INFO] Call Monte-Carlo Simulation Method"
-        if [[ $# -lt 11 ]]; then
-            echo "[ERROR] invalid parameters list."
-            Usage
-            exit
-        else
-            if [[ $8 -eq 2 ]]; then
-                if [[ $# -ne 14 ]]; then
-                    echo "[ERROR] invalid parameters list."
-                    Usage
-                    exit
-                fi
-            else
-                if [[ $# -ne 11 ]]; then
-                    echo "[ERROR] invalid parameters list."
-                    Usage
-                    exit
-                fi
-            fi
-        fi
     ;;
     3)
-        echo "[INFO] Call Gaussian Method with uncertain departure time"
-        if [[ $# -lt 11 ]]; then
-            echo "[ERROR] invalid parameters list."
-            Usage
-            exit
-        else
-            if [[ $8 -eq 2 ]]; then
-                if [[ $# -ne 14 ]]; then
-                    echo "[ERROR] invalid parameters list."
-                    Usage
-                    exit
-                fi
-            else
-                if [[ $# -ne 11 ]]; then
-                    echo "[ERROR] invalid parameters list."
-                    Usage
-                    exit
-                fi
-            fi
-        fi
-    ;;
-    4)
-        echo "[INFO] Call Monte-Carlo Method with uncertain departure time"
-        if [[ $# -lt 11 ]]; then
-            echo "[ERROR] invalid parameters list."
-            Usage
-            exit
-        else
-            if [[ $8 -eq 2 ]]; then
-                if [[ $# -ne 14 ]]; then
-                    echo "[ERROR] invalid parameters list."
-                    Usage
-                    exit
-                fi
-            else
-                if [[ $# -ne 11 ]]; then
-                    echo "[ERROR] invalid parameters list."
-                    Usage
-                    exit
-                fi
-            fi
-        fi
+        echo "[INFO] Call Gaussian Method"
     ;;
     5)
-        echo "[INFO] Call Enumeration Method with uncertain departure time"
-        if [[ $# -lt 11 ]]; then
-            echo "[ERROR] invalid parameters list."
-            Usage
-            exit
-        else
-            if [[ $8 -eq 2 ]]; then
-                if [[ $# -ne 14 ]]; then
-                    echo "[ERROR] invalid parameters list."
-                    Usage
-                    exit
-                fi
-            else
-                if [[ $# -ne 11 ]]; then
-                    echo "[ERROR] invalid parameters list."
-                    Usage
-                    exit
-                fi
-            fi
-        fi
+        echo "[INFO] Call all Methods"
     ;;
     *)
         echo "[ERROR] Not support such method"

@@ -119,45 +119,42 @@ void Network::InitCoefPi(double dCoefPi) {
     }
 }
 
-void Network::SetSigma(const vdList &vdParameters, int iRandomMode, bool modeGenerateSigma) {
-    double dSigma = MIN_SIGMA;
-//    std::copy(vdParameters.begin(), vdParameters.end(), std::ostream_iterator<double>(std::cout, "\t "));
-    switch (iRandomMode) {
-        case 0:
-            if (vdParameters.size() != 3) {
-                std::cerr << "the vdParameters list invalid!" << std::endl;
-                abort();
-            }
-            dSigma = getSigma1(vdParameters[0], vdParameters[1], vdParameters[2]);
-            break;
-        case 1:
-            if (vdParameters.size() != 3) {
-                std::cerr << "the vdParameters list invalid!" << std::endl;
-                abort();
-            }
-            dSigma = getSigma2(vdParameters[0], vdParameters[1], vdParameters[2]);
-            break;
-        case 2:
-            if (vdParameters.size() != 6) {
-                std::cerr << "the vdParameters list invalid!" << std::endl;
-                abort();
-            }
-            dSigma = getSigma3(vdParameters[0], vdParameters[1], vdParameters[2], vdParameters[3], vdParameters[4],
-                               vdParameters[5]);
-            break;
-        default:
-            std::cerr << "the random mode is not supported!" << std::endl;
-            abort();
+void Network::SetSigma(const vdList &vdParameters, bool modeGenerateSigma) {
+    if (vdParameters.size() != 6) {
+        std::cerr << "the vdParameters list invalid!" << std::endl;
+        abort();
     }
+    double dSigma = getSigma3(vdParameters[0], vdParameters[1], vdParameters[2], vdParameters[3], vdParameters[4],
+                              vdParameters[5]);
+
     uni_dist UniformDist(MIN_SIGMA, dSigma);
-//    //Will be used to obtain a seed for the random number engine
+    // Will be used to obtain a seed for the random number engine
     std::random_device rd;
     std::mt19937 gen(rd());
     for (auto &&fi : vpFlightsList) {
         if (modeGenerateSigma) {
-            fi->setSigma(UniformDist(gen) / 5.0);
+            double sigma = UniformDist(gen);
+            fi->setSigmaPrime(sigma);
+            fi->setSigma(getSigmaReal(vdParameters, sigma));
         } else {
-            fi->setSigma(dSigma / 10.0);
+            fi->setSigmaPrime(dSigma);
+            fi->setSigma(getSigmaReal(vdParameters, dSigma));
         }
     }
 }
+
+void
+Network::initialize(double dCoefPi, int iFeasibleSize, vdList vdParameter, bool modeGenerateSigma, bool modeDisplay) {
+    // Initialize the coefficient Pi for all flight in the network.
+    this->InitCoefPi(dCoefPi);
+    // Initialize the feasible flight levels for all flights in the network.
+    this->InitFeasibleList(iFeasibleSize);
+    // Initialize  the flight levels list of the network.
+    this->InitFlightLevelsList(modeDisplay);
+    // Initialize the sigma for the random departure time.
+
+    this->SetSigma(vdParameter, modeGenerateSigma);
+
+}
+
+

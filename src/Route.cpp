@@ -5,23 +5,25 @@
 #include "../include/Route.h"
 #include "../include/Input.h"
 
-void Route::GenerateNewRoute(Time dNewDepartureTime) {
-    std::default_random_engine generator;
-    vdTimeList[0] = dNewDepartureTime;
-    for (int i = 1; i < getPointListSize(); i++) {
-        double velocity = getVelocityFromPoint(i,
-                                               vpPointsList[i]->getArrivingTime() -
-                                               vpPointsList[i - 1]->getArrivingTime());
-        normal_dist NormalDistribution(0, 1.0 / 300);
-        uni_dist UniformDistribution(0.0, 1.0);
-        double dRandom = UniformDistribution(generator);
-        velocity = velocity * ((dRandom > 0.5) ? 1 + fabs(NormalDistribution(generator)) : 1 - fabs(NormalDistribution(
-                generator)));
-        double dDistance = distanceBetween(getPointAtI(i)->getPosition(), getPointAtI(i - 1)->getPosition());
-        Time dDeltaT = (Time) (dDistance / velocity);
-        vdTimeList[i] = vpPointsList[i - 1]->getArrivingTime() + dDeltaT;
-    }
-}
+//void Route::GenerateNewRoute(Time dNewDepartureTime) {
+////    std::default_random_engine generator;
+//    std::random_device rd;
+//    std::mt19937 generator(rd());
+//    vdTimeList[0] = dNewDepartureTime;
+//    for (int i = 1; i < getPointListSize(); i++) {
+//        double velocity = getVelocityFromPoint(i,
+//                                               vpPointsList[i]->getArrivingTime() -
+//                                               vpPointsList[i - 1]->getArrivingTime());
+//        normal_dist NormalDistribution(0, 1.0 / 300);
+//        uni_dist UniformDistribution(0.0, 1.0);
+//        double dRandom = UniformDistribution(generator);
+//        velocity = velocity * ((dRandom > 0.5) ? 1 + fabs(NormalDistribution(generator)) : 1 - fabs(NormalDistribution(
+//                generator)));
+//        double dDistance = distanceBetween(getPointAtI(i)->getPosition(), getPointAtI(i - 1)->getPosition());
+//        Time dDeltaT = (Time) (dDistance / velocity);
+//        vdTimeList[i] = vpPointsList[i - 1]->getArrivingTime() + dDeltaT;
+//    }
+//}
 
 void Route::GenerateNewRoute2(Time dNewDepartureTime) {
     vdTimeList[0] = dNewDepartureTime;
@@ -31,17 +33,17 @@ void Route::GenerateNewRoute2(Time dNewDepartureTime) {
     }
 }
 
-double Route::getVelocityFromPoint(int iIndexPoint, double dDeltaT) {
-    if (iIndexPoint == 0) {
-        return -1;
-    }
-    double dDistance = distanceBetween(getPositionAtPoint(iIndexPoint), getPositionAtPoint(iIndexPoint-1));
-    if (dDeltaT != 0) {
-        return dDistance / dDeltaT;
-    }
-    std::cerr << "[Fatal Error] the arriving time between two consecutive points is 0." << std::endl;
-    return -1;
-}
+//double Route::getVelocityFromPoint(int iIndexPoint, double dDeltaT) {
+//    if (iIndexPoint == 0) {
+//        return -1;
+//    }
+//    double dDistance = distanceBetween(getPositionAtPoint(iIndexPoint), getPositionAtPoint(iIndexPoint-1));
+//    if (dDeltaT != 0) {
+//        return dDistance / dDeltaT;
+//    }
+//    std::cerr << "[Fatal Error] the arriving time between two consecutive points is 0." << std::endl;
+//    return -1;
+//}
 
 
 double Route::getVelocityFromPoint(int iIndexPoint) {
@@ -59,8 +61,8 @@ double Route::getVelocityFromPoint(int iIndexPoint) {
 
 bool Route::selfCheck() {
     bool bValid = true;
-    for(int i =1; i < getPointListSize(); i++){
-        if (vpPointsList[i]->getArrivingTime() <= vpPointsList[i-1]->getArrivingTime())
+    for (int i = 1; i < getPointListSize(); i++) {
+        if (vpPointsList[i]->getArrivingTime() <= vpPointsList[i - 1]->getArrivingTime())
             bValid = false;
     }
     return bValid;
@@ -68,8 +70,8 @@ bool Route::selfCheck() {
 
 
 double Route::CalculateProbabilityAndDelayForPartA(double dT1, double dT2, double dV1, double dV2, double dCosA,
-                                                   double *pdDelayTime, bool bGeometricMethod, double dSigma1,
-                                                  double dSigma2) {
+                                                   double *pdDelayTime, double *pdDelayTimeMax, double dSigma1,
+                                                   double dSigma2) {
     double dRho = dV2 / dV1;
     if (fabs(dCosA) > MIN_ANGLE) {
         dCosA = (dCosA > 0) ? MIN_ANGLE : -MIN_ANGLE;
@@ -79,43 +81,40 @@ double Route::CalculateProbabilityAndDelayForPartA(double dT1, double dT2, doubl
     if (dT1 < dT2) {
         if (dCosA >= dRho) {
             double dMu = dLambda * dV2 * (dT2 - dT1);
-            double dSigma = dLambda * ((bGeometricMethod) ? getA_Bar() * sqrt(1 + pow(dRho, 2)) : dV2 *
-                                                                                                  sqrt(pow(dSigma1,
-                                                                                                           2) +
-                                                                                                       pow(dSigma2,
-                                                                                                           2)));
+            double dSigma = dLambda * (dV2 * sqrt(pow(dSigma1, 2) + pow(dSigma2, 2)));
             double dRight = (MIN_SEPARATION_DISTANCE * K - dMu) / (sqrt(2.0) * dSigma);
             double dLeft = dMu / (sqrt(2.0) * dSigma);
             *pdDelayTime = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT2 - dT1);
+            *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2);
             return 0.5 * (boost::math::erf(dRight) + boost::math::erf(dLeft));
         } else {
             *pdDelayTime = MIN_SEPARATION_DISTANCE * K / dV2 - (dT2 - dT1);
+            *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / dV2;
             return dV2 * (dT2 - dT1) < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
         }
     } else {
         if (dCosA >= 1.0 / dRho) {
             double dMu = dLambda * dV2 * (dT1 - dT2);
-            double dSigma = dLambda * ((bGeometricMethod) ? getA_Bar() * sqrt(1 + pow(dRho, 2)) : dV2 *
-                                                                                                  sqrt(pow(dSigma1,
-                                                                                                           2) +
-                                                                                                       pow(dSigma2,
-                                                                                                           2)));
+            double dSigma = dLambda * (dV2 * sqrt(pow(dSigma1, 2) + pow(dSigma2, 2)));
             double dRight = (MIN_SEPARATION_DISTANCE * K - dMu) / (sqrt(2.0) * dSigma);
             double dLeft = dMu / (sqrt(2.0) * dSigma);
             *pdDelayTime = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT1 - dT2);
+            *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2);
             return 0.5 * (boost::math::erf(dRight) + boost::math::erf(dLeft));
         } else {
             *pdDelayTime = MIN_SEPARATION_DISTANCE * K / dV1 - (dT1 - dT2);
+            *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / dV1;
             return dV1 * (dT1 - dT2) < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
         }
     }
 }
 
 double Route::CalculateProbabilityAndDelayForPartB(double dT1, double dT2, double dV1, double dV2, double dCosA,
-                                                   double *pdDelayTime, bool bGeometricMethod, double dSigma1,
+                                                   double *pdDelayTime, double *pdDelayTimeMax, double dSigma1,
                                                    double dSigma2) {
     if (dT1 >= dT2) {
         *pdDelayTime = 0;
+        *pdDelayTimeMax = 0;
         return 0;
     }
     double dRho = dV2 / dV1;
@@ -125,20 +124,20 @@ double Route::CalculateProbabilityAndDelayForPartB(double dT1, double dT2, doubl
     double dSinA = sqrt(1 - pow(dCosA, 2));
     double dLambda = dSinA / sqrt(pow(dRho, 2) + 2 * dRho * dCosA + 1);
     double dMu = dLambda * dV2 * (dT2 - dT1);
-    double dSigma =
-            dLambda * ((bGeometricMethod) ? getA_Bar() * sqrt(1 + pow(dRho, 2)) : dV2 * sqrt(pow(dSigma1, 2) +
-                                                                                             pow(dSigma2, 2)));
+    double dSigma = dLambda * (dV2 * sqrt(pow(dSigma1, 2) + pow(dSigma2, 2)));
     double dRight = (MIN_SEPARATION_DISTANCE * K - dMu) / (sqrt(2.0) * dSigma);
     double dLeft = dMu / (sqrt(2.0) * dSigma);
     *pdDelayTime = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT2 - dT1);
+    *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2);
     return 0.5 * (boost::math::erf(dRight) + boost::math::erf(dLeft));
 }
 
 double Route::CalculateProbabilityAndDelayForPartC(double dT1, double dT2, double dV1, double dV2, double dCosA,
-                                                   double *pdDelayTime, bool bGeometricMethod, double dSigma1,
+                                                   double *pdDelayTime, double *pdDelayTimeMax, double dSigma1,
                                                    double dSigma2) {
     if (dT1 < dT2) {
         *pdDelayTime = 0;
+        *pdDelayTimeMax = 0;
         return 0;
     }
     double dRho = dV2 / dV1;
@@ -148,17 +147,16 @@ double Route::CalculateProbabilityAndDelayForPartC(double dT1, double dT2, doubl
     double dSinA = sqrt(1 - pow(dCosA, 2));
     double dLambda = dSinA / sqrt(pow(dRho, 2) + 2 * dRho * dCosA + 1);
     double dMu = dLambda * dV2 * (dT1 - dT2);
-    double dSigma =
-            dLambda * ((bGeometricMethod) ? getA_Bar() * sqrt(1 + pow(dRho, 2)) : dV2 * sqrt(pow(dSigma1, 2) +
-                                                                                             pow(dSigma2, 2)));
+    double dSigma = dLambda * (dV2 * sqrt(pow(dSigma1, 2) + pow(dSigma2, 2)));
     double dRight = (MIN_SEPARATION_DISTANCE * K - dMu) / (sqrt(2.0) * dSigma);
     double dLeft = dMu / (sqrt(2.0) * dSigma);
     *pdDelayTime = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT1 - dT2);
+    *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2);
     return 0.5 * (boost::math::erf(dRight) + boost::math::erf(dLeft));
 }
 
 double Route::CalculateProbabilityAndDelayForPartD(double dT1, double dT2, double dV1, double dV2, double dCosA,
-                                                   double *pdDelayTime, bool bGeometricMethod, double dSigma1,
+                                                   double *pdDelayTime, double *pdDelayTimeMax, double dSigma1,
                                                    double dSigma2) {
     double dRho = dV2 / dV1;
     if (fabs(dCosA) > MIN_ANGLE) {
@@ -169,39 +167,36 @@ double Route::CalculateProbabilityAndDelayForPartD(double dT1, double dT2, doubl
     if (dT1 < dT2) {
         if (dCosA >= 1.0 / dRho) {
             double dMu = dLambda * dV2 * (dT2 - dT1);
-            double dSigma = dLambda * ((bGeometricMethod) ? getA_Bar() * sqrt(1 + pow(dRho, 2)) : dV2 *
-                                                                                                  sqrt(pow(dSigma1, 2) +
-                                                                                                       pow(dSigma2,
-                                                                                                           2)));
+            double dSigma = dLambda * (dV2 * sqrt(pow(dSigma1, 2) + pow(dSigma2, 2)));
             double dRight = (MIN_SEPARATION_DISTANCE * K - dMu) / (sqrt(2.0) * dSigma);
             double dLeft = dMu / (sqrt(2.0) * dSigma);
             *pdDelayTime = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT2 - dT1);
+            *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2);
             return 0.5 * (boost::math::erf(dRight) + boost::math::erf(dLeft));
         } else {
             *pdDelayTime = MIN_SEPARATION_DISTANCE * K / dV1 - (dT2 - dT1);
+            *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / dV1;
             return dV1 * (dT2 - dT1) < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
         }
     } else {
         if (dCosA >= dRho) {
             double dMu = dLambda * dV2 * (dT1 - dT2);
-            double dSigma = dLambda * ((bGeometricMethod) ? getA_Bar() * sqrt(1 + pow(dRho, 2)) : dV2 *
-                                                                                                  sqrt(pow(dSigma1, 2) +
-                                                                                                       pow(dSigma2,
-                                                                                                           2)));
+            double dSigma = dLambda * (dV2 * sqrt(pow(dSigma1, 2) + pow(dSigma2, 2)));
             double dRight = (MIN_SEPARATION_DISTANCE * K - dMu) / (sqrt(2.0) * dSigma);
             double dLeft = dMu / (sqrt(2.0) * dSigma);
             *pdDelayTime = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT1 - dT2);
+            *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2);
             return 0.5 * (boost::math::erf(dRight) + boost::math::erf(dLeft));
         } else {
             *pdDelayTime = MIN_SEPARATION_DISTANCE * K / dV2 - (dT1 - dT2);
+            *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / dV2;
             return dV2 * (dT1 - dT2) < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
         }
     }
 }
 
 double Route::CalculatePartialProbabilityAndDelay(int iIndex1, Route *pRoute2, int iIndex2, double *pdDelayTime,
-                                                  bool bFlag1,
-                                                  bool bFlag2, bool bGeometricMethod, double dSigma1,
+                                                  double *pdDelayTimeMax, bool bFlag1, bool bFlag2, double dSigma1,
                                                   double dSigma2) {
     double dT1 = getArrivingTimeAtPoint(iIndex1 + (bFlag1 ? 0 : 1));
     double dT2 = pRoute2->getArrivingTimeAtPoint(iIndex2 + (bFlag2 ? 0 : 1));
@@ -211,43 +206,45 @@ double Route::CalculatePartialProbabilityAndDelay(int iIndex1, Route *pRoute2, i
                            pRoute2->getPositionAtPoint(iIndex2 + (bFlag2 ? -1 : 1)));
     if (bFlag1) {
         if (bFlag2) {
-            return CalculateProbabilityAndDelayForPartA(dT1, dT2, dV1, dV2, dCosA, pdDelayTime, bGeometricMethod,
+            return CalculateProbabilityAndDelayForPartA(dT1, dT2, dV1, dV2, dCosA, pdDelayTime, pdDelayTimeMax,
                                                         dSigma1, dSigma2);
         } else {
-            return CalculateProbabilityAndDelayForPartC(dT1, dT2, dV1, dV2, dCosA, pdDelayTime, bGeometricMethod,
+            return CalculateProbabilityAndDelayForPartC(dT1, dT2, dV1, dV2, dCosA, pdDelayTime, pdDelayTimeMax,
                                                         dSigma1, dSigma2);
         }
     } else {
         if (bFlag2) {
-            return CalculateProbabilityAndDelayForPartB(dT1, dT2, dV1, dV2, dCosA, pdDelayTime, bGeometricMethod,
+            return CalculateProbabilityAndDelayForPartB(dT1, dT2, dV1, dV2, dCosA, pdDelayTime, pdDelayTimeMax,
                                                         dSigma1, dSigma2);
         } else {
-            return CalculateProbabilityAndDelayForPartD(dT1, dT2, dV1, dV2, dCosA, pdDelayTime, bGeometricMethod,
+            return CalculateProbabilityAndDelayForPartD(dT1, dT2, dV1, dV2, dCosA, pdDelayTime, pdDelayTimeMax,
                                                         dSigma1, dSigma2);
         }
     }
 }
 
 double Route::CalculationProbabilityAndDelayAtPoint(int iIndex1, Route *pRoute2, int iIndex2, double *pdDelayTime,
-                                                    bool *pbWait, bool bGeometricMethod, double dSigma1,
+                                                    double *pdDelayTimeMax, bool *pbWait, double dSigma1,
                                                     double dSigma2) {
     vdList vdConflictProbabilityList;
     vdList vdDelayTime;
+    vdList vdDelayTimeMax;
     double pdDelay;
+    double pdDelayMax;
     double dProbability;
     if (iIndex1 > 0 && iIndex1 < getPointListSize() - 1) {
         if (iIndex2 > 0 && iIndex2 < pRoute2->getPointListSize() - 1) {
             //case A
-            dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, true, true,
-                                                               bGeometricMethod, dSigma1, dSigma2);
+            dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, &pdDelayMax, true,
+                                                               true, dSigma1, dSigma2);
             vdDelayTime.push_back(pdDelay);
             vdConflictProbabilityList.push_back(dProbability);
             if (getArrivingTimeAtPoint(iIndex1) < pRoute2->getArrivingTimeAtPoint(iIndex2)) {
                 //case B
-                dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, false, true,
-                                                                   bGeometricMethod,
-                                                                   dSigma1, dSigma2);
+                dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, &pdDelayMax,
+                                                                   false, true, dSigma1, dSigma2);
                 vdDelayTime.push_back(pdDelay);
+                vdDelayTimeMax.push_back(pdDelayMax);
                 vdConflictProbabilityList.push_back(dProbability);
 
                 //case C
@@ -259,17 +256,18 @@ double Route::CalculationProbabilityAndDelayAtPoint(int iIndex1, Route *pRoute2,
 //                vdConflictProbabilityList.push_back(0);
 
                 //case C
-                dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, true, false,
-                                                                   bGeometricMethod,
-                                                                   dSigma1, dSigma2);
+                dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, &pdDelayMax,
+                                                                   true, false, dSigma1, dSigma2);
                 vdDelayTime.push_back(pdDelay);
+                vdDelayTimeMax.push_back(pdDelayMax);
                 vdConflictProbabilityList.push_back(dProbability);
             }
 
             //case D
-            dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, false, false,
-                                                               bGeometricMethod, dSigma1, dSigma2);
+            dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, &pdDelayMax, false,
+                                                               false, dSigma1, dSigma2);
             vdDelayTime.push_back(pdDelay);
+            vdDelayTimeMax.push_back(pdDelayMax);
             vdConflictProbabilityList.push_back(dProbability);
         } else if (iIndex2 == 0) {
             //case A
@@ -283,9 +281,10 @@ double Route::CalculationProbabilityAndDelayAtPoint(int iIndex1, Route *pRoute2,
             //case C
             if (getArrivingTimeAtPoint(iIndex1) > pRoute2->getArrivingTimeAtPoint(iIndex2)) {
 
-                dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, true, false,
-                                                                   bGeometricMethod, dSigma1, dSigma2);
+                dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, &pdDelayMax,
+                                                                   true, false, dSigma1, dSigma2);
                 vdDelayTime.push_back(pdDelay);
+                vdDelayTimeMax.push_back(pdDelayMax);
                 vdConflictProbabilityList.push_back(dProbability);
             }
 //            else{
@@ -293,22 +292,25 @@ double Route::CalculationProbabilityAndDelayAtPoint(int iIndex1, Route *pRoute2,
 //                vdConflictProbabilityList.push_back(0);
 //            }
             //case D
-            dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, false, false,
-                                                               bGeometricMethod, dSigma1, dSigma2);
+            dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, &pdDelayMax, false,
+                                                               false, dSigma1, dSigma2);
             vdDelayTime.push_back(pdDelay);
+            vdDelayTimeMax.push_back(pdDelayMax);
             vdConflictProbabilityList.push_back(dProbability);
         } else {
             //case A
-            dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, true, true,
-                                                               bGeometricMethod, dSigma1, dSigma2);
+            dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, &pdDelayMax, true,
+                                                               true, dSigma1, dSigma2);
             vdDelayTime.push_back(pdDelay);
+            vdDelayTimeMax.push_back(pdDelayMax);
             vdConflictProbabilityList.push_back(dProbability);
 
             //case B
             if (getArrivingTimeAtPoint(iIndex1) < pRoute2->getArrivingTimeAtPoint(iIndex2)) {
-                dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, false, true,
-                                                                   bGeometricMethod, dSigma1, dSigma2);
+                dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, &pdDelayMax,
+                                                                   false, true, dSigma1, dSigma2);
                 vdDelayTime.push_back(pdDelay);
+                vdDelayTimeMax.push_back(pdDelayMax);
                 vdConflictProbabilityList.push_back(dProbability);
             }
 //            else{
@@ -332,9 +334,10 @@ double Route::CalculationProbabilityAndDelayAtPoint(int iIndex1, Route *pRoute2,
 
             //case B
             if (getArrivingTimeAtPoint(iIndex1) < pRoute2->getArrivingTimeAtPoint(iIndex2)) {
-                dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, false, true,
-                                                                   bGeometricMethod, dSigma1, dSigma2);
+                dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, &pdDelayMax,
+                                                                   false, true, dSigma1, dSigma2);
                 vdDelayTime.push_back(pdDelay);
+                vdDelayTimeMax.push_back(pdDelayMax);
                 vdConflictProbabilityList.push_back(dProbability);
             }
 //            else{
@@ -347,9 +350,10 @@ double Route::CalculationProbabilityAndDelayAtPoint(int iIndex1, Route *pRoute2,
 //            vdConflictProbabilityList.push_back(0);
 
             //case D
-            dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, false, false,
-                                                               bGeometricMethod, dSigma1, dSigma2);
+            dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, &pdDelayMax, false,
+                                                               false, dSigma1, dSigma2);
             vdDelayTime.push_back(pdDelay);
+            vdDelayTimeMax.push_back(pdDelayMax);
             vdConflictProbabilityList.push_back(dProbability);
         } else if (iIndex2 == 0) {
 //            //case A
@@ -365,9 +369,10 @@ double Route::CalculationProbabilityAndDelayAtPoint(int iIndex1, Route *pRoute2,
 //            vdConflictProbabilityList.push_back(0);
 
             //case D
-            dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, false, false,
-                                                               bGeometricMethod, dSigma1, dSigma2);
+            dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, &pdDelayMax, false,
+                                                               false, dSigma1, dSigma2);
             vdDelayTime.push_back(pdDelay);
+            vdDelayTimeMax.push_back(pdDelayMax);
             vdConflictProbabilityList.push_back(dProbability);
         } else {
 //            //case A
@@ -376,12 +381,14 @@ double Route::CalculationProbabilityAndDelayAtPoint(int iIndex1, Route *pRoute2,
 
             //case B
             if (getArrivingTimeAtPoint(iIndex1) < pRoute2->getArrivingTimeAtPoint(iIndex2)) {
-                dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, false, true,
-                                                                   bGeometricMethod, dSigma1, dSigma2);
+                dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, &pdDelayMax,
+                                                                   false, true, dSigma1, dSigma2);
                 vdDelayTime.push_back(pdDelay);
+                vdDelayTimeMax.push_back(pdDelayMax);
                 vdConflictProbabilityList.push_back(dProbability);
             } else {
                 vdDelayTime.push_back(0);
+                vdDelayTimeMax.push_back(0);
                 vdConflictProbabilityList.push_back(0);
             }
 
@@ -396,9 +403,10 @@ double Route::CalculationProbabilityAndDelayAtPoint(int iIndex1, Route *pRoute2,
     } else {
         if (iIndex2 > 0 && iIndex2 < pRoute2->getPointListSize() - 1) {
             //case A
-            dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, true, true,
-                                                               bGeometricMethod, dSigma1, dSigma2);
+            dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, &pdDelayMax, true,
+                                                               true, dSigma1, dSigma2);
             vdDelayTime.push_back(pdDelay);
+            vdDelayTimeMax.push_back(pdDelayMax);
             vdConflictProbabilityList.push_back(dProbability);
 
 //            //case B
@@ -407,9 +415,10 @@ double Route::CalculationProbabilityAndDelayAtPoint(int iIndex1, Route *pRoute2,
 
             //case C
             if (getArrivingTimeAtPoint(iIndex1) > pRoute2->getArrivingTimeAtPoint(iIndex2)) {
-                dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, true, false,
-                                                                   bGeometricMethod, dSigma1, dSigma2);
+                dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, &pdDelayMax,
+                                                                   true, false, dSigma1, dSigma2);
                 vdDelayTime.push_back(pdDelay);
+                vdDelayTimeMax.push_back(pdDelayMax);
                 vdConflictProbabilityList.push_back(dProbability);
             }
 //            else{
@@ -431,12 +440,14 @@ double Route::CalculationProbabilityAndDelayAtPoint(int iIndex1, Route *pRoute2,
 
             //case C
             if (getArrivingTimeAtPoint(iIndex1) > pRoute2->getArrivingTimeAtPoint(iIndex2)) {
-                dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, true, false,
-                                                                   bGeometricMethod, dSigma1, dSigma2);
+                dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, &pdDelayMax,
+                                                                   true, false, dSigma1, dSigma2);
                 vdDelayTime.push_back(pdDelay);
+                vdDelayTimeMax.push_back(pdDelayMax);
                 vdConflictProbabilityList.push_back(dProbability);
             } else {
                 vdDelayTime.push_back(0);
+                vdDelayTimeMax.push_back(0);
                 vdConflictProbabilityList.push_back(0);
             }
 
@@ -445,9 +456,10 @@ double Route::CalculationProbabilityAndDelayAtPoint(int iIndex1, Route *pRoute2,
 //            vdConflictProbabilityList.push_back(0);
         } else {
             //case A
-            dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, true, true,
-                                                               bGeometricMethod, dSigma1, dSigma2);
+            dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, &pdDelayMax, true,
+                                                               true, dSigma1, dSigma2);
             vdDelayTime.push_back(pdDelay);
+            vdDelayTimeMax.push_back(pdDelayMax);
             vdConflictProbabilityList.push_back(dProbability);
 //
 //            //case B
@@ -464,6 +476,7 @@ double Route::CalculationProbabilityAndDelayAtPoint(int iIndex1, Route *pRoute2,
         }
     }
     *pdDelayTime = *std::max_element(vdDelayTime.begin(), vdDelayTime.end());
+    *pdDelayTimeMax = *std::max_element(vdDelayTimeMax.begin(), vdDelayTimeMax.end());
     *pbWait = getArrivingTimeAtPoint(iIndex1) > pRoute2->getArrivingTimeAtPoint(iIndex2);
     double dConflictProbability = std::min(
             std::accumulate(vdConflictProbabilityList.begin(), vdConflictProbabilityList.end(), 0.0), 1.0);

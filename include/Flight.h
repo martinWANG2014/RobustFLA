@@ -88,17 +88,16 @@ public:
      * @param bGeometricMethod      Whether use the geometric method to estimate the conflict probability
      * @return the conflict probability between two flights.
      */
-    double CalculateProbabilityConflictAndDelayForFlight(Flight *pFlight2, double *pdDelay, bool *pbWait,
-                                                         bool bGeometricMethod);
+    double CalculateProbabilityConflictAndDelayForFlight(Flight *pFlight2, double *pdDelay, double *pdDelayMax,
+                                                         bool *pbWait);
 
 
     /**
      * Generate a new flight with a different departure time.
      * @param iNewDepartureTime     The new flight departure time
-     * @param bGeometricMethod      Whether use the geometric method
      * @return  the pointer of a new flight.
      */
-    void GenerateNewFlight(Time iNewDepartureTime, bool bGeometricMethod);
+    void GenerateNewFlight(Time iNewDepartureTime);
 
     /**
      * override == operand.
@@ -126,11 +125,15 @@ public:
      */
     double getSigma() const;
 
+    double getSigmaPrime() const;
+
     /**
      * Setter for dSigma.
      * @param dSigma    The new sigma value
      */
     void setSigma(double dSigma);
+
+    void setSigmaPrime(double dSigmaPrime);
 
     /**
      * Initialize the route time list.
@@ -210,6 +213,8 @@ private:
      * The deviation of departure time.
      */
     double dSigma;
+
+    double dSigmaPrime;
 
     /**
      * The coefficient of admissible cost.

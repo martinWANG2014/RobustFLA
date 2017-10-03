@@ -13,7 +13,7 @@ Estimation feasibility:
     Hoeffding's Inequalities Method
     Gaussian Method
     Monte-Carlo Simulation Method
-    Numeration Method
+    Deterministic Method
 
 end note
 (Solve FLA problem) -r-> (Exporter Solution):<<include>>

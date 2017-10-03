@@ -76,13 +76,13 @@ public:
      */
     int getPointListSize();
 
-    /**
-     * Get the velocity between the current point and its precedent one.
-     * @param iIndexPoint       The index of queried Point
-     * @param dDeltaT           The delay time
-     * @return the velocity between the current point and its precedent one.
-     */
-    double getVelocityFromPoint(int iIndexPoint, double dDeltaT);
+//    /**
+//     * Get the velocity between the current point and its precedent one.
+//     * @param iIndexPoint       The index of queried Point
+//     * @param dDeltaT           The delay time
+//     * @return the velocity between the current point and its precedent one.
+//     */
+//    double getVelocityFromPoint(int iIndexPoint, double dDeltaT);
 
     /**
      * Get the velocity between the current point and its precedent one.
@@ -97,12 +97,12 @@ public:
      */
     Time getFinalArrivingTime();
 
-    /**
-     * Geometric method: Generate a new route with different times compared with current route.
-     * @param iNewDepartureTime    The new departure time
-     * @return A new route.
-     */
-    void GenerateNewRoute(Time iNewDepartureTime);
+//    /**
+//     * Geometric method: Generate a new route with different times compared with current route.
+//     * @param iNewDepartureTime    The new departure time
+//     * @return A new route.
+//     */
+//    void GenerateNewRoute(Time iNewDepartureTime);
 
     /**
      * Gaussian method: Generate a new route with different times compared with current route.
@@ -113,7 +113,7 @@ public:
 
     /**
      * Check whether the route is valid or not.
-     * @return true, if the route is valide; false, otherwise.
+     * @return true, if the route is valid; false, otherwise.
      */
     bool selfCheck();
 
@@ -130,8 +130,8 @@ public:
      * @return the conflict probability for two points.
      */
     double CalculationProbabilityAndDelayAtPoint(int iIndex1, Route *pRoute2, int iIndex2, double *pdDelayTime,
-                                                 bool *pbWait,
-                                                 bool bGeometricMethod, double dSigma1, double dSigma2);
+                                                 double *pdDelayTimeMax, bool *pbWait, double dSigma1,
+                                                 double dSigma2);
 
     /**
      * Initialize the route time list.
@@ -173,7 +173,7 @@ private:
      * @return the conflict probability for two points.
      */
     double CalculateProbabilityAndDelayForPartA(double dT1, double dT2, double dV1, double dV2, double dCosA,
-                                                double *pdDelayTime, bool bGeometricMethod, double dSigma1,
+                                                double *pdDelayTime, double *pdDelayTimeMax, double dSigma1,
                                                 double dSigma2);
 
     /**
@@ -191,7 +191,7 @@ private:
      * @return the conflict probability for two points.
      */
     double CalculateProbabilityAndDelayForPartB(double dT1, double dT2, double dV1, double dV2, double dCosA,
-                                                double *pdDelayTime, bool bGeometricMethod, double dSigma1,
+                                                double *pdDelayTime, double *pdDelayTimeMax, double dSigma1,
                                                 double dSigma2);
 
     /**
@@ -209,7 +209,7 @@ private:
      * @return the conflict probability for two points.
      */
     double CalculateProbabilityAndDelayForPartC(double dT1, double dT2, double dV1, double dV2, double dCosA,
-                                                double *pdDelayTime, bool bGeometricMethod, double dSigma1,
+                                                double *pdDelayTime, double *pdDelayTimeMax, double dSigma1,
                                                 double dSigma2);
 
     /**
@@ -227,7 +227,7 @@ private:
      * @return the conflict probability for two points.
      */
     double CalculateProbabilityAndDelayForPartD(double dT1, double dT2, double dV1, double dV2, double dCosA,
-                                                double *pdDelayTime, bool bGeometricMethod, double dSigma1,
+                                                double *pdDelayTime, double *pdDelayTimeMax, double dSigma1,
                                                 double dSigma2);
 
     /**
@@ -244,8 +244,8 @@ private:
      * @return the conflict probability for two points.
      */
     double CalculatePartialProbabilityAndDelay(int iIndex1, Route *pRoute2, int iIndex2, double *pdDelayTime,
-                                               bool bFlag1,
-                                               bool bFlag2, bool bGeometricMethod, double dSigma1, double dSigma2);
+                                               double *pdDelayTimeMax, bool bFlag1, bool bFlag2, double dSigma1,
+                                               double dSigma2);
 };
 
 #endif //ROUTE_H
