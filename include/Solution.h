@@ -73,7 +73,7 @@ void InitTable(double **ppdTable, int iSize);
 void DestroyTable(double **ppdTable, int iSize);
 
 void CalculateConflictProbability(FlightVector &vpConflictFlightList, double **ppdConflictProbability,
-                                  double **ppdDelayTime, double **ppdDelayTimeMax);
+                                  double **ppdDelayTime, double **ppdDelayTimeMax, bool deterministic);
 
 /**
  * Get the index of most infeasible constraint.
@@ -165,7 +165,7 @@ bool FeasibilityGaussian(FlightVector &vpConflictedFlightList, const vdList &vdP
  */
 bool FeasibilityMonteCarlo(FlightVector &vpConflictedFlightList, const viList &viConstraintList, const vdList &vdPi,
                            const IloNumArray &decisionVariables, const vdList &vdParameter, double dEpsilon,
-                           int *piIndex, bool modeDisplay);
+                           int *piIndex, bool modeDisplay, int nbIteration);
 
 
 /**
@@ -185,7 +185,7 @@ bool FeasibilityMonteCarlo(FlightVector &vpConflictedFlightList, const viList &v
 int SolveFLA(FlightVector &vpFlightList, FlightLevelAssignmentMap &flightLevelAssignmentMap, const IloEnv &env,
              const vdList &vdParameter,
              LevelVector &viLevelsList, ProcessClock &processClock, double epsilon, double dCoefPi,
-             double *dSumBenefits, int *iMaxNbConflict, int iModeMethod, bool modeDisplay);
+             double *dSumBenefits, int *iMaxNbConflict, int iModeMethod, bool modeDisplay, int nbIterations);
 
 /**
  * Get the number of flights that change it flight level.
@@ -219,20 +219,16 @@ SolvingFLAByLevelPP(FlightVector &vpFlightList, FlightsLevelMap &infeasibleFligh
                     FlightLevelAssignmentMap &flightLevelAssignmentMap, double epsilon,
                     int *iMaxNbConflict,
                     Level iProcessingLevel, int iModeMethod,
-                    bool modeDisplay);
+                    bool modeDisplay, int nbIterations);
 
-/**
- * Approximate FLA method
- * @param pNetwork          The pointer of network
- * @param vdParameter       The distribution parameter list
- * @param dEpsilon          The robust parameter
- * @param dCoefPi           The coefficient parameter for each flight
- * @param dSumBenefits      The sum of benefits
- * @param iMaxNbConflict    The maximal number of potential conflict
- * @param iModeMethod       The method mode
- * @param iFeasibleSize     The feasible flight size
- */
-void ApproximateFLA(const Network *pNetwork, const vdList &vdParameter, double dEpsilon, double dCoefPi,
-                    double *dSumBenefits, int *iMaxNbConflict, int iModeMethod, bool modeDisplay);
+void ApproximateFLA(const Network *pNetwork, const vdList &vdParameter, String solutionDir, String dataFilename,
+                    double dEpsilon, double dCoefPi,
+                    int feasibleSize, double percentAdditionalFlights, double *dSumBenefits, int *iMaxNbConflict,
+                    int iModeMethod, bool sigmaMode, bool modeDisplay, int nbIterations = 1000);
+
+void writeJsonSolution(String SolutionDir, String dataFilename, vdList parameterList, double epsilon, double coefPi,
+                       int feasibleSize, bool modeSigma, double percentAdditionalFlights, int method,
+                       int nbFlightsChangeLevel, int nbMaxConflict,
+                       int nbMaxDiverseLevels, double SumBenefits, double ElapsedTime, int nbIterations);
 
 #endif //SOLUTION_H

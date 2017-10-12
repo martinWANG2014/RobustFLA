@@ -17,7 +17,7 @@ void Flight::GenerateNewFlight(Time iNewDepartureTime) {
 }
 
 double Flight::CalculateProbabilityConflictAndDelayForFlight(Flight *pFlight2, double *pdDelay, double *pdDelayMax,
-                                                             bool *pbWait) {
+                                                             bool *pbWait, bool deterministic) {
     Route *route2 = pFlight2->getRoute();
     for (int i = 0; i < pRoute->getPointListSize(); i++) {
         for (int j = 0; j < route2->getPointListSize(); j++) {
@@ -25,7 +25,8 @@ double Flight::CalculateProbabilityConflictAndDelayForFlight(Flight *pFlight2, d
 //                    std::cout << "Flight: " << getCode() << " and Flight: " << pFlight2->getCode()
 //                              << " has conflict at (" << i << ", " << j << "):" ;
                     double prob = pRoute->CalculationProbabilityAndDelayAtPoint(i, route2, j, pdDelay, pdDelayMax,
-                                                                                pbWait, dSigma, pFlight2->getSigma());
+                                                                                pbWait, dSigma, pFlight2->getSigma(),
+                                                                                deterministic);
                     if (prob > MIN_PROBA) {
                         return prob;
                     }
@@ -136,6 +137,36 @@ Flight::Flight(const String &sCode, Airport *pAOrigin, Airport *pADestination, T
     Flight::pADestination = pADestination;
     Flight::dDepartureTime = iDepartureTime;
     Flight::pRoute = pRoute;
+    Flight::dDuration = pRoute->getPointAtI(pRoute->getPointListSize() - 1)->getArrivingTime() - iDepartureTime;
+    pRoute->setNbPointsPerFlight(pRoute->getPointListSize());
     Flight::iCurrentLevel = pRoute->getDefaultLevel();
 }
+
+Point *Flight::getPointAtI(int indexI) const {
+    return pRoute->getPointAtI(indexI);
+}
+
+String Flight::getDestAirportName() const {
+    return pADestination->getCode();
+}
+
+String Flight::getOrigAirportName() const {
+    return pAOrigin->getCode();
+}
+
+int Flight::getNbPoints() const {
+    return pRoute->getPointListSize();
+}
+
+void Flight::extendRoute(Time offset) {
+    int nbPoints = pRoute->getPointListSize();
+    for (int i = 0; i < nbPoints; i++) {
+        pRoute->addNewPoint(pRoute->getPointAtI(i)->clone(pRoute->getPointAtI(i)->getArrivingTime() + offset));
+    }
+}
+
+double Flight::getDuration() const {
+    return dDuration;
+}
+
 

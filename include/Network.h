@@ -127,6 +127,10 @@ public:
     void SetSigma(const vdList &vdParameters, bool modeGenerateSigma);
 
     void initialize(double dCoefPi, int iFeasibleSize, vdList parameterList, bool sigmaMode, bool modeDisplay);
+
+    Flight *getFlightAtI(int indexI) const;
+
+    void update(double percentAdditionalFlights, Time offset);
 private:
     /**
      * The flight list in the air traffic management network.

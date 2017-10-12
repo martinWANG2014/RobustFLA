@@ -60,6 +60,8 @@ public:
      */
     bool operator!=(const Node &rhs) const;
 
+    Node *clone();
+
 private:
     /**
      * The point code.

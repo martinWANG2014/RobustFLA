@@ -157,4 +157,26 @@ Network::initialize(double dCoefPi, int iFeasibleSize, vdList vdParameter, bool 
 
 }
 
+Flight *Network::getFlightAtI(int indexI) const {
+    return vpFlightsList[indexI];
+}
 
+void Network::update(double percentAdditionalFlights, Time offset) {
+    int nbFlights = getNbFlights();
+    int nbAdditionalFlights = (int) (nbFlights * percentAdditionalFlights);
+//    std::cerr << nbFlights <<"\t"<<nbAdditionalFlights << std::endl;
+    viList flightIdList;
+    for (int i = 0; i < nbFlights; i++) {
+        flightIdList.push_back(i);
+    }
+    std::random_shuffle(flightIdList.begin(), flightIdList.end());
+    for (int i = 0; i < nbAdditionalFlights; i++) {
+        int index = flightIdList[i];
+//        std::cerr << i << "\t"<< index << std::endl;
+        vpFlightsList[index]->extendRoute(vpFlightsList[index]->getDuration() + offset);
+    }
+    for (auto &&fj: vpFlightsList) {
+        fj->initRouteTimeList();
+    }
+//    std::cerr << "ok" << std::endl;
+}

@@ -1,6 +1,8 @@
 //
 // Created by chenghaowang on 14/07/17.
 //
+
+#include <fstream>
 #include "../include/Configuration.h"
 
 //double getSigma1(double alpha, double beta, double gamma) {
@@ -302,3 +304,29 @@ double getSigmaReal(const vdList &vdParameters, double dSigma) {
                         vdParameters[4],
                         dSigma));
 }
+
+bool exists(String filename) {
+    std::ifstream file(filename);
+    return file.good();
+}
+
+String doubleToString2(double value) {
+    std::stringstream ss;
+    ss << std::fixed << std::setprecision(2) << value;
+    return ss.str();
+}
+
+String doubleToString4(double value) {
+    std::stringstream ss;
+    ss << std::fixed << std::setprecision(4) << value;
+    return ss.str();
+}
+
+String doubleToString(double value) {
+    std::stringstream ss;
+    ss << std::fixed << std::setprecision(0) << value;
+    return ss.str();
+}
+
+
+

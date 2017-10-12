@@ -50,6 +50,9 @@ public:
      */
     bool operator!=(const Point &rhs) const;
 
+    String getPointName() const;
+
+    Point *clone(Time arrivingTime);
 private:
     /**
      * The wayPoint of the node point.

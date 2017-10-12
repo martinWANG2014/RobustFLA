@@ -6,7 +6,7 @@
 #include "../include/Input.h"
 
 bool Point::operator==(const Point &rhs) const {
-    return *pWayPoint == *rhs.pWayPoint &&
+    return (*pWayPoint == *rhs.pWayPoint) &&
            fabs(iArrivingTime - rhs.iArrivingTime) < Network::PERIOD_LENGTH;
 }
 
@@ -27,5 +27,14 @@ Time Point::getArrivingTime() const {
 }
 
 Point::Point(WayPoint *pWayPoint, Time iArrivingTime) : pWayPoint(pWayPoint), iArrivingTime(iArrivingTime) {}
+
+String Point::getPointName() const {
+    return pWayPoint->getCode();
+}
+
+Point *Point::clone(Time arrivingTime) {
+    return new Point(pWayPoint->clone(), arrivingTime);
+}
+
 
 

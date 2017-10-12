@@ -182,13 +182,14 @@ void Input::parseFlights(Network *pNetwork, bool modeDisplay) {
                     pNetwork->addNewFlight(pFlight);
                 } else if (modeDisplay && bIsRouteValid) {
                     std::cout << std::endl
-                              << "[Warning]: the route of " << i
-                              << "th flight is not correct, it is ignored automatically!"
+                              << "[Warning]: the " << i << "th flight was redundant, it is ignored automatically!"
                               << std::endl;
+
                 } else {
                     if (modeDisplay) {
                         std::cout << std::endl
-                                  << "[Warning]: the " << i << "th flight was redundant, it is ignored automatically!"
+                                  << "[Warning]: the route of " << i
+                                  << "th flight is not correct, it is ignored automatically!"
                                   << std::endl;
                     }
                 }
@@ -218,7 +219,4 @@ void Input::initNetwork(Network *pNetwork, bool modeDisplay) {
     parseFlights(pNetwork, modeDisplay);
 }
 
-bool Input::exists(const String &name) {
-    std::ifstream f(name.c_str());
-    return f.good();
-}
+

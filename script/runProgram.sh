@@ -3,8 +3,11 @@
 # data directory path
 data_dir="../data"
 
-# the solutionS directory path
-solution_dir="../solution"
+# the log directory path
+log_dir="../log_${2}"
+
+# the solution directory path
+solu_dir="../solution_${2}"
 
 # the original flight txt data file path
 flight_txt=${data_dir}/flight.txt
@@ -29,7 +32,7 @@ executable_target="../build/bin/RobustFLA"
 
 # the program usage message.
 function Usage {
-    echo -e "[USAGE] runProgram.sh method_mode period_length epsilon feasible_list_size coefficient_Pi alpha beta gamma w1 w2 p modeSigma modeDisplay"
+    echo -e "[USAGE] runProgram.sh method_mode period_length epsilon feasible_list_size coefficient_Pi alpha beta gamma w1 w2 p pa modeSigma modeDisplay"
     echo -e "method_mode 0 \t\t\t Deterministic Method"
     echo -e "method_mode 1 \t\t\t Hoeffding Inequalities Method"
     echo -e "method_mode 2 \t\t\t Monte-Carlo Simulation Method"
@@ -44,13 +47,14 @@ function Usage {
     echo -e "w1 \t\t\t An integer in [0, 100], the mean u=t-w1*alpha of the left part x<t"
     echo -e "w2 \t\t\t An integer in [0, 100], the mean u=t+w2*beta of the right part x>=t"
     echo -e "p \t\t\t An integer in [0, 100], the probability that Pr(x<t)=p%"
+    echo -e "pa \t\t\t An integer in [0, 100], the percentage of additional flights"
     echo -e "modeSigma \t\t\t A boolean, 1, set the dynamic sigma value;  0, set the statistic sigma value."
     echo -e "modeDisplay \t\t\t A boolean, 1, show the details;  0, don't display the details."
 
 }
 
 # method to generate the result filename.
-function getResultFileName {
+function getLogFileName {
     local filename="res"
     for i in $@; do
         filename=${filename}"_"${i}
@@ -65,9 +69,14 @@ if [[ ! -e ${data_dir} ]]; then
     exit
 fi
 
-#  check the solutionS directory, if not exists, then create it!
-if [[ ! -e ${solution_dir} ]]; then
-    mkdir -p ${solution_dir}
+#  check the log directory, if not exists, then create it!
+if [[ ! -e ${log_dir} ]]; then
+    mkdir -p ${log_dir}
+fi
+
+#  check the solution directory, if not exists, then create it!
+if [[ ! -e ${solu_dir} ]]; then
+    mkdir -p ${solu_dir}
 fi
 
 # check the airport data file, if not exists, then convert it from txt data file.
@@ -110,7 +119,7 @@ if [[ ! -e ${executable_target} ]]; then
 fi
 
 # check the parameters list
-if [[ $# -ne 13 ]]; then
+if [[ $# -ne 14 ]]; then
     echo "[ERROR] invalid parameters list."
     Usage
     exit
@@ -141,4 +150,4 @@ esac
 
 # call the program.
 echo  " ${executable_target} ${airport_json} ${beacon_json} ${flight_json} $@"
-${executable_target} ${airport_json} ${beacon_json} ${flight_json} $@ > ${solution_dir}/$(getResultFileName $@)
+${executable_target} ${airport_json} ${beacon_json} ${flight_json} $@  ${solu_dir} > ${log_dir}/$(getLogFileName $@)

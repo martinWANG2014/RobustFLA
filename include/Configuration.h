@@ -29,7 +29,7 @@ const double MIN_SEPARATION_DISTANCE = 5.0;
 #endif
 #ifndef MIN_ANGLE_CONST
 #define MIN_ANGLE_CONST
-const double MIN_ANGLE = cos(10.0 / 180.0 * M_PI);
+const double MIN_ANGLE = cos(5.0 / 180.0 * M_PI);
 #endif
 #ifndef MIN_PROBA_CONST
 #define MIN_PROBA_CONST
@@ -43,12 +43,10 @@ const double MIN_PROBA = 0.0001;
 const double MIN_SIGMA = 0.1;
 #endif
 typedef std::vector<int> viList;
-typedef std::vector<std::vector<int>> vviList;
 typedef std::vector<double> vdList;
 typedef std::deque<std::vector<int>> qviList;
 typedef int Level;
 typedef std::deque<Level> LevelQueue;
-typedef std::set<Level> LevelSet;
 typedef std::vector<Level> LevelVector;
 typedef std::map<Level, std::pair<int, int>> FlightLevelMap;
 typedef std::map<Level, bool> LevelExamine;
@@ -224,4 +222,12 @@ double getRealPartSigma_2(double mu, double sigma);
  * @return
  */
 double getSigmaReal(const vdList &vdParameters, double dSigma);
+
+bool exists(String filename);
+
+String doubleToString(double value);
+
+String doubleToString2(double value);
+
+String doubleToString4(double value);
 #endif //CONFIGURATION_H

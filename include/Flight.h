@@ -89,7 +89,7 @@ public:
      * @return the conflict probability between two flights.
      */
     double CalculateProbabilityConflictAndDelayForFlight(Flight *pFlight2, double *pdDelay, double *pdDelayMax,
-                                                         bool *pbWait);
+                                                         bool *pbWait, bool deterministic = false);
 
 
     /**
@@ -173,6 +173,19 @@ public:
      * @param newLevel      The new feasible flight level
      */
     void addNewFeasibleLevel(Level newLevel);
+
+    String getOrigAirportName() const;
+
+    String getDestAirportName() const;
+
+    int getNbPoints() const;
+
+    Point *getPointAtI(int indexI) const;
+
+    void extendRoute(Time offset);
+
+    double getDuration() const;
+
 private:
     /**
      * The flight id
@@ -220,6 +233,8 @@ private:
      * The coefficient of admissible cost.
      */
     double dCoefPi;
+
+    double dDuration;
 };
 typedef std::vector<Flight *> FlightVector;
 typedef std::map<Level, std::vector<Flight *>> FlightsLevelMap;

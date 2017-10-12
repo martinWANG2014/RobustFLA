@@ -28,4 +28,8 @@ const Position &Node::getPosition() const {
     return position;
 }
 
+Node *Node::clone() {
+    return new Node(sCode, sName, position);
+}
+
 

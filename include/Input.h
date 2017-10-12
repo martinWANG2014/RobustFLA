@@ -4,7 +4,6 @@
 
 #ifndef INPUT_H
 #define INPUT_H
-
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include "Flight.h"
@@ -66,12 +65,7 @@ private:
      */
     void parseWayPoints(Network *pNetwork, bool modeDisplay);
 
-    /**
-     * Verify whether the file exists.
-     * @param name      The filename
-     * @return true, if exists; false, otherwise.
-     */
-    bool exists(const String &name);
+
 };
 
 #endif //INPUT_H
