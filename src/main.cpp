@@ -2,7 +2,7 @@
 #include <boost/filesystem.hpp>
 void EchoUsage(){
     std::cout
-            << "[USAGE] RobustFLA airport_json_File beacon_json_file flight_json_file method_mode period_length epsilon feasible_list_size coefficient_Pi alpha beta gamma w1 w2 p sigmaMode displayMode [nbIterations]"
+            << "[USAGE] RobustFLA airport_json_File beacon_json_file flight_json_file alpha beta gamma w1 w2 p pa sigmaMode generateFlight period_length feasible_list_size method_mode epsilon coefficient_Pi nbIterations deterministicRule displayMode"
             << std::endl
             << "method_mode 0 \t\t\t Deterministic Method" << std::endl
             << "method_mode 1 \t\t\t Hoeffding Inequalities Method" << std::endl
@@ -28,100 +28,71 @@ void EchoUsage(){
             << "nbIterations \t\t\t An integer, it's required for Monte-Carlo method";
 }
 
-String writeJsonData(String SolutionDir, double percentAdditionalFlights, int mode, double epsilon, double coefPi,
-                     const Network *pNetwork) {
-    using boost::property_tree::ptree;
-    using boost::property_tree::write_json;
-    // check the solution directory.
-
-    // Write the json file with boost property tree.
-    ptree root;
-
-    // get the target filename.
-    std::stringstream outFilename;
-    outFilename << "flight_" << mode << "_" << doubleToString2(epsilon) << "_" << doubleToString2(coefPi) << "_"
-                << percentAdditionalFlights << ".json";
-
-    //write the flight list in a json format.
-    root.put("FN", pNetwork->getNbFlights());
-    for (int i = 0; i < pNetwork->getNbFlights(); i++) {
-        Flight *flight = pNetwork->getFlightAtI(i);
-        ptree rootFlight;
-        rootFlight.put("Origin", flight->getOrigAirportName());
-        rootFlight.put("Dest", flight->getDestAirportName());
-        rootFlight.put("FCode", flight->getCode());
-        rootFlight.put("DTime", doubleToString(flight->getDepartureTime()));
-        rootFlight.put("FLevel", flight->getDefaultLevel());
-        ptree rootPointsList;
-        for (int j = 0; j < flight->getRoute()->getPointListSize(); j++) {
-            ptree point;
-            point.put("Code", flight->getPointAtI(j)->getPointName());
-            point.put("Time", doubleToString(flight->getPointAtI(j)->getArrivingTime()));
-            rootPointsList.put_child(std::to_string(j), point);
-        }
-        rootPointsList.put("PLN", flight->getNbPoints());
-        rootFlight.put_child("PointList", rootPointsList);
-        root.put_child(std::to_string(i), rootFlight);
-    }
-    // write to the target file.
-    write_json(SolutionDir + "/" + outFilename.str(), root);
-    return outFilename.str();
-}
-
-
-
 int main(int argc, char *argv[]) {
     using std::invalid_argument;
     try {
-        if (argc < 19 || argc > 20 ||
-            (argc == 20 && (boost::lexical_cast<int>(argv[4]) != 2 || boost::lexical_cast<int>(argv[4]) != 5)) ||
-            (argc == 19 && (boost::lexical_cast<int>(argv[4]) == 2 || boost::lexical_cast<int>(argv[4]) == 5))) {
+        if (argc != 21) {
             EchoUsage();
             abort();
         }
-        Network::PERIOD_LENGTH = boost::lexical_cast<double>(argv[5]);
-        Network network;
-        String solutionDir = argv[18];
-        Input input(argv[1], argv[2], argv[3]);
-        double offsetAdditionRoute = 300;
-        double dSumBenefits = 0;
-        int iMaxNbConflict = 0;
-        vdList vdSigmaParameters;
-        vdSigmaParameters.push_back(boost::lexical_cast<int>(argv[9]));
-        vdSigmaParameters.push_back(boost::lexical_cast<int>(argv[10]));
-        vdSigmaParameters.push_back(boost::lexical_cast<int>(argv[11]) / 10000.0);
-        vdSigmaParameters.push_back(boost::lexical_cast<int>(argv[12]) / 100.0);
-        vdSigmaParameters.push_back(boost::lexical_cast<int>(argv[13]) / 100.0);
-        vdSigmaParameters.push_back(boost::lexical_cast<int>(argv[14]) / 100.0);
+        bool generatedFlightData = boost::lexical_cast<int>(argv[12]) == 1;
+        vdList vdDataParameters;
+        vdDataParameters.push_back(boost::lexical_cast<int>(argv[4]));
+        vdDataParameters.push_back(boost::lexical_cast<int>(argv[5]));
+        vdDataParameters.push_back(boost::lexical_cast<int>(argv[6]) / 10000.0);
+        vdDataParameters.push_back(boost::lexical_cast<int>(argv[7]) / 100.0);
+        vdDataParameters.push_back(boost::lexical_cast<int>(argv[8]) / 100.0);
+        vdDataParameters.push_back(boost::lexical_cast<int>(argv[9]) / 100.0);
+        vdDataParameters.push_back(boost::lexical_cast<int>(argv[10]) / 100.0);
 
-        bool modeDisplay = boost::lexical_cast<int>(argv[17]) == 1;
-        input.initNetwork(&network, modeDisplay);
-
-        double epsilon = boost::lexical_cast<double>(argv[6]) / 100.0;
-        int feasibleSize = boost::lexical_cast<int>(argv[7]);
-        double coefPi = boost::lexical_cast<double>(argv[8]) / 100.0;
-        double percentAdditionalFlights = boost::lexical_cast<double>(argv[15]) / 100.0;
-        bool modeSigma = boost::lexical_cast<int>(argv[16]) == 1;
-        int modeMethod = boost::lexical_cast<int>(argv[4]);
-        int nbIterations = (modeMethod == 2 || modeMethod == 5) ? boost::lexical_cast<int>(argv[19]) : 0;
-        network.initialize(coefPi, feasibleSize, vdSigmaParameters, modeSigma, modeDisplay);
-        network.update(boost::lexical_cast<int>(argv[15]) / 100.0, offsetAdditionRoute);
-        String dataFilename = writeJsonData(solutionDir, boost::lexical_cast<int>(argv[15]) / 100.0, modeMethod,
-                                            epsilon, coefPi, &network);
-        if (boost::lexical_cast<int>(argv[4]) == 5) {
-            ApproximateFLA(&network, vdSigmaParameters, solutionDir, dataFilename, epsilon, coefPi, feasibleSize,
-                           percentAdditionalFlights, &dSumBenefits, &iMaxNbConflict, 0, modeSigma, modeDisplay);
-            ApproximateFLA(&network, vdSigmaParameters, solutionDir, dataFilename, epsilon, coefPi, feasibleSize,
-                           percentAdditionalFlights, &dSumBenefits, &iMaxNbConflict, 1, modeSigma, modeDisplay);
-            ApproximateFLA(&network, vdSigmaParameters, solutionDir, dataFilename, epsilon, coefPi, feasibleSize,
-                           percentAdditionalFlights, &dSumBenefits, &iMaxNbConflict, 2, modeSigma, modeDisplay,
-                           nbIterations);
-            ApproximateFLA(&network, vdSigmaParameters, solutionDir, dataFilename, epsilon, coefPi, feasibleSize,
-                           percentAdditionalFlights, &dSumBenefits, &iMaxNbConflict, 3, modeSigma, modeDisplay);
+        std::stringstream modifiedFlightFileName;
+        if (generatedFlightData && vdDataParameters[6] > 0) {
+            modifiedFlightFileName << "../data/flight_" << vdDataParameters[0] << "_" << vdDataParameters[1] << "_"
+                                   << vdDataParameters[2] << "_" << vdDataParameters[3] << "_" << vdDataParameters[4]
+                                   << "_" << vdDataParameters[5]
+                                   << "_0_-.json";
         } else {
-            ApproximateFLA(&network, vdSigmaParameters, solutionDir, dataFilename, epsilon, coefPi, feasibleSize,
-                           percentAdditionalFlights, &dSumBenefits, &iMaxNbConflict, modeMethod, modeSigma, modeDisplay,
-                           nbIterations);
+            modifiedFlightFileName << "../data/flight_" << vdDataParameters[0] << "_" << vdDataParameters[1] << "_"
+                                   << vdDataParameters[2] << "_" << vdDataParameters[3] << "_" << vdDataParameters[4]
+                                   << "_" << vdDataParameters[5]
+                                   << "_"
+                                   << vdDataParameters[6] << "_-.json";
+        }
+        String flightName = modifiedFlightFileName.str();
+        bool deterministicRule = boost::lexical_cast<int>(argv[19]) == 1;
+        bool modeDisplay = boost::lexical_cast<int>(argv[20]) == 1;
+        double epsilon = boost::lexical_cast<int>(argv[16]) / 100.0;
+        int feasibleSize = boost::lexical_cast<int>(argv[14]);
+        double coefPi = boost::lexical_cast<int>(argv[17]) / 100.0;
+        bool modeSigma = boost::lexical_cast<int>(argv[11]) == 1;
+        int modeMethod = boost::lexical_cast<int>(argv[15]);
+        double offsetAdditionRoute = 300;
+        int nbIterations = boost::lexical_cast<int>(argv[18]);
+        if (nbIterations < 0) {
+            nbIterations = 1000;
+        }
+        Network network;
+        Input input(argv[1], argv[2], generatedFlightData && vdDataParameters[6] == 0 ? argv[3] : flightName);
+        input.initNetwork(&network, modeDisplay, !generatedFlightData || vdDataParameters[6] > 0);
+        network.initialize(vdDataParameters, coefPi, feasibleSize, modeSigma, modeDisplay, generatedFlightData);
+//        network.writeFlightsJsonData(&network, vdDataParameters);
+        String dataFilename = (generatedFlightData || !exists(flightName)) ? network.generateFlights(vdDataParameters,
+                                                                                                     offsetAdditionRoute)
+                                                                           : flightName;
+        Network::PERIOD_LENGTH = boost::lexical_cast<int>(argv[13]) / 1.00;
+        if (modeMethod == 5) {
+            ApproximateFLA(&network, vdDataParameters, dataFilename, epsilon, coefPi, feasibleSize, 0, modeSigma,
+                           modeDisplay, deterministicRule);
+            ApproximateFLA(&network, vdDataParameters, dataFilename, epsilon, coefPi, feasibleSize, 1, modeSigma,
+                           modeDisplay, deterministicRule);
+            ApproximateFLA(&network, vdDataParameters, dataFilename, epsilon, coefPi, feasibleSize, 2, modeSigma,
+                           modeDisplay, deterministicRule, nbIterations);
+            ApproximateFLA(&network, vdDataParameters, dataFilename, epsilon, coefPi, feasibleSize, 3, modeSigma,
+                           modeDisplay, deterministicRule);
+
+        } else {
+            ApproximateFLA(&network, vdDataParameters, dataFilename, epsilon, coefPi, feasibleSize, modeMethod,
+                           modeSigma, modeDisplay, deterministicRule, nbIterations);
         }
     }
     catch (const invalid_argument &e) {

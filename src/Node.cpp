@@ -4,6 +4,7 @@
 
 #include "../include/Node.h"
 bool Node::operator==(const Node &rhs) const {
+//    std::cout << sCode << ":" << rhs.getCode() << std::endl;
     return sCode == rhs.getCode();
 }
 
@@ -30,6 +31,11 @@ const Position &Node::getPosition() const {
 
 Node *Node::clone() {
     return new Node(sCode, sName, position);
+}
+
+std::ostream &operator<<(std::ostream &os, const Node &node) {
+    os << "sCode: " << node.sCode;
+    return os;
 }
 
 

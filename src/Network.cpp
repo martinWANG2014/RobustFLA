@@ -2,6 +2,7 @@
 // Created by martinwang on 27/04/17.
 //
 
+
 #include "../include/Network.h"
 
 double Network::PERIOD_LENGTH = 30;
@@ -120,7 +121,7 @@ void Network::InitCoefPi(double dCoefPi) {
 }
 
 void Network::SetSigma(const vdList &vdParameters, bool modeGenerateSigma) {
-    if (vdParameters.size() != 6) {
+    if (vdParameters.size() != 7) {
         std::cerr << "the vdParameters list invalid!" << std::endl;
         abort();
     }
@@ -135,16 +136,17 @@ void Network::SetSigma(const vdList &vdParameters, bool modeGenerateSigma) {
         if (modeGenerateSigma) {
             double sigma = UniformDist(gen);
             fi->setSigmaPrime(sigma);
-            fi->setSigma(getSigmaReal(vdParameters, sigma));
+            fi->setSigma(getSigmaHybridFoldedNormal(vdParameters, sigma));
         } else {
             fi->setSigmaPrime(dSigma);
-            fi->setSigma(getSigmaReal(vdParameters, dSigma));
+            fi->setSigma(getSigmaHybridFoldedNormal(vdParameters, dSigma));
         }
     }
 }
 
 void
-Network::initialize(double dCoefPi, int iFeasibleSize, vdList vdParameter, bool modeGenerateSigma, bool modeDisplay) {
+Network::initialize(vdList vdParameter, double dCoefPi, int iFeasibleSize, bool modeGenerateSigma, bool modeDisplay,
+                    bool generatedFlightFile) {
     // Initialize the coefficient Pi for all flight in the network.
     this->InitCoefPi(dCoefPi);
     // Initialize the feasible flight levels for all flights in the network.
@@ -152,31 +154,77 @@ Network::initialize(double dCoefPi, int iFeasibleSize, vdList vdParameter, bool 
     // Initialize  the flight levels list of the network.
     this->InitFlightLevelsList(modeDisplay);
     // Initialize the sigma for the random departure time.
-
-    this->SetSigma(vdParameter, modeGenerateSigma);
-
+    if (generatedFlightFile && vdParameter[6] == 0) {
+        this->SetSigma(vdParameter, modeGenerateSigma);
+    }
 }
 
 Flight *Network::getFlightAtI(int indexI) const {
     return vpFlightsList[indexI];
 }
 
-void Network::update(double percentAdditionalFlights, Time offset) {
+String Network::generateFlights(const vdList vdParameterList, Time offset) {
     int nbFlights = getNbFlights();
-    int nbAdditionalFlights = (int) (nbFlights * percentAdditionalFlights);
-//    std::cerr << nbFlights <<"\t"<<nbAdditionalFlights << std::endl;
-    viList flightIdList;
-    for (int i = 0; i < nbFlights; i++) {
-        flightIdList.push_back(i);
+    int nbAdditionalFlights = (int) (nbFlights * vdParameterList[6]);
+    if (nbAdditionalFlights > 0) {
+        viList flightIdList;
+        for (int i = 0; i < nbFlights; i++) {
+            flightIdList.push_back(i);
+        }
+        std::random_shuffle(flightIdList.begin(), flightIdList.end());
+        for (int i = 0; i < nbAdditionalFlights; i++) {
+            int index = flightIdList[i];
+            vpFlightsList[index]->extendRoute(vpFlightsList[index]->getDuration() + offset);
+        }
+        for (auto &&fj: vpFlightsList) {
+            fj->initRouteTimeList();
+        }
     }
-    std::random_shuffle(flightIdList.begin(), flightIdList.end());
-    for (int i = 0; i < nbAdditionalFlights; i++) {
-        int index = flightIdList[i];
-//        std::cerr << i << "\t"<< index << std::endl;
-        vpFlightsList[index]->extendRoute(vpFlightsList[index]->getDuration() + offset);
-    }
-    for (auto &&fj: vpFlightsList) {
-        fj->initRouteTimeList();
-    }
-//    std::cerr << "ok" << std::endl;
+    return writeFlightsJsonData(this, vdParameterList);
 }
+
+String Network::writeFlightsJsonData(const Network *pNetwork, const vdList parameterList) {
+    using boost::property_tree::ptree;
+//    using boost::property_tree::basic_ptree;
+    using boost::property_tree::write_json;
+    // check the solution directory.
+
+    // Write the json file with boost property tree.
+    ptree root;
+
+    // get the target filename.
+    std::stringstream outFilename;
+    outFilename << "../data/flight_" << parameterList[0] << "_" << parameterList[1] << "_"
+                << parameterList[2] << "_" << parameterList[3] << "_" << parameterList[4] << "_" << parameterList[5]
+                << "_" << parameterList[6] << "_-.json";
+    String filename = outFilename.str();
+    //write the flight list in a json format.
+    root.put("FN", pNetwork->getNbFlights());
+    for (int i = 0; i < pNetwork->getNbFlights(); i++) {
+        Flight *flight = pNetwork->getFlightAtI(i);
+        ptree rootFlight;
+        rootFlight.put<double>("Sigma", flight->getSigma());
+        rootFlight.put<double>("SigmaPrime", flight->getSigmaPrime());
+        rootFlight.put("Origin", flight->getOrigAirportName());
+        rootFlight.put("Dest", flight->getDestAirportName());
+        rootFlight.put("FCode", flight->getCode());
+        rootFlight.put("DTime", flight->getDepartureTime());
+        rootFlight.put<int>("FLevel", flight->getDefaultLevel());
+        ptree rootPointsList;
+        for (int j = 0; j < flight->getRoute()->getPointListSize(); j++) {
+            ptree point;
+            point.put("Code", flight->getPointAtI(j)->getPointName());
+            point.put<double>("Time", flight->getPointAtI(j)->getArrivingTime());
+            rootPointsList.put_child(std::to_string(j), point);
+        }
+        rootPointsList.put<int>("PLN", flight->getNbPoints());
+        rootFlight.put_child("PointList", rootPointsList);
+        root.put_child(std::to_string(i), rootFlight);
+    }
+    // write to the target file.
+//    if (!exists(filename)) {
+    write_json(filename, root);
+//    }
+    return filename;
+}
+

@@ -5,6 +5,7 @@
 #ifndef NODE_H
 #define NODE_H
 
+#include <ostream>
 #include "Position.h"
 #include "Configuration.h"
 /**
@@ -77,6 +78,8 @@ private:
      * The point position, see{@link Position}.
      */
     Position position;
+public:
+    friend std::ostream &operator<<(std::ostream &os, const Node &node);
 };
 
 typedef Node WayPoint, Airport;

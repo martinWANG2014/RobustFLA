@@ -6,6 +6,8 @@
 #define NETWORK_H
 
 #include "Flight.h"
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/json_parser.hpp>
 
 class Network {
 public:
@@ -126,11 +128,15 @@ public:
      */
     void SetSigma(const vdList &vdParameters, bool modeGenerateSigma);
 
-    void initialize(double dCoefPi, int iFeasibleSize, vdList parameterList, bool sigmaMode, bool modeDisplay);
+    void initialize(const vdList parameterList, double dCoefPi, int iFeasibleSize, bool sigmaMode, bool modeDisplay,
+                    bool generatedFlightFile);
 
     Flight *getFlightAtI(int indexI) const;
 
-    void update(double percentAdditionalFlights, Time offset);
+    String writeFlightsJsonData(const Network *pNetwork, const vdList parameterList);
+
+    String generateFlights(const vdList vdParameterList, Time offset);
+
 private:
     /**
      * The flight list in the air traffic management network.

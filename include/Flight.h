@@ -5,6 +5,7 @@
 #ifndef FLIGHT_H
 #define FLIGHT_H
 
+#include <ostream>
 #include "Node.h"
 #include "NodePoint.h"
 #include "Route.h"
@@ -72,7 +73,7 @@ public:
      * Get the arriving time for a flight.
      * @return  the arriving time of a flight
      */
-    Time getArrivingTime();
+    Time getArrivingTime() const;
 
     /**
      * Setter for vpFeasibleLevelsList.
@@ -89,7 +90,7 @@ public:
      * @return the conflict probability between two flights.
      */
     double CalculateProbabilityConflictAndDelayForFlight(Flight *pFlight2, double *pdDelay, double *pdDelayMax,
-                                                         bool *pbWait, bool deterministic = false);
+                                                         bool *pbWait, bool deterministic, bool deterministicRule);
 
 
     /**
@@ -186,6 +187,8 @@ public:
 
     double getDuration() const;
 
+    friend std::ostream &operator<<(std::ostream &os, const Flight &flight);
+
 private:
     /**
      * The flight id
@@ -233,11 +236,8 @@ private:
      * The coefficient of admissible cost.
      */
     double dCoefPi;
-
-    double dDuration;
 };
 typedef std::vector<Flight *> FlightVector;
 typedef std::map<Level, std::vector<Flight *>> FlightsLevelMap;
-typedef std::map<Flight *, bool> FlightAssignmentMap;
 typedef std::map<Flight *, std::pair<bool, Level>> FlightLevelAssignmentMap;
 #endif //FLIGHT_H

@@ -287,7 +287,7 @@ Level findNextFeasibleLevel(int iDefaultLevel, Level lastLevel) {
     }
 }
 
-double getRealPartSigma_2(double mu, double sigma) {
+double getSigma_2FoldedNormal(double mu, double sigma) {
     double dSigma_2;
     dSigma_2 = pow(mu, 2) + pow(sigma, 2);
     double muy = sigma * sqrt(2.0 / M_PI) * exp(-pow(mu, 2) / (2 * pow(sigma, 2))) -
@@ -296,10 +296,10 @@ double getRealPartSigma_2(double mu, double sigma) {
     return dSigma_2;
 }
 
-double getSigmaReal(const vdList &vdParameters, double dSigma) {
-    return sqrt(pow(vdParameters[5], 2) * getRealPartSigma_2(vdParameters[0] * vdParameters[3], dSigma) +
+double getSigmaHybridFoldedNormal(const vdList &vdParameters, double dSigma) {
+    return sqrt(pow(vdParameters[5], 2) * getSigma_2FoldedNormal(vdParameters[0] * vdParameters[3], dSigma) +
                 pow(1 - vdParameters[5], 2) *
-                getRealPartSigma_2(
+                getSigma_2FoldedNormal(
                         vdParameters[1] *
                         vdParameters[4],
                         dSigma));
@@ -308,24 +308,6 @@ double getSigmaReal(const vdList &vdParameters, double dSigma) {
 bool exists(String filename) {
     std::ifstream file(filename);
     return file.good();
-}
-
-String doubleToString2(double value) {
-    std::stringstream ss;
-    ss << std::fixed << std::setprecision(2) << value;
-    return ss.str();
-}
-
-String doubleToString4(double value) {
-    std::stringstream ss;
-    ss << std::fixed << std::setprecision(4) << value;
-    return ss.str();
-}
-
-String doubleToString(double value) {
-    std::stringstream ss;
-    ss << std::fixed << std::setprecision(0) << value;
-    return ss.str();
 }
 
 

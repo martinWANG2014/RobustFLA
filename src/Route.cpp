@@ -61,6 +61,9 @@ double Route::getVelocityFromPoint(int iIndexPoint) {
 
 bool Route::selfCheck() {
     bool bValid = true;
+//    for(auto && point:vpPointsList){
+//        std::cout << point->getPointName() << ":" << point->getArrivingTime() << std::endl;
+//    }
     for (int i = 1; i < getPointListSize(); i++) {
         if (vpPointsList[i]->getArrivingTime() <= vpPointsList[i - 1]->getArrivingTime()) {
             bValid = false;
@@ -89,7 +92,7 @@ double Route::CalculateProbabilityAndDelayForPartA(double dT1, double dT2, doubl
             *pdDelayTime = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT2 - dT1);
             *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2);
             if (deterministic) {
-                dProbabilityConflict = dMu < MIN_SEPARATION_DISTANCE ? 1 : 0;
+                dProbabilityConflict = dMu < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
             } else {
                 dProbabilityConflict = 0.5 * (boost::math::erf(dRight) + boost::math::erf(dLeft));
             }
@@ -107,7 +110,7 @@ double Route::CalculateProbabilityAndDelayForPartA(double dT1, double dT2, doubl
             *pdDelayTime = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT1 - dT2);
             *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2);
             if (deterministic) {
-                dProbabilityConflict = dMu < MIN_SEPARATION_DISTANCE ? 1 : 0;
+                dProbabilityConflict = dMu < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
             } else {
                 dProbabilityConflict = 0.5 * (boost::math::erf(dRight) + boost::math::erf(dLeft));
             }
@@ -142,7 +145,7 @@ double Route::CalculateProbabilityAndDelayForPartB(double dT1, double dT2, doubl
     *pdDelayTime = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT2 - dT1);
     *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2);
     if (deterministic) {
-        dProbabilityConflict = dMu < MIN_SEPARATION_DISTANCE ? 1 : 0;
+        dProbabilityConflict = dMu < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
     } else {
         dProbabilityConflict = 0.5 * (boost::math::erf(dRight) + boost::math::erf(dLeft));
     }
@@ -171,7 +174,7 @@ double Route::CalculateProbabilityAndDelayForPartC(double dT1, double dT2, doubl
     *pdDelayTime = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT1 - dT2);
     *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2);
     if (deterministic) {
-        dProbabilityConflict = dMu < MIN_SEPARATION_DISTANCE ? 1 : 0;
+        dProbabilityConflict = dMu < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
     } else {
         dProbabilityConflict = 0.5 * (boost::math::erf(dRight) + boost::math::erf(dLeft));
     }
@@ -197,7 +200,7 @@ double Route::CalculateProbabilityAndDelayForPartD(double dT1, double dT2, doubl
             *pdDelayTime = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT2 - dT1);
             *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2);
             if (deterministic) {
-                dProbabilityConflict = dMu < MIN_SEPARATION_DISTANCE ? 1 : 0;
+                dProbabilityConflict = dMu < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
             } else {
                 dProbabilityConflict = 0.5 * (boost::math::erf(dRight) + boost::math::erf(dLeft));
             }
@@ -215,7 +218,7 @@ double Route::CalculateProbabilityAndDelayForPartD(double dT1, double dT2, doubl
             *pdDelayTime = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT1 - dT2);
             *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2);
             if (deterministic) {
-                dProbabilityConflict = dMu < MIN_SEPARATION_DISTANCE ? 1 : 0;
+                dProbabilityConflict = dMu < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
             } else {
                 dProbabilityConflict = 0.5 * (boost::math::erf(dRight) + boost::math::erf(dLeft));
             }
@@ -589,4 +592,21 @@ int Route::getNbPointsPerFlight() const {
 
 void Route::setNbPointsPerFlight(int nbPointsPerFlight) {
     Route::nbPointsPerFlight = nbPointsPerFlight;
+}
+
+int Route::getEndPoint() {
+    auto position = std::find(vpPointsList.begin() + 1, vpPointsList.end(), vpPointsList[0]);
+    return (int) (position == vpPointsList.end() ? vpPointsList.size() : position - vpPointsList.begin());
+}
+
+const PointVector &Route::getVpPointsList() const {
+    return vpPointsList;
+}
+
+std::ostream &operator<<(std::ostream &os, const Route &route) {
+    os << "vpPointsList: ";
+    for (auto &&point:route.getVpPointsList()) {
+        os << *point << ",";
+    }
+    return os;
 }

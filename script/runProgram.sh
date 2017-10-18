@@ -4,10 +4,10 @@
 data_dir="../data"
 
 # the log directory path
-log_dir="../log_${2}"
+log_dir="../log"
 
 # the solution directory path
-solu_dir="../solution_${2}"
+solution_dir="../solution"
 
 # the original flight txt data file path
 flight_txt=${data_dir}/flight.txt
@@ -32,7 +32,7 @@ executable_target="../build/bin/RobustFLA"
 
 # the program usage message.
 function Usage {
-    echo -e "[USAGE] runProgram.sh method_mode period_length epsilon feasible_list_size coefficient_Pi alpha beta gamma w1 w2 p pa modeSigma modeDisplay"
+    echo -e "[USAGE] runProgram.sh alpha beta gamma w1 w2 p pa sigmaMode generateFlight period_length feasible_list_size method_mode epsilon coefficient_Pi nbIterations displayMode"
     echo -e "method_mode 0 \t\t\t Deterministic Method"
     echo -e "method_mode 1 \t\t\t Hoeffding Inequalities Method"
     echo -e "method_mode 2 \t\t\t Monte-Carlo Simulation Method"
@@ -75,8 +75,8 @@ if [[ ! -e ${log_dir} ]]; then
 fi
 
 #  check the solution directory, if not exists, then create it!
-if [[ ! -e ${solu_dir} ]]; then
-    mkdir -p ${solu_dir}
+if [[ ! -e ${solution_dir} ]]; then
+    mkdir -p ${solution_dir}
 fi
 
 # check the airport data file, if not exists, then convert it from txt data file.
@@ -119,35 +119,13 @@ if [[ ! -e ${executable_target} ]]; then
 fi
 
 # check the parameters list
-if [[ $# -ne 14 ]]; then
+if [[ $# -ne 16 ]]; then
     echo "[ERROR] invalid parameters list."
     Usage
     exit
 fi
 
-# echo method
-case $1 in
-    0)
-        echo "[INFO] Call Deterministic Method"
-    ;;
-    1)
-        echo "[INFO] Call Hoeffding Inequalities Method"
-    ;;
-    2)
-        echo "[INFO] Call Monte-Carlo Simulation Method"
-    ;;
-    3)
-        echo "[INFO] Call Gaussian Method"
-    ;;
-    5)
-        echo "[INFO] Call all Methods"
-    ;;
-    *)
-        echo "[ERROR] Not support such method"
-        Usage
-        exit
-esac
 
 # call the program.
 echo  " ${executable_target} ${airport_json} ${beacon_json} ${flight_json} $@"
-${executable_target} ${airport_json} ${beacon_json} ${flight_json} $@  ${solu_dir} > ${log_dir}/$(getLogFileName $@)
+${executable_target} ${airport_json} ${beacon_json} ${flight_json} $@ > ${log_dir}/$(getLogFileName $@)

@@ -96,7 +96,7 @@ void Input::parseAirports(Network *pNetwork, bool modeDisplay) {
               << "\tValid Airports: " << pNetwork->getNbAirports() << std::endl;
 }
 
-void Input::parseFlights(Network *pNetwork, bool modeDisplay) {
+void Input::parseFlights(Network *pNetwork, bool modeDisplay, bool flightFileModified) {
     using boost::property_tree::ptree;
     using boost::property_tree::read_json;
     std::cout << "[INFO] Parsing flights file... OK" << std::endl;
@@ -110,7 +110,7 @@ void Input::parseFlights(Network *pNetwork, bool modeDisplay) {
     // Read the json file by the read_json method offered by the boost library.
     read_json(sFlightPath, root);
     // Start to parse the content of json object.
-    int nbFlights = root.get<int>("FN");
+    int nbFlights = boost::lexical_cast<int>(root.get<String>("FN"));
     for (int i = 0; i < nbFlights; i++) {
         String sPrefixed(std::to_string(i));
         // Parse the flight icao code.
@@ -120,7 +120,7 @@ void Input::parseFlights(Network *pNetwork, bool modeDisplay) {
         // Parse the flight destination airport.
         Airport *pAirportDestination = pNetwork->findAirportByCode(root.get<String>(sPrefixed + ".Dest"));
         // Parse the flight departure time.
-        Time iDepartureTime = root.get<Time>(sPrefixed + ".DTime", -1);
+        Time iDepartureTime = boost::lexical_cast<Time>(root.get<String>(sPrefixed + ".DTime", "-1"));
         // Verify the icao code of a flight, if it is empty, then pop up an error message.
         if (modeDisplay && sCode.empty()) {
             std::cout << std::endl << "[Warning]: the " << i
@@ -148,9 +148,9 @@ void Input::parseFlights(Network *pNetwork, bool modeDisplay) {
                       << std::endl;
         } else {
             // Parse the default flight level.
-            Level iLevel = root.get<int>(sPrefixed + ".FLevel");
+            Level iLevel = boost::lexical_cast<Level>(root.get<String>(sPrefixed + ".FLevel"));
             Route *pRoute = new Route(iLevel, pAirportOrigin, iDepartureTime);
-            int nbPoints = root.get<int>(sPrefixed + ".PointList.PLN");
+            int nbPoints = boost::lexical_cast<int>(root.get<String>(sPrefixed + ".PointList.PLN"));
             bool bValid = true;
             int iIndexPoint = 0;
 
@@ -160,26 +160,66 @@ void Input::parseFlights(Network *pNetwork, bool modeDisplay) {
                 // Parse the wayPoint in the route.
                 WayPoint*pWayPoint = pNetwork->findWayPointByCode(root.get<String>(sPrefixedPath + ".Code"));
                 // Verify the wayPoint, if it is empty, then pop up an error message.
-                if (modeDisplay && pWayPoint == nullptr) {
-                    std::cout << std::endl << "[Warning]: the code of " << iIndexPoint << "th point in " << i
-                              << "th flight's route is unknown, it is ignored automatically!"
-                              << std::endl;
-                    bValid = false;
+                if (pWayPoint == nullptr) {
+                    pWayPoint = pNetwork->findAirportByCode(root.get<String>(sPrefixedPath + ".Code"));
+                    // Parse the arriving time at a corresponding wayPoint.
+                    if (flightFileModified && iIndexPoint != 0) {
+                        Point *point = new Point(pWayPoint,
+                                                 boost::lexical_cast<Time>(root.get<String>(sPrefixedPath + ".Time")));
+//                        std::cout << *point<<std::endl;
+                        pRoute->addNewPoint(point);
+                    } else if (!flightFileModified) {
+                        Point *point = new Point(pWayPoint,
+                                                 boost::lexical_cast<Time>(root.get<String>(sPrefixedPath + ".Time")));
+                        pRoute->addNewPoint(point);
+                    }
+                    if (modeDisplay && pWayPoint == nullptr) {
+                        std::cout << std::endl << "[Warning]: the code of " << iIndexPoint << "th point in " << i
+                                  << "th flight's route is unknown, it is ignored automatically!"
+                                  << std::endl;
+                        bValid = false;
+                    }
                 } else {
                     // Parse the arriving time at a corresponding wayPoint.
-                    Point *point = new Point(pWayPoint, root.get<Time>(sPrefixedPath + ".Time"));
-                    pRoute->addNewPoint(point);
+                    if (flightFileModified && iIndexPoint != 0) {
+                        Point *point = new Point(pWayPoint,
+                                                 boost::lexical_cast<Time>(root.get<String>(sPrefixedPath + ".Time")));
+//                        std::cout << *point<<std::endl;
+                        pRoute->addNewPoint(point);
+                    } else if (!flightFileModified) {
+                        Point *point = new Point(pWayPoint,
+                                                 boost::lexical_cast<Time>(root.get<String>(sPrefixedPath + ".Time")));
+
+                        pRoute->addNewPoint(point);
+                    }
+
                 }
                 iIndexPoint++;
             }
+//            std::cout << iIndexPoint<< std::endl;
+
             // If the route is correct, then create a flight object.
             if (bValid) {
                 Flight *pFlight = new Flight(sCode, pAirportOrigin, pAirportDestination, iDepartureTime, pRoute);
                 // Verify whether the network has contained the flight or not. If not, then add it into network.
+//                std::cout << "nbPoints:" << pFlight->getRoute()->getPointListSize() << std::endl;
+//                for(auto&& point:pFlight->getRoute()->getVpPointsList()){
+//                    std::cout << point->getPointName() << ":" << point->getArrivingTime() << std::endl;
+//                }
                 bool bIsRouteValid = pFlight->selfCheck();
+//                std::cout << i <<(bIsRouteValid ?":true" : ":false")<< std::endl;
                 if (bIsRouteValid && !contains(pNetwork->getFlightsList(), pFlight)) {
                     pFlight->initRouteTimeList();
+                    if (flightFileModified) {
+                        // Parse the sigma of flight.
+                        double sigma = boost::lexical_cast<double>(root.get<String>(sPrefixed + ".Sigma"));
+                        // Parse the prime sigma of flight.
+                        double sigmaPrime = boost::lexical_cast<double>(root.get<String>(sPrefixed + ".SigmaPrime"));
+                        pFlight->setSigma(sigma);
+                        pFlight->setSigmaPrime(sigmaPrime);
+                    }
                     pNetwork->addNewFlight(pFlight);
+//                    std::cout << *pFlight << std::endl;
                 } else if (modeDisplay && bIsRouteValid) {
                     std::cout << std::endl
                               << "[Warning]: the " << i << "th flight was redundant, it is ignored automatically!"
@@ -203,6 +243,9 @@ void Input::parseFlights(Network *pNetwork, bool modeDisplay) {
             }
         }
     }
+//    for (auto &&fj: pNetwork->getFlightsList()) {
+//        fj->initRouteTimeList();
+//    }
     std::cout << "\tFlights file data:" << std::endl
               << "\tFlights: " << nbFlights << std::endl
               << "\tValid Flights: " << pNetwork->getNbFlights() << std::endl;
@@ -213,10 +256,11 @@ Input::Input(const String &sAirportPath, const String &sWayPointPath, const Stri
 
 Input::~Input() {}
 
-void Input::initNetwork(Network *pNetwork, bool modeDisplay) {
+void Input::initNetwork(Network *pNetwork, bool modeDisplay, bool flightFileModified) {
     parseAirports(pNetwork, modeDisplay);
     parseWayPoints(pNetwork, modeDisplay);
-    parseFlights(pNetwork, modeDisplay);
+    parseFlights(pNetwork, modeDisplay, flightFileModified);
 }
+
 
 

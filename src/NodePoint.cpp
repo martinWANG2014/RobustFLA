@@ -36,5 +36,10 @@ Point *Point::clone(Time arrivingTime) {
     return new Point(pWayPoint->clone(), arrivingTime);
 }
 
+std::ostream &operator<<(std::ostream &os, const Point &point) {
+    os << "pWayPoint: " << *point.pWayPoint << " iArrivingTime: " << point.iArrivingTime;
+    return os;
+}
+
 
 

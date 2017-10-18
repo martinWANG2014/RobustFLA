@@ -5,6 +5,7 @@
 #ifndef NODEPOINT_H
 #define NODEPOINT_H
 
+#include <ostream>
 #include "Node.h"
 
 
@@ -53,6 +54,9 @@ public:
     String getPointName() const;
 
     Point *clone(Time arrivingTime);
+
+    friend std::ostream &operator<<(std::ostream &os, const Point &point);
+
 private:
     /**
      * The wayPoint of the node point.

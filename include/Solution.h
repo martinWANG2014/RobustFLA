@@ -31,20 +31,6 @@ qviList Combination(const viList &viConstraintList, int k);
 viList getComplement(int iSize, viList &candidateList);
 
 /**
- * Get a random data from the first type gaussian distribution
- * @param vdParameter       The parameter list for the gaussian distribution
- * @return a random data.
- */
-double GaussianDistribution1(const vdList &vdParameter, double dSigma);
-
-/**
- * Get a random data from the second type gaussian distribution
- * @param vdParameter       The parameter list for the gaussian distribution
- * @return a random data.
- */
-double GaussianDistribution2(const vdList &vdParameter, double dSigma);
-
-/**
  * Get a random data from the third type gaussian distribution
  * @param vdParameter       The parameter list for the gaussian distribution
  * @return a random data.
@@ -73,7 +59,8 @@ void InitTable(double **ppdTable, int iSize);
 void DestroyTable(double **ppdTable, int iSize);
 
 void CalculateConflictProbability(FlightVector &vpConflictFlightList, double **ppdConflictProbability,
-                                  double **ppdDelayTime, double **ppdDelayTimeMax, bool deterministic);
+                                  double **ppdDelayTime, double **ppdDelayTimeMax, bool deterministic,
+                                  bool deterministicRule);
 
 /**
  * Get the index of most infeasible constraint.
@@ -88,21 +75,6 @@ void CalculateConflictProbability(FlightVector &vpConflictFlightList, double **p
 int MinIndexArgs0(FlightVector &vpConflictFlightList, const vdList &vdPi,
                   double **ppdConflictProbability,
                   double **ppdDelayTime, bool modeDisplay);
-
-/**
- * Get the index of most infeasible constraint for last solution.
- * @param vpConflictFlightList      The conflict flights list
- * @param viSearchList              The search list
- * @param vdPi                      The Admissible cost list
- * @param decisionVariables         The decision variables values of last solution
- * @param ppdConflictProbability    The pointer of conflict probability matrix
- * @param ppdDelayTime              The pointer of delay time matrix
- * @param bGeoMethod                A flag whether use the geometric method
- * @return the index of most infeasible constraint.
- */
-int MinIndexArgs1(FlightVector &vpConflictFlightList, const viList &constraintList, const vdList &vdPi,
-                  const IloNumArray &decisionVariables, double **ppdConflictProbability, double **ppdDelayTime,
-                  bool bMethod);
 
 /**
  * Check the constraint feasibility
@@ -165,7 +137,7 @@ bool FeasibilityGaussian(FlightVector &vpConflictedFlightList, const vdList &vdP
  */
 bool FeasibilityMonteCarlo(FlightVector &vpConflictedFlightList, const viList &viConstraintList, const vdList &vdPi,
                            const IloNumArray &decisionVariables, const vdList &vdParameter, double dEpsilon,
-                           int *piIndex, bool modeDisplay, int nbIteration);
+                           int *piIndex, bool modeDisplay, int nbIteration, bool deterministicRule);
 
 
 /**
@@ -185,7 +157,8 @@ bool FeasibilityMonteCarlo(FlightVector &vpConflictedFlightList, const viList &v
 int SolveFLA(FlightVector &vpFlightList, FlightLevelAssignmentMap &flightLevelAssignmentMap, const IloEnv &env,
              const vdList &vdParameter,
              LevelVector &viLevelsList, ProcessClock &processClock, double epsilon, double dCoefPi,
-             double *dSumBenefits, int *iMaxNbConflict, int iModeMethod, bool modeDisplay, int nbIterations);
+             double *dSumBenefits, int *iMaxNbConflict, int iModeMethod, bool modeDisplay, int nbIterations,
+             bool deterministicRule);
 
 /**
  * Get the number of flights that change it flight level.
@@ -219,15 +192,15 @@ SolvingFLAByLevelPP(FlightVector &vpFlightList, FlightsLevelMap &infeasibleFligh
                     FlightLevelAssignmentMap &flightLevelAssignmentMap, double epsilon,
                     int *iMaxNbConflict,
                     Level iProcessingLevel, int iModeMethod,
-                    bool modeDisplay, int nbIterations);
+                    bool modeDisplay, int nbIterations, bool deterministicRule);
 
-void ApproximateFLA(const Network *pNetwork, const vdList &vdParameter, String solutionDir, String dataFilename,
+void ApproximateFLA(const Network *pNetwork, const vdList &vdParameter, String dataFilename,
                     double dEpsilon, double dCoefPi,
-                    int feasibleSize, double percentAdditionalFlights, double *dSumBenefits, int *iMaxNbConflict,
-                    int iModeMethod, bool sigmaMode, bool modeDisplay, int nbIterations = 1000);
+                    int feasibleSize,
+                    int iModeMethod, bool sigmaMode, bool modeDisplay, bool deterministicRule, int nbIterations = 1000);
 
-void writeJsonSolution(String SolutionDir, String dataFilename, vdList parameterList, double epsilon, double coefPi,
-                       int feasibleSize, bool modeSigma, double percentAdditionalFlights, int method,
+void writeJsonSolution(String dataFilename, vdList parameterList, double epsilon, double coefPi,
+                       int feasibleSize, bool modeSigma, int method,
                        int nbFlightsChangeLevel, int nbMaxConflict,
                        int nbMaxDiverseLevels, double SumBenefits, double ElapsedTime, int nbIterations);
 

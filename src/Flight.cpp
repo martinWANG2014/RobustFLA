@@ -17,10 +17,32 @@ void Flight::GenerateNewFlight(Time iNewDepartureTime) {
 }
 
 double Flight::CalculateProbabilityConflictAndDelayForFlight(Flight *pFlight2, double *pdDelay, double *pdDelayMax,
-                                                             bool *pbWait, bool deterministic) {
+                                                             bool *pbWait, bool deterministic,
+                                                             bool deterministicDominate) {
     Route *route2 = pFlight2->getRoute();
-    for (int i = 0; i < pRoute->getPointListSize(); i++) {
-        for (int j = 0; j < route2->getPointListSize(); j++) {
+    if (deterministicDominate) {
+        for (int i = 0; i < pRoute->getPointListSize(); i++) {
+            for (int j = 0; j < route2->getPointListSize(); j++) {
+                if (*pRoute->getPointAtI(i) == *route2->getPointAtI(j)) {
+//                    std::cout << "Flight: " << getCode() << " and Flight: " << pFlight2->getCode()
+//                              << " has conflict at (" << i << ", " << j << "):" ;
+                    double prob = pRoute->CalculationProbabilityAndDelayAtPoint(i, route2, j, pdDelay, pdDelayMax,
+                                                                                pbWait, dSigma, pFlight2->getSigma(),
+                                                                                true);
+                    if (prob > MIN_PROBA) {
+                        prob = pRoute->CalculationProbabilityAndDelayAtPoint(i, route2, j, pdDelay, pdDelayMax,
+                                                                             pbWait, dSigma, pFlight2->getSigma(),
+                                                                             deterministic);
+                        if (prob > MIN_PROBA) {
+                            return prob;
+                        }
+                    }
+                }
+            }
+        }
+    } else {
+        for (int i = 0; i < pRoute->getPointListSize(); i++) {
+            for (int j = 0; j < route2->getPointListSize(); j++) {
                 if (*pRoute->getPointAtI(i) == *route2->getPointAtI(j)) {
 //                    std::cout << "Flight: " << getCode() << " and Flight: " << pFlight2->getCode()
 //                              << " has conflict at (" << i << ", " << j << "):" ;
@@ -33,6 +55,8 @@ double Flight::CalculateProbabilityConflictAndDelayForFlight(Flight *pFlight2, d
                 }
             }
         }
+    }
+
     *pbWait = true;
     *pdDelay = 0;
     *pdDelayMax = 0;
@@ -92,7 +116,7 @@ void Flight::setFeasibleLevelList(const LevelVector levelList) {
     Flight::viFeasibleLevelList = levelList;
 }
 
-Time Flight::getArrivingTime() {
+Time Flight::getArrivingTime() const {
     return pRoute->getFinalArrivingTime();
 }
 
@@ -137,8 +161,13 @@ Flight::Flight(const String &sCode, Airport *pAOrigin, Airport *pADestination, T
     Flight::pADestination = pADestination;
     Flight::dDepartureTime = iDepartureTime;
     Flight::pRoute = pRoute;
-    Flight::dDuration = pRoute->getPointAtI(pRoute->getPointListSize() - 1)->getArrivingTime() - iDepartureTime;
-    pRoute->setNbPointsPerFlight(pRoute->getPointListSize());
+    auto position = std::find(pRoute->getVpPointsList().begin() + 1, pRoute->getVpPointsList().end(),
+                              pRoute->getPointAtI(0));
+    if (position == pRoute->getVpPointsList().end()) {
+        pRoute->setNbPointsPerFlight(pRoute->getPointListSize());
+    } else {
+        pRoute->setNbPointsPerFlight((int) (position - pRoute->getVpPointsList().begin()));
+    }
     Flight::iCurrentLevel = pRoute->getDefaultLevel();
 }
 
@@ -166,7 +195,12 @@ void Flight::extendRoute(Time offset) {
 }
 
 double Flight::getDuration() const {
-    return dDuration;
+    return getArrivingTime() - getDepartureTime();
+}
+
+std::ostream &operator<<(std::ostream &os, const Flight &flight) {
+    os << "pRoute: " << *flight.pRoute;
+    return os;
 }
 
 
