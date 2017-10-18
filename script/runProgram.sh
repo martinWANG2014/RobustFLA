@@ -32,7 +32,7 @@ executable_target="../build/bin/RobustFLA"
 
 # the program usage message.
 function Usage {
-    echo -e "[USAGE] runProgram.sh alpha beta gamma w1 w2 p pa sigmaMode generateFlight period_length feasible_list_size method_mode epsilon coefficient_Pi nbIterations displayMode"
+    echo -e "[USAGE] runProgram.sh alpha beta gamma w1 w2 p pa sigmaMode generateFlight period_length feasible_list_size method_mode epsilon coefficient_Pi nbIterations deterministicRule displayMode"
     echo -e "method_mode 0 \t\t\t Deterministic Method"
     echo -e "method_mode 1 \t\t\t Hoeffding Inequalities Method"
     echo -e "method_mode 2 \t\t\t Monte-Carlo Simulation Method"
@@ -119,7 +119,7 @@ if [[ ! -e ${executable_target} ]]; then
 fi
 
 # check the parameters list
-if [[ $# -ne 16 ]]; then
+if [[ $# -ne 17 ]]; then
     echo "[ERROR] invalid parameters list."
     Usage
     exit

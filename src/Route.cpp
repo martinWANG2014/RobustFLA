@@ -594,11 +594,6 @@ void Route::setNbPointsPerFlight(int nbPointsPerFlight) {
     Route::nbPointsPerFlight = nbPointsPerFlight;
 }
 
-int Route::getEndPoint() {
-    auto position = std::find(vpPointsList.begin() + 1, vpPointsList.end(), vpPointsList[0]);
-    return (int) (position == vpPointsList.end() ? vpPointsList.size() : position - vpPointsList.begin());
-}
-
 const PointVector &Route::getVpPointsList() const {
     return vpPointsList;
 }

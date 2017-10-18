@@ -147,8 +147,6 @@ public:
 
     void setNbPointsPerFlight(int nbPointsPerFlight);
 
-    int getEndPoint();
-
     const PointVector &getVpPointsList() const;
 
     friend std::ostream &operator<<(std::ostream &os, const Route &route);

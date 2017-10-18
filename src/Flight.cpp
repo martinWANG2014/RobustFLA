@@ -17,50 +17,27 @@ void Flight::GenerateNewFlight(Time iNewDepartureTime) {
 }
 
 double Flight::CalculateProbabilityConflictAndDelayForFlight(Flight *pFlight2, double *pdDelay, double *pdDelayMax,
-                                                             bool *pbWait, bool deterministic,
-                                                             bool deterministicDominate) {
+                                                             bool *pbWait, bool deterministic) {
     Route *route2 = pFlight2->getRoute();
-    if (deterministicDominate) {
-        for (int i = 0; i < pRoute->getPointListSize(); i++) {
-            for (int j = 0; j < route2->getPointListSize(); j++) {
-                if (*pRoute->getPointAtI(i) == *route2->getPointAtI(j)) {
+    for (int i = 0; i < pRoute->getPointListSize(); i++) {
+        for (int j = 0; j < route2->getPointListSize(); j++) {
+            if (*pRoute->getPointAtI(i) == *route2->getPointAtI(j)) {
 //                    std::cout << "Flight: " << getCode() << " and Flight: " << pFlight2->getCode()
 //                              << " has conflict at (" << i << ", " << j << "):" ;
-                    double prob = pRoute->CalculationProbabilityAndDelayAtPoint(i, route2, j, pdDelay, pdDelayMax,
-                                                                                pbWait, dSigma, pFlight2->getSigma(),
-                                                                                true);
-                    if (prob > MIN_PROBA) {
-                        prob = pRoute->CalculationProbabilityAndDelayAtPoint(i, route2, j, pdDelay, pdDelayMax,
-                                                                             pbWait, dSigma, pFlight2->getSigma(),
-                                                                             deterministic);
-                        if (prob > MIN_PROBA) {
-                            return prob;
-                        }
-                    }
-                }
-            }
-        }
-    } else {
-        for (int i = 0; i < pRoute->getPointListSize(); i++) {
-            for (int j = 0; j < route2->getPointListSize(); j++) {
-                if (*pRoute->getPointAtI(i) == *route2->getPointAtI(j)) {
-//                    std::cout << "Flight: " << getCode() << " and Flight: " << pFlight2->getCode()
-//                              << " has conflict at (" << i << ", " << j << "):" ;
-                    double prob = pRoute->CalculationProbabilityAndDelayAtPoint(i, route2, j, pdDelay, pdDelayMax,
-                                                                                pbWait, dSigma, pFlight2->getSigma(),
-                                                                                deterministic);
-                    if (prob > MIN_PROBA) {
-                        return prob;
-                    }
+                double prob = pRoute->CalculationProbabilityAndDelayAtPoint(i, route2, j, pdDelay, pdDelayMax,
+                                                                            pbWait, dSigma, pFlight2->getSigma(),
+                                                                            deterministic);
+                if (prob > MIN_PROBA) {
+                    return prob;
                 }
             }
         }
     }
-
     *pbWait = true;
     *pdDelay = 0;
     *pdDelayMax = 0;
     return 0;
+
 }
 
 void Flight::addNewFeasibleLevel(Level newLevel) {

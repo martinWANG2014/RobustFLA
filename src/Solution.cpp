@@ -6,7 +6,8 @@
 void writeJsonSolution(String dataFilename, vdList parameterList, double epsilon, double coefPi,
                        int feasibleSize, bool modeSigma, int method,
                        int nbFlightsChangeLevel, int nbMaxConflict,
-                       int nbMaxDiverseLevels, double SumBenefits, double ElapsedTime, int nbIterations) {
+                       int nbMaxDiverseLevels, double SumBenefits, double ElapsedTime, int nbIterations,
+                       bool deterministicRule) {
     //check the solutionDir
 
 
@@ -22,8 +23,8 @@ void writeJsonSolution(String dataFilename, vdList parameterList, double epsilon
     rootConfig.put<double>("minAngleCos", MIN_ANGLE);
     rootConfig.put<double>("PeriodLength", Network::PERIOD_LENGTH);
     rootConfig.put<int>("FeasibleListSize", feasibleSize);
-    rootConfig.put<int>("alpha", -parameterList[0]);
-    rootConfig.put<int>("beta", parameterList[1]);
+    rootConfig.put<double>("alpha", -parameterList[0]);
+    rootConfig.put<double>("beta", parameterList[1]);
     rootConfig.put<double>("gamma", parameterList[2]);
     rootConfig.put<double>("w1", parameterList[3]);
     rootConfig.put<double>("w2", parameterList[4]);
@@ -56,6 +57,7 @@ void writeJsonSolution(String dataFilename, vdList parameterList, double epsilon
     if (method == 2) {
         rootConfig.put<int>("nbIterations", nbIterations);
     }
+    rootConfig.put<int>("deterministicRule", deterministicRule ? 1 : 0);
     root.push_back(std::make_pair("config", rootConfig));
 
     //write the solution
@@ -73,12 +75,14 @@ void writeJsonSolution(String dataFilename, vdList parameterList, double epsilon
         outFilename << "../solution/res_" << method << "_" << Network::PERIOD_LENGTH << "_" << epsilon << "_"
                     << feasibleSize << "_" << coefPi << "_" << parameterList[0] << "_" << parameterList[1] << "_"
                     << parameterList[2] << "_" << parameterList[3] << "_" << parameterList[4] << "_" << parameterList[5]
-                    << "_" << (modeSigma ? 1 : 0) << "_" << parameterList[6] << "_" << nbIterations << ".json";
+                    << "_" << (modeSigma ? 1 : 0) << "_" << parameterList[6] << "_" << (deterministicRule ? 1 : 0)
+                    << "_" << nbIterations << ".json";
     } else {
         outFilename << "../solution/res_" << method << "_" << Network::PERIOD_LENGTH << "_" << epsilon << "_"
                     << feasibleSize << "_" << coefPi << "_" << parameterList[0] << "_" << parameterList[1] << "_"
                     << parameterList[2] << "_" << parameterList[3] << "_" << parameterList[4] << "_" << parameterList[5]
-                    << "_" << (modeSigma ? 1 : 0) << "_" << parameterList[6] << "_-" << ".json";
+                    << "_" << (modeSigma ? 1 : 0) << "_" << parameterList[6] << "_" << (deterministicRule ? 1 : 0)
+                    << "_-" << ".json";
     }
 
     // write to the target file.
@@ -151,7 +155,7 @@ void ApproximateFLA(const Network *pNetwork, const vdList &vdParameter, String d
     std::cout << "\tElapsed time: " << elapsedTime << std::endl << std::endl;
     writeJsonSolution(dataFilename, vdParameter, dEpsilon, dCoefPi, feasibleSize, sigmaMode, iModeMethod,
                       iNbFlightChangeLevel, iMaxNbConflict,
-                      iMaxDiverseLevel, dSumBenefits, elapsedTime, nbIterations);
+                      iMaxDiverseLevel, dSumBenefits, elapsedTime, nbIterations, deterministicRule);
 }
 
 int getNbFlightsChangeLevel(FlightVector &flightVector) {
@@ -242,8 +246,7 @@ SolvingFLAByLevelPP(FlightVector &vpFlightList, FlightsLevelMap &infeasibleFligh
                 continue;
             }
             double prob = fi->CalculateProbabilityConflictAndDelayForFlight(fj, &dDelayTime, &dDelayTimeMax, &bWait,
-                                                                            deterministicRule && iModeMethod,
-                                                                            deterministicRule);
+                                                                            deterministicRule && iModeMethod == 0);
             if (prob > 0) {
                 ConflictFlightList.push_back(fi);
                 break;
@@ -266,8 +269,7 @@ SolvingFLAByLevelPP(FlightVector &vpFlightList, FlightsLevelMap &infeasibleFligh
                 }
                 double prob = flight->CalculateProbabilityConflictAndDelayForFlight(fj, &dDelayTime, &dDelayTimeMax,
                                                                                     &bWait, deterministicRule &&
-                                                                                            iModeMethod == 0,
-                                                                                    deterministicRule);
+                                                                                            iModeMethod == 0);
                 if (prob > 0) {
                     conflict = true;
                 }
@@ -307,7 +309,7 @@ SolvingFLAByLevelPP(FlightVector &vpFlightList, FlightsLevelMap &infeasibleFligh
     InitTable(ppdDelayTime, iConflictFlightsSize);
     InitTable(ppdDelayTimeMax, iConflictFlightsSize);
     CalculateConflictProbability(ConflictFlightList, ppdConflictProbability, ppdDelayTime, ppdDelayTimeMax,
-                                 deterministicRule && iModeMethod == 0, deterministicRule);
+                                 deterministicRule);
 
     //Calculate Mi list and maximal conflict count.
     for (int i = 0; i < iConflictFlightsSize; i++) {
@@ -331,8 +333,7 @@ SolvingFLAByLevelPP(FlightVector &vpFlightList, FlightsLevelMap &infeasibleFligh
 
     viList viConstraintList;
     //Relax the most infeasible constraint.
-    int iMinIndexArgs = MinIndexArgs0(ConflictFlightList, Pi, ppdConflictProbability, ppdDelayTime,
-                                      modeDisplay);
+    int iMinIndexArgs = MinIndexArgs0(ConflictFlightList, Pi, ppdConflictProbability, ppdDelayTime);
     if (iMinIndexArgs == -1) {
         DestroyTable(ppdConflictProbability, iConflictFlightsSize);
         DestroyTable(ppdDelayTime, iConflictFlightsSize);
@@ -630,7 +631,7 @@ bool FeasibilityMonteCarlo(FlightVector &vpConflictedFlightList, const viList &v
             }
         }
         CalculateConflictProbability(vpConflictedFlightList, ppdConflictProbability, ppdDelayTime, ppdDelayTimeMax,
-                                     false, detersministicRule);
+                                     detersministicRule);
 
         for (int i = 0; i < iConflictedFlightsSize; i++) {
             if (decisionVariables[i] == 1) {
@@ -900,8 +901,8 @@ bool FeasibilityEnumeration(const vdList &vdPi, const IloNumArray &decisionVaria
     return true;
 }
 
-int MinIndexArgs0(FlightVector &vpConflictFlightList, const vdList &vdPi,
-                  double **ppdConflictProbability, double **ppdDelayTime, bool modeDisplay) {
+int MinIndexArgs0(FlightVector &vpConflictFlightList, const vdList &vdPi, double **ppdConflictProbability,
+                  double **ppdDelayTime) {
     int iMinIndex = -1;
     int iConflictedFlightSize = (int) vpConflictFlightList.size();
     double dMaxValue = std::numeric_limits<double>::max();
@@ -925,9 +926,9 @@ int MinIndexArgs0(FlightVector &vpConflictFlightList, const vdList &vdPi,
     return iMinIndex;
 }
 
-void CalculateConflictProbability(FlightVector &vpConflictFlightList, double **ppdConflictProbability,
-                                  double **ppdDelayTime, double **ppdDelayTimeMax, bool deterministic,
-                                  bool deterministicRule) {
+void
+CalculateConflictProbability(FlightVector &vpConflictFlightList, double **ppdConflictProbability, double **ppdDelayTime,
+                             double **ppdDelayTimeMax, bool deterministicRule) {
     int iSize = (int) vpConflictFlightList.size();
     bool bWait = true;
     double dDelay = 0;
@@ -936,8 +937,20 @@ void CalculateConflictProbability(FlightVector &vpConflictFlightList, double **p
         Flight *fi = vpConflictFlightList[i];
         for (int j = i + 1; j < iSize; j++) {
             Flight *fj = vpConflictFlightList[j];
-            ppdConflictProbability[i][j] = ppdConflictProbability[j][i] = fi->CalculateProbabilityConflictAndDelayForFlight(
-                    fj, &dDelay, &dDelayMax, &bWait, deterministic, deterministicRule);
+            if (deterministicRule) {
+                double proba = fi->CalculateProbabilityConflictAndDelayForFlight(fj, &dDelay, &dDelayMax, &bWait, true);
+                if (proba > MIN_PROBA) {
+                    ppdConflictProbability[i][j] = ppdConflictProbability[j][i] = fi->CalculateProbabilityConflictAndDelayForFlight(
+                            fj, &dDelay, &dDelayMax, &bWait, deterministicRule);
+                } else {
+                    fi->CalculateProbabilityConflictAndDelayForFlight(fj, &dDelay, &dDelayMax, &bWait,
+                                                                      deterministicRule);
+                    ppdConflictProbability[i][j] = ppdConflictProbability[j][i] == 0;
+                }
+            } else {
+                ppdConflictProbability[i][j] = ppdConflictProbability[j][i] = fi->CalculateProbabilityConflictAndDelayForFlight(
+                        fj, &dDelay, &dDelayMax, &bWait, deterministicRule);
+            }
             if (bWait) {
                 ppdDelayTime[i][j] = dDelay;
                 ppdDelayTime[j][i] = 0.0;//std::min(-dDelay, 0.0);

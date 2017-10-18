@@ -58,9 +58,9 @@ void InitTable(double **ppdTable, int iSize);
  */
 void DestroyTable(double **ppdTable, int iSize);
 
-void CalculateConflictProbability(FlightVector &vpConflictFlightList, double **ppdConflictProbability,
-                                  double **ppdDelayTime, double **ppdDelayTimeMax, bool deterministic,
-                                  bool deterministicRule);
+void
+CalculateConflictProbability(FlightVector &vpConflictFlightList, double **ppdConflictProbability, double **ppdDelayTime,
+                             double **ppdDelayTimeMax, bool deterministic);
 
 /**
  * Get the index of most infeasible constraint.
@@ -72,9 +72,8 @@ void CalculateConflictProbability(FlightVector &vpConflictFlightList, double **p
  * @param bGeoMethod                A flag whether use the geometric method
  * @return the index of most infeasible constraint.
  */
-int MinIndexArgs0(FlightVector &vpConflictFlightList, const vdList &vdPi,
-                  double **ppdConflictProbability,
-                  double **ppdDelayTime, bool modeDisplay);
+int MinIndexArgs0(FlightVector &vpConflictFlightList, const vdList &vdPi, double **ppdConflictProbability,
+                  double **ppdDelayTime);
 
 /**
  * Check the constraint feasibility
@@ -202,6 +201,7 @@ void ApproximateFLA(const Network *pNetwork, const vdList &vdParameter, String d
 void writeJsonSolution(String dataFilename, vdList parameterList, double epsilon, double coefPi,
                        int feasibleSize, bool modeSigma, int method,
                        int nbFlightsChangeLevel, int nbMaxConflict,
-                       int nbMaxDiverseLevels, double SumBenefits, double ElapsedTime, int nbIterations);
+                       int nbMaxDiverseLevels, double SumBenefits, double ElapsedTime, int nbIterations,
+                       bool deterministic);
 
 #endif //SOLUTION_H
