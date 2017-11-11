@@ -60,7 +60,7 @@ void DestroyTable(double **ppdTable, int iSize);
 
 void
 CalculateConflictProbability(FlightVector &vpConflictFlightList, double **ppdConflictProbability, double **ppdDelayTime,
-                             double **ppdDelayTimeMax, bool deterministic);
+                             double **ppdDelayTimeMax, bool deterministicRule, bool deterministic);
 
 /**
  * Get the index of most infeasible constraint.

@@ -4,6 +4,7 @@
 
 #include <fstream>
 #include "../include/Configuration.h"
+#include "../include/Network.h"
 
 //double getSigma1(double alpha, double beta, double gamma) {
 //    return (beta + alpha) / (2 * sqrt(2) * boost::math::erf_inv(gamma));
@@ -309,6 +310,9 @@ bool exists(String filename) {
     std::ifstream file(filename);
     return file.good();
 }
+//double getA_Bar() {
+//    return 0.25 * (Network::PERIOD_LENGTH);
+//}
 
 
 

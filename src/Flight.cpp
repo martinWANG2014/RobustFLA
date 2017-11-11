@@ -17,13 +17,21 @@ void Flight::GenerateNewFlight(Time iNewDepartureTime) {
 }
 
 double Flight::CalculateProbabilityConflictAndDelayForFlight(Flight *pFlight2, double *pdDelay, double *pdDelayMax,
-                                                             bool *pbWait, bool deterministic) {
+                                                             bool *pbWait, bool deterministicRule, bool deterministic) {
     Route *route2 = pFlight2->getRoute();
     for (int i = 0; i < pRoute->getPointListSize(); i++) {
         for (int j = 0; j < route2->getPointListSize(); j++) {
             if (*pRoute->getPointAtI(i) == *route2->getPointAtI(j)) {
 //                    std::cout << "Flight: " << getCode() << " and Flight: " << pFlight2->getCode()
 //                              << " has conflict at (" << i << ", " << j << "):" ;
+                if (deterministicRule && !deterministic) {
+                    double probDet = pRoute->CalculationProbabilityAndDelayAtPoint(i, route2, j, pdDelay, pdDelayMax,
+                                                                                   pbWait, dSigma, pFlight2->getSigma(),
+                                                                                   true);
+                    if (probDet <= MIN_PROBA) {
+                        continue;
+                    }
+                }
                 double prob = pRoute->CalculationProbabilityAndDelayAtPoint(i, route2, j, pdDelay, pdDelayMax,
                                                                             pbWait, dSigma, pFlight2->getSigma(),
                                                                             deterministic);

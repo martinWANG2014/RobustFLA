@@ -246,8 +246,9 @@ SolvingFLAByLevelPP(FlightVector &vpFlightList, FlightsLevelMap &infeasibleFligh
                 continue;
             }
             double prob = fi->CalculateProbabilityConflictAndDelayForFlight(fj, &dDelayTime, &dDelayTimeMax, &bWait,
+                                                                            deterministicRule,
                                                                             deterministicRule && iModeMethod == 0);
-            if (prob > 0) {
+            if (prob > MIN_PROBA) {
                 ConflictFlightList.push_back(fi);
                 break;
             }
@@ -268,9 +269,10 @@ SolvingFLAByLevelPP(FlightVector &vpFlightList, FlightsLevelMap &infeasibleFligh
                     continue;
                 }
                 double prob = flight->CalculateProbabilityConflictAndDelayForFlight(fj, &dDelayTime, &dDelayTimeMax,
-                                                                                    &bWait, deterministicRule &&
+                                                                                    &bWait, deterministicRule,
+                                                                                    deterministicRule &&
                                                                                             iModeMethod == 0);
-                if (prob > 0) {
+                if (prob > MIN_PROBA) {
                     conflict = true;
                 }
             }
@@ -309,7 +311,7 @@ SolvingFLAByLevelPP(FlightVector &vpFlightList, FlightsLevelMap &infeasibleFligh
     InitTable(ppdDelayTime, iConflictFlightsSize);
     InitTable(ppdDelayTimeMax, iConflictFlightsSize);
     CalculateConflictProbability(ConflictFlightList, ppdConflictProbability, ppdDelayTime, ppdDelayTimeMax,
-                                 deterministicRule);
+                                 deterministicRule, deterministicRule && iModeMethod == 0);
 
     //Calculate Mi list and maximal conflict count.
     for (int i = 0; i < iConflictFlightsSize; i++) {
@@ -631,14 +633,14 @@ bool FeasibilityMonteCarlo(FlightVector &vpConflictedFlightList, const viList &v
             }
         }
         CalculateConflictProbability(vpConflictedFlightList, ppdConflictProbability, ppdDelayTime, ppdDelayTimeMax,
-                                     detersministicRule);
+                                     detersministicRule, false);
 
         for (int i = 0; i < iConflictedFlightsSize; i++) {
             if (decisionVariables[i] == 1) {
 //                std::cout << "assign i : "<< i << std::endl;
                 double sum = 0;
                 for (int j = 0; j < iConflictedFlightsSize; j++) {
-                    if (j != i && ppdConflictProbability[i][j] > 0 && decisionVariables[j] == 1) {
+                    if (j != i && ppdConflictProbability[i][j] > MIN_PROBA && decisionVariables[j] == 1) {
                         sum += std::max(0.0, ppdDelayTime[i][j]);
 //                        std::cout << ppdConflictProbability[i][j] << "\t" << ppdDelayTime[i][j]<<std::endl;
                     }
@@ -747,7 +749,7 @@ bool FeasibilityGaussian(FlightVector &vpConflictedFlightList, const vdList &vdP
 //    double dMin = 1;
 //    bool feasible = true;
     for (int i = 0; i < iSize; i++) {
-        if (int(decisionVariables[i]) == 1) {
+        if (decisionVariables[i] == 1) {
 //            std::cout << "assign i : "<< i << std::endl;
             double exp_mu = 0.0;
             double exp_sigma_2 = 0.0;
@@ -756,7 +758,8 @@ bool FeasibilityGaussian(FlightVector &vpConflictedFlightList, const vdList &vdP
             double mu;
             double sigma_2;
             for (int j = 0; j < iSize; j++) {
-                if (ppdConflictProbability[i][j] > 0 && decisionVariables[j] == 1 && ppdDelayTime[i][j] > 0) {
+                if (j != i && decisionVariables[j] == 1 && ppdConflictProbability[i][j] > MIN_PROBA &&
+                    ppdDelayTime[i][j] > 0) {
                     mu = ppdDelayTime[i][j];
                     sigma_2 = (pow(vpConflictedFlightList[i]->getSigma(), 2) +
                                pow(vpConflictedFlightList[j]->getSigma(), 2));
@@ -807,7 +810,7 @@ bool FeasibilityHoeffding(const vdList &vdPi,
         if (int(decisionVariables[i]) == 1) {
 //            std::cout << "assign i : "<< i << std::endl;
             for (int j = 0; j < iConflictedFlightSize; j++) {
-                if (ppdConflictProbability[i][j] > 0) {
+                if (ppdConflictProbability[i][j] > MIN_PROBA) {
                     double maxPenalCost = std::max(0.0, ppdDelayTimeMax[i][j]) * decisionVariables[j] -
                                           std::max(ppdDelayTime[i][j] - vdParameter[1] - vdParameter[2], 0.0) *
                                           decisionVariables[j];
@@ -928,7 +931,7 @@ int MinIndexArgs0(FlightVector &vpConflictFlightList, const vdList &vdPi, double
 
 void
 CalculateConflictProbability(FlightVector &vpConflictFlightList, double **ppdConflictProbability, double **ppdDelayTime,
-                             double **ppdDelayTimeMax, bool deterministicRule) {
+                             double **ppdDelayTimeMax, bool deterministicRule, bool deterministic) {
     int iSize = (int) vpConflictFlightList.size();
     bool bWait = true;
     double dDelay = 0;
@@ -937,30 +940,19 @@ CalculateConflictProbability(FlightVector &vpConflictFlightList, double **ppdCon
         Flight *fi = vpConflictFlightList[i];
         for (int j = i + 1; j < iSize; j++) {
             Flight *fj = vpConflictFlightList[j];
-            if (deterministicRule) {
-                double proba = fi->CalculateProbabilityConflictAndDelayForFlight(fj, &dDelay, &dDelayMax, &bWait, true);
-                if (proba > MIN_PROBA) {
-                    ppdConflictProbability[i][j] = ppdConflictProbability[j][i] = fi->CalculateProbabilityConflictAndDelayForFlight(
-                            fj, &dDelay, &dDelayMax, &bWait, deterministicRule);
-                } else {
-                    fi->CalculateProbabilityConflictAndDelayForFlight(fj, &dDelay, &dDelayMax, &bWait,
-                                                                      deterministicRule);
-                    ppdConflictProbability[i][j] = ppdConflictProbability[j][i] == 0;
-                }
-            } else {
-                ppdConflictProbability[i][j] = ppdConflictProbability[j][i] = fi->CalculateProbabilityConflictAndDelayForFlight(
-                        fj, &dDelay, &dDelayMax, &bWait, deterministicRule);
-            }
+            ppdConflictProbability[i][j] = ppdConflictProbability[j][i] = fi->CalculateProbabilityConflictAndDelayForFlight(
+                    fj, &dDelay, &dDelayMax, &bWait, deterministicRule, deterministic);
+
             if (bWait) {
-                ppdDelayTime[i][j] = dDelay;
+                ppdDelayTime[i][j] = std::max(dDelay, 0.0);
                 ppdDelayTime[j][i] = 0.0;//std::min(-dDelay, 0.0);
-                ppdDelayTimeMax[i][j] = dDelayMax;
+                ppdDelayTimeMax[i][j] = std::max(dDelayMax, 0.0);
                 ppdDelayTimeMax[j][i] = 0.0;//std::min(-dDelayMax, 0.0);
             } else {
                 ppdDelayTime[i][j] = 0.0;//std::min(-dDelay, 0.0);
-                ppdDelayTime[j][i] = dDelay;
+                ppdDelayTime[j][i] = std::max(dDelay, 0.0);
                 ppdDelayTimeMax[i][j] = 0.0;// std::min(-dDelayMax, 0.0);
-                ppdDelayTimeMax[j][i] = dDelayMax;
+                ppdDelayTimeMax[j][i] = std::max(dDelayMax, 0.0);
             }
         }
     }

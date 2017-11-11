@@ -215,7 +215,7 @@ void Input::parseFlights(Network *pNetwork, bool modeDisplay, bool flightFileMod
                         double sigma = boost::lexical_cast<double>(root.get<String>(sPrefixed + ".Sigma"));
                         // Parse the prime sigma of flight.
                         double sigmaPrime = boost::lexical_cast<double>(root.get<String>(sPrefixed + ".SigmaPrime"));
-                        pFlight->setSigma(sigma);
+                        pFlight->setSigma(sigmaPrime);
                         pFlight->setSigmaPrime(sigmaPrime);
                     }
                     pNetwork->addNewFlight(pFlight);

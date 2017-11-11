@@ -90,7 +90,7 @@ public:
      * @return the conflict probability between two flights.
      */
     double CalculateProbabilityConflictAndDelayForFlight(Flight *pFlight2, double *pdDelay, double *pdDelayMax,
-                                                         bool *pbWait, bool deterministic);
+                                                         bool *pbWait, bool deterministicRule, bool deterministic);
 
 
     /**

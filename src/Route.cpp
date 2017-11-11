@@ -86,7 +86,8 @@ double Route::CalculateProbabilityAndDelayForPartA(double dT1, double dT2, doubl
     if (dT1 < dT2) {
         if (dCosA >= dRho) {
             double dMu = dLambda * dV2 * (dT2 - dT1);
-            double dSigma = dLambda * (dV2 * sqrt(pow(dSigma1, 2) + pow(dSigma2, 2)));
+            double dSigma = /*deterministic ?dLambda *getA_Bar() * sqrt(1 + pow(dRho, 2)) : */
+                    dLambda * (dV2 * sqrt(pow(dSigma1, 2) + pow(dSigma2, 2)));
             double dRight = (MIN_SEPARATION_DISTANCE * K - dMu) / (sqrt(2.0) * dSigma);
             double dLeft = dMu / (sqrt(2.0) * dSigma);
             *pdDelayTime = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT2 - dT1);
@@ -104,7 +105,8 @@ double Route::CalculateProbabilityAndDelayForPartA(double dT1, double dT2, doubl
     } else {
         if (dCosA >= 1.0 / dRho) {
             double dMu = dLambda * dV2 * (dT1 - dT2);
-            double dSigma = dLambda * (dV2 * sqrt(pow(dSigma1, 2) + pow(dSigma2, 2)));
+            double dSigma = /*deterministic ?dLambda *getA_Bar() * sqrt(1 + pow(dRho, 2)) :*/
+                    dLambda * (dV2 * sqrt(pow(dSigma1, 2) + pow(dSigma2, 2)));
             double dRight = (MIN_SEPARATION_DISTANCE * K - dMu) / (sqrt(2.0) * dSigma);
             double dLeft = dMu / (sqrt(2.0) * dSigma);
             *pdDelayTime = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT1 - dT2);
@@ -138,7 +140,8 @@ double Route::CalculateProbabilityAndDelayForPartB(double dT1, double dT2, doubl
     double dSinA = sqrt(1 - pow(dCosA, 2));
     double dLambda = dSinA / sqrt(pow(dRho, 2) + 2 * dRho * dCosA + 1);
     double dMu = dLambda * dV2 * (dT2 - dT1);
-    double dSigma = dLambda * (dV2 * sqrt(pow(dSigma1, 2) + pow(dSigma2, 2)));
+    double dSigma = /*deterministic ?dLambda *getA_Bar() * sqrt(1 + pow(dRho, 2)) :*/
+            dLambda * (dV2 * sqrt(pow(dSigma1, 2) + pow(dSigma2, 2)));
     double dRight = (MIN_SEPARATION_DISTANCE * K - dMu) / (sqrt(2.0) * dSigma);
     double dLeft = dMu / (sqrt(2.0) * dSigma);
     double dProbabilityConflict;
@@ -167,7 +170,8 @@ double Route::CalculateProbabilityAndDelayForPartC(double dT1, double dT2, doubl
     double dSinA = sqrt(1 - pow(dCosA, 2));
     double dLambda = dSinA / sqrt(pow(dRho, 2) + 2 * dRho * dCosA + 1);
     double dMu = dLambda * dV2 * (dT1 - dT2);
-    double dSigma = dLambda * (dV2 * sqrt(pow(dSigma1, 2) + pow(dSigma2, 2)));
+    double dSigma = /*deterministic ?dLambda *getA_Bar() * sqrt(1 + pow(dRho, 2)) :*/
+            dLambda * (dV2 * sqrt(pow(dSigma1, 2) + pow(dSigma2, 2)));
     double dRight = (MIN_SEPARATION_DISTANCE * K - dMu) / (sqrt(2.0) * dSigma);
     double dLeft = dMu / (sqrt(2.0) * dSigma);
     double dProbabilityConflict;
@@ -194,7 +198,8 @@ double Route::CalculateProbabilityAndDelayForPartD(double dT1, double dT2, doubl
     if (dT1 < dT2) {
         if (dCosA >= 1.0 / dRho) {
             double dMu = dLambda * dV2 * (dT2 - dT1);
-            double dSigma = dLambda * (dV2 * sqrt(pow(dSigma1, 2) + pow(dSigma2, 2)));
+            double dSigma = /*deterministic ?dLambda *getA_Bar() * sqrt(1 + pow(dRho, 2)) :*/
+                    dLambda * (dV2 * sqrt(pow(dSigma1, 2) + pow(dSigma2, 2)));
             double dRight = (MIN_SEPARATION_DISTANCE * K - dMu) / (sqrt(2.0) * dSigma);
             double dLeft = dMu / (sqrt(2.0) * dSigma);
             *pdDelayTime = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT2 - dT1);
@@ -212,7 +217,8 @@ double Route::CalculateProbabilityAndDelayForPartD(double dT1, double dT2, doubl
     } else {
         if (dCosA >= dRho) {
             double dMu = dLambda * dV2 * (dT1 - dT2);
-            double dSigma = dLambda * (dV2 * sqrt(pow(dSigma1, 2) + pow(dSigma2, 2)));
+            double dSigma = /*deterministic ?dLambda *getA_Bar() * sqrt(1 + pow(dRho, 2)) :*/
+                    dLambda * (dV2 * sqrt(pow(dSigma1, 2) + pow(dSigma2, 2)));
             double dRight = (MIN_SEPARATION_DISTANCE * K - dMu) / (sqrt(2.0) * dSigma);
             double dLeft = dMu / (sqrt(2.0) * dSigma);
             *pdDelayTime = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT1 - dT2);

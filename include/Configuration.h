@@ -233,4 +233,8 @@ double getSigma_2FoldedNormal(double mu, double sigma);
 double getSigmaHybridFoldedNormal(const vdList &vdParameters, double dSigma);
 
 bool exists(String filename);
+///**
+// * A coefficient parameter: A_BAR, from article "A Geometrical Approach to Conflict Probability Estimation, Richard Irvine"
+// */
+//double getA_Bar();
 #endif //CONFIGURATION_H
