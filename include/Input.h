@@ -30,8 +30,7 @@ public:
      * Initialize the air management network
      * @param pNetwork      A pointer of network
      */
-    void initNetwork(Network *pNetwork, bool modeDisplay, bool flightFileModified);
-
+    void initNetwork(Network *pNetwork, bool flightFileModified, bool modeDisplay);
 private:
     /**
      * The airport filename.
@@ -52,7 +51,7 @@ private:
      * Parse the flight file.
      * @param pNetwork      A pointer of network
      */
-    void parseFlights(Network *pNetwork, bool modeDisplay, bool flightFileModified);
+    void parseFlights(Network *pNetwork, bool flightFileModified, bool modeDisplay);
 
     /**
      * Parse the airport file.
@@ -65,8 +64,6 @@ private:
      * @param pNetwork      A pointer of network
      */
     void parseWayPoints(Network *pNetwork, bool modeDisplay);
-
-
 };
 
 #endif //INPUT_H

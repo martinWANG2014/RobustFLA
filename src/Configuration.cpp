@@ -6,79 +6,6 @@
 #include "../include/Configuration.h"
 #include "../include/Network.h"
 
-//double getSigma1(double alpha, double beta, double gamma) {
-//    return (beta + alpha) / (2 * sqrt(2) * boost::math::erf_inv(gamma));
-//}
-//
-//double getSigma2(double alpha, double beta, double gamma) {
-//    Py_Initialize();
-//    PyRun_SimpleString("import sys");
-//    PyRun_SimpleString("sys.path.append(\".\")");
-//    PyObject *pModule = PyImport_ImportModule("inverse_sigma");
-//    if (pModule != NULL) {
-//        PyObject *pFunc = PyObject_GetAttrString(pModule, "inverse_var_sigma_1");
-//        if (pFunc && PyCallable_Check(pFunc)) {
-//            PyObject *pArgs = PyTuple_New(3);
-//            PyTuple_SetItem(pArgs, 0, PyFloat_FromDouble(alpha));
-//            PyTuple_SetItem(pArgs, 1, PyFloat_FromDouble(beta));
-//            PyTuple_SetItem(pArgs, 2, PyFloat_FromDouble(gamma));
-//            PyObject *pResult = PyObject_CallObject(pFunc, pArgs);
-//            Py_DECREF(pFunc);
-//            Py_DECREF(pArgs);
-//            double sigma = PyFloat_AsDouble(pResult);
-//            Py_DECREF(pResult);
-//            Py_Finalize();
-//            return sigma;
-//        } else {
-//            Py_DECREF(pFunc);
-//            std::cout << "[ERROR] Can't call the inverse_var_sigma_1 function!" << std::endl;
-//            abort();
-//        }
-//    } else {
-//        Py_XDECREF(pModule);
-//        Py_Finalize();
-//        std::cerr << "[ERROR] Can't load the inverse_sigma module, please check the inverse_sigma.py file!"
-//                  << std::endl;
-//        abort();
-//    }
-//}
-
-double getSigma3(double alpha, double beta, double gamma, double w1, double w2, double p) {
-    Py_Initialize();
-    PyRun_SimpleString("import sys");
-    PyRun_SimpleString("sys.path.append(\".\")");
-    PyObject *pModule = PyImport_ImportModule("inverse_sigma");
-    if (pModule != NULL) {
-        PyObject *pFunc = PyObject_GetAttrString(pModule, "inverse_var_sigma_2");
-        if (pFunc && PyCallable_Check(pFunc)) {
-            PyObject *pArgs = PyTuple_New(6);
-            PyTuple_SetItem(pArgs, 0, PyFloat_FromDouble(alpha));
-            PyTuple_SetItem(pArgs, 1, PyFloat_FromDouble(beta));
-            PyTuple_SetItem(pArgs, 2, PyFloat_FromDouble(gamma));
-            PyTuple_SetItem(pArgs, 3, PyFloat_FromDouble(w1));
-            PyTuple_SetItem(pArgs, 4, PyFloat_FromDouble(w2));
-            PyTuple_SetItem(pArgs, 5, PyFloat_FromDouble(p));
-            PyObject *pResult = PyObject_CallObject(pFunc, pArgs);
-            Py_DECREF(pFunc);
-            Py_DECREF(pArgs);
-            double sigma = PyFloat_AsDouble(pResult);
-            Py_DECREF(pResult);
-            Py_Finalize();
-            return sigma;
-        } else {
-            Py_DECREF(pFunc);
-            std::cout << "[ERROR] Can't call the inverse_var_sigma_1 function!" << std::endl;
-            abort();
-        }
-    } else {
-        Py_XDECREF(pModule);
-        Py_Finalize();
-        std::cerr << "[ERROR] Can't load the inverse_sigma module, please check the inverse_sigma.py file!"
-                  << std::endl;
-        abort();
-    }
-}
-
 
 LevelVector findFeasibleLevels(Level iDefaultLevel, int iSize) {
     LevelVector feasibleList;
@@ -288,31 +215,44 @@ Level findNextFeasibleLevel(int iDefaultLevel, Level lastLevel) {
     }
 }
 
-double getSigma_2FoldedNormal(double mu, double sigma) {
-    double dSigma_2;
-    dSigma_2 = pow(mu, 2) + pow(sigma, 2);
-    double muy = sigma * sqrt(2.0 / M_PI) * exp(-pow(mu, 2) / (2 * pow(sigma, 2))) -
-                 mu * boost::math::erf(-mu / (sqrt(2) * sigma));
-    dSigma_2 -= pow(muy, 2);
-    return dSigma_2;
+double getMixedMu() {
+    return P_1*MU_1 + P_2*MU_2+ P_3*MU_3+P_4*MU_4;
 }
 
-double getSigmaHybridFoldedNormal(const vdList &vdParameters, double dSigma) {
-    return sqrt(pow(vdParameters[5], 2) * getSigma_2FoldedNormal(vdParameters[0] * vdParameters[3], dSigma) +
-                pow(1 - vdParameters[5], 2) *
-                getSigma_2FoldedNormal(
-                        vdParameters[1] *
-                        vdParameters[4],
-                        dSigma));
+double getMixedSigma_2()  {
+    return P_1*(SIGMA_2_1+pow(MU_1,2)) +P_2*(SIGMA_2_2+pow(MU_2,2)) +P_3*(SIGMA_2_3+pow(MU_3,2)) +P_4*(SIGMA_2_4+pow(MU_4,2)) - pow(getMixedMu(), 2);
 }
 
 bool exists(String filename) {
     std::ifstream file(filename);
     return file.good();
 }
-//double getA_Bar() {
-//    return 0.25 * (Network::PERIOD_LENGTH);
-//}
+
+double getProbability(double mu, double sigma_2) {
+    double dRight = (MIN_SEPARATION_DISTANCE * K - mu) / (sqrt(2.0*sigma_2));
+    double dLeft = mu / (sqrt(2.0 *sigma_2 ));
+    return 0.5 * (boost::math::erf(dRight) + boost::math::erf(dLeft));
+}
+
+double getHybridProbability(double coefficient, double t1, double t2) {
+    return P_1*P_1*getProbability(coefficient*(t1-t2), pow(coefficient, 2)*SIGMA_2_1*2)+
+            P_2*P_2*getProbability(coefficient*(t1-t2), pow(coefficient, 2)*SIGMA_2_2*2)+
+            P_3*P_3*getProbability(coefficient*(t1-t2), pow(coefficient, 2)*SIGMA_2_3*2)+
+            P_4*P_4*getProbability(coefficient*(t1-t2), pow(coefficient, 2)*SIGMA_2_4*2)+
+            P_1*P_2*getProbability(coefficient*(t1-t2+MU_1-MU_2), pow(coefficient, 2)*(SIGMA_2_1+SIGMA_2_2))+
+            P_1*P_3*getProbability(coefficient*(t1-t2+MU_1-MU_3), pow(coefficient, 2)*(SIGMA_2_1+SIGMA_2_3))+
+            P_1*P_4*getProbability(coefficient*(t1-t2+MU_1-MU_4), pow(coefficient, 2)*(SIGMA_2_1+SIGMA_2_4))+
+            P_2*P_1*getProbability(coefficient*(t1-t2+MU_2-MU_1), pow(coefficient, 2)*(SIGMA_2_2+SIGMA_2_1))+
+            P_2*P_3*getProbability(coefficient*(t1-t2+MU_2-MU_3), pow(coefficient, 2)*(SIGMA_2_2+SIGMA_2_3))+
+            P_2*P_4*getProbability(coefficient*(t1-t2+MU_2-MU_4), pow(coefficient, 2)*(SIGMA_2_2+SIGMA_2_4))+
+            P_3*P_2*getProbability(coefficient*(t1-t2+MU_3-MU_2), pow(coefficient, 2)*(SIGMA_2_3+SIGMA_2_2))+
+            P_3*P_1*getProbability(coefficient*(t1-t2+MU_3-MU_1), pow(coefficient, 2)*(SIGMA_2_3+SIGMA_2_1))+
+            P_3*P_4*getProbability(coefficient*(t1-t2+MU_3-MU_4), pow(coefficient, 2)*(SIGMA_2_3+SIGMA_2_4))+
+            P_4*P_2*getProbability(coefficient*(t1-t2+MU_4-MU_2), pow(coefficient, 2)*(SIGMA_2_4+SIGMA_2_2))+
+            P_4*P_3*getProbability(coefficient*(t1-t2+MU_4-MU_3), pow(coefficient, 2)*(SIGMA_2_4+SIGMA_2_3))+
+            P_4*P_1*getProbability(coefficient*(t1-t2+MU_4-MU_1), pow(coefficient, 2)*(SIGMA_2_4+SIGMA_2_1));
+}
+
 
 
 

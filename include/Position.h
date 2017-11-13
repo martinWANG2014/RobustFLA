@@ -82,6 +82,8 @@ public:
      */
     friend double getCosA(const Position &position1, const Position &position3, const Position &position4);
 
+    friend std::ostream &operator<<(std::ostream &os, const Position &position);
+
 private:
     /**
      * The latitude of a position.

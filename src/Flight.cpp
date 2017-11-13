@@ -22,18 +22,17 @@ double Flight::CalculateProbabilityConflictAndDelayForFlight(Flight *pFlight2, d
     for (int i = 0; i < pRoute->getPointListSize(); i++) {
         for (int j = 0; j < route2->getPointListSize(); j++) {
             if (*pRoute->getPointAtI(i) == *route2->getPointAtI(j)) {
+
 //                    std::cout << "Flight: " << getCode() << " and Flight: " << pFlight2->getCode()
-//                              << " has conflict at (" << i << ", " << j << "):" ;
+//                              << " has conflict at (" << i << ", " << j << "):" << std::endl;
                 if (deterministicRule && !deterministic) {
                     double probDet = pRoute->CalculationProbabilityAndDelayAtPoint(i, route2, j, pdDelay, pdDelayMax,
-                                                                                   pbWait, dSigma, pFlight2->getSigma(),
-                                                                                   true);
+                                                                                   pbWait, true);
                     if (probDet <= MIN_PROBA) {
                         continue;
                     }
                 }
-                double prob = pRoute->CalculationProbabilityAndDelayAtPoint(i, route2, j, pdDelay, pdDelayMax,
-                                                                            pbWait, dSigma, pFlight2->getSigma(),
+                double prob = pRoute->CalculationProbabilityAndDelayAtPoint(i, route2, j, pdDelay, pdDelayMax, pbWait,
                                                                             deterministic);
                 if (prob > MIN_PROBA) {
                     return prob;
@@ -75,23 +74,6 @@ void Flight::resetRouteTimeList() {
 void Flight::initRouteTimeList() {
     pRoute->initTimeList();
 }
-
-void Flight::setSigma(double dSigma) {
-    Flight::dSigma = dSigma;
-}
-
-double Flight::getSigma() const {
-    return dSigma;
-}
-
-void Flight::setSigmaPrime(double dSigma) {
-    Flight::dSigmaPrime = dSigma;
-}
-
-double Flight::getSigmaPrime() const {
-    return dSigmaPrime;
-}
-
 
 bool Flight::selfCheck() {
     return pRoute->selfCheck();

@@ -123,19 +123,35 @@ public:
     void InitCoefPi(double dCoefPi);
 
     /**
-     * Set the sigma value.
-     * @param vdParameters         The parameter list for distribution
+     * Initialize the network
+     * @param dCoefPi the coefficient of Pi
+     * @param iFeasibleSize  the feasible flight level list size
+     * @param modeDisplay the mode of display detail information.
      */
-    void SetSigma(const vdList &vdParameters, bool modeGenerateSigma);
+    void initialize(double dCoefPi, int iFeasibleSize, bool modeDisplay);
 
-    void initialize(const vdList parameterList, double dCoefPi, int iFeasibleSize, bool sigmaMode, bool modeDisplay,
-                    bool generatedFlightFile);
-
+    /**
+     * Get ith flight of flight list.
+     * @param indexI the index of flight
+     * @return the ith flight.
+     */
     Flight *getFlightAtI(int indexI) const;
 
-    String writeFlightsJsonData(const Network *pNetwork, const vdList parameterList);
+    /**
+     * save the modified flight data into file.
+     * @param pNetwork the corresponding network.
+     * @param percentileSup  the percentage of supplementary flight data.
+     * @return the saved flight file name.
+     */
+    String writeFlightsSup(const Network *pNetwork, int percentileSup);
 
-    String generateFlights(const vdList vdParameterList, Time offset);
+    /**
+     * Generate the supplementary flights
+     * @param percentileSup the percentage of supplementary flights.
+     * @param offset the offset of duplicating the route.
+     * @return  the saved flight file name.
+     */
+    String generateFlightsSup(int percentileSup, Time offset);
 
 private:
     /**

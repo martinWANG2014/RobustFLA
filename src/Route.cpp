@@ -74,8 +74,7 @@ bool Route::selfCheck() {
 
 
 double Route::CalculateProbabilityAndDelayForPartA(double dT1, double dT2, double dV1, double dV2, double dCosA,
-                                                   double *pdDelayTime, double *pdDelayTimeMax, double dSigma1,
-                                                   double dSigma2, bool deterministic) {
+                                                   double *pdDelayTime, double *pdDelayTimeMax, bool deterministic) {
     double dRho = dV2 / dV1;
     if (fabs(dCosA) > MIN_ANGLE) {
         dCosA = (dCosA > 0) ? MIN_ANGLE : -MIN_ANGLE;
@@ -85,49 +84,46 @@ double Route::CalculateProbabilityAndDelayForPartA(double dT1, double dT2, doubl
     double dProbabilityConflict;
     if (dT1 < dT2) {
         if (dCosA >= dRho) {
-            double dMu = dLambda * dV2 * (dT2 - dT1);
-            double dSigma = /*deterministic ?dLambda *getA_Bar() * sqrt(1 + pow(dRho, 2)) : */
-                    dLambda * (dV2 * sqrt(pow(dSigma1, 2) + pow(dSigma2, 2)));
-            double dRight = (MIN_SEPARATION_DISTANCE * K - dMu) / (sqrt(2.0) * dSigma);
-            double dLeft = dMu / (sqrt(2.0) * dSigma);
             *pdDelayTime = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT2 - dT1);
             *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2);
             if (deterministic) {
-                dProbabilityConflict = dMu < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
+                dProbabilityConflict = dLambda * dV2 * (dT2 - dT1) < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
             } else {
-                dProbabilityConflict = 0.5 * (boost::math::erf(dRight) + boost::math::erf(dLeft));
+                dProbabilityConflict = getHybridProbability(dLambda*dV2, dT2, dT1);
             }
         } else {
             *pdDelayTime = MIN_SEPARATION_DISTANCE * K / dV2 - (dT2 - dT1);
             *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / dV2;
-            dProbabilityConflict = dV2 * (dT2 - dT1) < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
+            if (deterministic) {
+                dProbabilityConflict = dV2 * (dT2 - dT1) < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
+            }else{
+                dProbabilityConflict = getHybridProbability(dV2, dT2, dT1);
+            }
         }
     } else {
         if (dCosA >= 1.0 / dRho) {
-            double dMu = dLambda * dV2 * (dT1 - dT2);
-            double dSigma = /*deterministic ?dLambda *getA_Bar() * sqrt(1 + pow(dRho, 2)) :*/
-                    dLambda * (dV2 * sqrt(pow(dSigma1, 2) + pow(dSigma2, 2)));
-            double dRight = (MIN_SEPARATION_DISTANCE * K - dMu) / (sqrt(2.0) * dSigma);
-            double dLeft = dMu / (sqrt(2.0) * dSigma);
             *pdDelayTime = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT1 - dT2);
             *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2);
             if (deterministic) {
-                dProbabilityConflict = dMu < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
+                dProbabilityConflict = dLambda * dV2 * (dT1 - dT2) < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
             } else {
-                dProbabilityConflict = 0.5 * (boost::math::erf(dRight) + boost::math::erf(dLeft));
+                dProbabilityConflict = getHybridProbability(dLambda*dV2, dT1, dT2);
             }
         } else {
             *pdDelayTime = MIN_SEPARATION_DISTANCE * K / dV1 - (dT1 - dT2);
             *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / dV1;
-            dProbabilityConflict = dV1 * (dT1 - dT2) < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
+            if (deterministic) {
+                dProbabilityConflict = dV1 * (dT1 - dT2) < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
+            }else{
+                dProbabilityConflict = getHybridProbability(dV1, dT1, dT2);
+            }
         }
     }
     return dProbabilityConflict;
 }
 
 double Route::CalculateProbabilityAndDelayForPartB(double dT1, double dT2, double dV1, double dV2, double dCosA,
-                                                   double *pdDelayTime, double *pdDelayTimeMax, double dSigma1,
-                                                   double dSigma2, bool deterministic) {
+                                                   double *pdDelayTime, double *pdDelayTimeMax, bool deterministic) {
     if (dT1 >= dT2) {
         *pdDelayTime = 0;
         *pdDelayTimeMax = 0;
@@ -139,25 +135,19 @@ double Route::CalculateProbabilityAndDelayForPartB(double dT1, double dT2, doubl
     }
     double dSinA = sqrt(1 - pow(dCosA, 2));
     double dLambda = dSinA / sqrt(pow(dRho, 2) + 2 * dRho * dCosA + 1);
-    double dMu = dLambda * dV2 * (dT2 - dT1);
-    double dSigma = /*deterministic ?dLambda *getA_Bar() * sqrt(1 + pow(dRho, 2)) :*/
-            dLambda * (dV2 * sqrt(pow(dSigma1, 2) + pow(dSigma2, 2)));
-    double dRight = (MIN_SEPARATION_DISTANCE * K - dMu) / (sqrt(2.0) * dSigma);
-    double dLeft = dMu / (sqrt(2.0) * dSigma);
     double dProbabilityConflict;
     *pdDelayTime = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT2 - dT1);
     *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2);
     if (deterministic) {
-        dProbabilityConflict = dMu < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
+        dProbabilityConflict = dLambda * dV2 * (dT2 - dT1) < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
     } else {
-        dProbabilityConflict = 0.5 * (boost::math::erf(dRight) + boost::math::erf(dLeft));
+        dProbabilityConflict = getHybridProbability(dLambda * dV2, dT2, dT1);
     }
     return dProbabilityConflict;
 }
 
 double Route::CalculateProbabilityAndDelayForPartC(double dT1, double dT2, double dV1, double dV2, double dCosA,
-                                                   double *pdDelayTime, double *pdDelayTimeMax, double dSigma1,
-                                                   double dSigma2, bool deterministic) {
+                                                   double *pdDelayTime, double *pdDelayTimeMax, bool deterministic) {
     if (dT1 < dT2) {
         *pdDelayTime = 0;
         *pdDelayTimeMax = 0;
@@ -169,25 +159,19 @@ double Route::CalculateProbabilityAndDelayForPartC(double dT1, double dT2, doubl
     }
     double dSinA = sqrt(1 - pow(dCosA, 2));
     double dLambda = dSinA / sqrt(pow(dRho, 2) + 2 * dRho * dCosA + 1);
-    double dMu = dLambda * dV2 * (dT1 - dT2);
-    double dSigma = /*deterministic ?dLambda *getA_Bar() * sqrt(1 + pow(dRho, 2)) :*/
-            dLambda * (dV2 * sqrt(pow(dSigma1, 2) + pow(dSigma2, 2)));
-    double dRight = (MIN_SEPARATION_DISTANCE * K - dMu) / (sqrt(2.0) * dSigma);
-    double dLeft = dMu / (sqrt(2.0) * dSigma);
     double dProbabilityConflict;
     *pdDelayTime = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT1 - dT2);
     *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2);
     if (deterministic) {
-        dProbabilityConflict = dMu < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
+        dProbabilityConflict = dLambda * dV2 * (dT1 - dT2) < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
     } else {
-        dProbabilityConflict = 0.5 * (boost::math::erf(dRight) + boost::math::erf(dLeft));
+        dProbabilityConflict = getHybridProbability(dLambda * dV2, dT1, dT2);
     }
     return dProbabilityConflict;
 }
 
 double Route::CalculateProbabilityAndDelayForPartD(double dT1, double dT2, double dV1, double dV2, double dCosA,
-                                                   double *pdDelayTime, double *pdDelayTimeMax, double dSigma1,
-                                                   double dSigma2, bool deterministic) {
+                                                   double *pdDelayTime, double *pdDelayTimeMax, bool deterministic) {
     double dRho = dV2 / dV1;
     if (fabs(dCosA) > MIN_ANGLE) {
         dCosA = (dCosA > 0) ? MIN_ANGLE : -MIN_ANGLE;
@@ -197,49 +181,46 @@ double Route::CalculateProbabilityAndDelayForPartD(double dT1, double dT2, doubl
     double dProbabilityConflict;
     if (dT1 < dT2) {
         if (dCosA >= 1.0 / dRho) {
-            double dMu = dLambda * dV2 * (dT2 - dT1);
-            double dSigma = /*deterministic ?dLambda *getA_Bar() * sqrt(1 + pow(dRho, 2)) :*/
-                    dLambda * (dV2 * sqrt(pow(dSigma1, 2) + pow(dSigma2, 2)));
-            double dRight = (MIN_SEPARATION_DISTANCE * K - dMu) / (sqrt(2.0) * dSigma);
-            double dLeft = dMu / (sqrt(2.0) * dSigma);
             *pdDelayTime = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT2 - dT1);
             *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2);
             if (deterministic) {
-                dProbabilityConflict = dMu < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
+                dProbabilityConflict = dLambda * dV2 * (dT2 - dT1) < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
             } else {
-                dProbabilityConflict = 0.5 * (boost::math::erf(dRight) + boost::math::erf(dLeft));
+                dProbabilityConflict = getHybridProbability(dLambda * dV2, dT2, dT1);
             }
         } else {
             *pdDelayTime = MIN_SEPARATION_DISTANCE * K / dV1 - (dT2 - dT1);
             *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / dV1;
-            dProbabilityConflict = dV1 * (dT2 - dT1) < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
+            if (deterministic) {
+                dProbabilityConflict = dV1 * (dT2 - dT1) < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
+            }else{
+                dProbabilityConflict = getHybridProbability(dV1, dT2, dT1);
+            }
         }
     } else {
         if (dCosA >= dRho) {
-            double dMu = dLambda * dV2 * (dT1 - dT2);
-            double dSigma = /*deterministic ?dLambda *getA_Bar() * sqrt(1 + pow(dRho, 2)) :*/
-                    dLambda * (dV2 * sqrt(pow(dSigma1, 2) + pow(dSigma2, 2)));
-            double dRight = (MIN_SEPARATION_DISTANCE * K - dMu) / (sqrt(2.0) * dSigma);
-            double dLeft = dMu / (sqrt(2.0) * dSigma);
             *pdDelayTime = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT1 - dT2);
             *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2);
             if (deterministic) {
-                dProbabilityConflict = dMu < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
+                dProbabilityConflict = dLambda * dV2 * (dT1 - dT2) < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
             } else {
-                dProbabilityConflict = 0.5 * (boost::math::erf(dRight) + boost::math::erf(dLeft));
+                dProbabilityConflict = getHybridProbability(dLambda * dV2, dT1, dT2);
             }
         } else {
             *pdDelayTime = MIN_SEPARATION_DISTANCE * K / dV2 - (dT1 - dT2);
             *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / dV2;
-            dProbabilityConflict = dV2 * (dT1 - dT2) < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
+            if (deterministic) {
+                dProbabilityConflict = dV2 * (dT1 - dT2) < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
+            }else{
+                dProbabilityConflict = getHybridProbability(dV2, dT1, dT2);
+            }
         }
     }
     return dProbabilityConflict;
 }
 
 double Route::CalculatePartialProbabilityAndDelay(int iIndex1, Route *pRoute2, int iIndex2, double *pdDelayTime,
-                                                  double *pdDelayTimeMax, bool bFlag1, bool bFlag2, double dSigma1,
-                                                  double dSigma2, bool deterministic) {
+                                                  double *pdDelayTimeMax, bool bFlag1, bool bFlag2, bool deterministic) {
     double dT1 = getArrivingTimeAtPoint(iIndex1 + (bFlag1 ? 0 : 1));
     double dT2 = pRoute2->getArrivingTimeAtPoint(iIndex2 + (bFlag2 ? 0 : 1));
     double dV1 = getVelocityFromPoint(iIndex1 + (bFlag1 ? 0 : 1));
@@ -249,25 +230,24 @@ double Route::CalculatePartialProbabilityAndDelay(int iIndex1, Route *pRoute2, i
     if (bFlag1) {
         if (bFlag2) {
             return CalculateProbabilityAndDelayForPartA(dT1, dT2, dV1, dV2, dCosA, pdDelayTime, pdDelayTimeMax,
-                                                        dSigma1, dSigma2, deterministic);
+                                                        deterministic);
         } else {
             return CalculateProbabilityAndDelayForPartC(dT1, dT2, dV1, dV2, dCosA, pdDelayTime, pdDelayTimeMax,
-                                                        dSigma1, dSigma2, deterministic);
+                                                        deterministic);
         }
     } else {
         if (bFlag2) {
             return CalculateProbabilityAndDelayForPartB(dT1, dT2, dV1, dV2, dCosA, pdDelayTime, pdDelayTimeMax,
-                                                        dSigma1, dSigma2, deterministic);
+                                                        deterministic);
         } else {
             return CalculateProbabilityAndDelayForPartD(dT1, dT2, dV1, dV2, dCosA, pdDelayTime, pdDelayTimeMax,
-                                                        dSigma1, dSigma2, deterministic);
+                                                        deterministic);
         }
     }
 }
 
 double Route::CalculationProbabilityAndDelayAtPoint(int iIndex1, Route *pRoute2, int iIndex2, double *pdDelayTime,
-                                                    double *pdDelayTimeMax, bool *pbWait, double dSigma1,
-                                                    double dSigma2, bool deterministic) {
+                                                    double *pdDelayTimeMax, bool *pbWait, bool deterministic) {
     vdList vdConflictProbabilityList;
     vdList vdDelayTime;
     vdList vdDelayTimeMax;
@@ -279,13 +259,13 @@ double Route::CalculationProbabilityAndDelayAtPoint(int iIndex1, Route *pRoute2,
             iIndex2 % pRoute2->getNbPointsPerFlight() < pRoute2->getNbPointsPerFlight() - 1) {
             //case A
             dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, &pdDelayMax, true,
-                                                               true, dSigma1, dSigma2, deterministic);
+                                                               true, deterministic);
             vdDelayTime.push_back(pdDelay);
             vdConflictProbabilityList.push_back(dProbability);
             if (getArrivingTimeAtPoint(iIndex1) < pRoute2->getArrivingTimeAtPoint(iIndex2)) {
                 //case B
                 dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, &pdDelayMax,
-                                                                   false, true, dSigma1, dSigma2, deterministic);
+                                                                   false, true, deterministic);
                 vdDelayTime.push_back(pdDelay);
                 vdDelayTimeMax.push_back(pdDelayMax);
                 vdConflictProbabilityList.push_back(dProbability);
@@ -300,7 +280,7 @@ double Route::CalculationProbabilityAndDelayAtPoint(int iIndex1, Route *pRoute2,
 
                 //case C
                 dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, &pdDelayMax,
-                                                                   true, false, dSigma1, dSigma2, deterministic);
+                                                                   true, false, deterministic);
                 vdDelayTime.push_back(pdDelay);
                 vdDelayTimeMax.push_back(pdDelayMax);
                 vdConflictProbabilityList.push_back(dProbability);
@@ -308,7 +288,7 @@ double Route::CalculationProbabilityAndDelayAtPoint(int iIndex1, Route *pRoute2,
 
             //case D
             dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, &pdDelayMax, false,
-                                                               false, dSigma1, dSigma2, deterministic);
+                                                               false, deterministic);
             vdDelayTime.push_back(pdDelay);
             vdDelayTimeMax.push_back(pdDelayMax);
             vdConflictProbabilityList.push_back(dProbability);
@@ -325,7 +305,7 @@ double Route::CalculationProbabilityAndDelayAtPoint(int iIndex1, Route *pRoute2,
             if (getArrivingTimeAtPoint(iIndex1) > pRoute2->getArrivingTimeAtPoint(iIndex2)) {
 
                 dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, &pdDelayMax,
-                                                                   true, false, dSigma1, dSigma2, deterministic);
+                                                                   true, false, deterministic);
                 vdDelayTime.push_back(pdDelay);
                 vdDelayTimeMax.push_back(pdDelayMax);
                 vdConflictProbabilityList.push_back(dProbability);
@@ -336,14 +316,14 @@ double Route::CalculationProbabilityAndDelayAtPoint(int iIndex1, Route *pRoute2,
 //            }
             //case D
             dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, &pdDelayMax, false,
-                                                               false, dSigma1, dSigma2, deterministic);
+                                                               false, deterministic);
             vdDelayTime.push_back(pdDelay);
             vdDelayTimeMax.push_back(pdDelayMax);
             vdConflictProbabilityList.push_back(dProbability);
         } else {
             //case A
             dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, &pdDelayMax, true,
-                                                               true, dSigma1, dSigma2, deterministic);
+                                                               true, deterministic);
             vdDelayTime.push_back(pdDelay);
             vdDelayTimeMax.push_back(pdDelayMax);
             vdConflictProbabilityList.push_back(dProbability);
@@ -351,7 +331,7 @@ double Route::CalculationProbabilityAndDelayAtPoint(int iIndex1, Route *pRoute2,
             //case B
             if (getArrivingTimeAtPoint(iIndex1) < pRoute2->getArrivingTimeAtPoint(iIndex2)) {
                 dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, &pdDelayMax,
-                                                                   false, true, dSigma1, dSigma2, deterministic);
+                                                                   false, true, deterministic);
                 vdDelayTime.push_back(pdDelay);
                 vdDelayTimeMax.push_back(pdDelayMax);
                 vdConflictProbabilityList.push_back(dProbability);
@@ -379,7 +359,7 @@ double Route::CalculationProbabilityAndDelayAtPoint(int iIndex1, Route *pRoute2,
             //case B
             if (getArrivingTimeAtPoint(iIndex1) < pRoute2->getArrivingTimeAtPoint(iIndex2)) {
                 dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, &pdDelayMax,
-                                                                   false, true, dSigma1, dSigma2, deterministic);
+                                                                   false, true, deterministic);
                 vdDelayTime.push_back(pdDelay);
                 vdDelayTimeMax.push_back(pdDelayMax);
                 vdConflictProbabilityList.push_back(dProbability);
@@ -395,7 +375,7 @@ double Route::CalculationProbabilityAndDelayAtPoint(int iIndex1, Route *pRoute2,
 
             //case D
             dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, &pdDelayMax, false,
-                                                               false, dSigma1, dSigma2, deterministic);
+                                                               false, deterministic);
             vdDelayTime.push_back(pdDelay);
             vdDelayTimeMax.push_back(pdDelayMax);
             vdConflictProbabilityList.push_back(dProbability);
@@ -414,7 +394,7 @@ double Route::CalculationProbabilityAndDelayAtPoint(int iIndex1, Route *pRoute2,
 
             //case D
             dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, &pdDelayMax, false,
-                                                               false, dSigma1, dSigma2, deterministic);
+                                                               false, deterministic);
             vdDelayTime.push_back(pdDelay);
             vdDelayTimeMax.push_back(pdDelayMax);
             vdConflictProbabilityList.push_back(dProbability);
@@ -426,7 +406,7 @@ double Route::CalculationProbabilityAndDelayAtPoint(int iIndex1, Route *pRoute2,
             //case B
             if (getArrivingTimeAtPoint(iIndex1) < pRoute2->getArrivingTimeAtPoint(iIndex2)) {
                 dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, &pdDelayMax,
-                                                                   false, true, dSigma1, dSigma2, deterministic);
+                                                                   false, true, deterministic);
                 vdDelayTime.push_back(pdDelay);
                 vdDelayTimeMax.push_back(pdDelayMax);
                 vdConflictProbabilityList.push_back(dProbability);
@@ -449,7 +429,7 @@ double Route::CalculationProbabilityAndDelayAtPoint(int iIndex1, Route *pRoute2,
             iIndex2 % pRoute2->getNbPointsPerFlight() < pRoute2->getNbPointsPerFlight() - 1) {
             //case A
             dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, &pdDelayMax, true,
-                                                               true, dSigma1, dSigma2, deterministic);
+                                                               true, deterministic);
             vdDelayTime.push_back(pdDelay);
             vdDelayTimeMax.push_back(pdDelayMax);
             vdConflictProbabilityList.push_back(dProbability);
@@ -461,7 +441,7 @@ double Route::CalculationProbabilityAndDelayAtPoint(int iIndex1, Route *pRoute2,
             //case C
             if (getArrivingTimeAtPoint(iIndex1) > pRoute2->getArrivingTimeAtPoint(iIndex2)) {
                 dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, &pdDelayMax,
-                                                                   true, false, dSigma1, dSigma2, deterministic);
+                                                                   true, false, deterministic);
                 vdDelayTime.push_back(pdDelay);
                 vdDelayTimeMax.push_back(pdDelayMax);
                 vdConflictProbabilityList.push_back(dProbability);
@@ -486,7 +466,7 @@ double Route::CalculationProbabilityAndDelayAtPoint(int iIndex1, Route *pRoute2,
             //case C
             if (getArrivingTimeAtPoint(iIndex1) > pRoute2->getArrivingTimeAtPoint(iIndex2)) {
                 dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, &pdDelayMax,
-                                                                   true, false, dSigma1, dSigma2, deterministic);
+                                                                   true, false, deterministic);
                 vdDelayTime.push_back(pdDelay);
                 vdDelayTimeMax.push_back(pdDelayMax);
                 vdConflictProbabilityList.push_back(dProbability);
@@ -502,7 +482,7 @@ double Route::CalculationProbabilityAndDelayAtPoint(int iIndex1, Route *pRoute2,
         } else {
             //case A
             dProbability = CalculatePartialProbabilityAndDelay(iIndex1, pRoute2, iIndex2, &pdDelay, &pdDelayMax, true,
-                                                               true, dSigma1, dSigma2, deterministic);
+                                                               true, deterministic);
             vdDelayTime.push_back(pdDelay);
             vdDelayTimeMax.push_back(pdDelayMax);
             vdConflictProbabilityList.push_back(dProbability);

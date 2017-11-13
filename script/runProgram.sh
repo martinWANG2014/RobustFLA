@@ -1,30 +1,30 @@
 #!/usr/bin/env bash
 
-# data directory path
-data_dir="../data"
+# data-ok3 directory path
+data_dir="../data-ok3"
 
-# the log directory path
-log_dir="../log"
+# the log-ok3 directory path
+log_dir="../log-ok3"
 
-# the solution directory path
-solution_dir="../solution"
+# the solution-ok3 directory path
+solution_dir="../solution-ok3"
 
-# the original flight txt data file path
+# the original flight txt data-ok3 file path
 flight_txt=${data_dir}/flight.txt
 
-# the flight json data file path
+# the flight json data-ok3 file path
 flight_json=${data_dir}/flight.json
 
-# the original airport txt data file path
+# the original airport txt data-ok3 file path
 airport_txt=${data_dir}/airport.txt
 
-# the airport json data file path
+# the airport json data-ok3 file path
 airport_json=${data_dir}/airport.json
 
-# the original beacon txt data file path
+# the original beacon txt data-ok3 file path
 beacon_txt=${data_dir}/beacon.txt
 
-# the beacon json data file path
+# the beacon json data-ok3 file path
 beacon_json=${data_dir}/beacon.json
 
 # the executable program path
@@ -63,49 +63,49 @@ function getLogFileName {
     echo ${filename}
 }
 
-# check the data directory.
+# check the data-ok3 directory.
 if [[ ! -e ${data_dir} ]]; then
-    echo ${data_dir} " not exists! Please check the data path."
+    echo ${data_dir} " not exists! Please check the data-ok3 path."
     exit
 fi
 
-#  check the log directory, if not exists, then create it!
+#  check the log-ok3 directory, if not exists, then create it!
 if [[ ! -e ${log_dir} ]]; then
     mkdir -p ${log_dir}
 fi
 
-#  check the solution directory, if not exists, then create it!
+#  check the solution-ok3 directory, if not exists, then create it!
 if [[ ! -e ${solution_dir} ]]; then
     mkdir -p ${solution_dir}
 fi
 
-# check the airport data file, if not exists, then convert it from txt data file.
+# check the airport data-ok3 file, if not exists, then convert it from txt data-ok3 file.
 if [[ ! -e ${airport_json} ]]; then
-    # check the airport data txt file.
+    # check the airport data-ok3 txt file.
     if [[ ! -e ${airport_txt} ]]; then
-        echo ${airport_txt} " not exists! Please check the airport data."
+        echo ${airport_txt} " not exists! Please check the airport data-ok3."
         exit
     else
         ./convertTXT2JSON.sh ${airport_txt}
     fi
 fi
 
-# check the beacon data file, if not exists, then convert it from txt data file.
+# check the beacon data-ok3 file, if not exists, then convert it from txt data-ok3 file.
 if [[ ! -e ${beacon_json} ]]; then
-    # check the beacon data txt file.
+    # check the beacon data-ok3 txt file.
     if [[ ! -e ${beacon_txt} ]]; then
-        echo ${beacon_txt} " not exists! Please check the waypoint data."
+        echo ${beacon_txt} " not exists! Please check the waypoint data-ok3."
         exit
     else
         ./convertTXT2JSON.sh ${beacon_txt}
     fi
 fi
 
-# check the flight data file, if not exists, then convert it from txt data file.
+# check the flight data-ok3 file, if not exists, then convert it from txt data-ok3 file.
 if [[ ! -e ${flight_json} ]]; then
-    # check the flight data txt file.
+    # check the flight data-ok3 txt file.
     if [[ ! -e ${flight_txt} ]]; then
-        echo ${flight_txt} " not exists! Please check the flight data."
+        echo ${flight_txt} " not exists! Please check the flight data-ok3."
         exit
     else
         ./convertTXT2JSON.sh ${flight_txt}

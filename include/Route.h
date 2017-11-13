@@ -130,8 +130,7 @@ public:
      * @return the conflict probability for two points.
      */
     double CalculationProbabilityAndDelayAtPoint(int iIndex1, Route *pRoute2, int iIndex2, double *pdDelayTime,
-                                                 double *pdDelayTimeMax, bool *pbWait, double dSigma1,
-                                                 double dSigma2, bool deterministic);
+                                                 double *pdDelayTimeMax, bool *pbWait, bool deterministic);
 
     /**
      * Initialize the route time list.
@@ -184,8 +183,7 @@ private:
      * @return the conflict probability for two points.
      */
     double CalculateProbabilityAndDelayForPartA(double dT1, double dT2, double dV1, double dV2, double dCosA,
-                                                double *pdDelayTime, double *pdDelayTimeMax, double dSigma1,
-                                                double dSigma2, bool deterministic);
+                                                double *pdDelayTime, double *pdDelayTimeMax, bool deterministic);
 
     /**
      * Calculate conflict probability and delay time.
@@ -202,8 +200,7 @@ private:
      * @return the conflict probability for two points.
      */
     double CalculateProbabilityAndDelayForPartB(double dT1, double dT2, double dV1, double dV2, double dCosA,
-                                                double *pdDelayTime, double *pdDelayTimeMax, double dSigma1,
-                                                double dSigma2, bool deterministic);
+                                                double *pdDelayTime, double *pdDelayTimeMax, bool deterministic);
 
     /**
      * Calculate conflict probability and delay time.
@@ -220,8 +217,7 @@ private:
      * @return the conflict probability for two points.
      */
     double CalculateProbabilityAndDelayForPartC(double dT1, double dT2, double dV1, double dV2, double dCosA,
-                                                double *pdDelayTime, double *pdDelayTimeMax, double dSigma1,
-                                                double dSigma2, bool deterministic);
+                                                double *pdDelayTime, double *pdDelayTimeMax, bool deterministic);
 
     /**
      * Calculate conflict probability and delay time.
@@ -238,8 +234,7 @@ private:
      * @return the conflict probability for two points.
      */
     double CalculateProbabilityAndDelayForPartD(double dT1, double dT2, double dV1, double dV2, double dCosA,
-                                                double *pdDelayTime, double *pdDelayTimeMax, double dSigma1,
-                                                double dSigma2, bool deterministic);
+                                                double *pdDelayTime, double *pdDelayTimeMax, bool deterministic);
 
     /**
      * Calculate conflict probability and delay time.
@@ -255,8 +250,7 @@ private:
      * @return the conflict probability for two points.
      */
     double CalculatePartialProbabilityAndDelay(int iIndex1, Route *pRoute2, int iIndex2, double *pdDelayTime,
-                                               double *pdDelayTimeMax, bool bFlag1, bool bFlag2, double dSigma1,
-                                               double dSigma2, bool deterministic);
+                                               double *pdDelayTimeMax, bool bFlag1, bool bFlag2, bool deterministic);
 };
 
 #endif //ROUTE_H

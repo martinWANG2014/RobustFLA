@@ -42,6 +42,28 @@ const double MIN_PROBA = 0.0001;
 #define MIN_SIGMA_CONST
 const double MIN_SIGMA = 0.1;
 #endif
+
+#ifndef PARAMETERS_GAUSSIAN_CONST
+#define PARAMETERS_GAUSSIAN_CONST
+const double P_1=0.37;
+const double P_2=0.40;
+const double P_3=0.15;
+const double P_4=0.08;
+const double MU_1=-17.15;
+const double MU_2=-7.31;
+const double MU_3=19.57;
+const double MU_4=69.13;
+const double SIGMA_2_1= 88.20;
+const double SIGMA_2_2= 89.33;
+const double SIGMA_2_3= 1007.73;
+const double SIGMA_2_4= 3926.00;
+#endif
+
+#ifndef TIMEOFFSETSUP_CONST
+#define TIMEOFFSETSUP_CONST
+const int TIMEOFFSETSUP = 300;
+#endif
+
 typedef std::vector<int> viList;
 typedef std::vector<double> vdList;
 typedef std::deque<std::vector<int>> qviList;
@@ -170,35 +192,6 @@ struct retrieve_key {
 };
 
 ////////////Method template////////////////////////////////////////////////////
-///**
-// * Get maximal value of sigma that make the Pr(-alpha <= y <= beta) >= gamma
-// * @param alpha     The absolute of lower bound for random variables
-// * @param beta      The upper bound for random variables
-// * @param gamma     The probability for -alpha<= y <= beta
-// * @return the maximal value of sigma that make the Pr(-alpha <= y <= beta) >= gamma
-// */
-//double getSigma1(double alpha, double beta, double gamma);
-//
-///**
-// * Get maximal value of sigma that make the Pr(-alpha <= y <= beta) >= gamma
-// * @param alpha     The absolute of lower bound for random variables
-// * @param beta      The upper bound for random variables
-// * @param gamma     The probability for -alpha<= y <= beta
-// * @return  the maximal value of sigma that make the Pr(-alpha <= y <= beta) >= gamma
-// */
-//double getSigma2(double alpha, double beta, double gamma);
-
-/**
- * Get maximal value of sigma that make the Pr(-alpha <= y <= beta) >= gamma
- * @param alpha     The absolute of lower bound for random variables
- * @param beta      The upper bound for random variables
- * @param gamma     The probability for -alpha<= y <= beta
- * @param w1        The related position of mean for the random variable in left part
- * @param w2        The related position of mean for the random variable in right part
- * @param p         The probability of random variables in left part
- * @return  the maximal value of sigma that make the Pr(-alpha <= y <= beta) >= gamma
- */
-double getSigma3(double alpha, double beta, double gamma, double w1, double w2, double p);
 
 /**
  * Find the feasible flight level list.
@@ -217,24 +210,20 @@ viList findFeasibleLevels(int iDefaultLevel, int iSize);
 Level findNextFeasibleLevel(int iDefaultLevel, Level lastLevel);
 
 /**
- *
- * @param mu
- * @param sigma
- * @return
+ * Get the mu of mixed gaussian distribution.
+ * @return the mixed mu of correspinding gaussian distribution model.
  */
-double getSigma_2FoldedNormal(double mu, double sigma);
+double getMixedMu() ;
 
 /**
- *
- * @param vdParameters
- * @param dSigma
- * @return
+ * Get the carre of sigma of mixed gaussian dustribution.
+ * @return the mixed  carre of sigma of corresponding gaussaing distribution model.
  */
-double getSigmaHybridFoldedNormal(const vdList &vdParameters, double dSigma);
+double getMixedSigma_2() ;
+
+double getProbability(double mu, double sigma_2);
+
+double getHybridProbability(double coefficient, double t1, double t2);
 
 bool exists(String filename);
-///**
-// * A coefficient parameter: A_BAR, from article "A Geometrical Approach to Conflict Probability Estimation, Richard Irvine"
-// */
-//double getA_Bar();
 #endif //CONFIGURATION_H

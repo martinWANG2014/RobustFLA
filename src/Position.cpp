@@ -19,7 +19,6 @@ double distanceBetween(const Position &p1, const Position &p2) {
     double dLat2 = p2.getLatitude();
     double dLng1 = p1.getLongitude();
     double dLng2 = p2.getLongitude();
-
     double dDeltaLat = dLat1 - dLat2;
     double dDeltaLng = dLng1 - dLng2;
     double dDeltaLatRadian = dDeltaLat * M_PI / 180;
@@ -53,5 +52,10 @@ Position::~Position() {}
 Position::Position(double dLatitude, double dLongitude) : dLatitude(dLatitude), dLongitude(dLongitude) {}
 
 Position::Position(const Position &position) : dLatitude(position.getLatitude()), dLongitude(position.getLongitude()) {}
+
+std::ostream &operator<<(std::ostream &os, const Position &position) {
+    os << "dLatitude: " << position.dLatitude << " dLongitude: " << position.dLongitude;
+    return os;
+}
 
 

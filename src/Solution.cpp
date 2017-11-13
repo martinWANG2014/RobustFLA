@@ -3,14 +3,11 @@
 //
 #include "../include/Solution.h"
 
-void writeJsonSolution(String dataFilename, vdList parameterList, double epsilon, double coefPi,
-                       int feasibleSize, bool modeSigma, int method,
+void writeJsonSolution(String dataFilename,  double epsilon, double coefPi,double SumBenefits, double ElapsedTime,
+                       int feasibleSize, int method, int percentileSup,
                        int nbFlightsChangeLevel, int nbMaxConflict,
-                       int nbMaxDiverseLevels, double SumBenefits, double ElapsedTime, int nbIterations,
+                       int nbMaxDiverseLevels,  int nbIterations,
                        bool deterministicRule) {
-    //check the solutionDir
-
-
     using boost::property_tree::ptree;
     using boost::property_tree::write_json;
     ptree root;
@@ -23,19 +20,12 @@ void writeJsonSolution(String dataFilename, vdList parameterList, double epsilon
     rootConfig.put<double>("minAngleCos", MIN_ANGLE);
     rootConfig.put<double>("PeriodLength", Network::PERIOD_LENGTH);
     rootConfig.put<int>("FeasibleListSize", feasibleSize);
-    rootConfig.put<double>("alpha", -parameterList[0]);
-    rootConfig.put<double>("beta", parameterList[1]);
-    rootConfig.put<double>("gamma", parameterList[2]);
-    rootConfig.put<double>("w1", parameterList[3]);
-    rootConfig.put<double>("w2", parameterList[4]);
-    rootConfig.put<double>("densityProbaLeft", parameterList[5]);
     if (method == 0) {
         rootConfig.put("epsilon", "");
     } else {
         rootConfig.put<double>("epsilon", epsilon);
     }
     rootConfig.put<double>("coefPi", coefPi);
-    rootConfig.put("modeGauss", modeSigma ? "dynamic" : "static");
     switch (method) {
         case 0 :
             rootConfig.put("method", "Deterministic");
@@ -53,7 +43,7 @@ void writeJsonSolution(String dataFilename, vdList parameterList, double epsilon
             rootConfig.put("method", "Unknown");
             break;
     }
-    rootConfig.put<double>("percentageAdditionalFlights", parameterList[6]);
+    rootConfig.put<double>("percentageAdditionalFlights", percentileSup);
     if (method == 2) {
         rootConfig.put<int>("nbIterations", nbIterations);
     }
@@ -73,15 +63,11 @@ void writeJsonSolution(String dataFilename, vdList parameterList, double epsilon
     std::stringstream outFilename;
     if (method == 2) {
         outFilename << "../solution/res_" << method << "_" << Network::PERIOD_LENGTH << "_" << epsilon << "_"
-                    << feasibleSize << "_" << coefPi << "_" << parameterList[0] << "_" << parameterList[1] << "_"
-                    << parameterList[2] << "_" << parameterList[3] << "_" << parameterList[4] << "_" << parameterList[5]
-                    << "_" << (modeSigma ? 1 : 0) << "_" << parameterList[6] << "_" << (deterministicRule ? 1 : 0)
+                    << feasibleSize << "_" << coefPi << "_" << percentileSup << "_" << (deterministicRule ? 1 : 0)
                     << "_" << nbIterations << ".json";
     } else {
         outFilename << "../solution/res_" << method << "_" << Network::PERIOD_LENGTH << "_" << epsilon << "_"
-                    << feasibleSize << "_" << coefPi << "_" << parameterList[0] << "_" << parameterList[1] << "_"
-                    << parameterList[2] << "_" << parameterList[3] << "_" << parameterList[4] << "_" << parameterList[5]
-                    << "_" << (modeSigma ? 1 : 0) << "_" << parameterList[6] << "_" << (deterministicRule ? 1 : 0)
+                    << feasibleSize << "_" << coefPi << "_" <<  percentileSup << "_" << (deterministicRule ? 1 : 0)
                     << "_-" << ".json";
     }
 
@@ -90,11 +76,10 @@ void writeJsonSolution(String dataFilename, vdList parameterList, double epsilon
 
 }
 
-void ApproximateFLA(const Network *pNetwork, const vdList &vdParameter, String dataFilename,
+void ApproximateFLA(const Network *pNetwork,  String dataFilename,
                     double dEpsilon, double dCoefPi,
                     int feasibleSize,
-                    int iModeMethod, bool sigmaMode, bool modeDisplay, bool deterministicRule, int nbIterations) {
-//    int iNbFlightNotAssigned = 0;
+                    int iModeMethod, int percentileSup, bool modeDisplay, bool deterministicRule, int nbIterations) {
     int iNbFlightChangeLevel = 0;
     IloEnv env;
     FlightLevelAssignmentMap flightLevelAssignmentMap;
@@ -113,9 +98,8 @@ void ApproximateFLA(const Network *pNetwork, const vdList &vdParameter, String d
     int iMaxNbConflict = 0;
     double dSumBenefits = 0.0;
     try {
-
         // Try to assign the flights.
-        iNbFlightNotAssigned = SolveFLA(vpFlightList, flightLevelAssignmentMap, env, vdParameter, viLevelsList,
+        iNbFlightNotAssigned = SolveFLA(vpFlightList, flightLevelAssignmentMap, env, viLevelsList,
                                         processClock, dEpsilon,
                                         dCoefPi,
                                         &dSumBenefits, &iMaxNbConflict, iModeMethod, modeDisplay, nbIterations,
@@ -143,7 +127,7 @@ void ApproximateFLA(const Network *pNetwork, const vdList &vdParameter, String d
             std::cout << "Result Gaus" << std::endl;
             break;
         default:
-            std::cout << "Result nDef" << std::endl;
+            std::cout << "Result NDef" << std::endl;
             break;
     }
     double elapsedTime = processClock.getCpuTime();
@@ -153,9 +137,10 @@ void ApproximateFLA(const Network *pNetwork, const vdList &vdParameter, String d
     std::cout << "\tMax diverse levels: " << iMaxDiverseLevel << std::endl;
     std::cout << "\tSum benefits: " << dSumBenefits << std::endl;
     std::cout << "\tElapsed time: " << elapsedTime << std::endl << std::endl;
-    writeJsonSolution(dataFilename, vdParameter, dEpsilon, dCoefPi, feasibleSize, sigmaMode, iModeMethod,
+    // write the solution into file.
+    writeJsonSolution(dataFilename, dEpsilon, dCoefPi, dSumBenefits, elapsedTime, feasibleSize, iModeMethod, percentileSup,
                       iNbFlightChangeLevel, iMaxNbConflict,
-                      iMaxDiverseLevel, dSumBenefits, elapsedTime, nbIterations, deterministicRule);
+                      iMaxDiverseLevel,  nbIterations, deterministicRule);
 }
 
 int getNbFlightsChangeLevel(FlightVector &flightVector) {
@@ -182,7 +167,7 @@ int getMaxDiverseLevel(FlightVector &flightVector) {
 bool
 SolvingFLAByLevelPP(FlightVector &vpFlightList, FlightsLevelMap &infeasibleFlightMap,
                     FlightVector &vpPreviousFlightList,
-                    const IloEnv &env, const vdList &vdParameter, LevelExamine &levelEx,
+                    const IloEnv &env,  LevelExamine &levelEx,
                     FlightLevelAssignmentMap &flightLevelAssignmentMap, double epsilon,
                     int *iMaxNbConflict,
                     Level iProcessingLevel, int iModeMethod,
@@ -382,9 +367,7 @@ SolvingFLAByLevelPP(FlightVector &vpFlightList, FlightsLevelMap &infeasibleFligh
             break;
         case 1:/*Hoeffding*/
             while (true) {
-                feasible = FeasibilityHoeffding(Pi, decisionVariablesValues, vdParameter,
-                                                ppdConflictProbability, ppdDelayTime,
-                                                ppdDelayTimeMax,
+                feasible = FeasibilityHoeffding(Pi, decisionVariablesValues, ppdConflictProbability, ppdDelayTimeMax,
                                                 epsilon, iConflictFlightsSize, &iMinIndexArgsFromFeaCheck, modeDisplay);
                 if (feasible) {
                     break;
@@ -448,7 +431,7 @@ SolvingFLAByLevelPP(FlightVector &vpFlightList, FlightsLevelMap &infeasibleFligh
         case 2:/*MonteCarlo with departure time*/
             while (true) {
                 feasible = FeasibilityMonteCarlo(ConflictFlightList, viConstraintList, Pi, decisionVariablesValues,
-                                                 vdParameter, epsilon, &iMinIndexArgsFromFeaCheck, modeDisplay,
+                                                  epsilon, &iMinIndexArgsFromFeaCheck, modeDisplay,
                                                  nbIterations, deterministicRule);
                 if (feasible) {
                     break;
@@ -498,7 +481,6 @@ SolvingFLAByLevelPP(FlightVector &vpFlightList, FlightsLevelMap &infeasibleFligh
 }
 
 int SolveFLA(FlightVector &vpFlightList, FlightLevelAssignmentMap &flightLevelAssignmentMap, const IloEnv &env,
-             const vdList &vdParameter,
              LevelVector &viLevelsList, ProcessClock &processClock, double epsilon, double dCoefPi,
              double *dSumBenefits, int *iMaxNbConflict,
              int iModeMethod, bool modeDisplay, int nbIterations, bool deterministicRule) {
@@ -545,7 +527,7 @@ int SolveFLA(FlightVector &vpFlightList, FlightLevelAssignmentMap &flightLevelAs
             bool solved = false;
             while (!solved) {
                 solved = SolvingFLAByLevelPP(vpFlightList, infeasibleFlightMap, vpPreviousFlightList,
-                                             env, vdParameter,
+                                             env,
                                              levelEx, flightLevelAssignmentMap, epsilon, iMaxNbConflict,
                                              processingLevel, iModeMethod, modeDisplay, nbIterations,
                                              deterministicRule);
@@ -601,11 +583,10 @@ int SolveFLA(FlightVector &vpFlightList, FlightLevelAssignmentMap &flightLevelAs
 }
 
 bool FeasibilityMonteCarlo(FlightVector &vpConflictedFlightList, const viList &viConstraintList, const vdList &vdPi,
-                           const IloNumArray &decisionVariables, const vdList &vdParameter, double dEpsilon,
+                           const IloNumArray &decisionVariables,   double dEpsilon,
                            int *piIndex, bool modeDisplay, int nbIteration, bool detersministicRule) {
     int iConflictedFlightsSize = (int) vpConflictedFlightList.size();
     int iConflictedCounter = 0;
-//    int iMaxConflict = -1;
     bool feasible = true;
     *piIndex = -1;
     double **ppdConflictProbability = CreateTable(iConflictedFlightsSize);
@@ -622,13 +603,12 @@ bool FeasibilityMonteCarlo(FlightVector &vpConflictedFlightList, const viList &v
         InitTable(ppdConflictProbability, iConflictedFlightsSize);
         bool test = true;
         //Generate a new scenario from current flight list.
-//        for (auto fj : vpConflictedFlightList) {
         for (int i = 0; i < iConflictedFlightsSize; i++) {
             if (decisionVariables[i] == 1 && !contains(viConstraintList, i)) {
                 Flight *fj = vpConflictedFlightList[i];
                 Time iOldDepartureTime = fj->getDepartureTime();
                 Time iDelta = 0;
-                iDelta = GaussianDistribution3(vdParameter, fj->getSigmaPrime());
+                iDelta = FourGaussianDistribution();
                 fj->GenerateNewFlight(iOldDepartureTime + iDelta);
             }
         }
@@ -637,12 +617,10 @@ bool FeasibilityMonteCarlo(FlightVector &vpConflictedFlightList, const viList &v
 
         for (int i = 0; i < iConflictedFlightsSize; i++) {
             if (decisionVariables[i] == 1) {
-//                std::cout << "assign i : "<< i << std::endl;
                 double sum = 0;
                 for (int j = 0; j < iConflictedFlightsSize; j++) {
                     if (j != i && ppdConflictProbability[i][j] > MIN_PROBA && decisionVariables[j] == 1) {
                         sum += std::max(0.0, ppdDelayTime[i][j]);
-//                        std::cout << ppdConflictProbability[i][j] << "\t" << ppdDelayTime[i][j]<<std::endl;
                     }
                 }
                 if (sum > vdPi[i]) {
@@ -652,7 +630,6 @@ bool FeasibilityMonteCarlo(FlightVector &vpConflictedFlightList, const viList &v
                 }
             }
         }
-
         if (!test) {
             iConflictedCounter++;
         }
@@ -692,10 +669,6 @@ bool FeasibilityMonteCarlo(FlightVector &vpConflictedFlightList, const viList &v
         if (decisionVariables[item] == 0) {
             table[item] = 0;
         }
-//        if (decisionVariables[item] == 1 && table[item] > iMaxConflict) {
-//            iMaxConflict = table[item];
-//            *piIndex = item;
-//        }
     }
     auto pos_max = std::max_element(table.begin(), table.end());
     *piIndex = int(pos_max - table.begin());
@@ -709,32 +682,6 @@ bool FeasibilityMonteCarlo(FlightVector &vpConflictedFlightList, const viList &v
     if (modeDisplay) {
         std::cout << "\t\t\tCount: " << (nbIteration - iConflictedCounter) / (nbIteration * 1.0) << std::endl;
     }
-//    if (dEpsilon == 0.05) {
-//        if (1000 - iConflictedCounter < 961) {
-//            return false;
-//        }
-//    }
-//    if (dEpsilon == 0.1) {
-//        if (1000 - iConflictedCounter < 915) {
-//            return false;
-//        }
-//    }
-//    if (dEpsilon == 0.15) {
-//        if (1000 - iConflictedCounter < 868) {
-//            return false;
-//        }
-//    }
-//    if (dEpsilon == 0.2) {
-//        if (1000 - iConflictedCounter < 821) {
-//            return false;
-//        }
-//    }
-//    if (dEpsilon == 0.25) {
-//        if (1000 - iConflictedCounter < 772) {
-//            return false;
-//        }
-//    }
-
     if (modeDisplay && feasible) {
         std::cout << "\t\t\tFeasibility ==> ok!" << std::endl;
     }
@@ -761,8 +708,7 @@ bool FeasibilityGaussian(FlightVector &vpConflictedFlightList, const vdList &vdP
                 if (j != i && decisionVariables[j] == 1 && ppdConflictProbability[i][j] > MIN_PROBA &&
                     ppdDelayTime[i][j] > 0) {
                     mu = ppdDelayTime[i][j];
-                    sigma_2 = (pow(vpConflictedFlightList[i]->getSigma(), 2) +
-                               pow(vpConflictedFlightList[j]->getSigma(), 2));
+                    sigma_2 = 0;
                     dLeftConstrainedFeasibility *= 0.5 * (boost::math::erf((vdPi[i] - mu) / (sqrt(2 * sigma_2))) + 1);
                     exp_mu += mu;
                     exp_sigma_2 += sigma_2;
@@ -798,22 +744,17 @@ bool FeasibilityGaussian(FlightVector &vpConflictedFlightList, const vdList &vdP
     return true;
 }
 
-bool FeasibilityHoeffding(const vdList &vdPi,
-                          const IloNumArray &decisionVariables, const vdList &vdParameter,
-                          double **ppdConflictProbability, double **ppdDelayTime, double **ppdDelayTimeMax,
-                          double dEpsilon,
+bool FeasibilityHoeffding(const vdList &vdPi, const IloNumArray &decisionVariables,
+                          double **ppdConflictProbability, double **ppdDelayTimeMax, double dEpsilon,
                           int iConflictedFlightSize, int *piIndex, bool modeDisplay) {
     *piIndex = -1;
     for (int i = 0; i < iConflictedFlightSize; i++) {
         double dInFeasibility = 0;
         double temp2 = 0;
         if (int(decisionVariables[i]) == 1) {
-//            std::cout << "assign i : "<< i << std::endl;
             for (int j = 0; j < iConflictedFlightSize; j++) {
                 if (ppdConflictProbability[i][j] > MIN_PROBA) {
-                    double maxPenalCost = std::max(0.0, ppdDelayTimeMax[i][j]) * decisionVariables[j] -
-                                          std::max(ppdDelayTime[i][j] - vdParameter[1] - vdParameter[2], 0.0) *
-                                          decisionVariables[j];
+                    double maxPenalCost = std::max(0.0, ppdDelayTimeMax[i][j]) * decisionVariables[j];
                     dInFeasibility += ppdConflictProbability[i][j] * maxPenalCost / 2;
                     temp2 += pow(maxPenalCost, 2);
                 }
@@ -826,75 +767,6 @@ bool FeasibilityHoeffding(const vdList &vdPi,
             if (dInFeasibility > dEpsilon) {
                 *piIndex = i;
                 return false;
-            }
-        }
-    }
-    if (modeDisplay) {
-        std::cout << "\t\t\tFeasibility ==> ok!" << std::endl;
-    }
-    return true;
-}
-
-bool FeasibilityEnumeration(const vdList &vdPi, const IloNumArray &decisionVariables,
-                            double **ppdConflictProbability, double **ppdDelayTime, double dEpsilon,
-                            int iConflictedFlightsSize, int *indexMostInfeasible, bool modeDisplay) {
-    *indexMostInfeasible = -1;
-
-    //Iterate all conflict flights in current flight level
-    for (int i = 0; i < iConflictedFlightsSize; i++) {
-        //For each assigned flight(x[i] = 1) in current level of last solutionC
-        if (int(decisionVariables[i]) == 1) {
-//            std::cout << "assign i : "<< i << std::endl;
-            int iConflictFlightsOfI = 0;
-            viList viCandidateConflictFlightOfI;
-            double dInFeasibility = 0;
-            double dSumPenalCost = 0;
-            for (int j = 0; j < iConflictedFlightsSize; j++) {
-                if (j != i && ppdConflictProbability[i][j] > 0) {
-                    dSumPenalCost += std::max(0.0, ppdDelayTime[i][j]) * decisionVariables[j];
-                    viCandidateConflictFlightOfI.push_back(j);
-                    iConflictFlightsOfI++;
-                }
-            }
-            bool bNotFinish = true;
-            int k = iConflictFlightsOfI;
-            //If the constraint is infeasible, then test all its combinations
-            // util all the combination with k items will be feasible.
-            if (dSumPenalCost > vdPi[i]) {
-                while (bNotFinish && k > 0) {
-                    qviList qviCombinationList = Combination(viCandidateConflictFlightOfI, k);
-                    bool bValid = false;
-                    //For each case of combination, test the occurrence probability.
-                    for (auto subCombination: qviCombinationList) {
-                        double dOccurrenceProbability = 1;
-                        double dSumPenalCostP = 0.0;
-                        viList viComplementList = getComplement((int) viCandidateConflictFlightOfI.size(),
-                                                                subCombination);
-                        for (auto indexJ: subCombination) {
-                            int j = viCandidateConflictFlightOfI[indexJ];
-                            dOccurrenceProbability *= ppdConflictProbability[i][j];
-                            dSumPenalCostP += std::max(0.0, ppdDelayTime[i][j]);
-                        }
-                        for (auto indexJ: viComplementList) {
-                            int j = viCandidateConflictFlightOfI[indexJ];
-                            dOccurrenceProbability *= 1 - ppdConflictProbability[i][j];
-                        }
-                        if (dSumPenalCostP > vdPi[i]) {
-                            bValid = true;
-                            dInFeasibility += dOccurrenceProbability;
-                        }
-                    }
-                    k--;
-                    bNotFinish = bValid;
-                }
-                if (modeDisplay) {
-                    std::cout << "\t\t\ti: " << i << "==>Feas: " << 1 - dInFeasibility << "===> Eps: " << 1 - dEpsilon
-                              << std::endl;
-                }
-                if (dInFeasibility > dEpsilon) {
-                    *indexMostInfeasible = i;
-                    return false;
-                }
             }
         }
     }
@@ -981,54 +853,25 @@ double **CreateTable(int iSize) {
     return ppdDouble;
 }
 
-double GaussianDistribution3(const vdList &vdParameter, double dSigma) {
-//    std::default_random_engine generator;
+double FourGaussianDistribution() {
     std::random_device rd;
     std::mt19937 generator(rd());
-    uni_dist UniformDist(0, 1);
+    uni_dist UniformDist(0.0, 1.0);
     double p = UniformDist(generator);
     double delta;
-    if (p < vdParameter[5]) {
-        normal_dist NormalDist(vdParameter[0] * vdParameter[3],
-                               dSigma);
-        delta = -fabs(NormalDist(generator));
-    } else {
-        normal_dist NormalDist(vdParameter[1] * vdParameter[4],
-                               dSigma);
-        delta = fabs(NormalDist(generator));
+    if (p< P_1){
+        normal_dist NormalDist(MU_1, sqrt(SIGMA_2_1));
+        delta = NormalDist(generator);
+    } else if (p < P_1+ P_2){
+        normal_dist NormalDist(MU_2, sqrt(SIGMA_2_2));
+        delta = NormalDist(generator);
+    } else if (p < P_1+P_2+P_3){
+        normal_dist NormalDist(MU_3, sqrt(SIGMA_2_3));
+        delta = NormalDist(generator);
+    } else{
+        normal_dist NormalDist(MU_4, sqrt(SIGMA_2_4));
+        delta = NormalDist(generator);
     }
     return delta;
 }
 
-viList getComplement(int iSize, viList &candidateList) {
-    viList resultList;
-    for (int i = 0; i < iSize; i++) {
-        auto index = std::find(candidateList.begin(), candidateList.end(), i);
-        if (index == candidateList.end()) {
-            resultList.push_back(i);
-        }
-    }
-    return resultList;
-}
-
-qviList Combination(const viList &viConstraintList, int k) {
-    qviList qviCombinationList;
-    //Initialize the deque with one item.
-    for (int i = 0; i < (int) viConstraintList.size() - k + 1; i++) {
-        viList candidateList;
-        candidateList.push_back(i);
-        qviCombinationList.push_back(candidateList);
-    }
-    //Do a combination for each item in deque until all items have a size of k.
-    while ((int) qviCombinationList.front().size() < k) {
-        int iValue = qviCombinationList.front()[qviCombinationList.front().size() - 1];
-        for (int i = iValue + 1;
-             i < (int) viConstraintList.size() - k + 1 + (int) qviCombinationList.front().size(); i++) {
-            viList candidateList = viList((viList &&) qviCombinationList.front());
-            candidateList.push_back(i);
-            qviCombinationList.push_back(candidateList);
-        }
-        qviCombinationList.pop_front();
-    }
-    return qviCombinationList;
-}

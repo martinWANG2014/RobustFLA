@@ -15,29 +15,6 @@
 #include <ilcplex/ilocplex.h>
 
 /**
- * Combination C(n,k), use the deque to implement a recursive combination.
- * @param viConstraintList  The constraint list, contains all the items.
- * @param k                 The number of selecting items.
- * @return All combinations of k items from n items.
- */
-qviList Combination(const viList &viConstraintList, int k);
-
-/**
- * Get the complement list of a candidate list
- * @param iSize             The size of a whole list
- * @param candidateList     The candidate list
- * @return A complement list of the candidate list
- */
-viList getComplement(int iSize, viList &candidateList);
-
-/**
- * Get a random data from the third type gaussian distribution
- * @param vdParameter       The parameter list for the gaussian distribution
- * @return a random data.
- */
-double GaussianDistribution3(const vdList &vdParameter, double dSigma);
-
-/**
  * Create real symmetric matrix in size of iSize*iSize
  * @param iSize     The number of rows and cols
  * @return A pointer that points to the created matrix.
@@ -87,26 +64,9 @@ int MinIndexArgs0(FlightVector &vpConflictFlightList, const vdList &vdPi, double
  * @param piIndexMostInfeasible     The index of most infeasible constraint
  * @return Whether the solution has a high confidence of feasibility.
  */
-bool FeasibilityEnumeration(const vdList &vdPi, const IloNumArray &decisionVariables,
-                            double **ppdConflictProbability, double **ppdDelayTime,
-                            double dEpsilon, int iConflictedFlightsSize, int *piIndexMostInfeasible, bool modeDisplay);
-
-/**
- * Check the constraint feasibility
- * @param viSearchList              The search list
- * @param vdPi                      The admissible cost list
- * @param decisionVariables         The decision variable value of last solution
- * @param ppdConflictProbability    The pointer of the conflict probability matrix
- * @param ppdDelayTime              The pointer of the delay time matrix
- * @param dEpsilon                  The robust parameter
- * @param iConflictedFlightsSize    The conflict flight number
- * @param piIndexMostInfeasible     The index of most infeasible constraint
- * @return Whether the solution has a high confidence of feasibility.
- */
-bool FeasibilityHoeffding(const vdList &vdPi,
-                          const IloNumArray &decisionVariables, const vdList &vdParameter,
-                          double **ppdConflictProbability, double **ppdDelayTime, double **ppdDelayTimeMax,
-                          double dEpsilon, int iConflictedFlightSize, int *piIndex, bool modeDisplay);
+bool FeasibilityHoeffding(const vdList &vdPi, const IloNumArray &decisionVariables,
+                          double **ppdConflictProbability, double **ppdDelayTimeMax, double dEpsilon,
+                          int iConflictedFlightSize, int *piIndex, bool modeDisplay);
 
 /**
  * * Check the constraint feasibility
@@ -135,7 +95,7 @@ bool FeasibilityGaussian(FlightVector &vpConflictedFlightList, const vdList &vdP
  * @return Whether the solution has a high confidence of feasibility.
  */
 bool FeasibilityMonteCarlo(FlightVector &vpConflictedFlightList, const viList &viConstraintList, const vdList &vdPi,
-                           const IloNumArray &decisionVariables, const vdList &vdParameter, double dEpsilon,
+                           const IloNumArray &decisionVariables,   double dEpsilon,
                            int *piIndex, bool modeDisplay, int nbIteration, bool deterministicRule);
 
 
@@ -154,7 +114,6 @@ bool FeasibilityMonteCarlo(FlightVector &vpConflictedFlightList, const viList &v
  * @return  A unassigned flights list
  */
 int SolveFLA(FlightVector &vpFlightList, FlightLevelAssignmentMap &flightLevelAssignmentMap, const IloEnv &env,
-             const vdList &vdParameter,
              LevelVector &viLevelsList, ProcessClock &processClock, double epsilon, double dCoefPi,
              double *dSumBenefits, int *iMaxNbConflict, int iModeMethod, bool modeDisplay, int nbIterations,
              bool deterministicRule);
@@ -187,21 +146,22 @@ int getMaxDiverseLevel(FlightVector &flightVector);
 bool
 SolvingFLAByLevelPP(FlightVector &vpFlightList, FlightsLevelMap &infeasibleFlightMap,
                     FlightVector &vpPreviousFlightList,
-                    const IloEnv &env, const vdList &vdParameter, LevelExamine &levelEx,
+                    const IloEnv &env,  LevelExamine &levelEx,
                     FlightLevelAssignmentMap &flightLevelAssignmentMap, double epsilon,
                     int *iMaxNbConflict,
                     Level iProcessingLevel, int iModeMethod,
                     bool modeDisplay, int nbIterations, bool deterministicRule);
 
-void ApproximateFLA(const Network *pNetwork, const vdList &vdParameter, String dataFilename,
+void ApproximateFLA(const Network *pNetwork, String dataFilename,
                     double dEpsilon, double dCoefPi,
                     int feasibleSize,
-                    int iModeMethod, bool sigmaMode, bool modeDisplay, bool deterministicRule, int nbIterations = 1000);
+                    int iModeMethod, int percentileSup,  bool modeDisplay, bool deterministicRule, int nbIterations = 1000);
 
-void writeJsonSolution(String dataFilename, vdList parameterList, double epsilon, double coefPi,
-                       int feasibleSize, bool modeSigma, int method,
+void writeJsonSolution(String dataFilename,  double epsilon, double coefPi,double SumBenefits, double ElapsedTime,
+                       int feasibleSize, int method, int percentileSup,
                        int nbFlightsChangeLevel, int nbMaxConflict,
-                       int nbMaxDiverseLevels, double SumBenefits, double ElapsedTime, int nbIterations,
-                       bool deterministic);
+                       int nbMaxDiverseLevels,  int nbIterations,
+                       bool deterministicRule);
+double FourGaussianDistribution();
 
 #endif //SOLUTION_H

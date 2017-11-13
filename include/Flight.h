@@ -121,22 +121,6 @@ public:
     bool selfCheck();
 
     /**
-     * Getter for dSigma.
-     * @return the  sigma value.
-     */
-    double getSigma() const;
-
-    double getSigmaPrime() const;
-
-    /**
-     * Setter for dSigma.
-     * @param dSigma    The new sigma value
-     */
-    void setSigma(double dSigma);
-
-    void setSigmaPrime(double dSigmaPrime);
-
-    /**
      * Initialize the route time list.
      */
     void initRouteTimeList();
@@ -224,13 +208,6 @@ private:
      * The chosen route of flight.
      */
     Route *pRoute;
-
-    /**
-     * The deviation of departure time.
-     */
-    double dSigma;
-
-    double dSigmaPrime;
 
     /**
      * The coefficient of admissible cost.

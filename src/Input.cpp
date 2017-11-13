@@ -2,14 +2,13 @@
 // Created by chenghaowang on 06/07/17.
 //
 #include "../include/Input.h"
-
 void Input::parseWayPoints(Network *pNetwork, bool modeDisplay) {
     using boost::property_tree::ptree;
     using boost::property_tree::read_json;
 
     std::cout << "[INFO] Parsing wayPoints file... " << std::flush;
 
-    // Verify whether the data file exists or not: if not, pop up an error message.
+    // Verify whether the data-ok3 file exists or not: if not, pop up an error message.
     if (!exists(sWayPointPath)) {
         std::cerr << "[ERROR] Not exist " << sWayPointPath << std::endl;
         abort();
@@ -45,7 +44,7 @@ void Input::parseWayPoints(Network *pNetwork, bool modeDisplay) {
         }
     }
     std::cout << "OK" << std::endl
-              << "\tBeacon file data:" << std::endl
+              << "\tBeacon file data-ok3:" << std::endl
               << "\tWayPoints: " << nbWayPoints << std::endl
               << "\tValid WayPoints: " << pNetwork->getNbWayPoints() << std::endl;
 }
@@ -56,7 +55,7 @@ void Input::parseAirports(Network *pNetwork, bool modeDisplay) {
 
     std::cout << "[INFO] Parsing airports file... " << std::flush;
 
-    // Verify whether the data file exists or not: if not, pop up an error message.
+    // Verify whether the data-ok3 file exists or not: if not, pop up an error message.
     if (!exists(sAirportPath)) {
         std::cerr << "[ERROR] Not exist " << sAirportPath << std::endl;
         abort();
@@ -91,12 +90,12 @@ void Input::parseAirports(Network *pNetwork, bool modeDisplay) {
         }
     }
     std::cout << "OK" << std::endl
-              << "\tAirports file data:" << std::endl
+              << "\tAirports file data-ok3:" << std::endl
               << "\tAirports: " << nbAirports << std::endl
               << "\tValid Airports: " << pNetwork->getNbAirports() << std::endl;
 }
 
-void Input::parseFlights(Network *pNetwork, bool modeDisplay, bool flightFileModified) {
+void Input::parseFlights(Network *pNetwork, bool flightFileModified, bool modeDisplay) {
     using boost::property_tree::ptree;
     using boost::property_tree::read_json;
     std::cout << "[INFO] Parsing flights file... OK" << std::endl;
@@ -210,14 +209,6 @@ void Input::parseFlights(Network *pNetwork, bool modeDisplay, bool flightFileMod
 //                std::cout << i <<(bIsRouteValid ?":true" : ":false")<< std::endl;
                 if (bIsRouteValid && !contains(pNetwork->getFlightsList(), pFlight)) {
                     pFlight->initRouteTimeList();
-                    if (flightFileModified) {
-                        // Parse the sigma of flight.
-                        double sigma = boost::lexical_cast<double>(root.get<String>(sPrefixed + ".Sigma"));
-                        // Parse the prime sigma of flight.
-                        double sigmaPrime = boost::lexical_cast<double>(root.get<String>(sPrefixed + ".SigmaPrime"));
-                        pFlight->setSigma(sigmaPrime);
-                        pFlight->setSigmaPrime(sigmaPrime);
-                    }
                     pNetwork->addNewFlight(pFlight);
 //                    std::cout << *pFlight << std::endl;
                 } else if (modeDisplay && bIsRouteValid) {
@@ -256,10 +247,10 @@ Input::Input(const String &sAirportPath, const String &sWayPointPath, const Stri
 
 Input::~Input() {}
 
-void Input::initNetwork(Network *pNetwork, bool modeDisplay, bool flightFileModified) {
+void Input::initNetwork(Network *pNetwork, bool flightFileModified,  bool modeDisplay) {
     parseAirports(pNetwork, modeDisplay);
     parseWayPoints(pNetwork, modeDisplay);
-    parseFlights(pNetwork, modeDisplay, flightFileModified);
+    parseFlights(pNetwork,flightFileModified, modeDisplay);
 }
 
 
