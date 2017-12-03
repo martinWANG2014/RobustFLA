@@ -209,21 +209,10 @@ viList findFeasibleLevels(int iDefaultLevel, int iSize);
  */
 Level findNextFeasibleLevel(int iDefaultLevel, Level lastLevel);
 
-/**
- * Get the mu of mixed gaussian distribution.
- * @return the mixed mu of correspinding gaussian distribution model.
- */
-double getMixedMu() ;
-
-/**
- * Get the carre of sigma of mixed gaussian dustribution.
- * @return the mixed  carre of sigma of corresponding gaussaing distribution model.
- */
-double getMixedSigma_2() ;
 
 double getProbability(double mu, double sigma_2);
 
-double getHybridProbability(double coefficient, double t1, double t2);
+double getConflictProbability(double coefficient, double t1, double t2);
 
 bool exists(String filename);
 #endif //CONFIGURATION_H

@@ -215,13 +215,6 @@ Level findNextFeasibleLevel(int iDefaultLevel, Level lastLevel) {
     }
 }
 
-double getMixedMu() {
-    return P_1*MU_1 + P_2*MU_2+ P_3*MU_3+P_4*MU_4;
-}
-
-double getMixedSigma_2()  {
-    return P_1*(SIGMA_2_1+pow(MU_1,2)) +P_2*(SIGMA_2_2+pow(MU_2,2)) +P_3*(SIGMA_2_3+pow(MU_3,2)) +P_4*(SIGMA_2_4+pow(MU_4,2)) - pow(getMixedMu(), 2);
-}
 
 bool exists(String filename) {
     std::ifstream file(filename);
@@ -229,28 +222,16 @@ bool exists(String filename) {
 }
 
 double getProbability(double mu, double sigma_2) {
-    double dRight = (MIN_SEPARATION_DISTANCE * K - mu) / (sqrt(2.0*sigma_2));
-    double dLeft = mu / (sqrt(2.0 *sigma_2 ));
+    double dRight = (MIN_SEPARATION_DISTANCE * K - mu) / (sqrt(2.0 * sigma_2));
+    double dLeft = mu / (sqrt(2.0 * sigma_2));
     return 0.5 * (boost::math::erf(dRight) + boost::math::erf(dLeft));
 }
 
-double getHybridProbability(double coefficient, double t1, double t2) {
-    return P_1*P_1*getProbability(coefficient*(t1-t2), pow(coefficient, 2)*SIGMA_2_1*2)+
-            P_2*P_2*getProbability(coefficient*(t1-t2), pow(coefficient, 2)*SIGMA_2_2*2)+
-            P_3*P_3*getProbability(coefficient*(t1-t2), pow(coefficient, 2)*SIGMA_2_3*2)+
-            P_4*P_4*getProbability(coefficient*(t1-t2), pow(coefficient, 2)*SIGMA_2_4*2)+
-            P_1*P_2*getProbability(coefficient*(t1-t2+MU_1-MU_2), pow(coefficient, 2)*(SIGMA_2_1+SIGMA_2_2))+
-            P_1*P_3*getProbability(coefficient*(t1-t2+MU_1-MU_3), pow(coefficient, 2)*(SIGMA_2_1+SIGMA_2_3))+
-            P_1*P_4*getProbability(coefficient*(t1-t2+MU_1-MU_4), pow(coefficient, 2)*(SIGMA_2_1+SIGMA_2_4))+
-            P_2*P_1*getProbability(coefficient*(t1-t2+MU_2-MU_1), pow(coefficient, 2)*(SIGMA_2_2+SIGMA_2_1))+
-            P_2*P_3*getProbability(coefficient*(t1-t2+MU_2-MU_3), pow(coefficient, 2)*(SIGMA_2_2+SIGMA_2_3))+
-            P_2*P_4*getProbability(coefficient*(t1-t2+MU_2-MU_4), pow(coefficient, 2)*(SIGMA_2_2+SIGMA_2_4))+
-            P_3*P_2*getProbability(coefficient*(t1-t2+MU_3-MU_2), pow(coefficient, 2)*(SIGMA_2_3+SIGMA_2_2))+
-            P_3*P_1*getProbability(coefficient*(t1-t2+MU_3-MU_1), pow(coefficient, 2)*(SIGMA_2_3+SIGMA_2_1))+
-            P_3*P_4*getProbability(coefficient*(t1-t2+MU_3-MU_4), pow(coefficient, 2)*(SIGMA_2_3+SIGMA_2_4))+
-            P_4*P_2*getProbability(coefficient*(t1-t2+MU_4-MU_2), pow(coefficient, 2)*(SIGMA_2_4+SIGMA_2_2))+
-            P_4*P_3*getProbability(coefficient*(t1-t2+MU_4-MU_3), pow(coefficient, 2)*(SIGMA_2_4+SIGMA_2_3))+
-            P_4*P_1*getProbability(coefficient*(t1-t2+MU_4-MU_1), pow(coefficient, 2)*(SIGMA_2_4+SIGMA_2_1));
+double getConflictProbability(double coefficient, double t1, double t2) {
+    return P_1 * getProbability(coefficient * (t1 - t2), pow(coefficient, 2) * SIGMA_2_1 * 2) +
+           P_2 * getProbability(coefficient * (t1 - t2), pow(coefficient, 2) * SIGMA_2_2 * 2) +
+           P_3 * getProbability(coefficient * (t1 - t2), pow(coefficient, 2) * SIGMA_2_2 * 2) +
+           P_4 * getProbability(coefficient * (t1 - t2), pow(coefficient, 2) * SIGMA_2_2 * 2);
 }
 
 

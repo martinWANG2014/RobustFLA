@@ -699,23 +699,42 @@ bool FeasibilityGaussian(FlightVector &vpConflictedFlightList, const vdList &vdP
         if (decisionVariables[i] == 1) {
 //            std::cout << "assign i : "<< i << std::endl;
             double exp_mu = 0.0;
-            double exp_sigma_2 = 0.0;
+            double exp_sigma_2_1 = 0.0;
+            double exp_sigma_2_2 = 0.0;
+            double exp_sigma_2_3 = 0.0;
+            double exp_sigma_2_4 = 0.0;
             int iCounter = 0;
             double dLeftConstrainedFeasibility = 1;
             double mu;
-            double sigma_2;
+            double sigma_2_1;
+            double sigma_2_2;
+            double sigma_2_3;
+            double sigma_2_4;
             for (int j = 0; j < iSize; j++) {
                 if (j != i && decisionVariables[j] == 1 && ppdConflictProbability[i][j] > MIN_PROBA &&
                     ppdDelayTime[i][j] > 0) {
                     mu = ppdDelayTime[i][j];
-                    sigma_2 = 0;
-                    dLeftConstrainedFeasibility *= 0.5 * (boost::math::erf((vdPi[i] - mu) / (sqrt(2 * sigma_2))) + 1);
+                    sigma_2_1 = 2 * SIGMA_2_1;
+                    sigma_2_2 = 2 * SIGMA_2_2;
+                    sigma_2_3 = 2 * SIGMA_2_3;
+                    sigma_2_4 = 2 * SIGMA_2_4;
+                    dLeftConstrainedFeasibility *= (
+                            P_1 * 0.5 * (boost::math::erf((vdPi[i] - mu) / (sqrt(2 * sigma_2_1))) + 1) +
+                            P_2 * 0.5 * (boost::math::erf((vdPi[i] - mu) / (sqrt(2 * sigma_2_2))) + 1) +
+                            P_3 * 0.5 * (boost::math::erf((vdPi[i] - mu) / (sqrt(2 * sigma_2_3))) + 1) +
+                            P_4 * 0.5 * (boost::math::erf((vdPi[i] - mu) / (sqrt(2 * sigma_2_4))) + 1));
                     exp_mu += mu;
-                    exp_sigma_2 += sigma_2;
+                    exp_sigma_2_1 += sigma_2_1;
+                    exp_sigma_2_2 += sigma_2_2;
+                    exp_sigma_2_3 += sigma_2_3;
+                    exp_sigma_2_4 += sigma_2_4;
                     iCounter++;
                 }
             }
-            double dFeasibility = 0.5 * (boost::math::erf((vdPi[i] - exp_mu) / (sqrt(2 * exp_sigma_2))) + 1);
+            double dFeasibility = (P_1 * 0.5 * (boost::math::erf((vdPi[i] - exp_mu) / (sqrt(2 * exp_sigma_2_1))) + 1) +
+                                   P_2 * 0.5 * (boost::math::erf((vdPi[i] - exp_mu) / (sqrt(2 * exp_sigma_2_2))) + 1) +
+                                   P_3 * 0.5 * (boost::math::erf((vdPi[i] - exp_mu) / (sqrt(2 * exp_sigma_2_3))) + 1) +
+                                   P_4 * 0.5 * (boost::math::erf((vdPi[i] - exp_mu) / (sqrt(2 * exp_sigma_2_4))) + 1));
             if (iCounter > 1) {
                 dFeasibility *= dLeftConstrainedFeasibility;
             }

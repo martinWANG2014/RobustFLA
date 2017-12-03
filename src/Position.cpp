@@ -53,9 +53,5 @@ Position::Position(double dLatitude, double dLongitude) : dLatitude(dLatitude), 
 
 Position::Position(const Position &position) : dLatitude(position.getLatitude()), dLongitude(position.getLongitude()) {}
 
-std::ostream &operator<<(std::ostream &os, const Position &position) {
-    os << "dLatitude: " << position.dLatitude << " dLongitude: " << position.dLongitude;
-    return os;
-}
 
 

@@ -85,37 +85,37 @@ double Route::CalculateProbabilityAndDelayForPartA(double dT1, double dT2, doubl
     if (dT1 < dT2) {
         if (dCosA >= dRho) {
             *pdDelayTime = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT2 - dT1);
-            *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2);
+            *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT2 - dT1) + 3 * sqrt(2 * SIGMA_2_4);
             if (deterministic) {
                 dProbabilityConflict = dLambda * dV2 * (dT2 - dT1) < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
             } else {
-                dProbabilityConflict = getHybridProbability(dLambda*dV2, dT2, dT1);
+                dProbabilityConflict = getConflictProbability(dLambda * dV2, dT2, dT1);
             }
         } else {
-            *pdDelayTime = MIN_SEPARATION_DISTANCE * K / dV2 - (dT2 - dT1);
+            *pdDelayTime = MIN_SEPARATION_DISTANCE * K / dV2 - (dT2 - dT1) - (dT2 - dT1) + 3 * sqrt(2 * SIGMA_2_4);
             *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / dV2;
             if (deterministic) {
                 dProbabilityConflict = dV2 * (dT2 - dT1) < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
             }else{
-                dProbabilityConflict = getHybridProbability(dV2, dT2, dT1);
+                dProbabilityConflict = getConflictProbability(dV2, dT2, dT1);
             }
         }
     } else {
         if (dCosA >= 1.0 / dRho) {
             *pdDelayTime = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT1 - dT2);
-            *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2);
+            *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT1 - dT2) + 3 * sqrt(2 * SIGMA_2_4);
             if (deterministic) {
                 dProbabilityConflict = dLambda * dV2 * (dT1 - dT2) < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
             } else {
-                dProbabilityConflict = getHybridProbability(dLambda*dV2, dT1, dT2);
+                dProbabilityConflict = getConflictProbability(dLambda * dV2, dT1, dT2);
             }
         } else {
             *pdDelayTime = MIN_SEPARATION_DISTANCE * K / dV1 - (dT1 - dT2);
-            *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / dV1;
+            *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / dV1 - (dT1 - dT2) + 3 * sqrt(2 * SIGMA_2_4);
             if (deterministic) {
                 dProbabilityConflict = dV1 * (dT1 - dT2) < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
             }else{
-                dProbabilityConflict = getHybridProbability(dV1, dT1, dT2);
+                dProbabilityConflict = getConflictProbability(dV1, dT1, dT2);
             }
         }
     }
@@ -137,11 +137,11 @@ double Route::CalculateProbabilityAndDelayForPartB(double dT1, double dT2, doubl
     double dLambda = dSinA / sqrt(pow(dRho, 2) + 2 * dRho * dCosA + 1);
     double dProbabilityConflict;
     *pdDelayTime = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT2 - dT1);
-    *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2);
+    *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT2 - dT1) + 3 * sqrt(2 * SIGMA_2_4);
     if (deterministic) {
         dProbabilityConflict = dLambda * dV2 * (dT2 - dT1) < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
     } else {
-        dProbabilityConflict = getHybridProbability(dLambda * dV2, dT2, dT1);
+        dProbabilityConflict = getConflictProbability(dLambda * dV2, dT2, dT1);
     }
     return dProbabilityConflict;
 }
@@ -161,11 +161,11 @@ double Route::CalculateProbabilityAndDelayForPartC(double dT1, double dT2, doubl
     double dLambda = dSinA / sqrt(pow(dRho, 2) + 2 * dRho * dCosA + 1);
     double dProbabilityConflict;
     *pdDelayTime = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT1 - dT2);
-    *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2);
+    *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT1 - dT2) + 3 * sqrt(2 * SIGMA_2_4);
     if (deterministic) {
         dProbabilityConflict = dLambda * dV2 * (dT1 - dT2) < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
     } else {
-        dProbabilityConflict = getHybridProbability(dLambda * dV2, dT1, dT2);
+        dProbabilityConflict = getConflictProbability(dLambda * dV2, dT1, dT2);
     }
     return dProbabilityConflict;
 }
@@ -182,37 +182,37 @@ double Route::CalculateProbabilityAndDelayForPartD(double dT1, double dT2, doubl
     if (dT1 < dT2) {
         if (dCosA >= 1.0 / dRho) {
             *pdDelayTime = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT2 - dT1);
-            *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2);
+            *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT2 - dT1) + 3 * sqrt(2 * SIGMA_2_4);
             if (deterministic) {
                 dProbabilityConflict = dLambda * dV2 * (dT2 - dT1) < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
             } else {
-                dProbabilityConflict = getHybridProbability(dLambda * dV2, dT2, dT1);
+                dProbabilityConflict = getConflictProbability(dLambda * dV2, dT2, dT1);
             }
         } else {
             *pdDelayTime = MIN_SEPARATION_DISTANCE * K / dV1 - (dT2 - dT1);
-            *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / dV1;
+            *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / dV1 - (dT2 - dT1) + 3 * sqrt(2 * SIGMA_2_4);
             if (deterministic) {
                 dProbabilityConflict = dV1 * (dT2 - dT1) < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
             }else{
-                dProbabilityConflict = getHybridProbability(dV1, dT2, dT1);
+                dProbabilityConflict = getConflictProbability(dV1, dT2, dT1);
             }
         }
     } else {
         if (dCosA >= dRho) {
             *pdDelayTime = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT1 - dT2);
-            *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2);
+            *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT1 - dT2) + 3 * sqrt(2 * SIGMA_2_4);
             if (deterministic) {
                 dProbabilityConflict = dLambda * dV2 * (dT1 - dT2) < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
             } else {
-                dProbabilityConflict = getHybridProbability(dLambda * dV2, dT1, dT2);
+                dProbabilityConflict = getConflictProbability(dLambda * dV2, dT1, dT2);
             }
         } else {
             *pdDelayTime = MIN_SEPARATION_DISTANCE * K / dV2 - (dT1 - dT2);
-            *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / dV2;
+            *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / dV2 - (dT1 - dT2) + 3 * sqrt(2 * SIGMA_2_4);
             if (deterministic) {
                 dProbabilityConflict = dV2 * (dT1 - dT2) < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
             }else{
-                dProbabilityConflict = getHybridProbability(dV2, dT1, dT2);
+                dProbabilityConflict = getConflictProbability(dV2, dT1, dT2);
             }
         }
     }
@@ -584,10 +584,3 @@ const PointVector &Route::getVpPointsList() const {
     return vpPointsList;
 }
 
-std::ostream &operator<<(std::ostream &os, const Route &route) {
-    os << "vpPointsList: ";
-    for (auto &&point:route.getVpPointsList()) {
-        os << *point << ",";
-    }
-    return os;
-}

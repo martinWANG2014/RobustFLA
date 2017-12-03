@@ -165,9 +165,5 @@ double Flight::getDuration() const {
     return getArrivingTime() - getDepartureTime();
 }
 
-std::ostream &operator<<(std::ostream &os, const Flight &flight) {
-    os << "pRoute: " << *flight.pRoute;
-    return os;
-}
 
 
