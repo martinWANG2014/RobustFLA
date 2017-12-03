@@ -11,7 +11,7 @@ end note
 note left of (Solver)
 Estimation feasibility:
     Hoeffding's Inequalities Method
-    Gaussian Method
+    Mixture Gaussian Method
     Monte-Carlo Simulation Method
     Deterministic Method
 

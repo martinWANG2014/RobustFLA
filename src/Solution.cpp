@@ -554,6 +554,7 @@ int SolveFLA(FlightVector &vpFlightList, FlightLevelAssignmentMap &flightLevelAs
                             viLevelsList.push_back(newLevel);
                         }
                     }
+//                    fi->setCoefPi(dCoefPi);
                 }
                 std::cout << "enlarge level" << std::endl;
                 count = 0;

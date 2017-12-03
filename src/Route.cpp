@@ -85,14 +85,14 @@ double Route::CalculateProbabilityAndDelayForPartA(double dT1, double dT2, doubl
     if (dT1 < dT2) {
         if (dCosA >= dRho) {
             *pdDelayTime = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT2 - dT1);
-            *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT2 - dT1) + 3 * sqrt(2 * SIGMA_2_4);
+            *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT2 - dT1) + sqrt(2 * SIGMA_2_4);
             if (deterministic) {
                 dProbabilityConflict = dLambda * dV2 * (dT2 - dT1) < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
             } else {
                 dProbabilityConflict = getConflictProbability(dLambda * dV2, dT2, dT1);
             }
         } else {
-            *pdDelayTime = MIN_SEPARATION_DISTANCE * K / dV2 - (dT2 - dT1) - (dT2 - dT1) + 3 * sqrt(2 * SIGMA_2_4);
+            *pdDelayTime = MIN_SEPARATION_DISTANCE * K / dV2 - (dT2 - dT1) - (dT2 - dT1) + sqrt(2 * SIGMA_2_4);
             *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / dV2;
             if (deterministic) {
                 dProbabilityConflict = dV2 * (dT2 - dT1) < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
@@ -103,7 +103,7 @@ double Route::CalculateProbabilityAndDelayForPartA(double dT1, double dT2, doubl
     } else {
         if (dCosA >= 1.0 / dRho) {
             *pdDelayTime = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT1 - dT2);
-            *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT1 - dT2) + 3 * sqrt(2 * SIGMA_2_4);
+            *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT1 - dT2) + sqrt(2 * SIGMA_2_4);
             if (deterministic) {
                 dProbabilityConflict = dLambda * dV2 * (dT1 - dT2) < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
             } else {
@@ -111,7 +111,7 @@ double Route::CalculateProbabilityAndDelayForPartA(double dT1, double dT2, doubl
             }
         } else {
             *pdDelayTime = MIN_SEPARATION_DISTANCE * K / dV1 - (dT1 - dT2);
-            *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / dV1 - (dT1 - dT2) + 3 * sqrt(2 * SIGMA_2_4);
+            *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / dV1 - (dT1 - dT2) + sqrt(2 * SIGMA_2_4);
             if (deterministic) {
                 dProbabilityConflict = dV1 * (dT1 - dT2) < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
             }else{
@@ -137,7 +137,7 @@ double Route::CalculateProbabilityAndDelayForPartB(double dT1, double dT2, doubl
     double dLambda = dSinA / sqrt(pow(dRho, 2) + 2 * dRho * dCosA + 1);
     double dProbabilityConflict;
     *pdDelayTime = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT2 - dT1);
-    *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT2 - dT1) + 3 * sqrt(2 * SIGMA_2_4);
+    *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT2 - dT1) + sqrt(2 * SIGMA_2_4);
     if (deterministic) {
         dProbabilityConflict = dLambda * dV2 * (dT2 - dT1) < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
     } else {
@@ -161,7 +161,7 @@ double Route::CalculateProbabilityAndDelayForPartC(double dT1, double dT2, doubl
     double dLambda = dSinA / sqrt(pow(dRho, 2) + 2 * dRho * dCosA + 1);
     double dProbabilityConflict;
     *pdDelayTime = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT1 - dT2);
-    *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT1 - dT2) + 3 * sqrt(2 * SIGMA_2_4);
+    *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT1 - dT2) + sqrt(2 * SIGMA_2_4);
     if (deterministic) {
         dProbabilityConflict = dLambda * dV2 * (dT1 - dT2) < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
     } else {
@@ -182,7 +182,7 @@ double Route::CalculateProbabilityAndDelayForPartD(double dT1, double dT2, doubl
     if (dT1 < dT2) {
         if (dCosA >= 1.0 / dRho) {
             *pdDelayTime = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT2 - dT1);
-            *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT2 - dT1) + 3 * sqrt(2 * SIGMA_2_4);
+            *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT2 - dT1) + sqrt(2 * SIGMA_2_4);
             if (deterministic) {
                 dProbabilityConflict = dLambda * dV2 * (dT2 - dT1) < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
             } else {
@@ -190,7 +190,7 @@ double Route::CalculateProbabilityAndDelayForPartD(double dT1, double dT2, doubl
             }
         } else {
             *pdDelayTime = MIN_SEPARATION_DISTANCE * K / dV1 - (dT2 - dT1);
-            *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / dV1 - (dT2 - dT1) + 3 * sqrt(2 * SIGMA_2_4);
+            *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / dV1 - (dT2 - dT1) + sqrt(2 * SIGMA_2_4);
             if (deterministic) {
                 dProbabilityConflict = dV1 * (dT2 - dT1) < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
             }else{
@@ -200,7 +200,7 @@ double Route::CalculateProbabilityAndDelayForPartD(double dT1, double dT2, doubl
     } else {
         if (dCosA >= dRho) {
             *pdDelayTime = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT1 - dT2);
-            *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT1 - dT2) + 3 * sqrt(2 * SIGMA_2_4);
+            *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2) - (dT1 - dT2) + sqrt(2 * SIGMA_2_4);
             if (deterministic) {
                 dProbabilityConflict = dLambda * dV2 * (dT1 - dT2) < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
             } else {
@@ -208,7 +208,7 @@ double Route::CalculateProbabilityAndDelayForPartD(double dT1, double dT2, doubl
             }
         } else {
             *pdDelayTime = MIN_SEPARATION_DISTANCE * K / dV2 - (dT1 - dT2);
-            *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / dV2 - (dT1 - dT2) + 3 * sqrt(2 * SIGMA_2_4);
+            *pdDelayTimeMax = MIN_SEPARATION_DISTANCE * K / dV2 - (dT1 - dT2) + sqrt(2 * SIGMA_2_4);
             if (deterministic) {
                 dProbabilityConflict = dV2 * (dT1 - dT2) < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
             }else{

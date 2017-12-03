@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-for method in 0 1 2; do
+for method in 0; do
     for pa in 0 15; do
         for periodLength in 30 ; do
             for feasibleSize in 3 ; do
