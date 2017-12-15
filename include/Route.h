@@ -76,14 +76,6 @@ public:
      */
     int getPointListSize();
 
-//    /**
-//     * Get the velocity between the current point and its precedent one.
-//     * @param iIndexPoint       The index of queried Point
-//     * @param dDeltaT           The delay time
-//     * @return the velocity between the current point and its precedent one.
-//     */
-//    double getVelocityFromPoint(int iIndexPoint, double dDeltaT);
-
     /**
      * Get the velocity between the current point and its precedent one.
      * @param iIndexPoint       The index of queried Point
@@ -97,19 +89,13 @@ public:
      */
     Time getFinalArrivingTime();
 
-//    /**
-//     * Geometric method: Generate a new route with different times compared with current route.
-//     * @param iNewDepartureTime    The new departure time
-//     * @return A new route.
-//     */
-//    void GenerateNewRoute(Time iNewDepartureTime);
 
     /**
      * Gaussian method: Generate a new route with different times compared with current route.
      * @param dNewDepartureTime    The new departure time
      * @return A new route.
      */
-    void GenerateNewRoute2(Time dNewDepartureTime);
+    void GenerateNewRoute(Time dNewDepartureTime);
 
     /**
      * Check whether the route is valid or not.
@@ -122,15 +108,16 @@ public:
      * @param iIndex1           The index of point in route 1
      * @param pRoute2           The another route 2
      * @param iIndex2           The index of point in route 2
-     * @param pdDelayTime       Output: The delay time to avoid the conflict
+     * @param pdDiffTime       Output: The delay time to avoid the conflict
      * @param pbWait            Output: Which flight will wait for another one. True, current flight wait for a given flight; False, A given flight wait for current one.
      * @param bGeometricMethod  Whether use the geometric method to estimate the conflict probability
      * @param dSigma1           The sigma for flight 1 to generate its departure time
      * @param dSigma2           The sigma for flight 2 to generate its departure time
      * @return the conflict probability for two points.
      */
-    double CalculationProbabilityAndDelayAtPoint(int iIndex1, Route *pRoute2, int iIndex2, double *pdDelayTime,
-                                                 double *pdDelayTimeMax, bool *pbWait, bool deterministic);
+    double CalculationProbabilityAndDelayAtPoint(int iIndex1, Route *pRoute2, int iIndex2, double *pdDiffTime,
+                                                 double *pdWaitingTimeMax,
+                                                 double *pdWait, bool deterministic);
 
     /**
      * Initialize the route time list.
@@ -148,7 +135,6 @@ public:
 
     const PointVector &getVpPointsList() const;
 
-    friend std::ostream &operator<<(std::ostream &os, const Route &route);
 
 private:
     /**
@@ -168,89 +154,10 @@ private:
 
     int nbPointsPerFlight;
 
-    /**
-     * Calculate conflict probability and delay time.
-     * @param dT1               The arriving time of flihgt 1 at the crossing point
-     * @param dT2               The arriving time of flight 2 at the crossing point
-     * @param dV1               The velocity of flight 1
-     * @param dV2               The velocity of flight 2
-     * @param dCosA             The cosine theta for the crossing angle of two conflict route
-     * @param pdDelayTime       Output: The delay time to avoid the conflict
-     * @param bFlag             The flag indicate whether is the conflict case that one flight arrive, another leave
-     * @param bGeometricMethod  Whether use the geometric method to estimate the conflict probability
-     * @param dSigma1           The sigma value for flight 1 to generate its departure time
-     * @param dSigma2           The sigma value for flight 2 to generate its departure time
-     * @return the conflict probability for two points.
-     */
-    double CalculateProbabilityAndDelayForPartA(double dT1, double dT2, double dV1, double dV2, double dCosA,
-                                                double *pdDelayTime, double *pdDelayTimeMax, bool deterministic);
 
-    /**
-     * Calculate conflict probability and delay time.
-     * @param dT1               The arriving time of flihgt 1 at the crossing point
-     * @param dT2               The arriving time of flight 2 at the crossing point
-     * @param dV1               The velocity of flight 1
-     * @param dV2               The velocity of flight 2
-     * @param dCosA             The cosine theta for the crossing angle of two conflict route
-     * @param pdDelayTime       Output: The delay time to avoid the conflict
-     * @param bFlag             The flag indicate whether is the conflict case that one flight arrive, another leave
-     * @param bGeometricMethod  Whether use the geometric method to estimate the conflict probability
-     * @param dSigma1           The sigma value for flight 1 to generate its departure time
-     * @param dSigma2           The sigma value for flight 2 to generate its departure time
-     * @return the conflict probability for two points.
-     */
-    double CalculateProbabilityAndDelayForPartB(double dT1, double dT2, double dV1, double dV2, double dCosA,
-                                                double *pdDelayTime, double *pdDelayTimeMax, bool deterministic);
+    double getConflictProbability(double coefficient, double t1, double t2, double dLB, double dUB);
 
-    /**
-     * Calculate conflict probability and delay time.
-     * @param dT1               The arriving time of flihgt 1 at the crossing point
-     * @param dT2               The arriving time of flight 2 at the crossing point
-     * @param dV1               The velocity of flight 1
-     * @param dV2               The velocity of flight 2
-     * @param dCosA             The cosine theta for the crossing angle of two conflict route
-     * @param pdDelayTime       Output: The delay time to avoid the conflict
-     * @param bFlag             The flag indicate whether is the conflict case that one flight arrive, another leave
-     * @param bGeometricMethod  Whether use the geometric method to estimate the conflict probability
-     * @param dSigma1           The sigma value for flight 1 to generate its departure time
-     * @param dSigma2           The sigma value for flight 2 to generate its departure time
-     * @return the conflict probability for two points.
-     */
-    double CalculateProbabilityAndDelayForPartC(double dT1, double dT2, double dV1, double dV2, double dCosA,
-                                                double *pdDelayTime, double *pdDelayTimeMax, bool deterministic);
-
-    /**
-     * Calculate conflict probability and delay time.
-     * @param dT1               The arriving time of flihgt 1 at the crossing point
-     * @param dT2               The arriving time of flight 2 at the crossing point
-     * @param dV1               The velocity of flight 1
-     * @param dV2               The velocity of flight 2
-     * @param dCosA             The cosine theta for the crossing angle of two conflict route
-     * @param pdDelayTime       Output: The delay time to avoid the conflict
-     * @param bFlag             The flag indicate whether is the conflict case that one flight arrive, another leave
-     * @param bGeometricMethod  Whether use the geometric method to estimate the conflict probability
-     * @param dSigma1           The sigma value for flight 1 to generate its departure time
-     * @param dSigma2           The sigma value for flight 2 to generate its departure time
-     * @return the conflict probability for two points.
-     */
-    double CalculateProbabilityAndDelayForPartD(double dT1, double dT2, double dV1, double dV2, double dCosA,
-                                                double *pdDelayTime, double *pdDelayTimeMax, bool deterministic);
-
-    /**
-     * Calculate conflict probability and delay time.
-     * @param iIndex1           The index of point in route 1
-     * @param pRoute2           The another route 2
-     * @param iIndex2           The index of point in route 2
-     * @param pdDelayTime       Output: The delay time to avoid the conflict
-     * @param bFlag1            The flag indicate whether the point in route 1 has a precedent point
-     * @param bFlag2            The flag indicate whether the point in route 2 has a precedent point
-     * @param bGeometricMethod  Whether use the geometric method to estimate the conflict probability
-     * @param dSigma1           The sigma value for flight 1 to generate its departure time
-     * @param dSigma2           The sigma value for flight 2 to generate its departure time
-     * @return the conflict probability for two points.
-     */
-    double CalculatePartialProbabilityAndDelay(int iIndex1, Route *pRoute2, int iIndex2, double *pdDelayTime,
-                                               double *pdDelayTimeMax, bool bFlag1, bool bFlag2, bool deterministic);
+    double getWaitProbability(double t1, double t2, double dLB);
 };
 
 #endif //ROUTE_H

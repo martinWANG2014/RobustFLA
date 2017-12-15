@@ -5,7 +5,7 @@
 #ifndef CONFIGURATION_H
 #define CONFIGURATION_H
 
-#include <Python.h>
+//#include <Python.h>
 #include <cmath>
 #include <vector>
 #include <set>
@@ -41,6 +41,11 @@ const double MIN_PROBA = 0.0001;
 #ifndef MIN_SIGMA_CONST
 #define MIN_SIGMA_CONST
 const double MIN_SIGMA = 0.1;
+#endif
+
+#ifndef LARGE_VALUE_CONST
+#define LARGE_VALUE_CONST
+const double LARGE_VALUE = 10000;
 #endif
 
 #ifndef PARAMETERS_GAUSSIAN_CONST
@@ -209,10 +214,10 @@ viList findFeasibleLevels(int iDefaultLevel, int iSize);
  */
 Level findNextFeasibleLevel(int iDefaultLevel, Level lastLevel);
 
+double getIntervalProbability(double mu, double sigma_2, double dLB, double dUB);
 
-double getProbability(double mu, double sigma_2);
+double getSingleSideProbability(double mu, double sigma_2, double dLB, bool bLB = true);
 
-double getConflictProbability(double coefficient, double t1, double t2);
 
 bool exists(String filename);
 #endif //CONFIGURATION_H

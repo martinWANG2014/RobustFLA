@@ -15,46 +15,18 @@ include(FindPackageHandleStandardArgs)
 #   /opt/IBM/ILOG/CPLEX_Studio<edition>124 - UNIX
 #   ~/Applications/IBM/ILOG/CPLEX_Studio<edition>124 - Mac OS X
 #   C:\Program Files\IBM\ILOG\CPLEX_Studio<edition>124 - Windows
-if (UNIX)
-    set(CPLEX_ILOG_DIRS /opt/ibm/ILOG /opt/IBM/ILOG)
-    if (CMAKE_SIZEOF_VOID_P EQUAL 8)
-        set(CPLEX_ARCH x86-64)
-    else ()
-        set(CPLEX_ARCH x86)
-    endif ()
-    if (APPLE)
-        set(CPLEX_ILOG_DIRS $ENV{HOME}/Applications/IBM/ILOG ${CPLEX_ILOG_DIRS})
-        foreach (suffix "osx" "darwin9_gcc4.0")
-            set(CPLEX_LIB_PATH_SUFFIXES
-                    ${CPLEX_LIB_PATH_SUFFIXES} lib/${CPLEX_ARCH}_${suffix}/static_pic)
-        endforeach ()
-    else ()
-        set(CPLEX_LIB_PATH_SUFFIXES
-                lib/${CPLEX_ARCH}_sles10_4.1/static_pic lib/${CPLEX_ARCH}_linux/static_pic)
-    endif ()
+set(CPLEX_ILOG_DIRS /opt/ibm/ILOG /opt/IBM/ILOG /opt /volper/users/wachengh/dependances)
+if (CMAKE_SIZEOF_VOID_P EQUAL 8)
+    set(CPLEX_ARCH x86-64)
 else ()
-    set(CPLEX_ILOG_DIRS "C:/Program Files/IBM/ILOG")
-    if (CMAKE_SIZEOF_VOID_P EQUAL 8)
-        set(CPLEX_ARCH x64)
-    else ()
-        set(CPLEX_ARCH x86)
-        set(CPLEX_ILOG_DIRS "C:/Program Files (x86)/IBM/ILOG" ${CPLEX_ILOG_DIRS})
-    endif ()
-    if (MSVC10)
-        set(CPLEX_LIB_PATH_SUFFIXES
-                lib/${CPLEX_ARCH}_windows_vs2010/stat_mda)
-        set(CPLEX_LIB_PATH_SUFFIXES_DEBUG
-                lib/${CPLEX_ARCH}_windows_vs2010/stat_mdd)
-    elseif (MSVC9)
-        set(CPLEX_LIB_PATH_SUFFIXES
-                lib/${CPLEX_ARCH}_windows_vs2008/stat_mda)
-        set(CPLEX_LIB_PATH_SUFFIXES_DEBUG
-                lib/${CPLEX_ARCH}_windows_vs2008/stat_mdd)
-    endif ()
+    set(CPLEX_ARCH x86)
 endif ()
+
+set(CPLEX_LIB_PATH_SUFFIXES lib/${CPLEX_ARCH}_sles10_4.1/static_pic lib/${CPLEX_ARCH}_linux/static_pic)
+
 if (NOT CPLEX_STUDIO_DIR)
     foreach (dir ${CPLEX_ILOG_DIRS})
-        file(GLOB CPLEX_STUDIO_DIRS "${dir}/CPLEX_Studio*")
+        file(GLOB CPLEX_STUDIO_DIRS "${dir}/CPLEX_Studio*" "${dir}/cplex")
         list(SORT CPLEX_STUDIO_DIRS)
         list(REVERSE CPLEX_STUDIO_DIRS)
         if (CPLEX_STUDIO_DIRS)
@@ -65,6 +37,7 @@ if (NOT CPLEX_STUDIO_DIR)
     endforeach ()
     if (NOT CPLEX_STUDIO_DIR_)
         set(CPLEX_STUDIO_DIR_ CPLEX_STUDIO_DIR-NOTFOUND)
+        message(STATUS "Not Found CPLEX Studio!")
     endif ()
     set(CPLEX_STUDIO_DIR ${CPLEX_STUDIO_DIR_} CACHE PATH
             "Path to the CPLEX Studio directory")

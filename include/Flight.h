@@ -84,13 +84,14 @@ public:
     /**
      * Get the conflict probability between two flights.
      * @param pFlight2              The pointer of a compared flight
-     * @param pdDelay               Output: The delay time to avoid the conflict
-     * @param pbWait                Output: Which flight will wait for another one. True, current flight wait for a given flight; False, A given flight wait for current one
+     * @param pdDiffTime               Output: The delay time to avoid the conflict
+     * @param pdWait                Output: Which flight will wait for another one. True, current flight wait for a given flight; False, A given flight wait for current one
      * @param bGeometricMethod      Whether use the geometric method to estimate the conflict probability
      * @return the conflict probability between two flights.
      */
-    double CalculateProbabilityConflictAndDelayForFlight(Flight *pFlight2, double *pdDelay, double *pdDelayMax,
-                                                         bool *pbWait, bool deterministicRule, bool deterministic);
+    double CalculateProbabilityConflictAndDelayForFlight(Flight *pFlight2, double *pdDiffTime, double *pdWaitingTimeMax,
+                                                         double *pdWait,
+                                                         bool deterministicRule, bool deterministic);
 
 
     /**

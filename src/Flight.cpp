@@ -13,11 +13,13 @@ bool Flight::operator!=(const Flight &rhs) const {
 }
 
 void Flight::GenerateNewFlight(Time iNewDepartureTime) {
-    pRoute->GenerateNewRoute2(iNewDepartureTime);
+    pRoute->GenerateNewRoute(iNewDepartureTime);
 }
 
-double Flight::CalculateProbabilityConflictAndDelayForFlight(Flight *pFlight2, double *pdDelay, double *pdDelayMax,
-                                                             bool *pbWait, bool deterministicRule, bool deterministic) {
+double
+Flight::CalculateProbabilityConflictAndDelayForFlight(Flight *pFlight2, double *pdDiffTime, double *pdWaitingTimeMax,
+                                                      double *pdWait,
+                                                      bool deterministicRule, bool deterministic) {
     Route *route2 = pFlight2->getRoute();
     for (int i = 0; i < pRoute->getPointListSize(); i++) {
         for (int j = 0; j < route2->getPointListSize(); j++) {
@@ -26,13 +28,14 @@ double Flight::CalculateProbabilityConflictAndDelayForFlight(Flight *pFlight2, d
 //                    std::cout << "Flight: " << getCode() << " and Flight: " << pFlight2->getCode()
 //                              << " has conflict at (" << i << ", " << j << "):" << std::endl;
                 if (deterministicRule && !deterministic) {
-                    double probDet = pRoute->CalculationProbabilityAndDelayAtPoint(i, route2, j, pdDelay, pdDelayMax,
-                                                                                   pbWait, true);
+                    double probDet = pRoute->CalculationProbabilityAndDelayAtPoint(i, route2, j, pdDiffTime,
+                                                                                   pdWaitingTimeMax, pdWait, true);
                     if (probDet <= MIN_PROBA) {
                         continue;
                     }
                 }
-                double prob = pRoute->CalculationProbabilityAndDelayAtPoint(i, route2, j, pdDelay, pdDelayMax, pbWait,
+                double prob = pRoute->CalculationProbabilityAndDelayAtPoint(i, route2, j, pdDiffTime, pdWaitingTimeMax,
+                                                                            pdWait,
                                                                             deterministic);
                 if (prob > MIN_PROBA) {
                     return prob;
@@ -40,9 +43,9 @@ double Flight::CalculateProbabilityConflictAndDelayForFlight(Flight *pFlight2, d
             }
         }
     }
-    *pbWait = true;
-    *pdDelay = 0;
-    *pdDelayMax = 0;
+    *pdWait = 0;
+    *pdDiffTime = 0;
+    *pdWaitingTimeMax = 0;
     return 0;
 
 }

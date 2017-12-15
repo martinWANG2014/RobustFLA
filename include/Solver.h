@@ -43,13 +43,13 @@ public:
      * @param constraintList            The list of constraints
      * @param Mi                        The Mi list
      * @param Pi                        The Pi list
-     * @param ppdDelayTime              The pointer of delay time matrix
+     * @param ppdDiffTime              The pointer of delay time matrix
      * @param iNbConflictedFlights      The number of conflict flights
      */
     void
-    initConstraint(const viList &constraintList, const vdList &Mi, const vdList &Pi, double **ppdConflictProbability,
-                   double **ppdDelayTime,
-                   int iNbConflictedFlights);
+    initConstraint(const viList &constraintList, const vdList &Mi, const vdList &Pi,
+                   double **ppdConflictProbability, double **ppdDiffTime, double **ppdWaitingTimeMax, double **ppdWait,
+                   int iNbConflictedFlights, bool deterministic = false);
 
     /**
     * Initialize the decision variables array.

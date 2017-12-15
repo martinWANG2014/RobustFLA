@@ -221,18 +221,18 @@ bool exists(String filename) {
     return file.good();
 }
 
-double getProbability(double mu, double sigma_2) {
-    double dRight = (MIN_SEPARATION_DISTANCE * K - mu) / (sqrt(2.0 * sigma_2));
-    double dLeft = mu / (sqrt(2.0 * sigma_2));
-    return 0.5 * (boost::math::erf(dRight) + boost::math::erf(dLeft));
+
+double getSingleSideProbability(double mu, double sigma_2, double dLB, bool bLB) {
+    double dLeft = (dLB - mu) / (sqrt(2.0 * sigma_2));
+    return 0.5 * (1 + (bLB ? -1 : 1) * boost::math::erf(dLeft));
 }
 
-double getConflictProbability(double coefficient, double t1, double t2) {
-    return P_1 * getProbability(coefficient * (t1 - t2), pow(coefficient, 2) * SIGMA_2_1 * 2) +
-           P_2 * getProbability(coefficient * (t1 - t2), pow(coefficient, 2) * SIGMA_2_2 * 2) +
-           P_3 * getProbability(coefficient * (t1 - t2), pow(coefficient, 2) * SIGMA_2_2 * 2) +
-           P_4 * getProbability(coefficient * (t1 - t2), pow(coefficient, 2) * SIGMA_2_2 * 2);
+double getIntervalProbability(double mu, double sigma_2, double dLB, double dUB) {
+    double dRight = (dUB - mu) / (sqrt(2.0 * sigma_2));
+    double dLeft = (dLB - mu) / (sqrt(2.0 * sigma_2));
+    return 0.5 * (boost::math::erf(dRight) - boost::math::erf(dLeft));
 }
+
 
 
 

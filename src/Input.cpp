@@ -8,7 +8,7 @@ void Input::parseWayPoints(Network *pNetwork, bool modeDisplay) {
 
     std::cout << "[INFO] Parsing wayPoints file... " << std::flush;
 
-    // Verify whether the data-ok3 file exists or not: if not, pop up an error message.
+    // Verify whether the data file exists or not: if not, pop up an error message.
     if (!exists(sWayPointPath)) {
         std::cerr << "[ERROR] Not exist " << sWayPointPath << std::endl;
         abort();
@@ -44,7 +44,7 @@ void Input::parseWayPoints(Network *pNetwork, bool modeDisplay) {
         }
     }
     std::cout << "OK" << std::endl
-              << "\tBeacon file data-ok3:" << std::endl
+              << "\tBeacon file data:" << std::endl
               << "\tWayPoints: " << nbWayPoints << std::endl
               << "\tValid WayPoints: " << pNetwork->getNbWayPoints() << std::endl;
 }
@@ -55,7 +55,7 @@ void Input::parseAirports(Network *pNetwork, bool modeDisplay) {
 
     std::cout << "[INFO] Parsing airports file... " << std::flush;
 
-    // Verify whether the data-ok3 file exists or not: if not, pop up an error message.
+    // Verify whether the data file exists or not: if not, pop up an error message.
     if (!exists(sAirportPath)) {
         std::cerr << "[ERROR] Not exist " << sAirportPath << std::endl;
         abort();
@@ -90,7 +90,7 @@ void Input::parseAirports(Network *pNetwork, bool modeDisplay) {
         }
     }
     std::cout << "OK" << std::endl
-              << "\tAirports file data-ok3:" << std::endl
+              << "\tAirports file data:" << std::endl
               << "\tAirports: " << nbAirports << std::endl
               << "\tValid Airports: " << pNetwork->getNbAirports() << std::endl;
 }
