@@ -222,8 +222,8 @@ bool exists(String filename) {
 }
 
 
-double getSingleSideProbability(double mu, double sigma_2, double dLB, bool bLB) {
-    double dLeft = (dLB - mu) / (sqrt(2.0 * sigma_2));
+double getSingleSideProbability(double mu, double sigma_2, double dBound, bool bLB) {
+    double dLeft = (dBound - mu) / (sqrt(2.0 * sigma_2));
     return 0.5 * (1 + (bLB ? -1 : 1) * boost::math::erf(dLeft));
 }
 

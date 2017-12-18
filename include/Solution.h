@@ -169,9 +169,9 @@ void writeJsonSolution(String dataFilename, double epsilon, double coefPi, doubl
 
 double MixtureGaussianDistributionWithFourComponents();
 
-double getFoldedProbability(double mu_left, double mu_right, double sigma_2, double UB);
+double getFoldedProbability(double mu_left, double mu_right, double sigma_2, double dBound, bool bLB);
 
 double getProbabilityGaussian(double mu_left, double mu_right, double variance1, double variance2, double variance3,
-                              double variance4, double UB);
+                              double variance4, double dBound, bool bLB = true);
 
 #endif //SOLUTION_H

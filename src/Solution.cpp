@@ -3,6 +3,7 @@
 //
 #include "../include/Solution.h"
 
+
 void writeJsonSolution(String dataFilename, double epsilon, double coefPi, double SumBenefits, double ElapsedTime,
                        double minAdmissibleCost, double maxAdmissibleCost,
                        int feasibleSize, int method, int percentileSup,
@@ -545,12 +546,12 @@ int SolveFLA(FlightVector &vpFlightList, FlightLevelAssignmentMap &flightLevelAs
     while (iNbFlightNotAssigned > 0) {
         //Initialize the flight level queue.
         for (auto &&processingLevel : viLevelsList) {
-            queueLevel.push_back(processingLevel);
+            queueLevel.push(processingLevel);
         }
         infeasibleFlightMap.clear();
         while (!queueLevel.empty()) {
             Level processingLevel = queueLevel.front();
-            queueLevel.pop_front();
+            queueLevel.pop();
             bool solved = false;
             while (!solved) {
                 solved = SolvingFLAByLevel(vpFlightList, infeasibleFlightMap, vpPreviousFlightList,
@@ -729,46 +730,68 @@ bool FeasibilityMixtureGaussian(FlightVector &vpConflictedFlightList, const vdLi
                                 double dEpsilon, int *piIndex, bool modeDisplay) {
     auto iSize = (int) vpConflictedFlightList.size();
     *piIndex = -1;
+
     for (int i = 0; i < iSize; i++) {
         if (decisionVariables[i] == 1) {
-            double sumMu_left = 0.0;
-            double sumMu_right = 0.0;
-            double sumVariance1 = 0.0;
-            double sumVariance2 = 0.0;
-            double sumVariance3 = 0.0;
-            double sumVariance4 = 0.0;
             double dFeasibility = 1;
             int count = 0;
+            ProbaQueue probabilityQueue;
             for (int j = 0; j < iSize; j++) {
-                if (j != i && ppdConflictProbability[i][j] > MIN_PROBA) {
-                    double mu_left =
-                            (ppdWaitingTimeMax[i][j] - ppdDiffTime[i][j]) * ppdWait[i][j] * decisionVariables[j];
-                    double mu_right =
-                            (ppdWaitingTimeMax[i][j] - ppdDiffTime[j][i]) * ppdWait[i][j] * decisionVariables[j];
-                    double variance1 = 2 * SIGMA_2_1 * pow(ppdWait[i][j] * decisionVariables[j], 2);
-                    double variance2 = 2 * SIGMA_2_2 * pow(ppdWait[i][j] * decisionVariables[j], 2);
-                    double variance3 = 2 * SIGMA_2_3 * pow(ppdWait[i][j] * decisionVariables[j], 2);
-                    double variance4 = 2 * SIGMA_2_4 * pow(ppdWait[i][j] * decisionVariables[j], 2);
-
-                    sumMu_left += mu_left;
-                    sumMu_right += mu_right;
-                    sumVariance1 += variance1;
-                    sumVariance2 += variance2;
-                    sumVariance3 += variance3;
-                    sumVariance4 += variance4;
-                    dFeasibility *= vdPi[i] > (mu_left + mu_right) / 2.0 ? 1 : getProbabilityGaussian(mu_left,
-                                                                                                      mu_right,
-                                                                                                      variance1,
-                                                                                                      variance2,
-                                                                                                      variance3,
-                                                                                                      variance4,
-                                                                                                      vdPi[i]);
+                if (j != i && ppdConflictProbability[i][j] > MIN_PROBA && decisionVariables[j] == 1) {
+                    double mu_left = ppdWaitingTimeMax[i][j] - ppdDiffTime[i][j];
+                    double mu_right = ppdWaitingTimeMax[i][j] - ppdDiffTime[j][i];
+                    dFeasibility *= (ppdWait[j][i] + ppdWait[i][j] * getProbabilityGaussian(mu_left,
+                                                                                            mu_right,
+                                                                                            2 * SIGMA_2_1,
+                                                                                            2 * SIGMA_2_2,
+                                                                                            2 * SIGMA_2_3,
+                                                                                            2 * SIGMA_2_4,
+                                                                                            vdPi[i]), false);
                     count++;
+                    if (count == 1) {
+                        probabilityQueue.push(std::make_tuple(ppdWait[j][i], 0, 0, 0));
+                        probabilityQueue.push(std::make_tuple(ppdWait[i][j], mu_left, mu_right, 1));
+                    } else {
+                        for (int k = 0; k < probabilityQueue.size() / 2; k++) {
+                            double probability;
+                            double left;
+                            double right;
+                            double count_gauss;
+                            std::tie(probability, left, right, count_gauss) = probabilityQueue.front();
+                            probabilityQueue.push(
+                                    std::make_tuple(probability * ppdWait[j][i], left, right, count_gauss));
+                            probabilityQueue.push(
+                                    std::make_tuple(probability * ppdWait[i][j], left + mu_left, right + mu_right,
+                                                    count_gauss + 1));
+                            probabilityQueue.pop();
+                            std::tie(probability, left, right, count_gauss) = probabilityQueue.front();
+                            probabilityQueue.push(
+                                    std::make_tuple(probability * ppdWait[j][i], left, right, count_gauss));
+                            probabilityQueue.push(
+                                    std::make_tuple(probability * ppdWait[i][j], left + mu_left, right + mu_right,
+                                                    count_gauss + 1));
+                            probabilityQueue.pop();
+                        }
+                    }
                 }
             }
+
+
             if (count > 1) {
-                dFeasibility *= vdPi[i] > (sumMu_left + sumMu_right) / 2.0 ? 1 : getProbabilityGaussian(
-                        sumMu_left, sumMu_right, sumVariance1, sumVariance2, sumVariance3, sumVariance4, vdPi[i]);
+                double probability;
+                double left;
+                double right;
+                double count_gauss;
+                std::tie(probability, left, right, count_gauss) = probabilityQueue.front();
+                double probability_sum = probability;
+                probabilityQueue.pop();
+                while (!probabilityQueue.empty()) {
+                    std::tie(probability, left, right, count_gauss) = probabilityQueue.front();
+                    probability_sum += probability * getProbabilityGaussian(
+                            left, right, count_gauss * 2 * SIGMA_2_1, count_gauss * 2 * SIGMA_2_2,
+                            count_gauss * 2 * SIGMA_2_3, count_gauss * 2 * SIGMA_2_4, vdPi[i], false);
+                }
+                dFeasibility *= probability_sum;
             }
             if (modeDisplay) {
                 std::cout << "\t\t\ti: " << i << "==>Feas: " << dFeasibility << "===> Eps: " << 1 - dEpsilon
@@ -925,15 +948,15 @@ double MixtureGaussianDistributionWithFourComponents() {
 
 double
 getProbabilityGaussian(double mu_left, double mu_right, double variance1, double variance2, double variance3,
-                       double variance4, double UB) {
-    return P_1 * getFoldedProbability(mu_left, mu_right, variance1, UB) +
-           P_2 * getFoldedProbability(mu_left, mu_right, variance2, UB) +
-           P_3 * getFoldedProbability(mu_left, mu_right, variance3, UB) +
-           P_4 * getFoldedProbability(mu_left, mu_right, variance4, UB);
+                       double variance4, double dBound, bool bLB) {
+    return P_1 * getFoldedProbability(mu_left, mu_right, variance1, dBound, bLB) +
+           P_2 * getFoldedProbability(mu_left, mu_right, variance2, dBound, bLB) +
+           P_3 * getFoldedProbability(mu_left, mu_right, variance3, dBound, bLB) +
+           P_4 * getFoldedProbability(mu_left, mu_right, variance4, dBound, bLB);
 }
 
-double getFoldedProbability(double mu_left, double mu_right, double sigma_2, double UB) {
-    return getSingleSideProbability(mu_left, sigma_2, UB, false) +
-           getSingleSideProbability(mu_right, sigma_2, UB, false);
+double getFoldedProbability(double mu_left, double mu_right, double sigma_2, double dBound, bool bLB) {
+    return getSingleSideProbability(mu_left, sigma_2, dBound, bLB) +
+           getSingleSideProbability(mu_right, sigma_2, dBound, bLB);
 }
 

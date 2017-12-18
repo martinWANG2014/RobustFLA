@@ -73,7 +73,9 @@ typedef std::vector<int> viList;
 typedef std::vector<double> vdList;
 typedef std::deque<std::vector<int>> qviList;
 typedef int Level;
-typedef std::deque<Level> LevelQueue;
+typedef std::queue<Level> LevelQueue;
+
+typedef std::queue<std::tuple<double, double, double, int>> ProbaQueue;
 typedef std::vector<Level> LevelVector;
 typedef std::map<Level, std::pair<int, int>> FlightLevelMap;
 typedef std::map<Level, bool> LevelExamine;
@@ -216,7 +218,7 @@ Level findNextFeasibleLevel(int iDefaultLevel, Level lastLevel);
 
 double getIntervalProbability(double mu, double sigma_2, double dLB, double dUB);
 
-double getSingleSideProbability(double mu, double sigma_2, double dLB, bool bLB = true);
+double getSingleSideProbability(double mu, double sigma_2, double dBound, bool bLB);
 
 
 bool exists(String filename);

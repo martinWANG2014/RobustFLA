@@ -151,9 +151,9 @@ double Route::getConflictProbability(double coefficient, double t1, double t2, d
 
 
 double Route::getWaitProbability(double t1, double t2, double dLB) {
-    return P_1 * getSingleSideProbability(t1 - t2, SIGMA_2_1 * 2, dLB) +
-           P_2 * getSingleSideProbability(t1 - t2, SIGMA_2_2 * 2, dLB) +
-           P_3 * getSingleSideProbability(t1 - t2, SIGMA_2_3 * 2, dLB) +
-           P_4 * getSingleSideProbability(t1 - t2, SIGMA_2_4 * 2, dLB);
+    return P_1 * getSingleSideProbability(t1 - t2, SIGMA_2_1 * 2, dLB, true) +
+           P_2 * getSingleSideProbability(t1 - t2, SIGMA_2_2 * 2, dLB, true) +
+           P_3 * getSingleSideProbability(t1 - t2, SIGMA_2_3 * 2, dLB, true) +
+           P_4 * getSingleSideProbability(t1 - t2, SIGMA_2_4 * 2, dLB, true);
 }
 
