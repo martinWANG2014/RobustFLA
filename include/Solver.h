@@ -48,8 +48,8 @@ public:
      */
     void
     initConstraint(const viList &constraintList, const vdList &Mi, const vdList &Pi,
-                   double **ppdConflictProbability, double **ppdDiffTime, double **ppdWaitingTimeMax, double **ppdWait,
-                   int iNbConflictedFlights, bool deterministic = false);
+                   double **ppdConflictProbability, double **ppdDiffTime, double **ppdWaitingTimeMax,
+                   int iNbConflictedFlights);
 
     /**
     * Initialize the decision variables array.

@@ -37,8 +37,7 @@ void DestroyTable(double **ppdTable, int iSize);
 
 void
 CalculateConflictProbability(FlightVector &vpConflictFlightList, double **ppdConflictProbability, double **ppdDiffTime,
-                             double **ppdWaitingTimeMax, double **ppdDelayWait,
-                             bool deterministicRule, bool deterministic);
+                             double **ppdWaitingTimeMax, bool deterministic);
 
 /**
  * Get the index of most infeasible constraint.
@@ -51,7 +50,7 @@ CalculateConflictProbability(FlightVector &vpConflictFlightList, double **ppdCon
  * @return the index of most infeasible constraint.
  */
 int MinIndexArgs0(FlightVector &vpConflictFlightList, const vdList &vdPi, double **ppdConflictProbability,
-                  double **ppdDiffTime, double **ppdWaitingTimeMax, double **ppdWait);
+                  double **ppdDiffTime, double **ppdWaitingTimeMax);
 
 /**
  * Check the constraint feasibility
@@ -66,7 +65,7 @@ int MinIndexArgs0(FlightVector &vpConflictFlightList, const vdList &vdPi, double
  * @return Whether the solution has a high confidence of feasibility.
  */
 bool FeasibilityHoeffding(const vdList &vdPi, const IloNumArray &decisionVariables, double **ppdConflictProbability,
-                          double **ppdWaitingTimeMax, double **ppdWait, double dEpsilon, int iConflictedFlightSize,
+                          double **ppdWaitingTimeMax, double **ppdDiffTime, double dEpsilon, int iConflictedFlightSize,
                           int *piIndex, bool modeDisplay);
 
 /**
@@ -83,8 +82,8 @@ bool FeasibilityHoeffding(const vdList &vdPi, const IloNumArray &decisionVariabl
  */
 bool FeasibilityMixtureGaussian(FlightVector &vpConflictedFlightList, const vdList &vdPi,
                                 const IloNumArray &decisionVariables, double **ppdConflictProbability,
-                                double **ppdDiffTime, double **ppdWaitingTimeMax, double **ppdWait,
-                                double dEpsilon, int *piIndex, bool modeDisplay);
+                                double **ppdDiffTime, double **ppdWaitingTimeMax, double dEpsilon, int *piIndex,
+                                bool modeDisplay);
 
 /**
  * * Check the constraint feasibility
@@ -97,8 +96,12 @@ bool FeasibilityMixtureGaussian(FlightVector &vpConflictedFlightList, const vdLi
  * @return Whether the solution has a high confidence of feasibility.
  */
 bool FeasibilityMonteCarlo(FlightVector &vpConflictedFlightList, const viList &viConstraintList, const vdList &vdPi,
-                           const IloNumArray &decisionVariables, double dEpsilon,
-                           int *piIndex, bool modeDisplay, int nbIteration, bool deterministicRule);
+                           const IloNumArray &decisionVariables, double dEpsilon, int *piIndex, bool modeDisplay,
+                           int nbIteration);
+
+bool FeasibilityRobustDet(const vdList &vdPi, const IloNumArray &decisionVariables, double **ppdConflictProbability,
+                          double **ppdWaitingTimeMax, double dEpsilon, int iConflictedFlightSize, int *piIndex,
+                          bool modeDisplay);
 
 
 /**
@@ -117,8 +120,8 @@ bool FeasibilityMonteCarlo(FlightVector &vpConflictedFlightList, const viList &v
  */
 int SolveFLA(FlightVector &vpFlightList, FlightLevelAssignmentMap &flightLevelAssignmentMap, const IloEnv &env,
              LevelVector &viLevelsList, ProcessClock &processClock, double epsilon, double *dSumBenefits,
-             double minAdmissibleCost, double maxAdmissibleCost,
-             int *iMaxNbConflict, int iModeMethod, bool modeDisplay, int nbIterations, bool deterministicRule);
+             double minAdmissibleCost, double maxAdmissibleCost, int *iMaxNbConflict, int iModeMethod, bool modeDisplay,
+             int nbIterations);
 
 /**
  * Get the number of flights that change it flight level.
@@ -146,32 +149,27 @@ int getMaxDiverseLevel(FlightVector &flightVector);
  * @return
  */
 bool
-SolvingFLAByLevel(FlightVector &vpFlightList, FlightsLevelMap &infeasibleFlightMap,
-                  FlightVector &vpPreviousFlightList,
-                  const IloEnv &env, LevelExamine &levelEx,
-                  FlightLevelAssignmentMap &flightLevelAssignmentMap, double epsilon, double minAdmissibleCost,
-                  double maxAdmissibleCost,
-                  int *iMaxNbConflict,
-                  Level iProcessingLevel, int iModeMethod,
-                  bool modeDisplay, int nbIterations, bool deterministicRule);
+SolvingFLAByLevel(FlightVector &vpFlightList, FlightsLevelMap &infeasibleFlightMap, FlightVector &vpPreviousFlightList,
+                  const IloEnv &env, LevelExamine &levelEx, FlightLevelAssignmentMap &flightLevelAssignmentMap,
+                  double epsilon, double minAdmissibleCost, double maxAdmissibleCost, int *iMaxNbConflict,
+                  Level iProcessingLevel, int iModeMethod, bool modeDisplay, int nbIterations);
 
-void ApproximateFLA(const Network *pNetwork, String dataFilename,
-                    double dEpsilon, double dCoefPi, double minAdmissibleCost, double maxAdmissibleCost,
-                    int feasibleSize,
-                    int iModeMethod, int percentileSup, bool modeDisplay, bool deterministicRule, int nbIterations = 1000);
+void
+ApproximateFLA(const Network *pNetwork, String dataFilename, double dEpsilon, double dCoefPi, double minAdmissibleCost,
+               double maxAdmissibleCost, int feasibleSize, int iModeMethod, int percentileSup, bool modeDisplay,
+               int nbIterations);
 
 void writeJsonSolution(String dataFilename, double epsilon, double coefPi, double SumBenefits, double ElapsedTime,
-                       double minAdmissibleCost, double maxAdmissibleCost,
-                       int feasibleSize, int method, int percentileSup,
-                       int nbFlightsChangeLevel, int nbMaxConflict,
-                       int nbMaxDiverseLevels, int nbIterations,
-                       bool deterministicRule);
+                       double minAdmissibleCost, double maxAdmissibleCost, int feasibleSize, int method,
+                       int percentileSup, int nbFlightsChangeLevel, int nbMaxConflict, int nbMaxDiverseLevels,
+                       int nbIterations);
 
 double MixtureGaussianDistributionWithFourComponents();
 
-double getFoldedProbability(double mu_left, double mu_right, double sigma_2, double dBound, bool bLB);
+double getProbaMixtureGaussian(double **ppdDiffTime, double **ppdWaitingTimeMax, viList Xil, double P_i, int i, int k);
 
-double getProbabilityGaussian(double mu_left, double mu_right, double variance1, double variance2, double variance3,
-                              double variance4, double dBound, bool bLB = true);
+viList getComplementXil(viList Xil, int j);
 
+double getPartialProbability(const viList right, double **ppdDiffTime, double **ppdWaitingTimeMax, int indexI,
+                             bool complement);
 #endif //SOLUTION_H

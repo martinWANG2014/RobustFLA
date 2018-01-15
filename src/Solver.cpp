@@ -81,40 +81,20 @@ Solver::Solver(IloEnv env, std::ofstream &log) {
 
 void Solver::initConstraint(const viList &constraintList, const vdList &Mi, const vdList &Pi,
                             double **ppdConflictProbability, double **ppdDiffTime, double **ppdWaitingTimeMax,
-                            double **ppdWait,
-                            int iNbConflictedFlights, bool deterministic) {
-    if (deterministic) {
-        for (auto &&i: constraintList) {
-            IloExpr constraint(env);
-            constraint += Mi[i] * decisionVariables[i];
+                            int iNbConflictedFlights) {
+    for (auto &&i: constraintList) {
+        IloExpr constraint(env);
+        constraint += Mi[i] * decisionVariables[i];
 
-            for (int j = 0; j < iNbConflictedFlights; j++) {
-                if (i != j && ppdConflictProbability[i][j] > 0) {
-                    constraint += std::max(ppdWaitingTimeMax[i][j], 0.0) *
-                                  decisionVariables[j];
-                }
+        for (int j = 0; j < iNbConflictedFlights; j++) {
+            if (i != j && ppdConflictProbability[i][j] > MIN_PROBA) {
+                constraint += getExpectedValue(ppdWaitingTimeMax[i][j], ppdDiffTime[i][j]) * decisionVariables[j];
             }
-
-            IloConstraint c(constraint <= (Mi[i] + Pi[i]));
-            model.add(c);
         }
-    } else {
-        for (auto &&i: constraintList) {
-            IloExpr constraint(env);
-            constraint += Mi[i] * decisionVariables[i];
 
-            for (int j = 0; j < iNbConflictedFlights; j++) {
-                if (i != j && ppdConflictProbability[i][j] > 0) {
-                    constraint += std::max((ppdWaitingTimeMax[i][j] - fabs(ppdDiffTime[i][j])) * ppdWait[i][j], 0.0) *
-                                  decisionVariables[j];
-                }
-            }
-
-            IloConstraint c(constraint <= (Mi[i] + Pi[i]));
-            model.add(c);
-        }
+        IloConstraint c(constraint <= (Mi[i] + Pi[i]));
+        model.add(c);
     }
-
 }
 
 void

@@ -75,7 +75,7 @@ typedef std::deque<std::vector<int>> qviList;
 typedef int Level;
 typedef std::queue<Level> LevelQueue;
 
-typedef std::queue<std::tuple<double, double, double, int>> ProbaQueue;
+typedef std::queue<std::pair<std::vector<int>, std::vector<int>>> ProbaQueue;
 typedef std::vector<Level> LevelVector;
 typedef std::map<Level, std::pair<int, int>> FlightLevelMap;
 typedef std::map<Level, bool> LevelExamine;
@@ -218,8 +218,14 @@ Level findNextFeasibleLevel(int iDefaultLevel, Level lastLevel);
 
 double getIntervalProbability(double mu, double sigma_2, double dLB, double dUB);
 
-double getSingleSideProbability(double mu, double sigma_2, double dBound, bool bLB);
+double getIntervalDensityProbability(double mu, double sigma_2, double dLB, double dUB);
 
+double getExpectedValue(double mu_1, double mu_2);
 
+double getPhi(double x, double mu, double sigma_2_1, double sigma_2_2, double sigma_2_3, double sigma_2_4);
+
+double
+getGMMIntervalProbability(double mu, double sigma_2_1, double sigma_2_2, double sigma_2_3, double sigma_2_4, double dLB,
+                          double dUB);
 bool exists(String filename);
 #endif //CONFIGURATION_H

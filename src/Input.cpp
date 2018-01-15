@@ -19,7 +19,7 @@ void Input::parseWayPoints(Network *pNetwork, bool modeDisplay) {
     // Read the json file by the read_json method offered by the boost library.
     read_json(sWayPointPath, root);
 
-    int nbWayPoints = root.get<int>("BN");
+    auto nbWayPoints = root.get<int>("BN");
     for (int i = 0; i < nbWayPoints; i++) {
         String sPrefixed(std::to_string(i));
         // Parse the wayPoint code.
@@ -66,7 +66,7 @@ void Input::parseAirports(Network *pNetwork, bool modeDisplay) {
     // Read the json file by the read_json method offered by the boost library.
     read_json(sAirportPath, root);
 
-    int nbAirports = root.get<int>("AN");
+    auto nbAirports = root.get<int>("AN");
     for (int i = 0; i < nbAirports; i++) {
         String sPrefixed(std::to_string(i));
         // Parse the airport icao code.
@@ -109,7 +109,7 @@ void Input::parseFlights(Network *pNetwork, bool flightFileModified, bool modeDi
     // Read the json file by the read_json method offered by the boost library.
     read_json(sFlightPath, root);
     // Start to parse the content of json object.
-    int nbFlights = boost::lexical_cast<int>(root.get<String>("FN"));
+    auto nbFlights = boost::lexical_cast<int>(root.get<String>("FN"));
     for (int i = 0; i < nbFlights; i++) {
         String sPrefixed(std::to_string(i));
         // Parse the flight icao code.
@@ -119,7 +119,7 @@ void Input::parseFlights(Network *pNetwork, bool flightFileModified, bool modeDi
         // Parse the flight destination airport.
         Airport *pAirportDestination = pNetwork->findAirportByCode(root.get<String>(sPrefixed + ".Dest"));
         // Parse the flight departure time.
-        Time iDepartureTime = boost::lexical_cast<Time>(root.get<String>(sPrefixed + ".DTime", "-1"));
+        auto iDepartureTime = boost::lexical_cast<Time>(root.get<String>(sPrefixed + ".DTime", "-1"));
         // Verify the icao code of a flight, if it is empty, then pop up an error message.
         if (modeDisplay && sCode.empty()) {
             std::cout << std::endl << "[Warning]: the " << i
@@ -147,9 +147,9 @@ void Input::parseFlights(Network *pNetwork, bool flightFileModified, bool modeDi
                       << std::endl;
         } else {
             // Parse the default flight level.
-            Level iLevel = boost::lexical_cast<Level>(root.get<String>(sPrefixed + ".FLevel"));
-            Route *pRoute = new Route(iLevel, pAirportOrigin, iDepartureTime);
-            int nbPoints = boost::lexical_cast<int>(root.get<String>(sPrefixed + ".PointList.PLN"));
+            auto iLevel = boost::lexical_cast<Level>(root.get<String>(sPrefixed + ".FLevel"));
+            auto *pRoute = new Route(iLevel, pAirportOrigin, iDepartureTime);
+            auto nbPoints = boost::lexical_cast<int>(root.get<String>(sPrefixed + ".PointList.PLN"));
             bool bValid = true;
             int iIndexPoint = 0;
 
@@ -199,7 +199,7 @@ void Input::parseFlights(Network *pNetwork, bool flightFileModified, bool modeDi
 
             // If the route is correct, then create a flight object.
             if (bValid) {
-                Flight *pFlight = new Flight(sCode, pAirportOrigin, pAirportDestination, iDepartureTime, pRoute);
+                auto *pFlight = new Flight(sCode, pAirportOrigin, pAirportDestination, iDepartureTime, pRoute);
                 // Verify whether the network has contained the flight or not. If not, then add it into network.
 //                std::cout << "nbPoints:" << pFlight->getRoute()->getPointListSize() << std::endl;
 //                for(auto&& point:pFlight->getRoute()->getVpPointsList()){
@@ -245,7 +245,7 @@ void Input::parseFlights(Network *pNetwork, bool flightFileModified, bool modeDi
 Input::Input(const String &sAirportPath, const String &sWayPointPath, const String &sFlightPath)
         : sAirportPath(sAirportPath), sWayPointPath(sWayPointPath), sFlightPath(sFlightPath) {}
 
-Input::~Input() {}
+Input::~Input() = default;
 
 void Input::initNetwork(Network *pNetwork, bool flightFileModified,  bool modeDisplay) {
     parseAirports(pNetwork, modeDisplay);

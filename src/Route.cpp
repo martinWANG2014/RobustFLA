@@ -40,8 +40,7 @@ bool Route::selfCheck() {
 
 
 double Route::CalculationProbabilityAndDelayAtPoint(int iIndex1, Route *pRoute2, int iIndex2, double *pdDiffTime,
-                                                    double *pdWaitingTimeMax,
-                                                    double *pdWait, bool deterministic) {
+                                                    double *pdWaitingTimeMax, bool deterministic) {
     vdList vdConflictProbabilityList;
     vdList vdDelayTime;
     double dT1 = getArrivingTimeAtPoint(iIndex1);
@@ -63,11 +62,9 @@ double Route::CalculationProbabilityAndDelayAtPoint(int iIndex1, Route *pRoute2,
     *pdWaitingTimeMax = MIN_SEPARATION_DISTANCE * K / (dLambda * dV2);
     if (deterministic) {
         dProbabilityConflict = fabs(dLambda * dV2 * (dT2 - dT1)) < MIN_SEPARATION_DISTANCE * K ? 1 : 0;
-        *pdWait = dT1 - dT2 > 0 ? 1 : 0;// true, if flight 1 wait for flight 2,; false, reverse.
     } else {
         dProbabilityConflict = getConflictProbability(dLambda * dV2, dT2, dT1, -MIN_SEPARATION_DISTANCE * K,
                                                       MIN_SEPARATION_DISTANCE * K);
-        *pdWait = getWaitProbability(dT1, dT2, 0);
     }
     return dProbabilityConflict;
 }
@@ -98,7 +95,7 @@ const Position &Route::getPositionAtPoint(int iIndex) {
 }
 
 Time Route::getArrivingTimeAtPoint(int iIndex) {
-    return vdTimeList[iIndex];//vpPointsList[iIndex]->getArrivingTime();
+    return vdTimeList[iIndex];
 }
 
 const Level Route::getDefaultLevel() const {
@@ -147,13 +144,5 @@ double Route::getConflictProbability(double coefficient, double t1, double t2, d
            P_2 * getIntervalProbability(coefficient * (t1 - t2), pow(coefficient, 2) * SIGMA_2_2 * 2, dLB, dUB) +
            P_3 * getIntervalProbability(coefficient * (t1 - t2), pow(coefficient, 2) * SIGMA_2_3 * 2, dLB, dUB) +
            P_4 * getIntervalProbability(coefficient * (t1 - t2), pow(coefficient, 2) * SIGMA_2_4 * 2, dLB, dUB);
-}
-
-
-double Route::getWaitProbability(double t1, double t2, double dLB) {
-    return P_1 * getSingleSideProbability(t1 - t2, SIGMA_2_1 * 2, dLB, true) +
-           P_2 * getSingleSideProbability(t1 - t2, SIGMA_2_2 * 2, dLB, true) +
-           P_3 * getSingleSideProbability(t1 - t2, SIGMA_2_3 * 2, dLB, true) +
-           P_4 * getSingleSideProbability(t1 - t2, SIGMA_2_4 * 2, dLB, true);
 }
 

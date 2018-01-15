@@ -222,18 +222,44 @@ bool exists(String filename) {
 }
 
 
-double getSingleSideProbability(double mu, double sigma_2, double dBound, bool bLB) {
-    double dLeft = (dBound - mu) / (sqrt(2.0 * sigma_2));
-    return 0.5 * (1 + (bLB ? -1 : 1) * boost::math::erf(dLeft));
-}
-
 double getIntervalProbability(double mu, double sigma_2, double dLB, double dUB) {
     double dRight = (dUB - mu) / (sqrt(2.0 * sigma_2));
     double dLeft = (dLB - mu) / (sqrt(2.0 * sigma_2));
     return 0.5 * (boost::math::erf(dRight) - boost::math::erf(dLeft));
 }
 
+double getIntervalDensityProbability(double mu, double sigma_2, double dLB, double dUB) {
+    double dRight = pow(dUB - mu, 2) / (2.0 * sigma_2);
+    double dLeft = pow(dLB - mu, 2) / (2.0 * sigma_2);
+    return 1.0 / sqrt(2 * M_PI * sigma_2) * (exp(dLeft) - exp(dRight));
+}
 
+double getExpectedValue(double maximalValue, double mu) {
+    return P_1 * (2 * SIGMA_2_1 * getIntervalDensityProbability(mu, 2 * SIGMA_2_1, 0, maximalValue) +
+                  mu * getIntervalProbability(mu, 2 * SIGMA_2_1, 0, maximalValue)) +
+           P_2 * (2 * SIGMA_2_2 * getIntervalDensityProbability(mu, 2 * SIGMA_2_2, 0, maximalValue) +
+                  mu * getIntervalProbability(mu, 2 * SIGMA_2_2, 0, maximalValue)) +
+           P_3 * (2 * SIGMA_2_3 * getIntervalDensityProbability(mu, 2 * SIGMA_2_3, 0, maximalValue) +
+                  mu * getIntervalProbability(mu, 2 * SIGMA_2_3, 0, maximalValue)) +
+           P_4 * (2 * SIGMA_2_4 * getIntervalDensityProbability(mu, 2 * SIGMA_2_4, 0, maximalValue) +
+                  mu * getIntervalProbability(mu, 2 * SIGMA_2_4, 0, maximalValue));
+}
+
+double getPhi(double x, double mu, double sigma_2_1, double sigma_2_2, double sigma_2_3, double sigma_2_4) {
+    return 0.5 * (P_1 * (boost::math::erf((x - mu) / (sqrt(2 * sigma_2_1))) + 1)
+                  + P_2 * (boost::math::erf((x - mu) / (sqrt(2 * sigma_2_2))) + 1)
+                  + P_3 * (boost::math::erf((x - mu) / (sqrt(2 * sigma_2_3))) + 1)
+                  + P_4 * (boost::math::erf((x - mu) / (sqrt(2 * sigma_2_4))) + 1));
+}
+
+double
+getGMMIntervalProbability(double mu, double sigma_2_1, double sigma_2_2, double sigma_2_3, double sigma_2_4, double dLB,
+                          double dUB) {
+    return P_1 * getIntervalProbability(mu, sigma_2_1, dLB, dUB)
+           + P_2 * getIntervalProbability(mu, sigma_2_2, dLB, dUB)
+           + P_3 * getIntervalProbability(mu, sigma_2_3, dLB, dUB)
+           + P_4 * getIntervalProbability(mu, sigma_2_4, dLB, dUB);
+}
 
 
 

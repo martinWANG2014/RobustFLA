@@ -116,8 +116,7 @@ public:
      * @return the conflict probability for two points.
      */
     double CalculationProbabilityAndDelayAtPoint(int iIndex1, Route *pRoute2, int iIndex2, double *pdDiffTime,
-                                                 double *pdWaitingTimeMax,
-                                                 double *pdWait, bool deterministic);
+                                                 double *pdWaitingTimeMax, bool deterministic);
 
     /**
      * Initialize the route time list.
@@ -129,12 +128,23 @@ public:
      */
     void resetTimeList();
 
+    /**
+     * Get the number of points of a flight
+     * @return the number of points of a flight.
+     */
     int getNbPointsPerFlight() const;
 
+    /**
+     * Set the number of points in flight's trajectory of an aircraft.
+     * @param nbPointsPerFlight  the number of points of a flight.
+     */
     void setNbPointsPerFlight(int nbPointsPerFlight);
 
+    /**
+     * Get the Points list of a flight.
+     * @return the Points list of a flight.
+     */
     const PointVector &getVpPointsList() const;
-
 
 private:
     /**
@@ -152,12 +162,22 @@ private:
      */
     vdList vdTimeList;
 
+    /**
+     * The number of points in its flight trajectory of an aircraft.
+     */
     int nbPointsPerFlight;
 
-
+    /**
+     * Calculate the conflict probability of two aircrafts,by the formula:
+     * Pr(-S <= coefficient*(t_j - t_i) <= S)
+     * @param coefficient   the coefficient to calculate minimum separation distance.
+     * @param t1            the departure time of aircraft i
+     * @param t2            the departure time of aircraft j
+     * @param dLB           the lower bound for minimum separation distance
+     * @param dUB           the upper bound for minimum separation distance
+     * @return  the conflict probability of two qircrafts.
+     */
     double getConflictProbability(double coefficient, double t1, double t2, double dLB, double dUB);
-
-    double getWaitProbability(double t1, double t2, double dLB);
 };
 
 #endif //ROUTE_H

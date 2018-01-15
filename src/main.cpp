@@ -2,7 +2,7 @@
 #include <boost/filesystem.hpp>
 void EchoUsage(){
     std::cout
-            << "[USAGE] RobustFLA airport_json_File beacon_json_file flight_json_file pa period_length feasible_list_size method_mode epsilon coefficient_Pi nbIterations minAdmissibleCost maxAdmissibleCost deterministicRule displayMode"
+            << "[USAGE] RobustFLA airport_json_File beacon_json_file flight_json_file pa period_length feasible_list_size method_mode epsilon coefficient_Pi nbIterations minAdmissibleCost maxAdmissibleCost displayMode"
             << std::endl
             << "method_mode 0 \t\t\t Deterministic Method" << std::endl
             << "method_mode 1 \t\t\t Hoeffding Inequalities Method" << std::endl
@@ -21,7 +21,7 @@ void EchoUsage(){
 int main(int argc, char *argv[]) {
     using std::invalid_argument;
     try {
-        if (argc != 15) {
+        if (argc != 14) {
             EchoUsage();
             abort();
         }
@@ -29,8 +29,7 @@ int main(int argc, char *argv[]) {
         std::stringstream modifiedFlightFileName;
         modifiedFlightFileName << "../data/flight_" << percentileSup <<"_-.json";
         String flightName = modifiedFlightFileName.str();
-        bool deterministicRule = boost::lexical_cast<int>(argv[13]) == 1;
-        bool modeDisplay = boost::lexical_cast<int>(argv[14]) == 1;
+        bool modeDisplay = boost::lexical_cast<int>(argv[13]) == 1;
         double epsilon = boost::lexical_cast<int>(argv[8]) / 100.0;
         auto feasibleSize = boost::lexical_cast<int>(argv[6]);
         double coefPi = boost::lexical_cast<int>(argv[9]) / 100.0;
@@ -55,16 +54,16 @@ int main(int argc, char *argv[]) {
         Network::PERIOD_LENGTH = boost::lexical_cast<int>(argv[5]) / 1.00;
         if (modeMethod == 4) {
             ApproximateFLA(&network, dataFilename, epsilon, coefPi, minAdmissibleCost, maxAdmissibleCost, feasibleSize,
-                           0, percentileSup, modeDisplay, deterministicRule);
+                           0, percentileSup, modeDisplay, 0);
             ApproximateFLA(&network, dataFilename, epsilon, coefPi, minAdmissibleCost, maxAdmissibleCost, feasibleSize,
-                           1, percentileSup, modeDisplay, deterministicRule);
+                           1, percentileSup, modeDisplay, 0);
             ApproximateFLA(&network, dataFilename, epsilon, coefPi, minAdmissibleCost, maxAdmissibleCost, feasibleSize,
-                           2, percentileSup, modeDisplay, deterministicRule, nbIterations);
+                           2, percentileSup, modeDisplay, nbIterations);
             ApproximateFLA(&network, dataFilename, epsilon, coefPi, minAdmissibleCost, maxAdmissibleCost, feasibleSize,
-                           3, percentileSup, modeDisplay, deterministicRule);
+                           3, percentileSup, modeDisplay, 0);
         } else {
             ApproximateFLA(&network, dataFilename, epsilon, coefPi, minAdmissibleCost, maxAdmissibleCost, feasibleSize,
-                           modeMethod, percentileSup, modeDisplay, deterministicRule, nbIterations);
+                           modeMethod, percentileSup, modeDisplay, nbIterations);
         }
     }
     catch (const invalid_argument &e) {

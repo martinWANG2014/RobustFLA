@@ -32,7 +32,7 @@ executable_target="../build/bin/RobustFLA"
 
 # the program usage message.
 function Usage {
-    echo -e "[USAGE] runProgram.sh pa period_length feasible_list_size method_mode epsilon coefficient_Pi nbIterations minAdmissibleCost deterministicRule displayMode"
+    echo -e "[USAGE] runProgram.sh pa period_length feasible_list_size method_mode epsilon coefficient_Pi nbIterations minAdmissibleCost displayMode"
 }
 
 # method to generate the result filename.
@@ -101,7 +101,7 @@ if [[ ! -e ${executable_target} ]]; then
 fi
 
 # check the parameters list
-if [[ $# -ne 11 ]]; then
+if [[ $# -ne 10 ]]; then
     echo $#
     echo "[ERROR] invalid parameters list."
     Usage
