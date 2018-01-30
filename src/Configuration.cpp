@@ -235,31 +235,108 @@ double getIntervalDensityProbability(double mu, double sigma_2, double dLB, doub
 }
 
 double getExpectedValue(double maximalValue, double mu) {
-    return P_1 * (2 * SIGMA_2_1 * getIntervalDensityProbability(mu, 2 * SIGMA_2_1, 0, maximalValue) +
-                  mu * getIntervalProbability(mu, 2 * SIGMA_2_1, 0, maximalValue)) +
-           P_2 * (2 * SIGMA_2_2 * getIntervalDensityProbability(mu, 2 * SIGMA_2_2, 0, maximalValue) +
-                  mu * getIntervalProbability(mu, 2 * SIGMA_2_2, 0, maximalValue)) +
-           P_3 * (2 * SIGMA_2_3 * getIntervalDensityProbability(mu, 2 * SIGMA_2_3, 0, maximalValue) +
-                  mu * getIntervalProbability(mu, 2 * SIGMA_2_3, 0, maximalValue)) +
-           P_4 * (2 * SIGMA_2_4 * getIntervalDensityProbability(mu, 2 * SIGMA_2_4, 0, maximalValue) +
-                  mu * getIntervalProbability(mu, 2 * SIGMA_2_4, 0, maximalValue));
-}
-
-double getPhi(double x, double mu, double sigma_2_1, double sigma_2_2, double sigma_2_3, double sigma_2_4) {
-    return 0.5 * (P_1 * (boost::math::erf((x - mu) / (sqrt(2 * sigma_2_1))) + 1)
-                  + P_2 * (boost::math::erf((x - mu) / (sqrt(2 * sigma_2_2))) + 1)
-                  + P_3 * (boost::math::erf((x - mu) / (sqrt(2 * sigma_2_3))) + 1)
-                  + P_4 * (boost::math::erf((x - mu) / (sqrt(2 * sigma_2_4))) + 1));
+    return P_1 * P_1 * ((SIGMA_2_1 + SIGMA_2_1) *
+                        getIntervalDensityProbability(mu + MU_1 - MU_1, (SIGMA_2_1 + SIGMA_2_1), 0, maximalValue) +
+                        (maximalValue - (mu + MU_1 - MU_1)) *
+                        getIntervalProbability(mu + MU_1 - MU_1, (SIGMA_2_1 + SIGMA_2_1), 0, maximalValue)) +
+           P_1 * P_2 * ((SIGMA_2_1 + SIGMA_2_2) *
+                        getIntervalDensityProbability(mu + MU_1 - MU_2, (SIGMA_2_1 + SIGMA_2_2), 0, maximalValue) +
+                        (maximalValue - (mu + MU_1 - MU_2)) *
+                        getIntervalProbability(mu + MU_1 - MU_2, (SIGMA_2_1 + SIGMA_2_2), 0, maximalValue)) +
+           P_1 * P_3 * ((SIGMA_2_1 + SIGMA_2_3) *
+                        getIntervalDensityProbability(mu + MU_1 - MU_3, (SIGMA_2_1 + SIGMA_2_3), 0, maximalValue) +
+                        maximalValue - ((mu + MU_1 - MU_3)) *
+                                       getIntervalProbability(mu + MU_1 - MU_3, (SIGMA_2_1 + SIGMA_2_3), 0,
+                                                              maximalValue)) +
+           P_1 * P_4 * ((SIGMA_2_1 + SIGMA_2_4) *
+                        getIntervalDensityProbability(mu + MU_1 - MU_4, (SIGMA_2_1 + SIGMA_2_4), 0, maximalValue) +
+                        (maximalValue - (mu + MU_1 - MU_4)) *
+                        getIntervalProbability(mu + MU_1 - MU_4, (SIGMA_2_1 + SIGMA_2_4), 0, maximalValue)) +
+           P_2 * P_1 * ((SIGMA_2_2 + SIGMA_2_1) *
+                        getIntervalDensityProbability(mu + MU_2 - MU_1, (SIGMA_2_2 + SIGMA_2_1), 0, maximalValue) +
+                        (maximalValue - (mu + MU_2 - MU_1)) *
+                        getIntervalProbability(mu + MU_2 - MU_1, (SIGMA_2_2 + SIGMA_2_1), 0, maximalValue)) +
+           P_2 * P_2 * ((SIGMA_2_2 + SIGMA_2_2) *
+                        getIntervalDensityProbability(mu + MU_2 - MU_2, (SIGMA_2_2 + SIGMA_2_2), 0, maximalValue) +
+                        (maximalValue - (mu + MU_2 - MU_2)) *
+                        getIntervalProbability(mu + MU_2 - MU_2, (SIGMA_2_2 + SIGMA_2_2), 0, maximalValue)) +
+           P_2 * P_3 * ((SIGMA_2_2 + SIGMA_2_3) *
+                        getIntervalDensityProbability(mu + MU_2 - MU_3, (SIGMA_2_2 + SIGMA_2_3), 0, maximalValue) +
+                        (maximalValue - (mu + MU_2 - MU_3)) *
+                        getIntervalProbability(mu + MU_2 - MU_3, (SIGMA_2_2 + SIGMA_2_3), 0, maximalValue)) +
+           P_2 * P_4 * ((SIGMA_2_2 + SIGMA_2_4) *
+                        getIntervalDensityProbability(mu + MU_2 - MU_4, (SIGMA_2_2 + SIGMA_2_4), 0, maximalValue) +
+                        (maximalValue - (mu + MU_2 - MU_4)) *
+                        getIntervalProbability(mu + MU_2 - MU_4, (SIGMA_2_2 + SIGMA_2_4), 0, maximalValue)) +
+           P_3 * P_1 * ((SIGMA_2_3 + SIGMA_2_1) *
+                        getIntervalDensityProbability(mu + MU_3 - MU_1, (SIGMA_2_3 + SIGMA_2_1), 0, maximalValue) +
+                        (maximalValue - (mu + MU_3 - MU_1)) *
+                        getIntervalProbability(mu + MU_3 - MU_1, (SIGMA_2_3 + SIGMA_2_1), 0, maximalValue)) +
+           P_3 * P_2 * ((SIGMA_2_3 + SIGMA_2_2) *
+                        getIntervalDensityProbability(mu + MU_3 - MU_2, (SIGMA_2_3 + SIGMA_2_2), 0, maximalValue) +
+                        (maximalValue - (mu + MU_3 - MU_2)) *
+                        getIntervalProbability(mu + MU_3 - MU_2, (SIGMA_2_3 + SIGMA_2_2), 0, maximalValue)) +
+           P_3 * P_3 * ((SIGMA_2_3 + SIGMA_2_3) *
+                        getIntervalDensityProbability(mu + MU_3 - MU_3, (SIGMA_2_3 + SIGMA_2_3), 0, maximalValue) +
+                        (maximalValue - (mu + MU_3 - MU_3)) *
+                        getIntervalProbability(mu + MU_3 - MU_3, (SIGMA_2_3 + SIGMA_2_3), 0, maximalValue)) +
+           P_3 * P_4 * ((SIGMA_2_3 + SIGMA_2_4) *
+                        getIntervalDensityProbability(mu + MU_3 - MU_4, (SIGMA_2_3 + SIGMA_2_4), 0, maximalValue) +
+                        (maximalValue - (mu + MU_3 - MU_4)) *
+                        getIntervalProbability(mu + MU_3 - MU_4, (SIGMA_2_3 + SIGMA_2_4), 0, maximalValue)) +
+           P_4 * P_1 * ((SIGMA_2_4 + SIGMA_2_1) *
+                        getIntervalDensityProbability(mu + MU_4 - MU_1, (SIGMA_2_4 + SIGMA_2_1), 0, maximalValue) +
+                        (maximalValue - (mu + MU_4 - MU_1)) *
+                        getIntervalProbability(mu + MU_4 - MU_1, (SIGMA_2_4 + SIGMA_2_1), 0, maximalValue)) +
+           P_4 * P_2 * ((SIGMA_2_4 + SIGMA_2_2) *
+                        getIntervalDensityProbability(mu + MU_4 - MU_2, (SIGMA_2_4 + SIGMA_2_2), 0, maximalValue) +
+                        (maximalValue - (mu + MU_4 - MU_2)) *
+                        getIntervalProbability(mu + MU_4 - MU_2, (SIGMA_2_4 + SIGMA_2_2), 0, maximalValue)) +
+           P_4 * P_3 * ((SIGMA_2_4 + SIGMA_2_3) *
+                        getIntervalDensityProbability(mu + MU_4 - MU_3, (SIGMA_2_4 + SIGMA_2_3), 0, maximalValue) +
+                        (maximalValue - (mu + MU_4 - MU_3)) *
+                        getIntervalProbability(mu + MU_4 - MU_3, (SIGMA_2_4 + SIGMA_2_3), 0, maximalValue)) +
+           P_4 * P_4 * ((SIGMA_2_4 + SIGMA_2_4) *
+                        getIntervalDensityProbability(mu + MU_4 - MU_4, 2 * (SIGMA_2_4 + SIGMA_2_4), 0, maximalValue) +
+                        (maximalValue - (mu + MU_4 - MU_4)) *
+                        getIntervalProbability(mu + MU_4 - MU_4, (SIGMA_2_4 + SIGMA_2_4), 0, maximalValue));
 }
 
 double
-getGMMIntervalProbability(double mu, double sigma_2_1, double sigma_2_2, double sigma_2_3, double sigma_2_4, double dLB,
-                          double dUB) {
-    return P_1 * getIntervalProbability(mu, sigma_2_1, dLB, dUB)
-           + P_2 * getIntervalProbability(mu, sigma_2_2, dLB, dUB)
-           + P_3 * getIntervalProbability(mu, sigma_2_3, dLB, dUB)
-           + P_4 * getIntervalProbability(mu, sigma_2_4, dLB, dUB);
+getUGMMIntervalProbability(double mu, double dLB, double dUB, double maximalValue) {
+    return
+            P_1 * (P_1 * getIntervalProbability(mu + MU_1 - MU_1, SIGMA_2_1 + SIGMA_2_1, maximalValue - dUB,
+                                                maximalValue - dLB)
+                   + P_2 * getIntervalProbability(mu + MU_1 - MU_2, SIGMA_2_2 + SIGMA_2_1, maximalValue - dUB,
+                                                  maximalValue - dLB)
+                   + P_3 * getIntervalProbability(mu + MU_1 - MU_3, SIGMA_2_3 + SIGMA_2_1, maximalValue - dUB,
+                                                  maximalValue - dLB)
+                   + P_4 * getIntervalProbability(mu + MU_1 - MU_4, SIGMA_2_4 + SIGMA_2_1, maximalValue - dUB,
+                                                  maximalValue - dLB)) +
+            P_2 * (P_1 * getIntervalProbability(mu + MU_2 - MU_1, SIGMA_2_1 + SIGMA_2_2, maximalValue - dUB,
+                                                maximalValue - dLB)
+                   + P_2 * getIntervalProbability(mu + MU_2 - MU_2, SIGMA_2_2 + SIGMA_2_2, maximalValue - dUB,
+                                                  maximalValue - dLB)
+                   + P_3 * getIntervalProbability(mu + MU_2 - MU_3, SIGMA_2_3 + SIGMA_2_2, maximalValue - dUB,
+                                                  maximalValue - dLB)
+                   + P_4 * getIntervalProbability(mu + MU_2 - MU_4, SIGMA_2_4 + SIGMA_2_2, maximalValue - dUB,
+                                                  maximalValue - dLB)) +
+            P_3 * (P_1 * getIntervalProbability(mu + MU_3 - MU_1, SIGMA_2_1 + SIGMA_2_3, maximalValue - dUB,
+                                                maximalValue - dLB)
+                   + P_2 * getIntervalProbability(mu + MU_3 - MU_2, SIGMA_2_2 + SIGMA_2_3, maximalValue - dUB,
+                                                  maximalValue - dLB)
+                   + P_3 * getIntervalProbability(mu + MU_3 - MU_3, SIGMA_2_3 + SIGMA_2_3, maximalValue - dUB,
+                                                  maximalValue - dLB)
+                   + P_4 * getIntervalProbability(mu + MU_3 - MU_4, SIGMA_2_4 + SIGMA_2_3, maximalValue - dUB,
+                                                  maximalValue - dLB)) +
+            P_4 * (P_1 * getIntervalProbability(mu + MU_4 - MU_1, SIGMA_2_1 + SIGMA_2_4, maximalValue - dUB,
+                                                maximalValue - dLB)
+                   + P_2 * getIntervalProbability(mu + MU_4 - MU_2, SIGMA_2_2 + SIGMA_2_4, maximalValue - dUB,
+                                                  maximalValue - dLB)
+                   + P_3 * getIntervalProbability(mu + MU_4 - MU_3, SIGMA_2_3 + SIGMA_2_4, maximalValue - dUB,
+                                                  maximalValue - dLB)
+                   + P_4 * getIntervalProbability(mu + MU_4 - MU_4, SIGMA_2_4 + SIGMA_2_4, maximalValue - dUB,
+                                                  maximalValue - dLB));
 }
-
 
 

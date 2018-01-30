@@ -52,7 +52,7 @@ int main(int argc, char *argv[]) {
 //        }
         String dataFilename = !exists(flightName) ? network.generateFlightsSup(percentileSup, TIMEOFFSETSUP) : flightName;
         Network::PERIOD_LENGTH = boost::lexical_cast<int>(argv[5]) / 1.00;
-        if (modeMethod == 4) {
+        if (modeMethod == 100) {
             ApproximateFLA(&network, dataFilename, epsilon, coefPi, minAdmissibleCost, maxAdmissibleCost, feasibleSize,
                            0, percentileSup, modeDisplay, 0);
             ApproximateFLA(&network, dataFilename, epsilon, coefPi, minAdmissibleCost, maxAdmissibleCost, feasibleSize,

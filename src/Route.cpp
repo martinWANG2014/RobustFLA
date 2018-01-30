@@ -140,9 +140,37 @@ const PointVector &Route::getVpPointsList() const {
 
 
 double Route::getConflictProbability(double coefficient, double t1, double t2, double dLB, double dUB) {
-    return P_1 * getIntervalProbability(coefficient * (t1 - t2), pow(coefficient, 2) * SIGMA_2_1 * 2, dLB, dUB) +
-           P_2 * getIntervalProbability(coefficient * (t1 - t2), pow(coefficient, 2) * SIGMA_2_2 * 2, dLB, dUB) +
-           P_3 * getIntervalProbability(coefficient * (t1 - t2), pow(coefficient, 2) * SIGMA_2_3 * 2, dLB, dUB) +
-           P_4 * getIntervalProbability(coefficient * (t1 - t2), pow(coefficient, 2) * SIGMA_2_4 * 2, dLB, dUB);
+    return P_1 * (P_1 * getIntervalProbability(coefficient * (t1 - t2 + MU_1 - MU_1),
+                                               pow(coefficient, 2) * (SIGMA_2_1 + SIGMA_2_1), dLB, dUB)
+                  + P_2 * getIntervalProbability(coefficient * (t1 - t2 + MU_1 - MU_2),
+                                                 pow(coefficient, 2) * (SIGMA_2_2 + SIGMA_2_1), dLB, dUB)
+                  + P_3 * getIntervalProbability(coefficient * (t1 - t2 + MU_1 - MU_3),
+                                                 pow(coefficient, 2) * (SIGMA_2_3 + SIGMA_2_1), dLB, dUB)
+                  + P_4 * getIntervalProbability(coefficient * (t1 - t2 + MU_1 - MU_4),
+                                                 pow(coefficient, 2) * (SIGMA_2_4 + SIGMA_2_1), dLB, dUB)) +
+           P_2 * (P_1 * getIntervalProbability(coefficient * (t1 - t2 + MU_2 - MU_1),
+                                               pow(coefficient, 2) * (SIGMA_2_1 + SIGMA_2_2), dLB, dUB)
+                  + P_2 * getIntervalProbability(coefficient * (t1 - t2 + MU_2 - MU_2),
+                                                 pow(coefficient, 2) * (SIGMA_2_2 + SIGMA_2_2), dLB, dUB)
+                  + P_3 * getIntervalProbability(coefficient * (t1 - t2 + MU_2 - MU_3),
+                                                 pow(coefficient, 2) * (SIGMA_2_3 + SIGMA_2_2), dLB, dUB)
+                  + P_4 * getIntervalProbability(coefficient * (t1 - t2 + MU_2 - MU_4),
+                                                 pow(coefficient, 2) * (SIGMA_2_4 + SIGMA_2_2), dLB, dUB)) +
+           P_3 * (P_1 * getIntervalProbability(coefficient * (t1 - t2 + MU_3 - MU_1),
+                                               pow(coefficient, 2) * (SIGMA_2_1 + SIGMA_2_3), dLB, dUB)
+                  + P_2 * getIntervalProbability(coefficient * (t1 - t2 + MU_3 - MU_2),
+                                                 pow(coefficient, 2) * (SIGMA_2_2 + SIGMA_2_3), dLB, dUB)
+                  + P_3 * getIntervalProbability(coefficient * (t1 - t2 + MU_3 - MU_3),
+                                                 pow(coefficient, 2) * (SIGMA_2_3 + SIGMA_2_3), dLB, dUB)
+                  + P_4 * getIntervalProbability(coefficient * (t1 - t2 + MU_3 - MU_4),
+                                                 pow(coefficient, 2) * (SIGMA_2_4 + SIGMA_2_3), dLB, dUB)) +
+           P_4 * (P_1 * getIntervalProbability(coefficient * (t1 - t2 + MU_4 - MU_1),
+                                               pow(coefficient, 2) * (SIGMA_2_1 + SIGMA_2_4), dLB, dUB)
+                  + P_2 * getIntervalProbability(coefficient * (t1 - t2 + MU_4 - MU_2),
+                                                 pow(coefficient, 2) * (SIGMA_2_2 + SIGMA_2_4), dLB, dUB)
+                  + P_3 * getIntervalProbability(coefficient * (t1 - t2 + MU_4 - MU_3),
+                                                 pow(coefficient, 2) * (SIGMA_2_3 + SIGMA_2_4), dLB, dUB)
+                  + P_4 * getIntervalProbability(coefficient * (t1 - t2 + MU_4 - MU_4),
+                                                 pow(coefficient, 2) * (SIGMA_2_4 + SIGMA_2_4), dLB, dUB));
 }
 

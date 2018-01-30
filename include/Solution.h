@@ -8,11 +8,19 @@
 #include "ProcessClock.h"
 #include "Solver.h"
 #include "Input.h"
+#include <algorithm>
+#include <boost/accumulators/accumulators.hpp>
+#include <boost/accumulators/statistics.hpp>
+#include <boost/accumulators/statistics/tail_quantile.hpp>
 
 #undef IL_STD
 #define  IL_STD
 
 #include <ilcplex/ilocplex.h>
+
+using namespace boost::accumulators;
+typedef accumulator_set<double, stats<boost::accumulators::tag::tail_quantile<right> > > accumulator_t_right;
+
 
 /**
  * Create real symmetric matrix in size of iSize*iSize
@@ -52,6 +60,7 @@ CalculateConflictProbability(FlightVector &vpConflictFlightList, double **ppdCon
 int MinIndexArgs0(FlightVector &vpConflictFlightList, const vdList &vdPi, double **ppdConflictProbability,
                   double **ppdDiffTime, double **ppdWaitingTimeMax);
 
+
 /**
  * Check the constraint feasibility
  * @param viSearchList              The search list
@@ -68,6 +77,13 @@ bool FeasibilityHoeffding(const vdList &vdPi, const IloNumArray &decisionVariabl
                           double **ppdWaitingTimeMax, double **ppdDiffTime, double dEpsilon, int iConflictedFlightSize,
                           int *piIndex, bool modeDisplay);
 
+bool
+FeasibilityEnhancedHoeffding(const vdList &vdPi, const IloNumArray &decisionVariables, double **ppdConflictProbability,
+                             double **ppdWaitingTimeMax, double **ppdDiffTime, double dEpsilon,
+                             int iConflictedFlightSize,
+                             int *piIndex, bool modeDisplay);
+
+
 /**
  * * Check the constraint feasibility
  * @param vpConflictedFlightList    The conflict flight list
@@ -80,10 +96,20 @@ bool FeasibilityHoeffding(const vdList &vdPi, const IloNumArray &decisionVariabl
  * @param piIndexMostInfeasible     The index of most infeasible constraint
  * @return Whether the solution has a high confidence of feasibility.
  */
-bool FeasibilityMixtureGaussian(FlightVector &vpConflictedFlightList, const vdList &vdPi,
-                                const IloNumArray &decisionVariables, double **ppdConflictProbability,
-                                double **ppdDiffTime, double **ppdWaitingTimeMax, double dEpsilon, int *piIndex,
-                                bool modeDisplay);
+bool FeasibilityGaussianLike(FlightVector &vpConflictedFlightList, const vdList &vdPi,
+                             const IloNumArray &decisionVariables, double **ppdConflictProbability,
+                             double **ppdDiffTime, double **ppdWaitingTimeMax, double dEpsilon, int *piIndex,
+                             bool modeDisplay);
+
+bool FeasibilitySampling(FlightVector &vpConflictedFlightList, const vdList &vdPi,
+                         const IloNumArray &decisionVariables, double **ppdConflictProbability,
+                         double **ppdDiffTime, double **ppdWaitingTimeMax, double dEpsilon, int *piIndex,
+                         bool modeDisplay);
+
+bool FeasibilityGaussianLike2(FlightVector &vpConflictedFlightList, const vdList &vdPi,
+                              const IloNumArray &decisionVariables, double **ppdConflictProbability,
+                              double **ppdDiffTime, double **ppdWaitingTimeMax, double dEpsilon, int *piIndex,
+                              bool modeDisplay);
 
 /**
  * * Check the constraint feasibility
@@ -166,10 +192,10 @@ void writeJsonSolution(String dataFilename, double epsilon, double coefPi, doubl
 
 double MixtureGaussianDistributionWithFourComponents();
 
-double getProbaMixtureGaussian(double **ppdDiffTime, double **ppdWaitingTimeMax, viList Xil, double P_i, int i, int k);
+double GenerateRandomWaitTime(double c_ij);
 
-viList getComplementXil(viList Xil, int j);
-
-double getPartialProbability(const viList right, double **ppdDiffTime, double **ppdWaitingTimeMax, int indexI,
+double getPartialProbability(viList right, double **ppdDiffTime, double **ppdWaitingTimeMax, int indexI,
                              bool complement);
+
+
 #endif //SOLUTION_H

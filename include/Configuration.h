@@ -198,6 +198,8 @@ struct retrieve_key {
     }
 };
 
+
+
 ////////////Method template////////////////////////////////////////////////////
 
 /**
@@ -222,10 +224,6 @@ double getIntervalDensityProbability(double mu, double sigma_2, double dLB, doub
 
 double getExpectedValue(double mu_1, double mu_2);
 
-double getPhi(double x, double mu, double sigma_2_1, double sigma_2_2, double sigma_2_3, double sigma_2_4);
-
-double
-getGMMIntervalProbability(double mu, double sigma_2_1, double sigma_2_2, double sigma_2_3, double sigma_2_4, double dLB,
-                          double dUB);
+double getUGMMIntervalProbability(double mu, double dLB, double dUB, double maximalValue);
 bool exists(String filename);
 #endif //CONFIGURATION_H
