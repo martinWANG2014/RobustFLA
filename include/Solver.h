@@ -71,12 +71,6 @@ public:
      */
     IloNumArray getDecisionVariablesValues() const;
 
-    /**
-     * Get the function objective value after solving the model.
-     * @return the function objective value
-     */
-    double getFunctionObjectiveValue() const;
-
     void prefixAssignedFlight(FlightVector &ConflictedFlightList, FlightLevelAssignmentMap &flightLevelAssignmentMap,
                               Level iProcessingLevel);
 

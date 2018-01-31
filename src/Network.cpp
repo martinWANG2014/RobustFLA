@@ -3,6 +3,8 @@
 //
 
 
+#include <random>
+
 #include "../include/Network.h"
 
 double Network::PERIOD_LENGTH = 30;
@@ -68,8 +70,8 @@ void Network::InitFlightLevelsList(bool modeDisplay) {
     std::cout << "OK" << std::endl;
     if (modeDisplay) {
         std::cout << "\tFlightLevel: NbFeasible, NbPreferred" << std::endl;
-        for (auto item = levelsList.begin(); item != levelsList.end(); item++) {
-            std::cout << "\t" << (*item).first << ": " << (*item).second.first << "," << (*item).second.second
+        for (auto &item : levelsList) {
+            std::cout << "\t" << item.first << ": " << item.second.first << "," << item.second.second
                       << std::endl;
         }
     }
@@ -135,13 +137,13 @@ Flight *Network::getFlightAtI(int indexI) const {
 
 String Network::generateFlightsSup(int percentileSup, Time offset) {
     int nbFlights = getNbFlights();
-    int nbAdditionalFlights = (int) (nbFlights * percentileSup / 100.0);
+    auto nbAdditionalFlights = (int) (nbFlights * percentileSup / 100.0);
     if (nbAdditionalFlights > 0) {
         viList flightIdList;
         for (int i = 0; i < nbFlights; i++) {
             flightIdList.push_back(i);
         }
-        std::random_shuffle(flightIdList.begin(), flightIdList.end());
+        std::shuffle(flightIdList.begin(), flightIdList.end(), std::mt19937(std::random_device()()));
         for (int i = 0; i < nbAdditionalFlights; i++) {
             int index = flightIdList[i];
             vpFlightsList[index]->extendRoute(vpFlightsList[index]->getDuration() + offset);

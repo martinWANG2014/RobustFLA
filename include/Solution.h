@@ -19,7 +19,7 @@
 #include <ilcplex/ilocplex.h>
 
 using namespace boost::accumulators;
-typedef accumulator_set<double, stats<boost::accumulators::tag::tail_quantile<right> > > accumulator_t_right;
+typedef accumulator_set<double, stats<boost::accumulators::tag::tail_quantile<right>>> accumulator_t_right;
 
 
 /**

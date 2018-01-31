@@ -758,9 +758,9 @@ bool FeasibilityMonteCarlo(FlightVector &vpConflictedFlightList, const viList &v
             if (decisionVariables[i] == 1) {
                 double sum = 0;
                 for (int j = 0; j < iConflictedFlightsSize; j++) {
-                    if (j != i && ppdConflictProbability[i][j] > MIN_PROBA) {
-                        sum += (ppdDiffTime[i][j] > 0 && ppdWaitingTimeMax[i][j]) - ppdDiffTime[i][j] > 0 ?
-                               (ppdWaitingTimeMax[i][j] - ppdDiffTime[i][j]) * decisionVariables[j] : 0.0;
+                    if (j != i && ppdConflictProbability[i][j] > MIN_PROBA && decisionVariables[j] == 1 &&
+                        0 <= ppdDiffTime[i][j] && ppdDiffTime[i][j] <= ppdWaitingTimeMax[i][j]) {
+                        sum += ppdWaitingTimeMax[i][j] - ppdDiffTime[i][j];
                     }
                 }
                 if (sum > vdPi[i]) {
@@ -777,35 +777,30 @@ bool FeasibilityMonteCarlo(FlightVector &vpConflictedFlightList, const viList &v
         for (auto &&fj: vpConflictedFlightList) {
             fj->resetRouteTimeList();
         }
-        // test the threshold
-        if (dEpsilon == 0.05) {
-            if ((nbIteration - iConflictedCounter) / (nbIteration * 1.0) < 0.961) {
-                feasible = false;
-            }
+    }
+    // test the threshold
+    if (dEpsilon == 0.05) {
+        if ((nbIteration - iConflictedCounter) / (nbIteration * 1.0) < 0.961) {
+            feasible = false;
         }
-        if (dEpsilon == 0.10) {
-            if ((nbIteration - iConflictedCounter) / (nbIteration * 1.0) < 0.915) {
-                feasible = false;
-            }
+    } else if (dEpsilon == 0.10) {
+        if ((nbIteration - iConflictedCounter) / (nbIteration * 1.0) < 0.915) {
+            feasible = false;
         }
-        if (dEpsilon == 0.15) {
-            if ((nbIteration - iConflictedCounter) / (nbIteration * 1.0) < 0.868) {
-                feasible = false;
-            }
+    } else if (dEpsilon == 0.15) {
+        if ((nbIteration - iConflictedCounter) / (nbIteration * 1.0) < 0.868) {
+            feasible = false;
         }
-        if (dEpsilon == 0.20) {
-            if ((nbIteration - iConflictedCounter) / (nbIteration * 1.0) < 0.821) {
-                feasible = false;
-            }
+    } else if (dEpsilon == 0.20) {
+        if ((nbIteration - iConflictedCounter) / (nbIteration * 1.0) < 0.821) {
+            feasible = false;
         }
-        if (dEpsilon == 0.25) {
-            if ((nbIteration - iConflictedCounter) / (nbIteration * 1.0) < 0.772) {
-                feasible = false;
-            }
+    } else if (dEpsilon == 0.25) {
+        if ((nbIteration - iConflictedCounter) / (nbIteration * 1.0) < 0.772) {
+            feasible = false;
         }
-        if (!feasible) {
-            break;
-        }
+    } else {
+        abort();
     }
     auto pos_max = std::max_element(table.begin(), table.end());
     *piIndex = int(pos_max - table.begin());
@@ -935,7 +930,7 @@ bool FeasibilitySampling(FlightVector &vpConflictedFlightList, const vdList &vdP
                     }
 
                     //create a accumulator.
-                    accumulator_t_right acc0(boost::accumulators::tag::tail<right>::cache_size = 100000);
+                    accumulator_t_right acc0(tag::tail<right>::cache_size = iSizeSample);
                     //fill accumulator
                     for (int j = 0; j < iSizeSample; ++j) {
                         acc0(data[j]);

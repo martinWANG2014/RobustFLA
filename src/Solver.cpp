@@ -32,10 +32,6 @@ IloNumArray Solver::getDecisionVariablesValues() const {
     return decisionVariablesValues;
 }
 
-double Solver::getFunctionObjectiveValue() const {
-    return dFunctionObjectiveValue;
-}
-
 
 void Solver::solve() {
     IloNumArray values(env);
