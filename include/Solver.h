@@ -9,6 +9,7 @@
 
 #include <ilcplex/ilocplex.h>
 #include "Flight.h"
+#include "Conflict.h"
 
 /**
  * The solver class for purpose to solve the ILP model, then give a corresponding result.
@@ -47,9 +48,8 @@ public:
      * @param iNbConflictedFlights      The number of conflict flights
      */
     void
-    initConstraint(const viList &constraintList, const vdList &Mi, const vdList &Pi,
-                   double **ppdConflictProbability, double **ppdDiffTime, double **ppdWaitingTimeMax,
-                   int iNbConflictedFlights);
+    initConstraint(const viList &constraintList, const FlightVector &ConflictFlightList, const ConflictMap &conflictMap,
+                   const MiPiMap &miPiMap);
 
     /**
     * Initialize the decision variables array.

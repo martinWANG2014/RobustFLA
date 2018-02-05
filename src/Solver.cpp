@@ -75,20 +75,24 @@ Solver::Solver(IloEnv env, std::ofstream &log) {
     solver.setParam(IloCplex::Threads, 2);
 }
 
-void Solver::initConstraint(const viList &constraintList, const vdList &Mi, const vdList &Pi,
-                            double **ppdConflictProbability, double **ppdDiffTime, double **ppdWaitingTimeMax,
-                            int iNbConflictedFlights) {
+void Solver::initConstraint(const viList &constraintList, const FlightVector &ConflictFlightList,
+                            const ConflictMap &conflictMap, const MiPiMap &miPiMap) {
     for (auto &&i: constraintList) {
         IloExpr constraint(env);
-        constraint += Mi[i] * decisionVariables[i];
 
-        for (int j = 0; j < iNbConflictedFlights; j++) {
-            if (i != j && ppdConflictProbability[i][j] > MIN_PROBA) {
-                constraint += getExpectedValue(ppdWaitingTimeMax[i][j], ppdDiffTime[i][j]) * decisionVariables[j];
+        constraint += miPiMap.at(ConflictFlightList[i]->getCode()).first * decisionVariables[i];
+
+        for (int j = 0, iNbConflictedFlights = static_cast<int>(ConflictFlightList.size());
+             j < iNbConflictedFlights; j++) {
+            auto keyConflict = std::make_pair(ConflictFlightList[i]->getCode(), ConflictFlightList[j]->getCode());
+            if (i != j && conflictMap.at(keyConflict)->getConflictProbability() > MIN_PROBA) {
+
+                constraint += conflictMap.at(keyConflict)->getAverageWaitTime() * decisionVariables[j];
             }
         }
 
-        IloConstraint c(constraint <= (Mi[i] + Pi[i]));
+        IloConstraint c(constraint <= (miPiMap.at(ConflictFlightList[i]->getCode()).first +
+                                       miPiMap.at(ConflictFlightList[i]->getCode()).second));
         model.add(c);
     }
 }
