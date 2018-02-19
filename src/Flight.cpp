@@ -27,6 +27,11 @@ Flight::CalculateProbabilityConflictAndDelayForFlight(Flight *pFlight2, double *
 //                              << " has conflict at (" << i << ", " << j << "):" << std::endl;
                 double prob = pRoute->CalculationProbabilityAndDelayAtPoint(i, route2, j, pdDiffTime, pdWaitingTimeMax,
                                                                             deterministic);
+//                if(prob > MIN_PROBA && *pdWaitingTimeMax > 5) {
+//                    std::cout << "(" << getCode() << "," << pFlight2->getCode() << ")==>" << "proba:" << prob
+//                              << "==>wmax:" << *pdWaitingTimeMax << "==>wt:" << *pdWaitingTimeMax - *pdDiffTime
+//                              << std::endl;
+//                }
                 if (prob > MIN_PROBA) {
                     return prob;
                 }

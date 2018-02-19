@@ -29,7 +29,7 @@ const double MIN_SEPARATION_DISTANCE = 5.0;
 #endif
 #ifndef MIN_ANGLE_CONST
 #define MIN_ANGLE_CONST
-const double MIN_ANGLE = cos(5.0 / 180.0 * M_PI);
+const double MIN_ANGLE = cos(15.0 / 180.0 * M_PI);
 #endif
 #ifndef MIN_PROBA_CONST
 #define MIN_PROBA_CONST
@@ -224,6 +224,5 @@ double getIntervalDensityProbability(double mu, double sigma_2, double dLB, doub
 
 double getExpectedValue(double mu_1, double mu_2);
 
-double getUGMMIntervalProbability(double mu, double dLB, double dUB, double maximalValue);
 bool exists(String filename);
 #endif //CONFIGURATION_H

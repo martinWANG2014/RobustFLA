@@ -23,7 +23,7 @@ void EchoUsage(){
 int main(int argc, char *argv[]) {
     using std::invalid_argument;
     try {
-        if (argc != 17) {
+        if (argc != 16) {
             EchoUsage();
             abort();
         }
@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
         std::stringstream modifiedFlightFileName;
         modifiedFlightFileName << "../data/flight_" << percentileSup <<"_-.json";
         String flightName = modifiedFlightFileName.str();
-        bool modeDisplay = boost::lexical_cast<int>(argv[16]) == 1;
+        bool modeDisplay = boost::lexical_cast<int>(argv[15]) == 1;
         double epsilon = boost::lexical_cast<int>(argv[8]) / 100.0;
         auto feasibleSize = boost::lexical_cast<int>(argv[6]);
         double coefPi = boost::lexical_cast<int>(argv[9]) / 100.0;
@@ -52,19 +52,18 @@ int main(int argc, char *argv[]) {
 
         String dataFilename = !exists(flightName) ? network.generateFlightsSup(percentileSup, TIMEOFFSETSUP) : flightName;
         Network::PERIOD_LENGTH = boost::lexical_cast<int>(argv[5]) / 1.00;
-        const double TIMEOUT_SOLUTION = boost::lexical_cast<double>(argv[13]);
-        const int COUNTER_MAX = boost::lexical_cast<int>(argv[14]);
-        const bool ALL_ASSIGNED = boost::lexical_cast<int>(argv[15]) == 1;
+        const auto COUNTER_MAX = boost::lexical_cast<int>(argv[13]);
+        const bool ALL_ASSIGNED = boost::lexical_cast<int>(argv[14]) == 1;
         if (modeMethod == 100) {
             ApproximateFLA(&network, dataFilename, epsilon, coefPi, minAdmissibleCost, maxAdmissibleCost, feasibleSize,
-                           0, percentileSup, modeDisplay, 0, TIMEOUT_SOLUTION, COUNTER_MAX, ALL_ASSIGNED);
+                           0, percentileSup, modeDisplay, 0, COUNTER_MAX, ALL_ASSIGNED);
             ApproximateFLA(&network, dataFilename, epsilon, coefPi, minAdmissibleCost, maxAdmissibleCost, feasibleSize,
-                           1, percentileSup, modeDisplay, 0, TIMEOUT_SOLUTION, COUNTER_MAX, ALL_ASSIGNED);
+                           1, percentileSup, modeDisplay, 0, COUNTER_MAX, ALL_ASSIGNED);
             ApproximateFLA(&network, dataFilename, epsilon, coefPi, minAdmissibleCost, maxAdmissibleCost, feasibleSize,
-                           2, percentileSup, modeDisplay, nbIterations, TIMEOUT_SOLUTION, COUNTER_MAX, ALL_ASSIGNED);
+                           2, percentileSup, modeDisplay, nbIterations, COUNTER_MAX, ALL_ASSIGNED);
         } else {
             ApproximateFLA(&network, dataFilename, epsilon, coefPi, minAdmissibleCost, maxAdmissibleCost, feasibleSize,
-                           modeMethod, percentileSup, modeDisplay, nbIterations, TIMEOUT_SOLUTION, COUNTER_MAX,
+                           modeMethod, percentileSup, modeDisplay, nbIterations, COUNTER_MAX,
                            ALL_ASSIGNED);
         }
     }

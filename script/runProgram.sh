@@ -101,7 +101,7 @@ if [[ ! -e ${executable_target} ]]; then
 fi
 
 # check the parameters list
-if [[ $# -ne 13 ]]; then
+if [[ $# -ne 12 ]]; then
     echo $#
     echo "[ERROR] invalid parameters list."
     Usage

@@ -17,7 +17,24 @@ for minAdmissibleCost in 0 5;do
                     for feasibleSize in 3 ; do
                         for epsilon in  25 20 15 10 5; do
                             for coefPi in  15 10 5; do
-                                echo ${pa} ${periodLength} ${feasibleSize} ${method} ${epsilon} ${coefPi} 1000 ${minAdmissibleCost} ${maxAdmissibleCost} 20000 5 0 0 >> ${taskInstanceFile}
+                                echo ${pa} ${periodLength} ${feasibleSize} ${method} ${epsilon} ${coefPi} 1000 ${minAdmissibleCost} ${maxAdmissibleCost} 10 0 0 >> ${taskInstanceFile}
+                            done
+                        done
+                    done
+                done
+            done
+        done
+    done
+done
+for minAdmissibleCost in 0 5;do
+    for maxAdmissibleCost in 30 ;do
+        for method in 0 1 2; do
+            for pa in 0 15 ; do
+                for periodLength in 30 ; do
+                    for feasibleSize in 3 ; do
+                        for epsilon in  25 20 15 10 5; do
+                            for coefPi in  15 10 5; do
+                                echo ${pa} ${periodLength} ${feasibleSize} ${method} ${epsilon} ${coefPi} 1000 ${minAdmissibleCost} ${maxAdmissibleCost}  10 1 0 >> ${taskInstanceFile}
                             done
                         done
                     done
@@ -28,4 +45,4 @@ for minAdmissibleCost in 0 5;do
 done
 
 
-cat ${taskInstanceFile} | xargs -n 13 -P ${NbThreads} ./runProgram.sh
+cat ${taskInstanceFile} | xargs -n 12 -P ${NbThreads} ./runProgram.sh

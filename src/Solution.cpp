@@ -7,7 +7,7 @@ void writeJsonSolution(String dataFilename, double epsilon, double coefPi, doubl
                        double minAdmissibleCost, double maxAdmissibleCost, int feasibleSize, int method,
                        int percentileSup, int nbFlightsChangeLevel, int nbFlightsUnassigned, int nbMaxConflict,
                        int nbMaxDiverseLevels,
-                       int nbIterations, const double timeout, const int maxcount, const bool tryAllAssign) {
+                       int nbIterations, const int maxcount, const bool tryAllAssign) {
     using boost::property_tree::ptree;
     using boost::property_tree::write_json;
     ptree root;
@@ -20,7 +20,6 @@ void writeJsonSolution(String dataFilename, double epsilon, double coefPi, doubl
     rootConfig.put<double>("minAngleCos", MIN_ANGLE);
     rootConfig.put<double>("PeriodLength", Network::PERIOD_LENGTH);
     rootConfig.put<int>("FeasibleListSize", feasibleSize);
-    rootConfig.put<double>("SolutionTimeOut", timeout);
     rootConfig.put<int>("MaxCountForUnImprovedSol", maxcount);
     if (tryAllAssign) {
         rootConfig.put("TryAllAssign", "yes");
@@ -82,11 +81,11 @@ void writeJsonSolution(String dataFilename, double epsilon, double coefPi, doubl
     if (method == 2) {
         outFilename << "../solution/res_" << method << "_" << Network::PERIOD_LENGTH << "_" << epsilon << "_"
                     << feasibleSize << "_" << coefPi << "_" << minAdmissibleCost << "_" << maxAdmissibleCost << "_"
-                    << percentileSup << "_" << nbIterations << ".json";
+                    << percentileSup << "_" << nbIterations << "_" << (tryAllAssign ? 1 : 0) << ".json";
     } else {
         outFilename << "../solution/res_" << method << "_" << Network::PERIOD_LENGTH << "_" << epsilon << "_"
                     << feasibleSize << "_" << coefPi << "_" << minAdmissibleCost << "_" << maxAdmissibleCost << "_"
-                    << percentileSup << "_-" << ".json";
+                    << percentileSup << "_-" "_" << (tryAllAssign ? 1 : 0) << ".json";
     }
 
     // write to the target file.
@@ -97,7 +96,7 @@ void writeJsonSolution(String dataFilename, double epsilon, double coefPi, doubl
 void
 ApproximateFLA(const Network *pNetwork, String dataFilename, double dEpsilon, double dCoefPi, double minAdmissibleCost,
                double maxAdmissibleCost, int feasibleSize, int iModeMethod, int percentileSup, bool modeDisplay,
-               int nbIterations, const double timeout, const int maxcount, const bool tryAllAssign) {
+               int nbIterations, const int maxcount, const bool tryAllAssign) {
     int iNbFlightChangeLevel = 0;
     IloEnv env;
     FlightLevelAssignmentMap flightLevelAssignmentMap;
@@ -121,7 +120,7 @@ ApproximateFLA(const Network *pNetwork, String dataFilename, double dEpsilon, do
         // Try to assign the flights.
         SolveFLA(vpFlightList, flightLevelAssignmentMap, conflictMap, miPiMap, env, viLevelsList, processClock,
                  dEpsilon, &dSumBenefits, minAdmissibleCost, maxAdmissibleCost, &iMaxNbConflict,
-                 iModeMethod, modeDisplay, nbIterations, timeout, maxcount, tryAllAssign);
+                 iModeMethod, modeDisplay, nbIterations, maxcount, tryAllAssign);
         // Get the number of flights that change its most preferred flight level.
         iNbFlightChangeLevel = getNbFlightsChangeLevel(vpFlightList);
         iMaxDiverseLevel = getMaxDiverseLevel(vpFlightList);
@@ -177,7 +176,7 @@ ApproximateFLA(const Network *pNetwork, String dataFilename, double dEpsilon, do
     writeJsonSolution(dataFilename, dEpsilon, dCoefPi, dSumBenefits, elapsedTime, minAdmissibleCost, maxAdmissibleCost,
                       feasibleSize, iModeMethod, percentileSup, iNbFlightChangeLevel, iNbFlightNotAssigned,
                       iMaxNbConflict, iMaxDiverseLevel,
-                      nbIterations, timeout, maxcount, tryAllAssign);
+                      nbIterations, maxcount, tryAllAssign);
 }
 
 int getNbFlightsChangeLevel(FlightVector &flightVector) {
@@ -384,6 +383,12 @@ SolvingFLAByLevel(FlightVector &vpFlightList, FlightsLevelMap &infeasibleFlightM
         }
     }
 
+//    if(modeDisplay){
+//        for(auto key: conflictMap){
+//            std::cout <<iProcessingLevel<<","<<"(" <<key.first.first << "," << key.first.second << ")==>"<<key.second->getConflictProbability() <<",[" << key.second->getMaxWaitTime() << "," << key.second->getAverageWaitTime() <<", " << key.second->getMaxWaitTime()- key.second->getDiffTime() <<"]"  << std::endl;
+//        }
+//    }
+
     viList viConstraintList;
     //Relax the most infeasible constraint.
     int iMinIndexArgs = MinIndexArgs0(ConflictFlightList, conflictMap, miPiMap);
@@ -530,7 +535,7 @@ int SolveFLA(FlightVector &vpFlightList, FlightLevelAssignmentMap &flightLevelAs
              MiPiMap &miPiMap, const IloEnv &env,
              LevelVector &viLevelsList, ProcessClock &processClock, double epsilon, double *dSumBenefits,
              double minAdmissibleCost, double maxAdmissibleCost, int *iMaxNbConflict, int iModeMethod, bool modeDisplay,
-             int nbIterations, const double timeout, const int maxcount, const bool tryAllAssign) {
+             int nbIterations, const int maxcount, const bool tryAllAssign) {
     LevelExamine levelEx;
     FlightsLevelMap infeasibleFlightMap;
     LevelQueue queueLevel;
@@ -594,19 +599,19 @@ int SolveFLA(FlightVector &vpFlightList, FlightLevelAssignmentMap &flightLevelAs
         if (tryAllAssign) {
             if ((int) flightNotAssigned.size() >= iNbFlightNotAssigned) {
                 count++;
-                if (count >= maxcount) {
-                    for (auto &&fi : flightNotAssigned) {
-                        Level newLevel = findNextFeasibleLevel(fi->getDefaultLevel(), fi->getLastFeasibleLevel());
-                        if (newLevel != -1) {
-                            fi->addNewFeasibleLevel(newLevel);
-                            if (!contains(viLevelsList, newLevel)) {
-                                viLevelsList.push_back(newLevel);
-                            }
+            }
+            if (count >= maxcount) {
+                for (auto &&fi : flightNotAssigned) {
+                    Level newLevel = findNextFeasibleLevel(fi->getDefaultLevel(), fi->getLastFeasibleLevel());
+                    if (newLevel != -1) {
+                        fi->addNewFeasibleLevel(newLevel);
+                        if (!contains(viLevelsList, newLevel)) {
+                            viLevelsList.push_back(newLevel);
                         }
                     }
-                    std::cout << "enlarge level" << std::endl;
-                    count = 0;
                 }
+                std::cout << "enlarge level" << std::endl;
+                count = 0;
             }
         } else {
             if ((int) flightNotAssigned.size() >= iNbFlightNotAssigned) {
@@ -628,7 +633,7 @@ int SolveFLA(FlightVector &vpFlightList, FlightLevelAssignmentMap &flightLevelAs
         if (iModeMethod == 2) {
             std::cout << "NbIteration: " << nbIterations << std::endl;
         }
-        if (processClock.getCpuTime() > timeout || count >= maxcount) {
+        if (count > maxcount) {
             iNbFlightNotAssigned = 0;
         }
     }
@@ -683,6 +688,7 @@ bool FeasibilityMonteCarlo(const FlightVector &vpConflictedFlightList, const Ilo
                 for (int j = 0; j < iConflictedFlightsSize; j++) {
                     if (j != i && ppdConflictProbability[i][j] > MIN_PROBA && decisionVariables[j] == 1 &&
                         0 <= ppdDiffTime[i][j] && ppdDiffTime[i][j] <= ppdWaitingTimeMax[i][j]) {
+                        //std::cout << "(" << vpConflictedFlightList[i]->getCode() << ", " << vpConflictedFlightList[j]->getCode() << ")==>"<<ppdConflictProbability[i][j]<<",[" << ppdWaitingTimeMax[i][j] - ppdDiffTime[i][j] << "," << ppdWaitingTimeMax[i][j] << "]" << std::endl;
                         sum += ppdWaitingTimeMax[i][j] - ppdDiffTime[i][j];
                     }
                 }

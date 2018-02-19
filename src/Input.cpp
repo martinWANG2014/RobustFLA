@@ -148,8 +148,13 @@ void Input::parseFlights(Network *pNetwork, bool flightFileModified, bool modeDi
         } else {
             // Parse the default flight level.
             auto iLevel = boost::lexical_cast<Level>(root.get<String>(sPrefixed + ".FLevel"));
-            auto *pRoute = new Route(iLevel, pAirportOrigin, iDepartureTime);
+            //auto *pRoute = new Route(iLevel, pAirportOrigin, iDepartureTime);
+            auto *pRoute = new Route(iLevel);
             auto nbPoints = boost::lexical_cast<int>(root.get<String>(sPrefixed + ".PointList.PLN"));
+            if (nbPoints < 2) {
+                delete pRoute;
+                continue;
+            }
             bool bValid = true;
             int iIndexPoint = 0;
 
@@ -160,37 +165,44 @@ void Input::parseFlights(Network *pNetwork, bool flightFileModified, bool modeDi
                 WayPoint*pWayPoint = pNetwork->findWayPointByCode(root.get<String>(sPrefixedPath + ".Code"));
                 // Verify the wayPoint, if it is empty, then pop up an error message.
                 if (pWayPoint == nullptr) {
-                    pWayPoint = pNetwork->findAirportByCode(root.get<String>(sPrefixedPath + ".Code"));
+                    //pWayPoint = pNetwork->findAirportByCode(root.get<String>(sPrefixedPath + ".Code"));
                     // Parse the arriving time at a corresponding wayPoint.
-                    if (flightFileModified && iIndexPoint != 0) {
-                        Point *point = new Point(pWayPoint,
-                                                 boost::lexical_cast<Time>(root.get<String>(sPrefixedPath + ".Time")));
-//                        std::cout << *point<<std::endl;
-                        pRoute->addNewPoint(point);
-                    } else if (!flightFileModified) {
-                        Point *point = new Point(pWayPoint,
-                                                 boost::lexical_cast<Time>(root.get<String>(sPrefixedPath + ".Time")));
-                        pRoute->addNewPoint(point);
-                    }
-                    if (modeDisplay && pWayPoint == nullptr) {
+//                    if (flightFileModified && iIndexPoint != 0) {
+//                        Point *point = new Point(pWayPoint,
+//                                                 boost::lexical_cast<Time>(root.get<String>(sPrefixedPath + ".Time")));
+////                        std::cout << *point<<std::endl;
+//                        pRoute->addNewPoint(point);
+//                    } else if (!flightFileModified) {
+//                        Point *point = new Point(pWayPoint,
+//                                                 boost::lexical_cast<Time>(root.get<String>(sPrefixedPath + ".Time")));
+//                        pRoute->addNewPoint(point);
+//                    }
+                    //Point *point = new Point(pWayPoint, boost::lexical_cast<Time>(root.get<String>(sPrefixedPath + ".Time")));
+                    //pRoute->addNewPoint(point);
+                    //if (modeDisplay && pWayPoint == nullptr) {
+                    if (modeDisplay) {
                         std::cout << std::endl << "[Warning]: the code of " << iIndexPoint << "th point in " << i
                                   << "th flight's route is unknown, it is ignored automatically!"
                                   << std::endl;
-                        bValid = false;
+                        //bValid = false;
                     }
+                    bValid = false;
                 } else {
                     // Parse the arriving time at a corresponding wayPoint.
-                    if (flightFileModified && iIndexPoint != 0) {
-                        Point *point = new Point(pWayPoint,
-                                                 boost::lexical_cast<Time>(root.get<String>(sPrefixedPath + ".Time")));
-//                        std::cout << *point<<std::endl;
-                        pRoute->addNewPoint(point);
-                    } else if (!flightFileModified) {
-                        Point *point = new Point(pWayPoint,
-                                                 boost::lexical_cast<Time>(root.get<String>(sPrefixedPath + ".Time")));
-
-                        pRoute->addNewPoint(point);
-                    }
+//                    if (flightFileModified && iIndexPoint != 0) {
+//                        Point *point = new Point(pWayPoint,
+//                                                 boost::lexical_cast<Time>(root.get<String>(sPrefixedPath + ".Time")));
+////                        std::cout << *point<<std::endl;
+//                        pRoute->addNewPoint(point);
+//                    } else if (!flightFileModified) {
+//                        Point *point = new Point(pWayPoint,
+//                                                 boost::lexical_cast<Time>(root.get<String>(sPrefixedPath + ".Time")));
+//
+//                        pRoute->addNewPoint(point);
+//                    }
+                    Point *point = new Point(pWayPoint,
+                                             boost::lexical_cast<Time>(root.get<String>(sPrefixedPath + ".Time")));
+                    pRoute->addNewPoint(point);
 
                 }
                 iIndexPoint++;

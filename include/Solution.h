@@ -108,7 +108,7 @@ int SolveFLA(FlightVector &vpFlightList, FlightLevelAssignmentMap &flightLevelAs
              MiPiMap &miPiMap, const IloEnv &env,
              LevelVector &viLevelsList, ProcessClock &processClock, double epsilon, double *dSumBenefits,
              double minAdmissibleCost, double maxAdmissibleCost, int *iMaxNbConflict, int iModeMethod, bool modeDisplay,
-             int nbIterations, const double timeout, const int maxcount, const bool tryAllAssign);
+             int nbIterations, const int maxcount, const bool tryAllAssign);
 
 /**
  * Get the number of flights that change it flight level.
@@ -145,13 +145,13 @@ SolvingFLAByLevel(FlightVector &vpFlightList, FlightsLevelMap &infeasibleFlightM
 void
 ApproximateFLA(const Network *pNetwork, String dataFilename, double dEpsilon, double dCoefPi, double minAdmissibleCost,
                double maxAdmissibleCost, int feasibleSize, int iModeMethod, int percentileSup, bool modeDisplay,
-               int nbIterations, const double timeout, const int maxcount, const bool tryAllAssign);
+               int nbIterations, const int maxcount, const bool tryAllAssign);
 
 void writeJsonSolution(String dataFilename, double epsilon, double coefPi, double SumBenefits, double ElapsedTime,
                        double minAdmissibleCost, double maxAdmissibleCost, int feasibleSize, int method,
                        int percentileSup, int nbFlightsChangeLevel, int nbFlightsUnassigned, int nbMaxConflict,
                        int nbMaxDiverseLevels,
-                       int nbIterations, const double timeout, const int maxcount, const bool tryAllAssign);
+                       int nbIterations, const int maxcount, const bool tryAllAssign);
 
 double MixtureGaussianDistributionWithFourComponents();
 

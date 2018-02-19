@@ -33,6 +33,12 @@ public:
     Route(Level iDefaultLevel, Point *pPoint);
 
     /**
+     * Constructor with parameters.
+     * @param iDefaultLevel     The default flight level
+     */
+    Route(Level iDefaultLevel);
+
+    /**
      * Destructor.
      */
     virtual ~Route();

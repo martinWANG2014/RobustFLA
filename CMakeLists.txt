@@ -44,7 +44,7 @@ message(STATUS "Compiler version: ${CMAKE_CXX_COMPILER_VERSION}")
 
 ######## Set C++ 11 standard
 include(CheckCXXCompilerFlag)
-check_cxx_compiler_flag("-std=c++14" COMPILER_SUPPORTS_CXX11)
+check_cxx_compiler_flag("-std=c++11" COMPILER_SUPPORTS_CXX11)
 if (COMPILER_SUPPORTS_CXX11)
     if (CMAKE_COMPILER_IS_GNUCXX)
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
