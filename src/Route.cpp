@@ -53,10 +53,12 @@ double Route::CalculationProbabilityAndDelayAtPoint(int iIndex1, Route *pRoute2,
                            getPositionAtPoint(iIndex1 + (iIndex1 % getNbPointsPerFlight() == 0 ? +1 : -1)),
                            pRoute2->getPositionAtPoint(
                                    iIndex2 + (iIndex2 % pRoute2->getNbPointsPerFlight() == 0 ? +1 : -1)));
-    if (dV1 < 10) dV1 = 10;
-    if (dV1 > 15) dV1 = 15;
-    if (dV2 < 10) dV2 = 10;
-    if (dV2 > 15) dV2 = 15;
+    //if (dV1 < 10) dV1 = 10;
+    //if (dV1 > 15) dV1 = 15;
+    //if (dV2 < 10) dV2 = 10;
+    //if (dV2 > 15) dV2 = 15;
+    dV1 = std::min(std::max(5.0, dV1), 15.0);
+    dV2 = std::min(std::max(5.0, dV2), 15.0);
     double dRho = dV2 / dV1;
     if (fabs(dCosA) > MIN_ANGLE) {
         dCosA = (dCosA > 0) ? MIN_ANGLE : -MIN_ANGLE;
