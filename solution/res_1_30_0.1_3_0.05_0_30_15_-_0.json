@@ -1,0 +1,25 @@
+{
+  "config": {
+    "dataSource": "..\/data\/flight_15_-.json",
+    "minSeparatedDistance": "5",
+    "minAngleCos": "0.9659258262890683",
+    "PeriodLength": "30",
+    "FeasibleListSize": "3",
+    "MaxCountForUnImprovedSol": "10",
+    "TryAllAssign": "no",
+    "epsilon": "0.1",
+    "coefPi": "0.05",
+    "method": "Hoeffding",
+    "percentageAdditionalFlights": "15"
+  },
+  "solution": {
+    "NbLevelsChange": "106",
+    "NbFlightUnassigned": "2",
+    "NbMaxConflict": "14",
+    "NbMaxDiverseLevels": "20",
+    "SumBenefits": "24089.47497659087",
+    "ElapsedTime": "19.73",
+    "MinAdmissibleCost": "0",
+    "MaxAdmissibleCost": "30"
+  }
+}
