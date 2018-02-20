@@ -38,15 +38,6 @@ const double MIN_ANGLE = cos(15.0 / 180.0 * M_PI);
 */
 const double MIN_PROBA = 0.0001;
 #endif
-#ifndef MIN_SIGMA_CONST
-#define MIN_SIGMA_CONST
-const double MIN_SIGMA = 0.1;
-#endif
-
-#ifndef LARGE_VALUE_CONST
-#define LARGE_VALUE_CONST
-const double LARGE_VALUE = 10000;
-#endif
 
 #ifndef PARAMETERS_GAUSSIAN_CONST
 #define PARAMETERS_GAUSSIAN_CONST
@@ -71,17 +62,15 @@ const int TIMEOFFSETSUP = 300;
 
 typedef std::vector<int> viList;
 typedef std::vector<double> vdList;
-typedef std::deque<std::vector<int>> qviList;
 typedef int Level;
-typedef std::queue<Level> LevelQueue;
+typedef double Time;
+typedef std::string String;
 
-typedef std::queue<std::pair<std::vector<int>, std::vector<int>>> ProbaQueue;
+typedef std::queue<Level> LevelQueue;
 typedef std::vector<Level> LevelVector;
 typedef std::map<Level, std::pair<int, int>> FlightLevelMap;
 typedef std::map<Level, bool> LevelExamine;
 typedef std::vector<std::pair<Level, std::pair<int, int>>> LevelNumberList;
-typedef std::string String;
-typedef double Time;
 typedef std::normal_distribution<double> normal_dist;
 typedef std::uniform_real_distribution<double> uni_dist;
 
@@ -218,11 +207,33 @@ viList findFeasibleLevels(int iDefaultLevel, int iSize);
  */
 Level findNextFeasibleLevel(int iDefaultLevel, Level lastLevel);
 
+/**
+ * Get the probability of Pr(LB <= X <= UB)
+ * @param mu the mean value of random distribution.
+ * @param sigma_2 the variance value of random distribution
+ * @param dLB  the lower bound
+ * @param dUB the upper bound
+ * @return the difference of cdf at the specified interval.
+ */
 double getIntervalProbability(double mu, double sigma_2, double dLB, double dUB);
 
+/**
+ * Get the probability of Pr(x=UB)-Pr(x=LB)
+ * @param mu the mean value of random distribution.
+ * @param sigma_2 the variance value of random distribution
+ * @param dLB the lower bound
+ * @param dUB the upper bound
+ * @return the difference of pdf at specified interval.
+ */
 double getIntervalDensityProbability(double mu, double sigma_2, double dLB, double dUB);
 
-double getExpectedValue(double mu_1, double mu_2);
+/**
+ * Get the expected value of waiting time
+ * @param max_value the maximal waiting time
+ * @param mu the mean value of waiting time's distribution model
+ * @return the expected waiting time
+ */
+double getExpectedValue(double max_value, double mu);
 
 bool exists(String filename);
 #endif //CONFIGURATION_H

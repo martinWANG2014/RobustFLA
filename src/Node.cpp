@@ -4,7 +4,6 @@
 
 #include "../include/Node.h"
 bool Node::operator==(const Node &rhs) const {
-//    std::cout << sCode << ":" << rhs.getCode() << std::endl;
     return sCode == rhs.getCode();
 }
 

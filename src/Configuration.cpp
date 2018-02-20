@@ -231,7 +231,7 @@ double getIntervalProbability(double mu, double sigma_2, double dLB, double dUB)
 double getIntervalDensityProbability(double mu, double sigma_2, double dLB, double dUB) {
     double dRight = pow(dUB - mu, 2) / (2.0 * sigma_2);
     double dLeft = pow(dLB - mu, 2) / (2.0 * sigma_2);
-    return 1.0 / sqrt(2 * M_PI * sigma_2) * (exp(dLeft) - exp(dRight));
+    return 1.0 / sqrt(2 * M_PI * sigma_2) * (exp(-dRight) - exp(-dLeft));
 }
 
 double getExpectedValue(double maximalValue, double mu) {

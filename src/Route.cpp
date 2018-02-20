@@ -7,7 +7,6 @@
 
 
 void Route::GenerateNewRoute(Time dNewDepartureTime) {
-    //vdTimeList[0] = dNewDepartureTime;
     Time dDeltaT = dNewDepartureTime - vpPointsList[0]->getArrivingTime();
     for (int i = 0; i < getPointListSize(); i++) {
         vdTimeList[i] = vpPointsList[i]->getArrivingTime() + dDeltaT;
@@ -54,21 +53,10 @@ double Route::CalculationProbabilityAndDelayAtPoint(int iIndex1, Route *pRoute2,
                            getPositionAtPoint(iIndex1 + (iIndex1 % getNbPointsPerFlight() == 0 ? +1 : -1)),
                            pRoute2->getPositionAtPoint(
                                    iIndex2 + (iIndex2 % pRoute2->getNbPointsPerFlight() == 0 ? +1 : -1)));
-//    double dCosA;
-//    if(iIndex1 % getNbPointsPerFlight() == 0 || iIndex2 % pRoute2->getNbPointsPerFlight() == 0 ){
-//        if(iIndex1 % getNbPointsPerFlight() == getNbPointsPerFlight()-1){
-//            dCosA = getCosA(getPositionAtPoint(iIndex1), getPositionAtPoint(iIndex1 - 1), pRoute2->getPositionAtPoint(iIndex2 + 1));
-//        }
-//        else if(iIndex2 % pRoute2->getNbPointsPerFlight() == pRoute2->getNbPointsPerFlight()-1) {
-//            dCosA = getCosA(getPositionAtPoint(iIndex1), getPositionAtPoint(iIndex1 + 1), pRoute2->getPositionAtPoint(iIndex2 - 1));
-//        }
-//        else{
-//            dCosA = getCosA(getPositionAtPoint(iIndex1), getPositionAtPoint(iIndex1 + 1), pRoute2->getPositionAtPoint(iIndex2 + 1));
-//        }
-//
-//    }else{
-//        dCosA = getCosA(getPositionAtPoint(iIndex1), getPositionAtPoint(iIndex1 -1), pRoute2->getPositionAtPoint(iIndex2 - 1));
-//    }
+    if (dV1 < 10) dV1 = 10;
+    if (dV1 > 15) dV1 = 15;
+    if (dV2 < 10) dV2 = 10;
+    if (dV2 > 15) dV2 = 15;
     double dRho = dV2 / dV1;
     if (fabs(dCosA) > MIN_ANGLE) {
         dCosA = (dCosA > 0) ? MIN_ANGLE : -MIN_ANGLE;
@@ -83,12 +71,6 @@ double Route::CalculationProbabilityAndDelayAtPoint(int iIndex1, Route *pRoute2,
     } else {
         dProbabilityConflict = getConflictProbability(dLambda * dV2, dT2, dT1, -MIN_SEPARATION_DISTANCE * K,
                                                       MIN_SEPARATION_DISTANCE * K);
-    }
-    if (*pdWaitingTimeMax > 5) {
-        std::cout << "(cosA, v1[km/min], v2, t1[min], t2, lambda, t, tmax, proba)==>(" << dCosA << "," << dV1 << ","
-                  << dV2 << "," << dT1
-                  << "," << dT2 << "," << dLambda << "," << *pdWaitingTimeMax - *pdDiffTime << "," << *pdWaitingTimeMax
-                  << "," << dProbabilityConflict << ")" << std::endl;
     }
     return dProbabilityConflict;
 }

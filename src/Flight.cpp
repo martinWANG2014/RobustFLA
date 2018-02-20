@@ -5,7 +5,6 @@
 
 bool Flight::operator==(const Flight &rhs) const {
     return sCode == rhs.getCode();
-    //return sCode == rhs.getCode() && dDepartureTime == rhs.getDepartureTime();
 }
 
 bool Flight::operator!=(const Flight &rhs) const {
@@ -23,15 +22,8 @@ Flight::CalculateProbabilityConflictAndDelayForFlight(Flight *pFlight2, double *
     for (int i = 0; i < pRoute->getPointListSize(); i++) {
         for (int j = 0; j < route2->getPointListSize(); j++) {
             if (*pRoute->getPointAtI(i) == *route2->getPointAtI(j)) {
-//                    std::cout << "Flight: " << getCode() << " and Flight: " << pFlight2->getCode()
-//                              << " has conflict at (" << i << ", " << j << "):" << std::endl;
                 double prob = pRoute->CalculationProbabilityAndDelayAtPoint(i, route2, j, pdDiffTime, pdWaitingTimeMax,
                                                                             deterministic);
-//                if(prob > MIN_PROBA && *pdWaitingTimeMax > 5) {
-//                    std::cout << "(" << getCode() << "," << pFlight2->getCode() << ")==>" << "proba:" << prob
-//                              << "==>wmax:" << *pdWaitingTimeMax << "==>wt:" << *pdWaitingTimeMax - *pdDiffTime
-//                              << std::endl;
-//                }
                 if (prob > MIN_PROBA) {
                     return prob;
                 }

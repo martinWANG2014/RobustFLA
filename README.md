@@ -1,4 +1,4 @@
 # RobustFLA
->A new version code for the porject "RobustFlightsOld" to make it more readable and high productivity.
+>A new version code for the project "RobustFlightsOld" to make it more readable and high productivity.
 
->Then add a new efficace method to trace the data uncertainty.
+>Then add a new efficacy method to trace the data uncertainty.
