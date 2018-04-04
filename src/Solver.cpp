@@ -87,7 +87,7 @@ void Solver::initConstraint(const viList &constraintList, const FlightVector &Co
             auto keyConflict = std::make_pair(ConflictFlightList[i]->getCode(), ConflictFlightList[j]->getCode());
             if (i != j && conflictMap.at(keyConflict)->getConflictProbability() > MIN_PROBA) {
 
-                constraint += conflictMap.at(keyConflict)->getAverageWaitTime() * decisionVariables[j];
+                constraint += conflictMap.at(keyConflict)->getMaxWaitTime() * decisionVariables[j];
             }
         }
 

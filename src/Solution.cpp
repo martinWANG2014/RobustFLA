@@ -143,15 +143,6 @@ ApproximateFLA(const Network *pNetwork, String dataFilename, double dEpsilon, do
         case 3:
             std::cout << "Result Gaus" << std::endl;
             break;
-        case 5:
-            std::cout << "Result Gaus2" << std::endl;
-            break;
-        case 6:
-            std::cout << "Result Samp" << std::endl;
-            break;
-        case 4:
-            std::cout << "Result eHoef" << std::endl;
-            break;
         default:
             std::cout << "Result NDef" << std::endl;
             break;
@@ -268,7 +259,7 @@ SolvingFLAByLevel(FlightVector &vpFlightList, FlightsLevelMap &infeasibleFlightM
             double prob;
             if (conflictMap.find(keyConflict) == conflictMap.end()) {
                 if (modeDisplay) {
-                    std::cout << "\t\tRecord: " << keyConflict.first << "\t" << keyConflict.second << std::endl;
+                    //std::cout << "\t\tRecord: " << keyConflict.first << "\t" << keyConflict.second << std::endl;
                 }
                 prob = fi->CalculateProbabilityConflictAndDelayForFlight(fj, &dDiffTime, &dWaitingTimeMax, false);
                 conflictMap.insert(std::make_pair(keyConflict, new Conflict(dDiffTime, dWaitingTimeMax, prob)));
@@ -366,7 +357,7 @@ SolvingFLAByLevel(FlightVector &vpFlightList, FlightsLevelMap &infeasibleFlightM
                                   maxAdmissibleCost);
             miPiMap.insert(std::make_pair(keyMiPi, std::make_pair(dMi, dPi)));
             if (modeDisplay) {
-                std::cout << "\t\tRecord Mi Pi: " << keyMiPi << std::endl;
+                //std::cout << "\t\tRecord Mi Pi: " << keyMiPi << std::endl;
             }
         }
         for (int j = 0; j < iConflictFlightsSize; j++) {
@@ -755,6 +746,8 @@ bool FeasibilityHoeffding(const FlightVector &vpConflictedFlightList, const IloN
                           const ConflictMap &conflictMap, const MiPiMap &miPiMap, double dEpsilon, int *piIndex,
                           bool modeDisplay) {
     *piIndex = -1;
+    bool bValid = true;
+    double dInFeasibilityMax = 0;
     for (int i = 0, iConflictedFlightSize = static_cast<int>(vpConflictedFlightList.size());
          i < iConflictedFlightSize; i++) {
         double dInFeasibility = 0;
@@ -768,6 +761,12 @@ bool FeasibilityHoeffding(const FlightVector &vpConflictedFlightList, const IloN
                 if (j != i && conflictMap.at(keyConflict)->getConflictProbability() > MIN_PROBA) {
                     dTemp2 += pow(conflictMap.at(keyConflict)->getMaxWaitTime(), 2) * decisionVariables[j];
                     dSumBound += conflictMap.at(keyConflict)->getMaxWaitTime() * decisionVariables[j];
+                    double dExpectValue = 0;
+                    if (!conflictMap.at(keyConflict)->isAverageCalculated()) {
+                        dExpectValue = getExpectedValue(conflictMap.at(keyConflict)->getMaxWaitTime(),
+                                                        conflictMap.at(keyConflict)->getDiffTime());
+                        conflictMap.at(keyConflict)->setAverageWaitTime(dExpectValue);
+                    }
                     dTemp1 += conflictMap.at(keyConflict)->getAverageWaitTime() * decisionVariables[j];
                 }
             }
@@ -785,19 +784,23 @@ bool FeasibilityHoeffding(const FlightVector &vpConflictedFlightList, const IloN
                 dInFeasibility = 1;
             }
             if (modeDisplay) {
-                std::cout << "\t\t\ti: " << i << "==>Feas: " << 1 - dInFeasibility << "===> Eps: " << 1 - dEpsilon
-                          << std::endl;
+
             }
-            if (dInFeasibility > dEpsilon) {
+            if (dInFeasibility > dEpsilon && dInFeasibility > dInFeasibilityMax) {
                 *piIndex = i;
-                return false;
+                dInFeasibilityMax = dInFeasibility;
+                bValid = false;
             }
         }
     }
     if (modeDisplay) {
-        std::cout << "\t\t\tFeasibility ==> ok!" << std::endl;
+        std::cout << "\t\t\ti: " << *piIndex << "==>Feas: " << 1 - dInFeasibilityMax << "===> Eps: " << 1 - dEpsilon
+                  << std::endl;
+        if (bValid) {
+            std::cout << "\t\t\tFeasibility ==> ok!" << std::endl;
+        }
     }
-    return true;
+    return bValid;
 }
 
 
@@ -805,6 +808,8 @@ bool FeasibilityRobustDet(const FlightVector &vpConflictedFlightList, const IloN
                           const ConflictMap &conflictMap, const MiPiMap &miPiMap, double dEpsilon, int *piIndex,
                           bool modeDisplay) {
     *piIndex = -1;
+    bool bValid = true;
+    double dSumBoundMax = -1;
     for (int i = 0, iConflictedFlightSize = static_cast<int>(vpConflictedFlightList.size());
          i < iConflictedFlightSize; i++) {
         double dSumBound = 0;
@@ -816,20 +821,22 @@ bool FeasibilityRobustDet(const FlightVector &vpConflictedFlightList, const IloN
                     dSumBound += conflictMap.at(keyConflict)->getMaxWaitTime() * decisionVariables[j];
                 }
             }
-            if (modeDisplay) {
-                std::cout << "\t\t\ti: " << i << "==>Feas: " << 1 << "===> Eps: " << 1 - dEpsilon
-                          << std::endl;
-            }
-            if (miPiMap.at(vpConflictedFlightList[i]->getCode()).second < dSumBound) {
+
+            if (miPiMap.at(vpConflictedFlightList[i]->getCode()).second < dSumBound && dSumBound > dSumBoundMax) {
                 *piIndex = i;
-                return false;
+                dSumBoundMax = dSumBound;
+                bValid = false;
             }
         }
     }
     if (modeDisplay) {
-        std::cout << "\t\t\tFeasibility ==> ok!" << std::endl;
+        std::cout << "\t\t\ti: " << *piIndex << "==>Feas: " << 0 << "===> Eps: " << 1 - dEpsilon
+                  << std::endl;
+        if (bValid) {
+            std::cout << "\t\t\tFeasibility ==> ok!" << std::endl;
+        }
     }
-    return true;
+    return bValid;
 }
 
 int MinIndexArgs0(const FlightVector &vpConflictFlightList, ConflictMap &conflictMap, const MiPiMap &miPiMap) {
@@ -845,13 +852,13 @@ int MinIndexArgs0(const FlightVector &vpConflictFlightList, ConflictMap &conflic
                 auto keyConflict = std::make_pair(vpConflictFlightList[index]->getCode(),
                                                   vpConflictFlightList[j]->getCode());
                 if (conflictMap.at(keyConflict)->getConflictProbability() > MIN_PROBA) {
-                    double dExpectValue = 0;
-                    if (!conflictMap.at(keyConflict)->isAverageCalculated()) {
-                        dExpectValue = getExpectedValue(conflictMap.at(keyConflict)->getMaxWaitTime(),
-                                                        conflictMap.at(keyConflict)->getDiffTime());
-                        conflictMap.at(keyConflict)->setAverageWaitTime(dExpectValue);
-                    }
-                    dSumPenalCost += dExpectValue;
+//                    double dExpectValue = 0;
+//                    if (!conflictMap.at(keyConflict)->isAverageCalculated()) {
+//                        dExpectValue = getExpectedValue(conflictMap.at(keyConflict)->getMaxWaitTime(),
+//                                                        conflictMap.at(keyConflict)->getDiffTime());
+//                        conflictMap.at(keyConflict)->setAverageWaitTime(dExpectValue);
+//                    }
+                    dSumPenalCost += conflictMap.at(keyConflict)->getMaxWaitTime();
                 }
             }
         }
@@ -865,6 +872,41 @@ int MinIndexArgs0(const FlightVector &vpConflictFlightList, ConflictMap &conflic
     }
     return iMinIndex;
 }
+
+//int MinIndexArgs1(const FlightVector &vpConflictFlightList, const IloNumArray &decisionVariables, ConflictMap &conflictMap, const MiPiMap &miPiMap) {
+//    int iMinIndex = -1;
+//    auto iConflictedFlightSize = (int) vpConflictFlightList.size();
+//    double dMaxValue = std::numeric_limits<double>::max();
+//
+//    for (int index = 0; index < (int) vpConflictFlightList.size(); index++) {
+//        double dSumPenalCost = 0;
+//        if (decisionVariables[index] == 1) {
+//            for (int j = 0; j < iConflictedFlightSize; j++) {
+//                if (j != index) {
+//                    auto keyConflict = std::make_pair(vpConflictFlightList[index]->getCode(),
+//                                                      vpConflictFlightList[j]->getCode());
+//                    if (conflictMap.at(keyConflict)->getConflictProbability() > MIN_PROBA) {
+////                        double dExpectValue = 0;
+////                        if (!conflictMap.at(keyConflict)->isAverageCalculated()) {
+////                            dExpectValue = getExpectedValue(conflictMap.at(keyConflict)->getMaxWaitTime(),
+////                                                            conflictMap.at(keyConflict)->getDiffTime());
+////                            conflictMap.at(keyConflict)->setAverageWaitTime(dExpectValue);
+////                        }
+//                        dSumPenalCost += conflictMap.at(keyConflict)->getMaxWaitTime()* decisionVariables[j];
+//                    }
+//                }
+//            }
+//        }
+//
+//        //i : min Pi-E[sum{p_ij}]
+//        dSumPenalCost = miPiMap.at(vpConflictFlightList[index]->getCode()).second - dSumPenalCost;
+//        if (dSumPenalCost < dMaxValue) {
+//            dMaxValue = dSumPenalCost;
+//            iMinIndex = index;
+//        }
+//    }
+//    return iMinIndex;
+//}
 
 void
 CalculateConflictProbability(const FlightVector &vpConflictFlightList, double **ppdConflictProbability,

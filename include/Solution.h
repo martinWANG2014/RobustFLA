@@ -54,6 +54,8 @@ CalculateConflictProbability(const FlightVector &vpConflictFlightList, double **
  */
 int MinIndexArgs0(const FlightVector &vpConflictFlightList, ConflictMap &conflictMap, const MiPiMap &miPiMap);
 
+//int MinIndexArgs1(const FlightVector &vpConflictFlightList, const IloNumArray &decisionVariables, ConflictMap &conflictMap, const MiPiMap &miPiMap);
+
 
 /**
  * Check the constraint feasibility

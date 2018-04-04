@@ -9,7 +9,7 @@ NbThreads=$1
 if [[ -e ${taskInstanceFile} ]] ; then
     rm ${taskInstanceFile}
 fi
-for minAdmissibleCost in 0;do
+for minAdmissibleCost in 0 ;do
     for maxAdmissibleCost in 30 ;do
         for method in 0 1 2; do
             for pa in 0 15 ; do

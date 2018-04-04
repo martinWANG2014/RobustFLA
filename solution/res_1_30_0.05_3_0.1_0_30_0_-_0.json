@@ -2,23 +2,23 @@
   "config": {
     "dataSource": "..\/data\/flight_0_-.json",
     "minSeparatedDistance": "5",
-    "minAngleCos": "0.9659258262890683",
+    "minAngleCos": "0.96592582628906831",
     "PeriodLength": "30",
     "FeasibleListSize": "3",
     "MaxCountForUnImprovedSol": "10",
     "TryAllAssign": "no",
-    "epsilon": "0.05",
-    "coefPi": "0.1",
+    "epsilon": "0.050000000000000003",
+    "coefPi": "0.10000000000000001",
     "method": "Hoeffding",
     "percentageAdditionalFlights": "0"
   },
   "solution": {
-    "NbLevelsChange": "46",
-    "NbFlightUnassigned": "1",
+    "NbLevelsChange": "118",
+    "NbFlightUnassigned": "2",
     "NbMaxConflict": "11",
     "NbMaxDiverseLevels": "20",
-    "SumBenefits": "24908.7155571332",
-    "ElapsedTime": "14.39",
+    "SumBenefits": "23890.409463995104",
+    "ElapsedTime": "10.83",
     "MinAdmissibleCost": "0",
     "MaxAdmissibleCost": "30"
   }
