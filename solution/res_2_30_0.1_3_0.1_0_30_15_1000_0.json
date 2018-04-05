@@ -14,12 +14,12 @@
     "nbIterations": "1000"
   },
   "solution": {
-    "NbLevelsChange": "57",
+    "NbLevelsChange": "52",
     "NbFlightUnassigned": "0",
     "NbMaxConflict": "14",
     "NbMaxDiverseLevels": "20",
-    "SumBenefits": "24751.773610825814",
-    "ElapsedTime": "982.94000000000005",
+    "SumBenefits": "24810.585240676621",
+    "ElapsedTime": "771.11000000000001",
     "MinAdmissibleCost": "0",
     "MaxAdmissibleCost": "30"
   }

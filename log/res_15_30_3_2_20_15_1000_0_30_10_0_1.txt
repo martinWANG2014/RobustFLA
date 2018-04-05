@@ -62,24 +62,24 @@
 			Start
 		[INFO] Index: 114
 i: 36
-			Count: 0.75
+			Count: 0.744
 		[INFO] Index: 36
 i: 137
-			Count: 0.882
+			Count: 0.902
 			Feasibility ==> ok!
 [INFO] Level: 280
 	CandidateFlights: 139
 	ConflictFlights: 135
 			Start
 		[INFO] Index: 62
-i: 118
-			Count: 0.72
-		[INFO] Index: 118
 i: 61
-			Count: 0.81
+			Count: 0.679
 		[INFO] Index: 61
+i: 118
+			Count: 0.724
+		[INFO] Index: 118
 i: 121
-			Count: 0.847
+			Count: 0.875
 			Feasibility ==> ok!
 [INFO] Level: 290
 	CandidateFlights: 128
@@ -103,7 +103,7 @@ i: 0
 			Start
 		[INFO] Index: 56
 i: 88
-			Count: 0.834
+			Count: 0.826
 			Feasibility ==> ok!
 [INFO] Level: 330
 	CandidateFlights: 83
@@ -119,7 +119,7 @@ i: 0
 			Start
 		[INFO] Index: 15
 i: 8
-			Count: 0.826
+			Count: 0.84
 			Feasibility ==> ok!
 [INFO] Level: 240
 	CandidateFlights: 52
@@ -127,7 +127,7 @@ i: 8
 			Start
 		[INFO] Index: 25
 i: 7
-			Count: 0.999
+			Count: 0.998
 			Feasibility ==> ok!
 [INFO] Level: 160
 	CandidateFlights: 38
@@ -135,7 +135,10 @@ i: 7
 			Start
 		[INFO] Index: 7
 i: 4
-			Count: 0.823
+			Count: 0.819
+		[INFO] Index: 4
+i: 11
+			Count: 0.984
 			Feasibility ==> ok!
 [INFO] Level: 70
 	CandidateFlights: 30
@@ -226,7 +229,7 @@ i: 0
 			Count: 1
 			Feasibility ==> ok!
 [INFO] Level: 140
-	CandidateFlights: 17
+	CandidateFlights: 18
 	ConflictFlights: 6
 			Start
 		[INFO] Index: 0
@@ -318,15 +321,15 @@ i: 0
 	ConflictFlights: 0
 	No conflict flights
 Solve the problem P':
-	Nb of flights change level: 13
+	Nb of flights change level: 14
 	Nb of flights not be assigned: 0
-	Elapsed time: 199.66
+	Elapsed time: 205.04
 NbIteration: 1000
 Result MC
-	Nb of flights change level: 13
+	Nb of flights change level: 14
 	Nb of flights not be assigned: 0
 	Max conflict: 14
 	Max diverse levels: 20
-	Sum benefits: 25394.5
-	Elapsed time: 199.66
+	Sum benefits: 25377.1
+	Elapsed time: 205.04
 

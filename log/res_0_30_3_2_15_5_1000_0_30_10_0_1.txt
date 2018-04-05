@@ -62,58 +62,58 @@
 			Start
 		[INFO] Index: 112
 i: 26
-			Count: 0.107
+			Count: 0.078
 		[INFO] Index: 26
 i: 34
-			Count: 0.106
+			Count: 0.11
 		[INFO] Index: 34
-i: 33
-			Count: 0.152
-		[INFO] Index: 33
 i: 13
-			Count: 0.2
+			Count: 0.144
 		[INFO] Index: 13
+i: 33
+			Count: 0.191
+		[INFO] Index: 33
 i: 133
-			Count: 0.217
+			Count: 0.222
 		[INFO] Index: 133
 i: 53
-			Count: 0.412
+			Count: 0.434
 		[INFO] Index: 53
 i: 109
-			Count: 0.507
+			Count: 0.505
 		[INFO] Index: 109
 i: 28
-			Count: 0.567
+			Count: 0.609
 		[INFO] Index: 28
 i: 37
-			Count: 0.606
+			Count: 0.617
 		[INFO] Index: 37
-i: 52
-			Count: 0.658
-		[INFO] Index: 52
+i: 19
+			Count: 0.668
+		[INFO] Index: 19
+i: 69
+			Count: 0.706
+		[INFO] Index: 69
 i: 73
-			Count: 0.693
+			Count: 0.722
 		[INFO] Index: 73
 i: 46
-			Count: 0.728
+			Count: 0.766
 		[INFO] Index: 46
-i: 69
-			Count: 0.775
-		[INFO] Index: 69
 i: 29
-			Count: 0.793
+			Count: 0.796
 		[INFO] Index: 29
 i: 113
-			Count: 0.83
+			Count: 0.809
 		[INFO] Index: 113
 i: 15
-			Count: 0.863
+			Count: 0.83
 		[INFO] Index: 15
-i: 44
-			Count: 0.855
-		[INFO] Index: 44
+i: 38
+			Count: 0.843
+		[INFO] Index: 38
 i: 100
-			Count: 0.889
+			Count: 0.877
 			Feasibility ==> ok!
 [INFO] Level: 280
 	CandidateFlights: 139
@@ -121,46 +121,46 @@ i: 100
 			Start
 		[INFO] Index: 115
 i: 58
-			Count: 0.171
+			Count: 0.161
 		[INFO] Index: 58
-i: 1
-			Count: 0.262
-		[INFO] Index: 1
 i: 59
-			Count: 0.318
+			Count: 0.244
 		[INFO] Index: 59
+i: 1
+			Count: 0.353
+		[INFO] Index: 1
 i: 60
-			Count: 0.415
+			Count: 0.428
 		[INFO] Index: 60
 i: 102
-			Count: 0.544
+			Count: 0.53
 		[INFO] Index: 102
 i: 3
-			Count: 0.611
+			Count: 0.622
 		[INFO] Index: 3
 i: 33
-			Count: 0.639
+			Count: 0.642
 		[INFO] Index: 33
 i: 123
-			Count: 0.697
+			Count: 0.692
 		[INFO] Index: 123
+i: 130
+			Count: 0.742
+		[INFO] Index: 130
 i: 32
-			Count: 0.728
+			Count: 0.765
 		[INFO] Index: 32
 i: 34
-			Count: 0.785
+			Count: 0.804
 		[INFO] Index: 34
+i: 38
+			Count: 0.8
+		[INFO] Index: 38
 i: 51
-			Count: 0.797
+			Count: 0.85
 		[INFO] Index: 51
-i: 52
-			Count: 0.812
-		[INFO] Index: 52
-i: 128
-			Count: 0.856
-		[INFO] Index: 128
-i: 124
-			Count: 0.893
+i: 40
+			Count: 0.882
 			Feasibility ==> ok!
 [INFO] Level: 290
 	CandidateFlights: 128
@@ -168,15 +168,15 @@ i: 124
 			Start
 		[INFO] Index: 60
 i: 0
-			Count: 0.942
+			Count: 0.955
 			Feasibility ==> ok!
 [INFO] Level: 310
 	CandidateFlights: 128
 	ConflictFlights: 118
 			Start
 		[INFO] Index: 86
-i: 105
-			Count: 0.983
+i: 109
+			Count: 0.987
 			Feasibility ==> ok!
 [INFO] Level: 190
 	CandidateFlights: 126
@@ -184,82 +184,82 @@ i: 105
 			Start
 		[INFO] Index: 55
 i: 47
-			Count: 0.081
+			Count: 0.087
 		[INFO] Index: 47
 i: 62
-			Count: 0.129
+			Count: 0.127
 		[INFO] Index: 62
 i: 85
-			Count: 0.191
+			Count: 0.164
 		[INFO] Index: 85
 i: 86
-			Count: 0.349
+			Count: 0.378
 		[INFO] Index: 86
 i: 41
-			Count: 0.475
+			Count: 0.492
 		[INFO] Index: 41
 i: 77
-			Count: 0.533
+			Count: 0.549
 		[INFO] Index: 77
 i: 93
-			Count: 0.607
+			Count: 0.633
 		[INFO] Index: 93
-i: 68
-			Count: 0.673
-		[INFO] Index: 68
 i: 46
-			Count: 0.792
+			Count: 0.674
 		[INFO] Index: 46
-i: 69
-			Count: 0.829
-		[INFO] Index: 69
+i: 68
+			Count: 0.724
+		[INFO] Index: 68
+i: 74
+			Count: 0.824
+		[INFO] Index: 74
 i: 61
-			Count: 0.856
+			Count: 0.85
 		[INFO] Index: 61
 i: 57
-			Count: 0.876
+			Count: 0.891
 			Feasibility ==> ok!
 [INFO] Level: 330
 	CandidateFlights: 83
 	ConflictFlights: 81
 			Start
 		[INFO] Index: 36
-i: 31
-			Count: 0.972
+i: 66
+			Count: 0.977
 			Feasibility ==> ok!
 [INFO] Level: 270
 	CandidateFlights: 52
 	ConflictFlights: 27
 			Start
 		[INFO] Index: 14
-i: 8
-			Count: 0.252
-		[INFO] Index: 8
 i: 4
-			Count: 0.366
+			Count: 0.262
 		[INFO] Index: 4
+i: 8
+			Count: 0.358
+		[INFO] Index: 8
 i: 9
-			Count: 0.493
+			Count: 0.49
 		[INFO] Index: 9
 i: 15
-			Count: 0.598
+			Count: 0.614
 		[INFO] Index: 15
 i: 10
-			Count: 0.911
+			Count: 0.912
 			Feasibility ==> ok!
 [INFO] Level: 240
 	CandidateFlights: 52
 	ConflictFlights: 30
 			Start
 		[INFO] Index: 24
-i: 9
-			Count: 0.674
-		[INFO] Index: 9
 i: 26
-			Count: 0.754
+			Count: 0.658
 		[INFO] Index: 26
+i: 9
+			Count: 0.847
+		[INFO] Index: 9
 i: 6
-			Count: 0.942
+			Count: 0.95
 			Feasibility ==> ok!
 [INFO] Level: 160
 	CandidateFlights: 38
@@ -267,7 +267,7 @@ i: 6
 			Start
 		[INFO] Index: 6
 i: 4
-			Count: 0.774
+			Count: 0.728
 		[INFO] Index: 4
 i: 0
 			Count: 1
@@ -278,7 +278,7 @@ i: 0
 			Start
 		[INFO] Index: 0
 i: 1
-			Count: 0.987
+			Count: 0.986
 			Feasibility ==> ok!
 [INFO] Level: 150
 	CandidateFlights: 29
@@ -286,24 +286,24 @@ i: 1
 			Start
 		[INFO] Index: 5
 i: 1
-			Count: 0.905
+			Count: 0.912
 			Feasibility ==> ok!
 [INFO] Level: 210
 	CandidateFlights: 40
 	ConflictFlights: 20
 			Start
 		[INFO] Index: 17
-i: 16
-			Count: 0.721
-		[INFO] Index: 16
 i: 4
-			Count: 0.765
+			Count: 0.74
 		[INFO] Index: 4
-i: 12
-			Count: 0.815
-		[INFO] Index: 12
+i: 16
+			Count: 0.787
+		[INFO] Index: 16
 i: 1
-			Count: 0.869
+			Count: 0.832
+		[INFO] Index: 1
+i: 10
+			Count: 0.87
 			Feasibility ==> ok!
 [INFO] Level: 250
 	CandidateFlights: 31
@@ -318,11 +318,11 @@ i: 9
 	ConflictFlights: 16
 			Start
 		[INFO] Index: 6
-i: 3
-			Count: 0.993
+i: 2
+			Count: 0.996
 			Feasibility ==> ok!
 [INFO] Level: 230
-	CandidateFlights: 27
+	CandidateFlights: 28
 	ConflictFlights: 9
 			Start
 		[INFO] Index: 2
@@ -334,8 +334,11 @@ i: 0
 	ConflictFlights: 17
 			Start
 		[INFO] Index: 0
-i: 6
-			Count: 0.964
+i: 12
+			Count: 0.861
+		[INFO] Index: 12
+i: 9
+			Count: 0.966
 			Feasibility ==> ok!
 [INFO] Level: 350
 	CandidateFlights: 21
@@ -343,10 +346,10 @@ i: 6
 			Start
 		[INFO] Index: 0
 i: 1
-			Count: 0.991
+			Count: 0.994
 			Feasibility ==> ok!
 [INFO] Level: 170
-	CandidateFlights: 21
+	CandidateFlights: 20
 	ConflictFlights: 3
 			Start
 		[INFO] Index: 2
@@ -367,7 +370,7 @@ i: 0
 			Start
 		[INFO] Index: 4
 i: 1
-			Count: 0.982
+			Count: 0.987
 			Feasibility ==> ok!
 [INFO] Level: 140
 	CandidateFlights: 18
@@ -375,7 +378,7 @@ i: 1
 			Start
 		[INFO] Index: 0
 i: 1
-			Count: 0.983
+			Count: 0.971
 			Feasibility ==> ok!
 [INFO] Level: 90
 	CandidateFlights: 16
@@ -431,9 +434,9 @@ i: 1
 	No conflict flights
 [INFO] Level: 300
 	CandidateFlights: 14
-	ConflictFlights: 2
+	ConflictFlights: 4
 			Start
-		[INFO] Index: 0
+		[INFO] Index: 2
 i: 0
 			Count: 1
 			Feasibility ==> ok!
@@ -467,56 +470,59 @@ i: 0
 	No conflict flights
 Solve the problem P':
 	Nb of flights change level: 63
-	Nb of flights not be assigned: 3
-	Elapsed time: 754.31
+	Nb of flights not be assigned: 4
+	Elapsed time: 614.65
 NbIteration: 1000
 [INFO] Level: 180
-	CandidateFlights: 145
-	ConflictFlights: 117
+	CandidateFlights: 146
+	ConflictFlights: 118
 			Start
-		[INFO] Index: 63
-i: 2
-			Count: 0.872
+		[INFO] Index: 93
+i: 82
+			Count: 0.865
+		[INFO] Index: 82
+i: 65
+			Count: 0.895
 			Feasibility ==> ok!
 [INFO] Level: 280
 	CandidateFlights: 125
 	ConflictFlights: 116
 			Start
-		[INFO] Index: 110
-i: 34
-			Count: 0.93
+		[INFO] Index: 62
+i: 41
+			Count: 0.895
 			Feasibility ==> ok!
 [INFO] Level: 290
 	CandidateFlights: 127
 	ConflictFlights: 118
 			Start
 		[INFO] Index: 48
-i: 0
-			Count: 0.951
+i: 51
+			Count: 0.949
 			Feasibility ==> ok!
 [INFO] Level: 310
 	CandidateFlights: 128
 	ConflictFlights: 118
 			Start
 		[INFO] Index: 83
-i: 30
-			Count: 0.985
+i: 105
+			Count: 0.978
 			Feasibility ==> ok!
 [INFO] Level: 190
 	CandidateFlights: 114
 	ConflictFlights: 89
 			Start
 		[INFO] Index: 85
-i: 52
-			Count: 0.883
+i: 8
+			Count: 0.874
 			Feasibility ==> ok!
 [INFO] Level: 330
 	CandidateFlights: 83
 	ConflictFlights: 81
 			Start
 		[INFO] Index: 35
-i: 60
-			Count: 0.977
+i: 31
+			Count: 0.984
 			Feasibility ==> ok!
 [INFO] Level: 270
 	CandidateFlights: 47
@@ -524,7 +530,7 @@ i: 60
 			Start
 		[INFO] Index: 8
 i: 3
-			Count: 0.934
+			Count: 0.935
 			Feasibility ==> ok!
 [INFO] Level: 240
 	CandidateFlights: 50
@@ -532,13 +538,13 @@ i: 3
 			Start
 		[INFO] Index: 5
 i: 3
-			Count: 0.997
+			Count: 0.993
 			Feasibility ==> ok!
 [INFO] Level: 160
-	CandidateFlights: 37
-	ConflictFlights: 11
+	CandidateFlights: 38
+	ConflictFlights: 10
 			Start
-		[INFO] Index: 6
+		[INFO] Index: 4
 i: 0
 			Count: 1
 			Feasibility ==> ok!
@@ -556,15 +562,15 @@ i: 0
 			Start
 		[INFO] Index: 5
 i: 1
-			Count: 0.905
+			Count: 0.907
 			Feasibility ==> ok!
 [INFO] Level: 210
 	CandidateFlights: 37
-	ConflictFlights: 15
+	ConflictFlights: 16
 			Start
-		[INFO] Index: 0
-i: 7
-			Count: 0.916
+		[INFO] Index: 12
+i: 0
+			Count: 0.875
 			Feasibility ==> ok!
 [INFO] Level: 250
 	CandidateFlights: 32
@@ -572,15 +578,15 @@ i: 7
 			Start
 		[INFO] Index: 4
 i: 11
-			Count: 0.981
+			Count: 0.983
 			Feasibility ==> ok!
 [INFO] Level: 130
 	CandidateFlights: 26
 	ConflictFlights: 13
 			Start
 		[INFO] Index: 9
-i: 2
-			Count: 0.995
+i: 0
+			Count: 0.994
 			Feasibility ==> ok!
 [INFO] Level: 230
 	CandidateFlights: 28
@@ -591,12 +597,12 @@ i: 0
 			Count: 1
 			Feasibility ==> ok!
 [INFO] Level: 200
-	CandidateFlights: 39
-	ConflictFlights: 17
+	CandidateFlights: 38
+	ConflictFlights: 14
 			Start
-		[INFO] Index: 9
-i: 16
-			Count: 0.926
+		[INFO] Index: 2
+i: 7
+			Count: 0.972
 			Feasibility ==> ok!
 [INFO] Level: 350
 	CandidateFlights: 21
@@ -623,12 +629,12 @@ i: 0
 			Count: 1
 			Feasibility ==> ok!
 [INFO] Level: 220
-	CandidateFlights: 17
-	ConflictFlights: 12
+	CandidateFlights: 16
+	ConflictFlights: 10
 			Start
-		[INFO] Index: 8
-i: 11
-			Count: 0.968
+		[INFO] Index: 7
+i: 1
+			Count: 0.982
 			Feasibility ==> ok!
 [INFO] Level: 140
 	CandidateFlights: 17
@@ -636,7 +642,7 @@ i: 11
 			Start
 		[INFO] Index: 0
 i: 1
-			Count: 0.99
+			Count: 0.993
 			Feasibility ==> ok!
 [INFO] Level: 90
 	CandidateFlights: 17
@@ -704,9 +710,9 @@ i: 0
 	No conflict flights
 [INFO] Level: 300
 	CandidateFlights: 14
-	ConflictFlights: 2
+	ConflictFlights: 4
 			Start
-		[INFO] Index: 0
+		[INFO] Index: 2
 i: 0
 			Count: 1
 			Feasibility ==> ok!
@@ -739,60 +745,57 @@ i: 0
 	ConflictFlights: 0
 	No conflict flights
 Solve the problem P':
-	Nb of flights change level: 79
-	Nb of flights not be assigned: 1
-	Elapsed time: 838.21
+	Nb of flights change level: 77
+	Nb of flights not be assigned: 2
+	Elapsed time: 693.92
 NbIteration: 1000
 [INFO] Level: 180
-	CandidateFlights: 144
-	ConflictFlights: 115
+	CandidateFlights: 145
+	ConflictFlights: 117
 			Start
-		[INFO] Index: 100
-i: 29
-			Count: 0.862
-		[INFO] Index: 29
-i: 109
-			Count: 0.881
+		[INFO] Index: 92
+i: 2
+			Count: 0.898
 			Feasibility ==> ok!
 [INFO] Level: 280
 	CandidateFlights: 124
 	ConflictFlights: 115
 			Start
-		[INFO] Index: 46
-i: 112
-			Count: 0.938
+		[INFO] Index: 112
+i: 39
+			Count: 0.941
 			Feasibility ==> ok!
 [INFO] Level: 290
 	CandidateFlights: 126
 	ConflictFlights: 117
 			Start
 		[INFO] Index: 83
-i: 0
-			Count: 0.938
+i: 50
+			Count: 0.939
 			Feasibility ==> ok!
 [INFO] Level: 310
 	CandidateFlights: 128
 	ConflictFlights: 118
 			Start
 		[INFO] Index: 83
-i: 30
-			Count: 0.981
+i: 105
+			Count: 0.98
 			Feasibility ==> ok!
 [INFO] Level: 190
 	CandidateFlights: 113
 	ConflictFlights: 87
 			Start
 		[INFO] Index: 28
-i: 23
-			Count: 0.88
+i: 52
+			Count: 0.893
 			Feasibility ==> ok!
 [INFO] Level: 330
 	CandidateFlights: 83
 	ConflictFlights: 81
 			Start
 		[INFO] Index: 57
-i: 33
-			Count: 0.986
+i: 79
+			Count: 0.987
 			Feasibility ==> ok!
 [INFO] Level: 270
 	CandidateFlights: 46
@@ -800,7 +803,7 @@ i: 33
 			Start
 		[INFO] Index: 7
 i: 3
-			Count: 0.953
+			Count: 0.951
 			Feasibility ==> ok!
 [INFO] Level: 240
 	CandidateFlights: 50
@@ -808,13 +811,13 @@ i: 3
 			Start
 		[INFO] Index: 1
 i: 3
-			Count: 0.999
+			Count: 0.995
 			Feasibility ==> ok!
 [INFO] Level: 160
 	CandidateFlights: 38
 	ConflictFlights: 10
 			Start
-		[INFO] Index: 1
+		[INFO] Index: 4
 i: 0
 			Count: 1
 			Feasibility ==> ok!
@@ -832,15 +835,15 @@ i: 0
 			Start
 		[INFO] Index: 4
 i: 1
-			Count: 0.937
+			Count: 0.935
 			Feasibility ==> ok!
 [INFO] Level: 210
 	CandidateFlights: 37
 	ConflictFlights: 14
 			Start
-		[INFO] Index: 10
-i: 0
-			Count: 0.924
+		[INFO] Index: 7
+i: 9
+			Count: 0.928
 			Feasibility ==> ok!
 [INFO] Level: 250
 	CandidateFlights: 33
@@ -848,7 +851,7 @@ i: 0
 			Start
 		[INFO] Index: 4
 i: 13
-			Count: 0.989
+			Count: 0.977
 			Feasibility ==> ok!
 [INFO] Level: 130
 	CandidateFlights: 26
@@ -856,10 +859,10 @@ i: 13
 			Start
 		[INFO] Index: 10
 i: 2
-			Count: 0.993
+			Count: 0.991
 			Feasibility ==> ok!
 [INFO] Level: 230
-	CandidateFlights: 28
+	CandidateFlights: 29
 	ConflictFlights: 9
 			Start
 		[INFO] Index: 2
@@ -867,19 +870,19 @@ i: 0
 			Count: 1
 			Feasibility ==> ok!
 [INFO] Level: 200
-	CandidateFlights: 40
-	ConflictFlights: 17
+	CandidateFlights: 39
+	ConflictFlights: 16
 			Start
-		[INFO] Index: 11
-i: 15
-			Count: 0.917
+		[INFO] Index: 2
+i: 8
+			Count: 0.974
 			Feasibility ==> ok!
 [INFO] Level: 350
 	CandidateFlights: 21
 	ConflictFlights: 0
 	No conflict flights
 [INFO] Level: 170
-	CandidateFlights: 21
+	CandidateFlights: 20
 	ConflictFlights: 2
 			Start
 		[INFO] Index: 0
@@ -895,12 +898,12 @@ i: 0
 			Count: 1
 			Feasibility ==> ok!
 [INFO] Level: 220
-	CandidateFlights: 16
-	ConflictFlights: 9
+	CandidateFlights: 15
+	ConflictFlights: 7
 			Start
-		[INFO] Index: 8
-i: 6
-			Count: 0.989
+		[INFO] Index: 5
+i: 2
+			Count: 0.984
 			Feasibility ==> ok!
 [INFO] Level: 140
 	CandidateFlights: 16
@@ -972,9 +975,9 @@ i: 0
 	No conflict flights
 [INFO] Level: 300
 	CandidateFlights: 14
-	ConflictFlights: 2
+	ConflictFlights: 4
 			Start
-		[INFO] Index: 0
+		[INFO] Index: 2
 i: 0
 			Count: 1
 			Feasibility ==> ok!
@@ -1007,41 +1010,41 @@ i: 0
 	ConflictFlights: 0
 	No conflict flights
 Solve the problem P':
-	Nb of flights change level: 91
+	Nb of flights change level: 88
 	Nb of flights not be assigned: 2
-	Elapsed time: 945.01
+	Elapsed time: 774.14
 NbIteration: 1000
 [INFO] Level: 180
-	CandidateFlights: 144
-	ConflictFlights: 115
+	CandidateFlights: 145
+	ConflictFlights: 117
 			Start
-		[INFO] Index: 91
-i: 54
-			Count: 0.909
+		[INFO] Index: 92
+i: 55
+			Count: 0.879
 			Feasibility ==> ok!
 [INFO] Level: 280
 	CandidateFlights: 123
 	ConflictFlights: 114
 			Start
-		[INFO] Index: 61
-i: 39
-			Count: 0.938
+		[INFO] Index: 39
+i: 34
+			Count: 0.954
 			Feasibility ==> ok!
 [INFO] Level: 290
 	CandidateFlights: 125
 	ConflictFlights: 116
 			Start
 		[INFO] Index: 80
-i: 50
-			Count: 0.95
+i: 0
+			Count: 0.947
 			Feasibility ==> ok!
 [INFO] Level: 310
 	CandidateFlights: 128
 	ConflictFlights: 118
 			Start
 		[INFO] Index: 11
-i: 105
-			Count: 0.986
+i: 30
+			Count: 0.988
 			Feasibility ==> ok!
 [INFO] Level: 190
 	CandidateFlights: 112
@@ -1049,15 +1052,15 @@ i: 105
 			Start
 		[INFO] Index: 50
 i: 23
-			Count: 0.908
+			Count: 0.912
 			Feasibility ==> ok!
 [INFO] Level: 330
 	CandidateFlights: 83
 	ConflictFlights: 80
 			Start
 		[INFO] Index: 65
-i: 39
-			Count: 0.987
+i: 31
+			Count: 0.993
 			Feasibility ==> ok!
 [INFO] Level: 270
 	CandidateFlights: 45
@@ -1068,20 +1071,20 @@ i: 0
 			Count: 1
 			Feasibility ==> ok!
 [INFO] Level: 240
-	CandidateFlights: 49
+	CandidateFlights: 50
 	ConflictFlights: 21
 			Start
 		[INFO] Index: 15
-i: 3
-			Count: 0.999
+i: 0
+			Count: 1
 			Feasibility ==> ok!
 [INFO] Level: 160
-	CandidateFlights: 40
-	ConflictFlights: 12
+	CandidateFlights: 38
+	ConflictFlights: 10
 			Start
-		[INFO] Index: 11
-i: 5
-			Count: 0.923
+		[INFO] Index: 4
+i: 0
+			Count: 1
 			Feasibility ==> ok!
 [INFO] Level: 70
 	CandidateFlights: 28
@@ -1097,7 +1100,7 @@ i: 0
 			Start
 		[INFO] Index: 1
 i: 1
-			Count: 0.918
+			Count: 0.906
 			Feasibility ==> ok!
 [INFO] Level: 210
 	CandidateFlights: 37
@@ -1105,7 +1108,7 @@ i: 1
 			Start
 		[INFO] Index: 8
 i: 9
-			Count: 0.978
+			Count: 0.951
 			Feasibility ==> ok!
 [INFO] Level: 250
 	CandidateFlights: 34
@@ -1113,7 +1116,7 @@ i: 9
 			Start
 		[INFO] Index: 4
 i: 13
-			Count: 0.984
+			Count: 0.979
 			Feasibility ==> ok!
 [INFO] Level: 130
 	CandidateFlights: 25
@@ -1121,10 +1124,10 @@ i: 13
 			Start
 		[INFO] Index: 0
 i: 1
-			Count: 0.994
+			Count: 0.992
 			Feasibility ==> ok!
 [INFO] Level: 230
-	CandidateFlights: 29
+	CandidateFlights: 30
 	ConflictFlights: 9
 			Start
 		[INFO] Index: 2
@@ -1132,12 +1135,12 @@ i: 0
 			Count: 1
 			Feasibility ==> ok!
 [INFO] Level: 200
-	CandidateFlights: 41
-	ConflictFlights: 18
+	CandidateFlights: 39
+	ConflictFlights: 16
 			Start
-		[INFO] Index: 12
-i: 16
-			Count: 0.925
+		[INFO] Index: 2
+i: 8
+			Count: 0.965
 			Feasibility ==> ok!
 [INFO] Level: 350
 	CandidateFlights: 22
@@ -1148,7 +1151,7 @@ i: 0
 			Count: 1
 			Feasibility ==> ok!
 [INFO] Level: 170
-	CandidateFlights: 21
+	CandidateFlights: 20
 	ConflictFlights: 2
 			Start
 		[INFO] Index: 0
@@ -1164,12 +1167,12 @@ i: 0
 			Count: 1
 			Feasibility ==> ok!
 [INFO] Level: 220
-	CandidateFlights: 16
-	ConflictFlights: 7
+	CandidateFlights: 15
+	ConflictFlights: 6
 			Start
-		[INFO] Index: 5
-i: 5
-			Count: 0.981
+		[INFO] Index: 3
+i: 1
+			Count: 0.983
 			Feasibility ==> ok!
 [INFO] Level: 140
 	CandidateFlights: 15
@@ -1237,9 +1240,9 @@ i: 0
 	No conflict flights
 [INFO] Level: 300
 	CandidateFlights: 14
-	ConflictFlights: 2
+	ConflictFlights: 4
 			Start
-		[INFO] Index: 0
+		[INFO] Index: 2
 i: 0
 			Count: 1
 			Feasibility ==> ok!
@@ -1272,33 +1275,33 @@ i: 0
 	ConflictFlights: 0
 	No conflict flights
 Solve the problem P':
-	Nb of flights change level: 101
-	Nb of flights not be assigned: 3
-	Elapsed time: 1030.09
+	Nb of flights change level: 98
+	Nb of flights not be assigned: 1
+	Elapsed time: 862.82
 NbIteration: 1000
 [INFO] Level: 180
-	CandidateFlights: 143
-	ConflictFlights: 114
+	CandidateFlights: 145
+	ConflictFlights: 117
 			Start
-		[INFO] Index: 90
-i: 79
-			Count: 0.898
+		[INFO] Index: 92
+i: 111
+			Count: 0.874
 			Feasibility ==> ok!
 [INFO] Level: 280
 	CandidateFlights: 122
 	ConflictFlights: 113
 			Start
-		[INFO] Index: 39
-i: 34
-			Count: 0.971
+		[INFO] Index: 45
+i: 108
+			Count: 0.952
 			Feasibility ==> ok!
 [INFO] Level: 290
 	CandidateFlights: 124
 	ConflictFlights: 115
 			Start
 		[INFO] Index: 50
-i: 10
-			Count: 0.984
+i: 13
+			Count: 0.985
 			Feasibility ==> ok!
 [INFO] Level: 310
 	CandidateFlights: 128
@@ -1306,7 +1309,7 @@ i: 10
 			Start
 		[INFO] Index: 32
 i: 109
-			Count: 0.99
+			Count: 0.979
 			Feasibility ==> ok!
 [INFO] Level: 190
 	CandidateFlights: 111
@@ -1314,15 +1317,15 @@ i: 109
 			Start
 		[INFO] Index: 65
 i: 23
-			Count: 0.883
+			Count: 0.897
 			Feasibility ==> ok!
 [INFO] Level: 330
 	CandidateFlights: 83
 	ConflictFlights: 81
 			Start
 		[INFO] Index: 73
-i: 53
-			Count: 0.988
+i: 69
+			Count: 0.987
 			Feasibility ==> ok!
 [INFO] Level: 270
 	CandidateFlights: 44
@@ -1338,15 +1341,15 @@ i: 0
 			Start
 		[INFO] Index: 12
 i: 3
-			Count: 0.997
+			Count: 0.998
 			Feasibility ==> ok!
 [INFO] Level: 160
-	CandidateFlights: 40
-	ConflictFlights: 12
+	CandidateFlights: 38
+	ConflictFlights: 10
 			Start
-		[INFO] Index: 11
-i: 5
-			Count: 0.913
+		[INFO] Index: 4
+i: 0
+			Count: 1
 			Feasibility ==> ok!
 [INFO] Level: 70
 	CandidateFlights: 28
@@ -1362,7 +1365,7 @@ i: 0
 			Start
 		[INFO] Index: 1
 i: 1
-			Count: 0.894
+			Count: 0.906
 			Feasibility ==> ok!
 [INFO] Level: 210
 	CandidateFlights: 37
@@ -1370,7 +1373,7 @@ i: 1
 			Start
 		[INFO] Index: 12
 i: 7
-			Count: 0.982
+			Count: 0.936
 			Feasibility ==> ok!
 [INFO] Level: 250
 	CandidateFlights: 35
@@ -1378,7 +1381,7 @@ i: 7
 			Start
 		[INFO] Index: 14
 i: 13
-			Count: 0.98
+			Count: 0.987
 			Feasibility ==> ok!
 [INFO] Level: 130
 	CandidateFlights: 24
@@ -1389,7 +1392,7 @@ i: 1
 			Count: 0.998
 			Feasibility ==> ok!
 [INFO] Level: 230
-	CandidateFlights: 29
+	CandidateFlights: 30
 	ConflictFlights: 9
 			Start
 		[INFO] Index: 2
@@ -1397,12 +1400,12 @@ i: 0
 			Count: 1
 			Feasibility ==> ok!
 [INFO] Level: 200
-	CandidateFlights: 41
-	ConflictFlights: 18
+	CandidateFlights: 39
+	ConflictFlights: 16
 			Start
-		[INFO] Index: 12
-i: 16
-			Count: 0.926
+		[INFO] Index: 2
+i: 8
+			Count: 0.971
 			Feasibility ==> ok!
 [INFO] Level: 350
 	CandidateFlights: 23
@@ -1413,7 +1416,7 @@ i: 0
 			Count: 1
 			Feasibility ==> ok!
 [INFO] Level: 170
-	CandidateFlights: 22
+	CandidateFlights: 21
 	ConflictFlights: 2
 			Start
 		[INFO] Index: 0
@@ -1434,7 +1437,7 @@ i: 0
 			Start
 		[INFO] Index: 3
 i: 2
-			Count: 0.987
+			Count: 0.989
 			Feasibility ==> ok!
 [INFO] Level: 140
 	CandidateFlights: 15
@@ -1502,9 +1505,9 @@ i: 0
 	No conflict flights
 [INFO] Level: 300
 	CandidateFlights: 14
-	ConflictFlights: 2
+	ConflictFlights: 4
 			Start
-		[INFO] Index: 0
+		[INFO] Index: 2
 i: 0
 			Count: 1
 			Feasibility ==> ok!
@@ -1537,25 +1540,25 @@ i: 0
 	ConflictFlights: 0
 	No conflict flights
 Solve the problem P':
-	Nb of flights change level: 109
-	Nb of flights not be assigned: 4
-	Elapsed time: 1113.2
+	Nb of flights change level: 105
+	Nb of flights not be assigned: 3
+	Elapsed time: 935.58
 NbIteration: 1000
 [INFO] Level: 180
-	CandidateFlights: 143
-	ConflictFlights: 114
+	CandidateFlights: 145
+	ConflictFlights: 117
 			Start
-		[INFO] Index: 90
-i: 54
-			Count: 0.894
+		[INFO] Index: 92
+i: 29
+			Count: 0.902
 			Feasibility ==> ok!
 [INFO] Level: 280
 	CandidateFlights: 121
 	ConflictFlights: 112
 			Start
-		[INFO] Index: 34
-i: 108
-			Count: 0.987
+		[INFO] Index: 43
+i: 34
+			Count: 0.953
 			Feasibility ==> ok!
 [INFO] Level: 290
 	CandidateFlights: 125
@@ -1563,15 +1566,15 @@ i: 108
 			Start
 		[INFO] Index: 104
 i: 85
-			Count: 0.969
+			Count: 0.983
 			Feasibility ==> ok!
 [INFO] Level: 310
 	CandidateFlights: 128
 	ConflictFlights: 117
 			Start
 		[INFO] Index: 115
-i: 108
-			Count: 0.985
+i: 104
+			Count: 0.981
 			Feasibility ==> ok!
 [INFO] Level: 190
 	CandidateFlights: 110
@@ -1579,15 +1582,15 @@ i: 108
 			Start
 		[INFO] Index: 24
 i: 49
-			Count: 0.895
+			Count: 0.907
 			Feasibility ==> ok!
 [INFO] Level: 330
 	CandidateFlights: 83
 	ConflictFlights: 81
 			Start
 		[INFO] Index: 41
-i: 34
-			Count: 0.995
+i: 40
+			Count: 0.992
 			Feasibility ==> ok!
 [INFO] Level: 270
 	CandidateFlights: 44
@@ -1603,15 +1606,15 @@ i: 0
 			Start
 		[INFO] Index: 9
 i: 3
-			Count: 0.999
+			Count: 0.997
 			Feasibility ==> ok!
 [INFO] Level: 160
-	CandidateFlights: 40
-	ConflictFlights: 12
+	CandidateFlights: 38
+	ConflictFlights: 10
 			Start
-		[INFO] Index: 11
-i: 5
-			Count: 0.932
+		[INFO] Index: 4
+i: 0
+			Count: 1
 			Feasibility ==> ok!
 [INFO] Level: 70
 	CandidateFlights: 28
@@ -1627,7 +1630,7 @@ i: 0
 			Start
 		[INFO] Index: 1
 i: 1
-			Count: 0.9
+			Count: 0.893
 			Feasibility ==> ok!
 [INFO] Level: 210
 	CandidateFlights: 37
@@ -1643,7 +1646,7 @@ i: 0
 			Start
 		[INFO] Index: 13
 i: 12
-			Count: 0.986
+			Count: 0.985
 			Feasibility ==> ok!
 [INFO] Level: 130
 	CandidateFlights: 23
@@ -1662,12 +1665,12 @@ i: 0
 			Count: 1
 			Feasibility ==> ok!
 [INFO] Level: 200
-	CandidateFlights: 41
-	ConflictFlights: 18
+	CandidateFlights: 39
+	ConflictFlights: 16
 			Start
-		[INFO] Index: 12
-i: 16
-			Count: 0.917
+		[INFO] Index: 2
+i: 8
+			Count: 0.973
 			Feasibility ==> ok!
 [INFO] Level: 350
 	CandidateFlights: 24
@@ -1698,8 +1701,8 @@ i: 0
 	ConflictFlights: 6
 			Start
 		[INFO] Index: 3
-i: 5
-			Count: 0.984
+i: 2
+			Count: 0.987
 			Feasibility ==> ok!
 [INFO] Level: 140
 	CandidateFlights: 15
@@ -1767,9 +1770,274 @@ i: 0
 	No conflict flights
 [INFO] Level: 300
 	CandidateFlights: 14
+	ConflictFlights: 4
+			Start
+		[INFO] Index: 2
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 20
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 10
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 410
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 85
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 75
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 65
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 55
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+Solve the problem P':
+	Nb of flights change level: 111
+	Nb of flights not be assigned: 2
+	Elapsed time: 1002.9
+NbIteration: 1000
+[INFO] Level: 180
+	CandidateFlights: 145
+	ConflictFlights: 117
+			Start
+		[INFO] Index: 92
+i: 55
+			Count: 0.891
+			Feasibility ==> ok!
+[INFO] Level: 280
+	CandidateFlights: 120
+	ConflictFlights: 111
+			Start
+		[INFO] Index: 34
+i: 37
+			Count: 0.978
+			Feasibility ==> ok!
+[INFO] Level: 290
+	CandidateFlights: 124
+	ConflictFlights: 116
+			Start
+		[INFO] Index: 103
+i: 85
+			Count: 0.982
+			Feasibility ==> ok!
+[INFO] Level: 310
+	CandidateFlights: 128
+	ConflictFlights: 117
+			Start
+		[INFO] Index: 10
+i: 109
+			Count: 0.986
+			Feasibility ==> ok!
+[INFO] Level: 190
+	CandidateFlights: 109
+	ConflictFlights: 79
+			Start
+		[INFO] Index: 14
+i: 23
+			Count: 0.904
+			Feasibility ==> ok!
+[INFO] Level: 330
+	CandidateFlights: 83
+	ConflictFlights: 80
+			Start
+		[INFO] Index: 49
+i: 56
+			Count: 0.99
+			Feasibility ==> ok!
+[INFO] Level: 270
+	CandidateFlights: 44
+	ConflictFlights: 14
+			Start
+		[INFO] Index: 6
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 240
+	CandidateFlights: 48
+	ConflictFlights: 19
+			Start
+		[INFO] Index: 9
+i: 3
+			Count: 0.999
+			Feasibility ==> ok!
+[INFO] Level: 160
+	CandidateFlights: 38
+	ConflictFlights: 10
+			Start
+		[INFO] Index: 4
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 70
+	CandidateFlights: 28
 	ConflictFlights: 2
 			Start
 		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 150
+	CandidateFlights: 27
+	ConflictFlights: 4
+			Start
+		[INFO] Index: 1
+i: 1
+			Count: 0.895
+			Feasibility ==> ok!
+[INFO] Level: 210
+	CandidateFlights: 37
+	ConflictFlights: 14
+			Start
+		[INFO] Index: 7
+i: 3
+			Count: 0.972
+			Feasibility ==> ok!
+[INFO] Level: 250
+	CandidateFlights: 34
+	ConflictFlights: 14
+			Start
+		[INFO] Index: 13
+i: 12
+			Count: 0.982
+			Feasibility ==> ok!
+[INFO] Level: 130
+	CandidateFlights: 22
+	ConflictFlights: 4
+			Start
+		[INFO] Index: 2
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 230
+	CandidateFlights: 31
+	ConflictFlights: 11
+			Start
+		[INFO] Index: 6
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 200
+	CandidateFlights: 39
+	ConflictFlights: 16
+			Start
+		[INFO] Index: 2
+i: 8
+			Count: 0.967
+			Feasibility ==> ok!
+[INFO] Level: 350
+	CandidateFlights: 25
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 1
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 170
+	CandidateFlights: 22
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 80
+	CandidateFlights: 18
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 1
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 220
+	CandidateFlights: 16
+	ConflictFlights: 6
+			Start
+		[INFO] Index: 3
+i: 1
+			Count: 0.993
+			Feasibility ==> ok!
+[INFO] Level: 140
+	CandidateFlights: 15
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 90
+	CandidateFlights: 16
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 60
+	CandidateFlights: 13
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 50
+	CandidateFlights: 13
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 40
+	CandidateFlights: 10
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 110
+	CandidateFlights: 14
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 100
+	CandidateFlights: 8
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 120
+	CandidateFlights: 10
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 30
+	CandidateFlights: 7
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 260
+	CandidateFlights: 15
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 390
+	CandidateFlights: 4
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 370
+	CandidateFlights: 4
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 45
+	CandidateFlights: 1
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 35
+	CandidateFlights: 1
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 300
+	CandidateFlights: 14
+	ConflictFlights: 4
+			Start
+		[INFO] Index: 2
 i: 0
 			Count: 1
 			Feasibility ==> ok!
@@ -1803,62 +2071,62 @@ i: 0
 	No conflict flights
 Solve the problem P':
 	Nb of flights change level: 116
-	Nb of flights not be assigned: 3
-	Elapsed time: 1192.68
+	Nb of flights not be assigned: 4
+	Elapsed time: 1069.35
 NbIteration: 1000
 [INFO] Level: 180
-	CandidateFlights: 143
-	ConflictFlights: 114
+	CandidateFlights: 145
+	ConflictFlights: 117
 			Start
-		[INFO] Index: 90
-i: 2
-			Count: 0.889
+		[INFO] Index: 92
+i: 29
+			Count: 0.885
 			Feasibility ==> ok!
 [INFO] Level: 280
-	CandidateFlights: 120
-	ConflictFlights: 111
+	CandidateFlights: 119
+	ConflictFlights: 110
 			Start
-		[INFO] Index: 83
+		[INFO] Index: 82
 i: 37
-			Count: 0.98
+			Count: 0.984
 			Feasibility ==> ok!
 [INFO] Level: 290
-	CandidateFlights: 124
-	ConflictFlights: 116
+	CandidateFlights: 123
+	ConflictFlights: 115
 			Start
-		[INFO] Index: 103
-i: 85
-			Count: 0.976
+		[INFO] Index: 53
+i: 103
+			Count: 0.965
 			Feasibility ==> ok!
 [INFO] Level: 310
 	CandidateFlights: 128
-	ConflictFlights: 117
+	ConflictFlights: 116
 			Start
-		[INFO] Index: 10
-i: 105
-			Count: 0.984
+		[INFO] Index: 21
+i: 28
+			Count: 0.989
 			Feasibility ==> ok!
 [INFO] Level: 190
-	CandidateFlights: 109
-	ConflictFlights: 79
+	CandidateFlights: 110
+	ConflictFlights: 80
 			Start
-		[INFO] Index: 14
-i: 47
-			Count: 0.89
+		[INFO] Index: 47
+i: 52
+			Count: 0.904
 			Feasibility ==> ok!
 [INFO] Level: 330
 	CandidateFlights: 83
-	ConflictFlights: 80
+	ConflictFlights: 79
 			Start
-		[INFO] Index: 49
-i: 75
+		[INFO] Index: 59
+i: 74
 			Count: 0.99
 			Feasibility ==> ok!
 [INFO] Level: 270
-	CandidateFlights: 44
-	ConflictFlights: 14
+	CandidateFlights: 43
+	ConflictFlights: 13
 			Start
-		[INFO] Index: 6
+		[INFO] Index: 8
 i: 0
 			Count: 1
 			Feasibility ==> ok!
@@ -1868,15 +2136,15 @@ i: 0
 			Start
 		[INFO] Index: 9
 i: 3
-			Count: 0.998
+			Count: 0.999
 			Feasibility ==> ok!
 [INFO] Level: 160
-	CandidateFlights: 40
-	ConflictFlights: 12
+	CandidateFlights: 38
+	ConflictFlights: 10
 			Start
-		[INFO] Index: 11
-i: 5
-			Count: 0.912
+		[INFO] Index: 4
+i: 0
+			Count: 1
 			Feasibility ==> ok!
 [INFO] Level: 70
 	CandidateFlights: 28
@@ -1892,22 +2160,22 @@ i: 0
 			Start
 		[INFO] Index: 1
 i: 1
-			Count: 0.901
+			Count: 0.873
 			Feasibility ==> ok!
 [INFO] Level: 210
 	CandidateFlights: 37
-	ConflictFlights: 14
+	ConflictFlights: 15
 			Start
-		[INFO] Index: 7
+		[INFO] Index: 10
 i: 3
-			Count: 0.969
+			Count: 0.963
 			Feasibility ==> ok!
 [INFO] Level: 250
-	CandidateFlights: 34
-	ConflictFlights: 14
+	CandidateFlights: 33
+	ConflictFlights: 12
 			Start
-		[INFO] Index: 13
-i: 12
+		[INFO] Index: 4
+i: 11
 			Count: 0.986
 			Feasibility ==> ok!
 [INFO] Level: 130
@@ -1919,23 +2187,23 @@ i: 0
 			Count: 1
 			Feasibility ==> ok!
 [INFO] Level: 230
-	CandidateFlights: 31
-	ConflictFlights: 11
+	CandidateFlights: 29
+	ConflictFlights: 9
 			Start
-		[INFO] Index: 6
+		[INFO] Index: 2
 i: 0
 			Count: 1
 			Feasibility ==> ok!
 [INFO] Level: 200
-	CandidateFlights: 41
-	ConflictFlights: 18
+	CandidateFlights: 39
+	ConflictFlights: 16
 			Start
-		[INFO] Index: 12
-i: 16
-			Count: 0.937
+		[INFO] Index: 2
+i: 14
+			Count: 0.965
 			Feasibility ==> ok!
 [INFO] Level: 350
-	CandidateFlights: 25
+	CandidateFlights: 26
 	ConflictFlights: 2
 			Start
 		[INFO] Index: 1
@@ -1943,10 +2211,10 @@ i: 0
 			Count: 1
 			Feasibility ==> ok!
 [INFO] Level: 170
-	CandidateFlights: 22
-	ConflictFlights: 2
+	CandidateFlights: 23
+	ConflictFlights: 4
 			Start
-		[INFO] Index: 0
+		[INFO] Index: 1
 i: 0
 			Count: 1
 			Feasibility ==> ok!
@@ -1963,7 +2231,7 @@ i: 0
 	ConflictFlights: 6
 			Start
 		[INFO] Index: 3
-i: 5
+i: 2
 			Count: 0.989
 			Feasibility ==> ok!
 [INFO] Level: 140
@@ -2011,7 +2279,7 @@ i: 0
 	ConflictFlights: 0
 	No conflict flights
 [INFO] Level: 260
-	CandidateFlights: 15
+	CandidateFlights: 16
 	ConflictFlights: 0
 	No conflict flights
 [INFO] Level: 390
@@ -2032,9 +2300,9 @@ i: 0
 	No conflict flights
 [INFO] Level: 300
 	CandidateFlights: 14
-	ConflictFlights: 2
+	ConflictFlights: 4
 			Start
-		[INFO] Index: 0
+		[INFO] Index: 2
 i: 0
 			Count: 1
 			Feasibility ==> ok!
@@ -2067,290 +2335,25 @@ i: 0
 	ConflictFlights: 0
 	No conflict flights
 Solve the problem P':
-	Nb of flights change level: 121
-	Nb of flights not be assigned: 5
-	Elapsed time: 1285.33
+	Nb of flights change level: 123
+	Nb of flights not be assigned: 1
+	Elapsed time: 1134.7
 NbIteration: 1000
 [INFO] Level: 180
-	CandidateFlights: 143
-	ConflictFlights: 114
+	CandidateFlights: 145
+	ConflictFlights: 117
 			Start
-		[INFO] Index: 90
-i: 79
-			Count: 0.896
-			Feasibility ==> ok!
-[INFO] Level: 280
-	CandidateFlights: 119
-	ConflictFlights: 110
-			Start
-		[INFO] Index: 37
-i: 83
-			Count: 0.998
-			Feasibility ==> ok!
-[INFO] Level: 290
-	CandidateFlights: 123
-	ConflictFlights: 115
-			Start
-		[INFO] Index: 53
-i: 103
-			Count: 0.967
-			Feasibility ==> ok!
-[INFO] Level: 310
-	CandidateFlights: 128
-	ConflictFlights: 116
-			Start
-		[INFO] Index: 21
-i: 104
-			Count: 0.981
-			Feasibility ==> ok!
-[INFO] Level: 190
-	CandidateFlights: 110
-	ConflictFlights: 80
-			Start
-		[INFO] Index: 47
-i: 42
-			Count: 0.913
-			Feasibility ==> ok!
-[INFO] Level: 330
-	CandidateFlights: 83
-	ConflictFlights: 79
-			Start
-		[INFO] Index: 59
-i: 70
-			Count: 0.993
-			Feasibility ==> ok!
-[INFO] Level: 270
-	CandidateFlights: 43
-	ConflictFlights: 13
-			Start
-		[INFO] Index: 8
-i: 0
-			Count: 1
-			Feasibility ==> ok!
-[INFO] Level: 240
-	CandidateFlights: 48
-	ConflictFlights: 19
-			Start
-		[INFO] Index: 9
-i: 3
-			Count: 0.999
-			Feasibility ==> ok!
-[INFO] Level: 160
-	CandidateFlights: 40
-	ConflictFlights: 12
-			Start
-		[INFO] Index: 11
-i: 5
-			Count: 0.935
-			Feasibility ==> ok!
-[INFO] Level: 70
-	CandidateFlights: 28
-	ConflictFlights: 2
-			Start
-		[INFO] Index: 0
-i: 0
-			Count: 1
-			Feasibility ==> ok!
-[INFO] Level: 150
-	CandidateFlights: 27
-	ConflictFlights: 4
-			Start
-		[INFO] Index: 1
-i: 1
-			Count: 0.916
-			Feasibility ==> ok!
-[INFO] Level: 210
-	CandidateFlights: 37
-	ConflictFlights: 15
-			Start
-		[INFO] Index: 10
-i: 3
-			Count: 0.97
-			Feasibility ==> ok!
-[INFO] Level: 250
-	CandidateFlights: 33
-	ConflictFlights: 12
-			Start
-		[INFO] Index: 4
-i: 11
-			Count: 0.981
-			Feasibility ==> ok!
-[INFO] Level: 130
-	CandidateFlights: 22
-	ConflictFlights: 4
-			Start
-		[INFO] Index: 2
-i: 0
-			Count: 1
-			Feasibility ==> ok!
-[INFO] Level: 230
-	CandidateFlights: 29
-	ConflictFlights: 9
-			Start
-		[INFO] Index: 2
-i: 0
-			Count: 1
-			Feasibility ==> ok!
-[INFO] Level: 200
-	CandidateFlights: 41
-	ConflictFlights: 18
-			Start
-		[INFO] Index: 12
-i: 16
-			Count: 0.922
-			Feasibility ==> ok!
-[INFO] Level: 350
-	CandidateFlights: 26
-	ConflictFlights: 2
-			Start
-		[INFO] Index: 1
-i: 0
-			Count: 1
-			Feasibility ==> ok!
-[INFO] Level: 170
-	CandidateFlights: 23
-	ConflictFlights: 4
-			Start
-		[INFO] Index: 1
-i: 0
-			Count: 1
-			Feasibility ==> ok!
-[INFO] Level: 80
-	CandidateFlights: 18
-	ConflictFlights: 2
-			Start
-		[INFO] Index: 1
-i: 0
-			Count: 1
-			Feasibility ==> ok!
-[INFO] Level: 220
-	CandidateFlights: 16
-	ConflictFlights: 6
-			Start
-		[INFO] Index: 3
-i: 5
-			Count: 0.988
-			Feasibility ==> ok!
-[INFO] Level: 140
-	CandidateFlights: 15
-	ConflictFlights: 0
-	No conflict flights
-[INFO] Level: 90
-	CandidateFlights: 16
-	ConflictFlights: 0
-	No conflict flights
-[INFO] Level: 60
-	CandidateFlights: 13
-	ConflictFlights: 0
-	No conflict flights
-[INFO] Level: 50
-	CandidateFlights: 13
-	ConflictFlights: 0
-	No conflict flights
-[INFO] Level: 40
-	CandidateFlights: 10
-	ConflictFlights: 0
-	No conflict flights
-[INFO] Level: 110
-	CandidateFlights: 14
-	ConflictFlights: 2
-			Start
-		[INFO] Index: 0
-i: 0
-			Count: 1
-			Feasibility ==> ok!
-[INFO] Level: 100
-	CandidateFlights: 8
-	ConflictFlights: 0
-	No conflict flights
-[INFO] Level: 120
-	CandidateFlights: 10
-	ConflictFlights: 2
-			Start
-		[INFO] Index: 0
-i: 0
-			Count: 1
-			Feasibility ==> ok!
-[INFO] Level: 30
-	CandidateFlights: 7
-	ConflictFlights: 0
-	No conflict flights
-[INFO] Level: 260
-	CandidateFlights: 16
-	ConflictFlights: 0
-	No conflict flights
-[INFO] Level: 390
-	CandidateFlights: 4
-	ConflictFlights: 0
-	No conflict flights
-[INFO] Level: 370
-	CandidateFlights: 4
-	ConflictFlights: 0
-	No conflict flights
-[INFO] Level: 45
-	CandidateFlights: 1
-	ConflictFlights: 0
-	No conflict flights
-[INFO] Level: 35
-	CandidateFlights: 1
-	ConflictFlights: 0
-	No conflict flights
-[INFO] Level: 300
-	CandidateFlights: 14
-	ConflictFlights: 2
-			Start
-		[INFO] Index: 0
-i: 0
-			Count: 1
-			Feasibility ==> ok!
-[INFO] Level: 20
-	CandidateFlights: 0
-	ConflictFlights: 0
-	No conflict flights
-[INFO] Level: 10
-	CandidateFlights: 0
-	ConflictFlights: 0
-	No conflict flights
-[INFO] Level: 410
-	CandidateFlights: 0
-	ConflictFlights: 0
-	No conflict flights
-[INFO] Level: 85
-	CandidateFlights: 0
-	ConflictFlights: 0
-	No conflict flights
-[INFO] Level: 75
-	CandidateFlights: 0
-	ConflictFlights: 0
-	No conflict flights
-[INFO] Level: 65
-	CandidateFlights: 0
-	ConflictFlights: 0
-	No conflict flights
-[INFO] Level: 55
-	CandidateFlights: 0
-	ConflictFlights: 0
-	No conflict flights
-Solve the problem P':
-	Nb of flights change level: 128
-	Nb of flights not be assigned: 2
-	Elapsed time: 1359.34
-NbIteration: 1000
-[INFO] Level: 180
-	CandidateFlights: 143
-	ConflictFlights: 114
-			Start
-		[INFO] Index: 90
-i: 2
-			Count: 0.891
+		[INFO] Index: 92
+i: 65
+			Count: 0.878
 			Feasibility ==> ok!
 [INFO] Level: 280
 	CandidateFlights: 118
 	ConflictFlights: 109
 			Start
-		[INFO] Index: 63
-i: 15
-			Count: 0.994
+		[INFO] Index: 37
+i: 82
+			Count: 0.992
 			Feasibility ==> ok!
 [INFO] Level: 290
 	CandidateFlights: 122
@@ -2358,7 +2361,7 @@ i: 15
 			Start
 		[INFO] Index: 83
 i: 10
-			Count: 0.98
+			Count: 0.984
 			Feasibility ==> ok!
 [INFO] Level: 310
 	CandidateFlights: 128
@@ -2366,23 +2369,23 @@ i: 10
 			Start
 		[INFO] Index: 38
 i: 104
-			Count: 0.987
+			Count: 0.984
 			Feasibility ==> ok!
 [INFO] Level: 190
 	CandidateFlights: 109
 	ConflictFlights: 79
 			Start
 		[INFO] Index: 20
-i: 34
-			Count: 0.922
+i: 22
+			Count: 0.897
 			Feasibility ==> ok!
 [INFO] Level: 330
 	CandidateFlights: 83
 	ConflictFlights: 78
 			Start
 		[INFO] Index: 50
-i: 12
-			Count: 0.992
+i: 35
+			Count: 0.991
 			Feasibility ==> ok!
 [INFO] Level: 270
 	CandidateFlights: 43
@@ -2401,12 +2404,12 @@ i: 3
 			Count: 0.998
 			Feasibility ==> ok!
 [INFO] Level: 160
-	CandidateFlights: 40
-	ConflictFlights: 12
+	CandidateFlights: 38
+	ConflictFlights: 10
 			Start
-		[INFO] Index: 11
-i: 5
-			Count: 0.93
+		[INFO] Index: 4
+i: 0
+			Count: 1
 			Feasibility ==> ok!
 [INFO] Level: 70
 	CandidateFlights: 28
@@ -2422,7 +2425,7 @@ i: 0
 			Start
 		[INFO] Index: 1
 i: 1
-			Count: 0.903
+			Count: 0.904
 			Feasibility ==> ok!
 [INFO] Level: 210
 	CandidateFlights: 37
@@ -2438,7 +2441,7 @@ i: 0
 			Start
 		[INFO] Index: 4
 i: 11
-			Count: 0.979
+			Count: 0.984
 			Feasibility ==> ok!
 [INFO] Level: 130
 	CandidateFlights: 22
@@ -2457,12 +2460,12 @@ i: 0
 			Count: 1
 			Feasibility ==> ok!
 [INFO] Level: 200
-	CandidateFlights: 41
-	ConflictFlights: 18
+	CandidateFlights: 39
+	ConflictFlights: 16
 			Start
-		[INFO] Index: 12
-i: 16
-			Count: 0.917
+		[INFO] Index: 2
+i: 14
+			Count: 0.978
 			Feasibility ==> ok!
 [INFO] Level: 350
 	CandidateFlights: 27
@@ -2493,8 +2496,8 @@ i: 0
 	ConflictFlights: 6
 			Start
 		[INFO] Index: 3
-i: 1
-			Count: 0.988
+i: 5
+			Count: 0.991
 			Feasibility ==> ok!
 [INFO] Level: 140
 	CandidateFlights: 15
@@ -2562,9 +2565,9 @@ i: 0
 	No conflict flights
 [INFO] Level: 300
 	CandidateFlights: 14
-	ConflictFlights: 2
+	ConflictFlights: 4
 			Start
-		[INFO] Index: 0
+		[INFO] Index: 2
 i: 0
 			Count: 1
 			Feasibility ==> ok!
@@ -2597,49 +2600,49 @@ i: 0
 	ConflictFlights: 0
 	No conflict flights
 Solve the problem P':
-	Nb of flights change level: 133
-	Nb of flights not be assigned: 2
-	Elapsed time: 1446.53
+	Nb of flights change level: 128
+	Nb of flights not be assigned: 1
+	Elapsed time: 1198.92
 NbIteration: 1000
 [INFO] Level: 180
-	CandidateFlights: 143
-	ConflictFlights: 114
+	CandidateFlights: 145
+	ConflictFlights: 117
 			Start
-		[INFO] Index: 90
-i: 79
-			Count: 0.894
+		[INFO] Index: 92
+i: 55
+			Count: 0.875
 			Feasibility ==> ok!
 [INFO] Level: 280
 	CandidateFlights: 117
 	ConflictFlights: 108
 			Start
-		[INFO] Index: 10
-i: 82
-			Count: 0.998
+		[INFO] Index: 62
+i: 84
+			Count: 0.989
 			Feasibility ==> ok!
 [INFO] Level: 290
 	CandidateFlights: 121
 	ConflictFlights: 113
 			Start
 		[INFO] Index: 88
-i: 83
-			Count: 0.99
+i: 82
+			Count: 0.977
 			Feasibility ==> ok!
 [INFO] Level: 310
 	CandidateFlights: 128
 	ConflictFlights: 116
 			Start
 		[INFO] Index: 30
-i: 108
-			Count: 0.989
+i: 27
+			Count: 0.991
 			Feasibility ==> ok!
 [INFO] Level: 190
 	CandidateFlights: 108
 	ConflictFlights: 78
 			Start
 		[INFO] Index: 51
-i: 33
-			Count: 0.913
+i: 7
+			Count: 0.898
 			Feasibility ==> ok!
 [INFO] Level: 330
 	CandidateFlights: 83
@@ -2647,7 +2650,7 @@ i: 33
 			Start
 		[INFO] Index: 26
 i: 34
-			Count: 0.991
+			Count: 0.994
 			Feasibility ==> ok!
 [INFO] Level: 270
 	CandidateFlights: 43
@@ -2662,16 +2665,16 @@ i: 0
 	ConflictFlights: 19
 			Start
 		[INFO] Index: 9
-i: 0
-			Count: 1
+i: 3
+			Count: 0.999
 			Feasibility ==> ok!
 [INFO] Level: 160
-	CandidateFlights: 40
-	ConflictFlights: 12
+	CandidateFlights: 38
+	ConflictFlights: 10
 			Start
-		[INFO] Index: 11
-i: 5
-			Count: 0.923
+		[INFO] Index: 4
+i: 0
+			Count: 1
 			Feasibility ==> ok!
 [INFO] Level: 70
 	CandidateFlights: 28
@@ -2687,7 +2690,7 @@ i: 0
 			Start
 		[INFO] Index: 1
 i: 1
-			Count: 0.876
+			Count: 0.902
 			Feasibility ==> ok!
 [INFO] Level: 210
 	CandidateFlights: 37
@@ -2703,7 +2706,7 @@ i: 0
 			Start
 		[INFO] Index: 4
 i: 11
-			Count: 0.983
+			Count: 0.978
 			Feasibility ==> ok!
 [INFO] Level: 130
 	CandidateFlights: 22
@@ -2722,12 +2725,12 @@ i: 0
 			Count: 1
 			Feasibility ==> ok!
 [INFO] Level: 200
-	CandidateFlights: 41
-	ConflictFlights: 18
+	CandidateFlights: 39
+	ConflictFlights: 16
 			Start
-		[INFO] Index: 12
-i: 16
-			Count: 0.929
+		[INFO] Index: 2
+i: 14
+			Count: 0.973
 			Feasibility ==> ok!
 [INFO] Level: 350
 	CandidateFlights: 28
@@ -2758,8 +2761,8 @@ i: 0
 	ConflictFlights: 6
 			Start
 		[INFO] Index: 3
-i: 5
-			Count: 0.987
+i: 1
+			Count: 0.992
 			Feasibility ==> ok!
 [INFO] Level: 140
 	CandidateFlights: 15
@@ -2807,12 +2810,8 @@ i: 0
 	No conflict flights
 [INFO] Level: 260
 	CandidateFlights: 18
-	ConflictFlights: 2
-			Start
-		[INFO] Index: 0
-i: 0
-			Count: 1
-			Feasibility ==> ok!
+	ConflictFlights: 0
+	No conflict flights
 [INFO] Level: 390
 	CandidateFlights: 4
 	ConflictFlights: 0
@@ -2831,9 +2830,9 @@ i: 0
 	No conflict flights
 [INFO] Level: 300
 	CandidateFlights: 14
-	ConflictFlights: 2
+	ConflictFlights: 4
 			Start
-		[INFO] Index: 0
+		[INFO] Index: 2
 i: 0
 			Count: 1
 			Feasibility ==> ok!
@@ -2866,25 +2865,25 @@ i: 0
 	ConflictFlights: 0
 	No conflict flights
 Solve the problem P':
-	Nb of flights change level: 138
-	Nb of flights not be assigned: 2
-	Elapsed time: 1527.36
+	Nb of flights change level: 133
+	Nb of flights not be assigned: 1
+	Elapsed time: 1262.3
 NbIteration: 1000
 [INFO] Level: 180
-	CandidateFlights: 143
-	ConflictFlights: 114
+	CandidateFlights: 145
+	ConflictFlights: 117
 			Start
-		[INFO] Index: 90
-i: 2
-			Count: 0.892
+		[INFO] Index: 92
+i: 111
+			Count: 0.881
 			Feasibility ==> ok!
 [INFO] Level: 280
 	CandidateFlights: 116
 	ConflictFlights: 107
 			Start
-		[INFO] Index: 54
-i: 81
-			Count: 0.995
+		[INFO] Index: 10
+i: 3
+			Count: 0.997
 			Feasibility ==> ok!
 [INFO] Level: 290
 	CandidateFlights: 120
@@ -2892,31 +2891,31 @@ i: 81
 			Start
 		[INFO] Index: 50
 i: 12
-			Count: 0.983
+			Count: 0.991
 			Feasibility ==> ok!
 [INFO] Level: 310
 	CandidateFlights: 128
 	ConflictFlights: 116
 			Start
 		[INFO] Index: 96
-i: 27
-			Count: 0.984
+i: 108
+			Count: 0.982
 			Feasibility ==> ok!
 [INFO] Level: 190
 	CandidateFlights: 107
 	ConflictFlights: 77
 			Start
 		[INFO] Index: 59
-i: 50
-			Count: 0.934
+i: 21
+			Count: 0.921
 			Feasibility ==> ok!
 [INFO] Level: 330
 	CandidateFlights: 82
 	ConflictFlights: 76
 			Start
 		[INFO] Index: 27
-i: 38
-			Count: 0.996
+i: 64
+			Count: 0.994
 			Feasibility ==> ok!
 [INFO] Level: 270
 	CandidateFlights: 44
@@ -2935,12 +2934,12 @@ i: 0
 			Count: 1
 			Feasibility ==> ok!
 [INFO] Level: 160
-	CandidateFlights: 40
-	ConflictFlights: 12
+	CandidateFlights: 38
+	ConflictFlights: 10
 			Start
-		[INFO] Index: 11
-i: 5
-			Count: 0.928
+		[INFO] Index: 4
+i: 0
+			Count: 1
 			Feasibility ==> ok!
 [INFO] Level: 70
 	CandidateFlights: 28
@@ -2956,7 +2955,7 @@ i: 0
 			Start
 		[INFO] Index: 1
 i: 1
-			Count: 0.88
+			Count: 0.9
 			Feasibility ==> ok!
 [INFO] Level: 210
 	CandidateFlights: 38
@@ -2972,7 +2971,7 @@ i: 0
 			Start
 		[INFO] Index: 4
 i: 11
-			Count: 0.983
+			Count: 0.981
 			Feasibility ==> ok!
 [INFO] Level: 130
 	CandidateFlights: 22
@@ -2991,12 +2990,12 @@ i: 0
 			Count: 1
 			Feasibility ==> ok!
 [INFO] Level: 200
-	CandidateFlights: 41
-	ConflictFlights: 18
+	CandidateFlights: 39
+	ConflictFlights: 16
 			Start
-		[INFO] Index: 12
-i: 16
-			Count: 0.922
+		[INFO] Index: 2
+i: 8
+			Count: 0.973
 			Feasibility ==> ok!
 [INFO] Level: 350
 	CandidateFlights: 29
@@ -3027,8 +3026,8 @@ i: 0
 	ConflictFlights: 6
 			Start
 		[INFO] Index: 3
-i: 1
-			Count: 0.995
+i: 5
+			Count: 0.982
 			Feasibility ==> ok!
 [INFO] Level: 140
 	CandidateFlights: 15
@@ -3076,7 +3075,7 @@ i: 0
 	No conflict flights
 [INFO] Level: 260
 	CandidateFlights: 19
-	ConflictFlights: 4
+	ConflictFlights: 2
 			Start
 		[INFO] Index: 0
 i: 0
@@ -3100,9 +3099,9 @@ i: 0
 	No conflict flights
 [INFO] Level: 300
 	CandidateFlights: 14
-	ConflictFlights: 2
+	ConflictFlights: 4
 			Start
-		[INFO] Index: 0
+		[INFO] Index: 2
 i: 0
 			Count: 1
 			Feasibility ==> ok!
@@ -3135,23 +3134,23 @@ i: 0
 	ConflictFlights: 0
 	No conflict flights
 Solve the problem P':
-	Nb of flights change level: 142
-	Nb of flights not be assigned: 2
-	Elapsed time: 1597.79
+	Nb of flights change level: 137
+	Nb of flights not be assigned: 1
+	Elapsed time: 1329.73
 NbIteration: 1000
 [INFO] Level: 180
-	CandidateFlights: 143
-	ConflictFlights: 114
+	CandidateFlights: 145
+	ConflictFlights: 117
 			Start
-		[INFO] Index: 90
-i: 108
-			Count: 0.904
+		[INFO] Index: 92
+i: 111
+			Count: 0.868
 			Feasibility ==> ok!
 [INFO] Level: 280
 	CandidateFlights: 115
 	ConflictFlights: 106
 			Start
-		[INFO] Index: 67
+		[INFO] Index: 53
 i: 80
 			Count: 0.993
 			Feasibility ==> ok!
@@ -3161,14 +3160,14 @@ i: 80
 			Start
 		[INFO] Index: 12
 i: 82
-			Count: 0.994
+			Count: 0.986
 			Feasibility ==> ok!
 [INFO] Level: 310
 	CandidateFlights: 128
 	ConflictFlights: 116
 			Start
 		[INFO] Index: 108
-i: 104
+i: 27
 			Count: 0.991
 			Feasibility ==> ok!
 [INFO] Level: 190
@@ -3177,15 +3176,15 @@ i: 104
 			Start
 		[INFO] Index: 50
 i: 33
-			Count: 0.92
+			Count: 0.931
 			Feasibility ==> ok!
 [INFO] Level: 330
 	CandidateFlights: 82
 	ConflictFlights: 75
 			Start
 		[INFO] Index: 32
-i: 63
-			Count: 0.998
+i: 33
+			Count: 0.993
 			Feasibility ==> ok!
 [INFO] Level: 270
 	CandidateFlights: 44
@@ -3201,15 +3200,15 @@ i: 0
 			Start
 		[INFO] Index: 9
 i: 3
-			Count: 0.997
+			Count: 0.999
 			Feasibility ==> ok!
 [INFO] Level: 160
-	CandidateFlights: 40
-	ConflictFlights: 12
+	CandidateFlights: 38
+	ConflictFlights: 10
 			Start
-		[INFO] Index: 11
-i: 5
-			Count: 0.925
+		[INFO] Index: 4
+i: 0
+			Count: 1
 			Feasibility ==> ok!
 [INFO] Level: 70
 	CandidateFlights: 28
@@ -3225,7 +3224,7 @@ i: 0
 			Start
 		[INFO] Index: 1
 i: 1
-			Count: 0.882
+			Count: 0.886
 			Feasibility ==> ok!
 [INFO] Level: 210
 	CandidateFlights: 39
@@ -3241,7 +3240,7 @@ i: 0
 			Start
 		[INFO] Index: 4
 i: 11
-			Count: 0.971
+			Count: 0.98
 			Feasibility ==> ok!
 [INFO] Level: 130
 	CandidateFlights: 22
@@ -3260,12 +3259,12 @@ i: 0
 			Count: 1
 			Feasibility ==> ok!
 [INFO] Level: 200
-	CandidateFlights: 41
-	ConflictFlights: 18
+	CandidateFlights: 39
+	ConflictFlights: 16
 			Start
-		[INFO] Index: 12
-i: 16
-			Count: 0.916
+		[INFO] Index: 2
+i: 8
+			Count: 0.97
 			Feasibility ==> ok!
 [INFO] Level: 350
 	CandidateFlights: 30
@@ -3296,7 +3295,7 @@ i: 0
 	ConflictFlights: 6
 			Start
 		[INFO] Index: 3
-i: 5
+i: 1
 			Count: 0.984
 			Feasibility ==> ok!
 [INFO] Level: 140
@@ -3345,7 +3344,7 @@ i: 0
 	No conflict flights
 [INFO] Level: 260
 	CandidateFlights: 20
-	ConflictFlights: 4
+	ConflictFlights: 2
 			Start
 		[INFO] Index: 0
 i: 0
@@ -3369,9 +3368,9 @@ i: 0
 	No conflict flights
 [INFO] Level: 300
 	CandidateFlights: 14
-	ConflictFlights: 2
+	ConflictFlights: 4
 			Start
-		[INFO] Index: 0
+		[INFO] Index: 2
 i: 0
 			Count: 1
 			Feasibility ==> ok!
@@ -3404,33 +3403,33 @@ i: 0
 	ConflictFlights: 0
 	No conflict flights
 Solve the problem P':
-	Nb of flights change level: 146
-	Nb of flights not be assigned: 3
-	Elapsed time: 1673.03
+	Nb of flights change level: 141
+	Nb of flights not be assigned: 2
+	Elapsed time: 1411.27
 NbIteration: 1000
 [INFO] Level: 180
-	CandidateFlights: 143
-	ConflictFlights: 114
+	CandidateFlights: 145
+	ConflictFlights: 117
 			Start
-		[INFO] Index: 90
-i: 108
-			Count: 0.914
+		[INFO] Index: 92
+i: 65
+			Count: 0.876
 			Feasibility ==> ok!
 [INFO] Level: 280
 	CandidateFlights: 114
 	ConflictFlights: 105
 			Start
-		[INFO] Index: 49
+		[INFO] Index: 81
 i: 79
-			Count: 0.998
+			Count: 0.994
 			Feasibility ==> ok!
 [INFO] Level: 290
 	CandidateFlights: 118
 	ConflictFlights: 110
 			Start
 		[INFO] Index: 47
-i: 81
-			Count: 0.99
+i: 15
+			Count: 0.988
 			Feasibility ==> ok!
 [INFO] Level: 310
 	CandidateFlights: 128
@@ -3438,23 +3437,23 @@ i: 81
 			Start
 		[INFO] Index: 98
 i: 105
-			Count: 0.981
+			Count: 0.989
 			Feasibility ==> ok!
 [INFO] Level: 190
 	CandidateFlights: 106
 	ConflictFlights: 75
 			Start
 		[INFO] Index: 50
-i: 21
-			Count: 0.928
+i: 33
+			Count: 0.927
 			Feasibility ==> ok!
 [INFO] Level: 330
 	CandidateFlights: 81
 	ConflictFlights: 74
 			Start
 		[INFO] Index: 36
-i: 54
-			Count: 0.993
+i: 32
+			Count: 0.995
 			Feasibility ==> ok!
 [INFO] Level: 270
 	CandidateFlights: 45
@@ -3462,23 +3461,23 @@ i: 54
 			Start
 		[INFO] Index: 12
 i: 4
-			Count: 0.989
+			Count: 0.991
 			Feasibility ==> ok!
 [INFO] Level: 240
 	CandidateFlights: 48
 	ConflictFlights: 19
 			Start
 		[INFO] Index: 9
-i: 3
-			Count: 0.999
+i: 0
+			Count: 1
 			Feasibility ==> ok!
 [INFO] Level: 160
-	CandidateFlights: 40
-	ConflictFlights: 12
+	CandidateFlights: 38
+	ConflictFlights: 10
 			Start
-		[INFO] Index: 11
-i: 5
-			Count: 0.942
+		[INFO] Index: 4
+i: 0
+			Count: 1
 			Feasibility ==> ok!
 [INFO] Level: 70
 	CandidateFlights: 28
@@ -3494,7 +3493,7 @@ i: 0
 			Start
 		[INFO] Index: 1
 i: 1
-			Count: 0.884
+			Count: 0.914
 			Feasibility ==> ok!
 [INFO] Level: 210
 	CandidateFlights: 39
@@ -3510,7 +3509,7 @@ i: 0
 			Start
 		[INFO] Index: 4
 i: 11
-			Count: 0.985
+			Count: 0.984
 			Feasibility ==> ok!
 [INFO] Level: 130
 	CandidateFlights: 22
@@ -3529,12 +3528,12 @@ i: 0
 			Count: 1
 			Feasibility ==> ok!
 [INFO] Level: 200
-	CandidateFlights: 41
-	ConflictFlights: 18
+	CandidateFlights: 39
+	ConflictFlights: 16
 			Start
-		[INFO] Index: 12
-i: 16
-			Count: 0.905
+		[INFO] Index: 2
+i: 14
+			Count: 0.969
 			Feasibility ==> ok!
 [INFO] Level: 350
 	CandidateFlights: 31
@@ -3565,8 +3564,8 @@ i: 0
 	ConflictFlights: 6
 			Start
 		[INFO] Index: 3
-i: 2
-			Count: 0.989
+i: 5
+			Count: 0.985
 			Feasibility ==> ok!
 [INFO] Level: 140
 	CandidateFlights: 15
@@ -3616,7 +3615,7 @@ i: 0
 	CandidateFlights: 21
 	ConflictFlights: 4
 			Start
-		[INFO] Index: 0
+		[INFO] Index: 2
 i: 0
 			Count: 1
 			Feasibility ==> ok!
@@ -3638,9 +3637,9 @@ i: 0
 	No conflict flights
 [INFO] Level: 300
 	CandidateFlights: 14
-	ConflictFlights: 2
+	ConflictFlights: 4
 			Start
-		[INFO] Index: 0
+		[INFO] Index: 2
 i: 0
 			Count: 1
 			Feasibility ==> ok!
@@ -3673,32 +3672,32 @@ i: 0
 	ConflictFlights: 0
 	No conflict flights
 Solve the problem P':
-	Nb of flights change level: 148
-	Nb of flights not be assigned: 4
-	Elapsed time: 1752.83
+	Nb of flights change level: 143
+	Nb of flights not be assigned: 3
+	Elapsed time: 1492.05
 NbIteration: 1000
 [INFO] Level: 180
-	CandidateFlights: 143
-	ConflictFlights: 114
+	CandidateFlights: 145
+	ConflictFlights: 117
 			Start
-		[INFO] Index: 90
-i: 79
-			Count: 0.871
+		[INFO] Index: 92
+i: 111
+			Count: 0.879
 			Feasibility ==> ok!
 [INFO] Level: 280
 	CandidateFlights: 113
 	ConflictFlights: 104
 			Start
-		[INFO] Index: 68
-i: 0
-			Count: 1
+		[INFO] Index: 48
+i: 79
+			Count: 0.997
 			Feasibility ==> ok!
 [INFO] Level: 290
 	CandidateFlights: 117
 	ConflictFlights: 108
 			Start
 		[INFO] Index: 73
-i: 66
+i: 78
 			Count: 0.992
 			Feasibility ==> ok!
 [INFO] Level: 310
@@ -3707,7 +3706,7 @@ i: 66
 			Start
 		[INFO] Index: 62
 i: 106
-			Count: 0.986
+			Count: 0.996
 			Feasibility ==> ok!
 [INFO] Level: 190
 	CandidateFlights: 106
@@ -3715,15 +3714,15 @@ i: 106
 			Start
 		[INFO] Index: 50
 i: 21
-			Count: 0.933
+			Count: 0.932
 			Feasibility ==> ok!
 [INFO] Level: 330
 	CandidateFlights: 81
 	ConflictFlights: 74
 			Start
 		[INFO] Index: 36
-i: 65
-			Count: 0.991
+i: 33
+			Count: 0.99
 			Feasibility ==> ok!
 [INFO] Level: 270
 	CandidateFlights: 45
@@ -3731,23 +3730,23 @@ i: 65
 			Start
 		[INFO] Index: 12
 i: 4
-			Count: 0.988
+			Count: 0.991
 			Feasibility ==> ok!
 [INFO] Level: 240
 	CandidateFlights: 48
 	ConflictFlights: 19
 			Start
 		[INFO] Index: 9
-i: 3
-			Count: 0.998
+i: 0
+			Count: 1
 			Feasibility ==> ok!
 [INFO] Level: 160
-	CandidateFlights: 40
-	ConflictFlights: 12
+	CandidateFlights: 38
+	ConflictFlights: 10
 			Start
-		[INFO] Index: 11
-i: 5
-			Count: 0.933
+		[INFO] Index: 4
+i: 0
+			Count: 1
 			Feasibility ==> ok!
 [INFO] Level: 70
 	CandidateFlights: 28
@@ -3763,7 +3762,7 @@ i: 0
 			Start
 		[INFO] Index: 1
 i: 1
-			Count: 0.895
+			Count: 0.897
 			Feasibility ==> ok!
 [INFO] Level: 210
 	CandidateFlights: 39
@@ -3779,7 +3778,7 @@ i: 0
 			Start
 		[INFO] Index: 4
 i: 11
-			Count: 0.972
+			Count: 0.989
 			Feasibility ==> ok!
 [INFO] Level: 130
 	CandidateFlights: 22
@@ -3798,12 +3797,12 @@ i: 0
 			Count: 1
 			Feasibility ==> ok!
 [INFO] Level: 200
-	CandidateFlights: 41
-	ConflictFlights: 18
+	CandidateFlights: 39
+	ConflictFlights: 16
 			Start
-		[INFO] Index: 12
-i: 16
-			Count: 0.919
+		[INFO] Index: 2
+i: 14
+			Count: 0.961
 			Feasibility ==> ok!
 [INFO] Level: 350
 	CandidateFlights: 31
@@ -3834,8 +3833,8 @@ i: 0
 	ConflictFlights: 6
 			Start
 		[INFO] Index: 3
-i: 2
-			Count: 0.987
+i: 1
+			Count: 0.988
 			Feasibility ==> ok!
 [INFO] Level: 140
 	CandidateFlights: 15
@@ -3883,9 +3882,9 @@ i: 0
 	No conflict flights
 [INFO] Level: 260
 	CandidateFlights: 22
-	ConflictFlights: 6
+	ConflictFlights: 4
 			Start
-		[INFO] Index: 0
+		[INFO] Index: 2
 i: 0
 			Count: 1
 			Feasibility ==> ok!
@@ -3907,9 +3906,9 @@ i: 0
 	No conflict flights
 [INFO] Level: 300
 	CandidateFlights: 14
-	ConflictFlights: 2
+	ConflictFlights: 4
 			Start
-		[INFO] Index: 0
+		[INFO] Index: 2
 i: 0
 			Count: 1
 			Feasibility ==> ok!
@@ -3942,15 +3941,284 @@ i: 0
 	ConflictFlights: 0
 	No conflict flights
 Solve the problem P':
-	Nb of flights change level: 150
-	Nb of flights not be assigned: 4
-	Elapsed time: 1826.92
+	Nb of flights change level: 145
+	Nb of flights not be assigned: 3
+	Elapsed time: 1556.69
+NbIteration: 1000
+[INFO] Level: 180
+	CandidateFlights: 145
+	ConflictFlights: 117
+			Start
+		[INFO] Index: 92
+i: 111
+			Count: 0.892
+			Feasibility ==> ok!
+[INFO] Level: 280
+	CandidateFlights: 112
+	ConflictFlights: 103
+			Start
+		[INFO] Index: 56
+i: 78
+			Count: 0.998
+			Feasibility ==> ok!
+[INFO] Level: 290
+	CandidateFlights: 116
+	ConflictFlights: 107
+			Start
+		[INFO] Index: 77
+i: 10
+			Count: 0.995
+			Feasibility ==> ok!
+[INFO] Level: 310
+	CandidateFlights: 130
+	ConflictFlights: 118
+			Start
+		[INFO] Index: 62
+i: 107
+			Count: 0.984
+			Feasibility ==> ok!
+[INFO] Level: 190
+	CandidateFlights: 106
+	ConflictFlights: 75
+			Start
+		[INFO] Index: 50
+i: 33
+			Count: 0.933
+			Feasibility ==> ok!
+[INFO] Level: 330
+	CandidateFlights: 81
+	ConflictFlights: 74
+			Start
+		[INFO] Index: 36
+i: 32
+			Count: 0.993
+			Feasibility ==> ok!
+[INFO] Level: 270
+	CandidateFlights: 45
+	ConflictFlights: 17
+			Start
+		[INFO] Index: 12
+i: 4
+			Count: 0.984
+			Feasibility ==> ok!
+[INFO] Level: 240
+	CandidateFlights: 48
+	ConflictFlights: 19
+			Start
+		[INFO] Index: 9
+i: 3
+			Count: 0.997
+			Feasibility ==> ok!
+[INFO] Level: 160
+	CandidateFlights: 38
+	ConflictFlights: 10
+			Start
+		[INFO] Index: 4
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 70
+	CandidateFlights: 28
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 150
+	CandidateFlights: 27
+	ConflictFlights: 4
+			Start
+		[INFO] Index: 1
+i: 1
+			Count: 0.894
+			Feasibility ==> ok!
+[INFO] Level: 210
+	CandidateFlights: 39
+	ConflictFlights: 14
+			Start
+		[INFO] Index: 5
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 250
+	CandidateFlights: 33
+	ConflictFlights: 12
+			Start
+		[INFO] Index: 4
+i: 11
+			Count: 0.981
+			Feasibility ==> ok!
+[INFO] Level: 130
+	CandidateFlights: 22
+	ConflictFlights: 4
+			Start
+		[INFO] Index: 2
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 230
+	CandidateFlights: 30
+	ConflictFlights: 10
+			Start
+		[INFO] Index: 3
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 200
+	CandidateFlights: 39
+	ConflictFlights: 16
+			Start
+		[INFO] Index: 2
+i: 8
+			Count: 0.973
+			Feasibility ==> ok!
+[INFO] Level: 350
+	CandidateFlights: 31
+	ConflictFlights: 6
+			Start
+		[INFO] Index: 3
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 170
+	CandidateFlights: 24
+	ConflictFlights: 4
+			Start
+		[INFO] Index: 1
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 80
+	CandidateFlights: 18
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 1
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 220
+	CandidateFlights: 16
+	ConflictFlights: 6
+			Start
+		[INFO] Index: 3
+i: 5
+			Count: 0.983
+			Feasibility ==> ok!
+[INFO] Level: 140
+	CandidateFlights: 15
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 90
+	CandidateFlights: 16
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 60
+	CandidateFlights: 13
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 50
+	CandidateFlights: 13
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 40
+	CandidateFlights: 10
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 110
+	CandidateFlights: 14
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 100
+	CandidateFlights: 8
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 120
+	CandidateFlights: 10
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 30
+	CandidateFlights: 7
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 260
+	CandidateFlights: 23
+	ConflictFlights: 6
+			Start
+		[INFO] Index: 4
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 390
+	CandidateFlights: 4
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 370
+	CandidateFlights: 4
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 45
+	CandidateFlights: 1
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 35
+	CandidateFlights: 1
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 300
+	CandidateFlights: 14
+	ConflictFlights: 4
+			Start
+		[INFO] Index: 2
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 20
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 10
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 410
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 85
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 75
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 65
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 55
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+Solve the problem P':
+	Nb of flights change level: 147
+	Nb of flights not be assigned: 3
+	Elapsed time: 1627.2
 NbIteration: 1000
 Result MC
-	Nb of flights change level: 150
-	Nb of flights not be assigned: 4
+	Nb of flights change level: 147
+	Nb of flights not be assigned: 3
 	Max conflict: 11
 	Max diverse levels: 20
-	Sum benefits: 23375.9
-	Elapsed time: 1826.92
+	Sum benefits: 23426.1
+	Elapsed time: 1627.2
 

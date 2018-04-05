@@ -344,7 +344,7 @@
 Solve the problem P':
 	Nb of flights change level: 34
 	Nb of flights not be assigned: 1
-	Elapsed time: 1.25
+	Elapsed time: 1.09
 [INFO] Level: 180
 	CandidateFlights: 156
 	ConflictFlights: 132
@@ -586,12 +586,12 @@ Solve the problem P':
 Solve the problem P':
 	Nb of flights change level: 43
 	Nb of flights not be assigned: 0
-	Elapsed time: 2.08
+	Elapsed time: 1.72
 Result Hoef
 	Nb of flights change level: 43
 	Nb of flights not be assigned: 0
 	Max conflict: 14
 	Max diverse levels: 20
 	Sum benefits: 24962.2
-	Elapsed time: 2.08
+	Elapsed time: 1.72
 

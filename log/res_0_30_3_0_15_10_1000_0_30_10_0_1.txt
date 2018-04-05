@@ -621,7 +621,7 @@
 Solve the problem P':
 	Nb of flights change level: 117
 	Nb of flights not be assigned: 13
-	Elapsed time: 3.63
+	Elapsed time: 2.38
 [INFO] Level: 180
 	CandidateFlights: 144
 	ConflictFlights: 116
@@ -885,7 +885,7 @@ Solve the problem P':
 Solve the problem P':
 	Nb of flights change level: 128
 	Nb of flights not be assigned: 3
-	Elapsed time: 4.46
+	Elapsed time: 3.01
 [INFO] Level: 180
 	CandidateFlights: 135
 	ConflictFlights: 106
@@ -1131,7 +1131,7 @@ Solve the problem P':
 Solve the problem P':
 	Nb of flights change level: 128
 	Nb of flights not be assigned: 3
-	Elapsed time: 5.19
+	Elapsed time: 3.56
 [INFO] Level: 180
 	CandidateFlights: 135
 	ConflictFlights: 106
@@ -1377,7 +1377,7 @@ Solve the problem P':
 Solve the problem P':
 	Nb of flights change level: 128
 	Nb of flights not be assigned: 3
-	Elapsed time: 5.92
+	Elapsed time: 4.02
 [INFO] Level: 180
 	CandidateFlights: 135
 	ConflictFlights: 106
@@ -1623,7 +1623,7 @@ Solve the problem P':
 Solve the problem P':
 	Nb of flights change level: 128
 	Nb of flights not be assigned: 3
-	Elapsed time: 6.67
+	Elapsed time: 4.67
 [INFO] Level: 180
 	CandidateFlights: 135
 	ConflictFlights: 106
@@ -1869,7 +1869,7 @@ Solve the problem P':
 Solve the problem P':
 	Nb of flights change level: 128
 	Nb of flights not be assigned: 3
-	Elapsed time: 7.42
+	Elapsed time: 5.21
 [INFO] Level: 180
 	CandidateFlights: 135
 	ConflictFlights: 106
@@ -2115,7 +2115,7 @@ Solve the problem P':
 Solve the problem P':
 	Nb of flights change level: 128
 	Nb of flights not be assigned: 3
-	Elapsed time: 8.2
+	Elapsed time: 5.84
 [INFO] Level: 180
 	CandidateFlights: 135
 	ConflictFlights: 106
@@ -2361,7 +2361,7 @@ Solve the problem P':
 Solve the problem P':
 	Nb of flights change level: 128
 	Nb of flights not be assigned: 3
-	Elapsed time: 9.02
+	Elapsed time: 6.44
 [INFO] Level: 180
 	CandidateFlights: 135
 	ConflictFlights: 106
@@ -2607,7 +2607,7 @@ Solve the problem P':
 Solve the problem P':
 	Nb of flights change level: 128
 	Nb of flights not be assigned: 3
-	Elapsed time: 9.83
+	Elapsed time: 7.04
 [INFO] Level: 180
 	CandidateFlights: 135
 	ConflictFlights: 106
@@ -2853,7 +2853,7 @@ Solve the problem P':
 Solve the problem P':
 	Nb of flights change level: 128
 	Nb of flights not be assigned: 3
-	Elapsed time: 10.57
+	Elapsed time: 7.62
 [INFO] Level: 180
 	CandidateFlights: 135
 	ConflictFlights: 106
@@ -3099,7 +3099,7 @@ Solve the problem P':
 Solve the problem P':
 	Nb of flights change level: 128
 	Nb of flights not be assigned: 3
-	Elapsed time: 11.27
+	Elapsed time: 8.3
 [INFO] Level: 180
 	CandidateFlights: 135
 	ConflictFlights: 106
@@ -3345,12 +3345,12 @@ Solve the problem P':
 Solve the problem P':
 	Nb of flights change level: 128
 	Nb of flights not be assigned: 3
-	Elapsed time: 11.99
+	Elapsed time: 8.98
 Result Det
 	Nb of flights change level: 128
 	Nb of flights not be assigned: 3
 	Max conflict: 11
 	Max diverse levels: 20
 	Sum benefits: 23760.7
-	Elapsed time: 11.99
+	Elapsed time: 8.98
 

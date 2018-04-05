@@ -62,13 +62,10 @@
 			Start
 		[INFO] Index: 112
 i: 35
-			Count: 0.702
+			Count: 0.69
 		[INFO] Index: 35
-i: 135
-			Count: 0.855
-		[INFO] Index: 135
-i: 13
-			Count: 0.951
+i: 133
+			Count: 0.869
 			Feasibility ==> ok!
 [INFO] Level: 280
 	CandidateFlights: 139
@@ -76,10 +73,10 @@ i: 13
 			Start
 		[INFO] Index: 115
 i: 58
-			Count: 0.826
+			Count: 0.85
 		[INFO] Index: 58
-i: 59
-			Count: 0.881
+i: 60
+			Count: 0.879
 			Feasibility ==> ok!
 [INFO] Level: 290
 	CandidateFlights: 128
@@ -102,11 +99,11 @@ i: 0
 	ConflictFlights: 104
 			Start
 		[INFO] Index: 55
-i: 86
-			Count: 0.851
-		[INFO] Index: 86
 i: 62
-			Count: 0.895
+			Count: 0.811
+		[INFO] Index: 62
+i: 86
+			Count: 0.898
 			Feasibility ==> ok!
 [INFO] Level: 330
 	CandidateFlights: 83
@@ -122,13 +119,13 @@ i: 0
 			Start
 		[INFO] Index: 14
 i: 7
-			Count: 0.755
+			Count: 0.778
 		[INFO] Index: 7
 i: 8
-			Count: 0.832
+			Count: 0.848
 		[INFO] Index: 8
 i: 9
-			Count: 0.945
+			Count: 0.924
 			Feasibility ==> ok!
 [INFO] Level: 240
 	CandidateFlights: 52
@@ -144,7 +141,10 @@ i: 6
 			Start
 		[INFO] Index: 6
 i: 4
-			Count: 0.871
+			Count: 0.845
+		[INFO] Index: 4
+i: 0
+			Count: 1
 			Feasibility ==> ok!
 [INFO] Level: 70
 	CandidateFlights: 30
@@ -164,7 +164,7 @@ i: 0
 			Feasibility ==> ok!
 [INFO] Level: 210
 	CandidateFlights: 30
-	ConflictFlights: 16
+	ConflictFlights: 15
 			Start
 		[INFO] Index: 13
 i: 0
@@ -195,7 +195,7 @@ i: 0
 			Count: 1
 			Feasibility ==> ok!
 [INFO] Level: 200
-	CandidateFlights: 23
+	CandidateFlights: 22
 	ConflictFlights: 5
 			Start
 		[INFO] Index: 3
@@ -235,7 +235,7 @@ i: 0
 			Count: 1
 			Feasibility ==> ok!
 [INFO] Level: 140
-	CandidateFlights: 17
+	CandidateFlights: 18
 	ConflictFlights: 6
 			Start
 		[INFO] Index: 0
@@ -329,13 +329,13 @@ i: 0
 Solve the problem P':
 	Nb of flights change level: 15
 	Nb of flights not be assigned: 0
-	Elapsed time: 154.4
+	Elapsed time: 156.91
 NbIteration: 1000
 Result MC
 	Nb of flights change level: 15
 	Nb of flights not be assigned: 0
 	Max conflict: 11
 	Max diverse levels: 20
-	Sum benefits: 25359.8
-	Elapsed time: 154.4
+	Sum benefits: 25355.1
+	Elapsed time: 156.91
 

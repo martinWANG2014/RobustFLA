@@ -62,79 +62,82 @@
 			Start
 		[INFO] Index: 114
 i: 27
-			Count: 0.149
+			Count: 0.132
 		[INFO] Index: 27
 i: 35
-			Count: 0.173
+			Count: 0.162
 		[INFO] Index: 35
 i: 14
-			Count: 0.239
+			Count: 0.204
 		[INFO] Index: 14
 i: 34
-			Count: 0.256
+			Count: 0.26
 		[INFO] Index: 34
 i: 137
-			Count: 0.322
+			Count: 0.324
 		[INFO] Index: 137
 i: 54
-			Count: 0.405
+			Count: 0.404
 		[INFO] Index: 54
 i: 122
-			Count: 0.429
+			Count: 0.41
 		[INFO] Index: 122
-i: 29
-			Count: 0.453
-		[INFO] Index: 29
 i: 111
-			Count: 0.518
+			Count: 0.486
 		[INFO] Index: 111
-i: 38
-			Count: 0.609
-		[INFO] Index: 38
+i: 29
+			Count: 0.579
+		[INFO] Index: 29
 i: 20
-			Count: 0.66
+			Count: 0.644
 		[INFO] Index: 20
+i: 38
+			Count: 0.7
+		[INFO] Index: 38
+i: 47
+			Count: 0.727
+		[INFO] Index: 47
 i: 74
-			Count: 0.696
+			Count: 0.746
 		[INFO] Index: 74
+i: 30
+			Count: 0.784
+		[INFO] Index: 30
 i: 39
-			Count: 0.77
+			Count: 0.786
 		[INFO] Index: 39
 i: 70
-			Count: 0.787
+			Count: 0.819
 		[INFO] Index: 70
-i: 30
-			Count: 0.797
-		[INFO] Index: 30
-i: 47
-			Count: 0.83
-		[INFO] Index: 47
 i: 40
-			Count: 0.842
+			Count: 0.845
 		[INFO] Index: 40
 i: 16
 			Count: 0.874
 		[INFO] Index: 16
 i: 115
-			Count: 0.88
+			Count: 0.896
 		[INFO] Index: 115
 i: 134
-			Count: 0.921
+			Count: 0.902
 		[INFO] Index: 134
-i: 71
-			Count: 0.934
-		[INFO] Index: 71
+i: 45
+			Count: 0.927
+		[INFO] Index: 45
 i: 84
-			Count: 0.928
+			Count: 0.925
 		[INFO] Index: 84
 i: 102
-			Count: 0.927
+			Count: 0.939
 		[INFO] Index: 102
-i: 45
-			Count: 0.951
-		[INFO] Index: 45
+i: 71
+			Count: 0.947
+		[INFO] Index: 71
 i: 110
-			Count: 0.963
+			Count: 0.958
+		[INFO] Index: 110
+i: 4
+			Count: 0.97
 			Feasibility ==> ok!
 [INFO] Level: 280
 	CandidateFlights: 139
@@ -142,67 +145,58 @@ i: 110
 			Start
 		[INFO] Index: 62
 i: 61
-			Count: 0.169
+			Count: 0.158
 		[INFO] Index: 61
-i: 1
-			Count: 0.224
-		[INFO] Index: 1
 i: 63
-			Count: 0.262
+			Count: 0.224
 		[INFO] Index: 63
-i: 110
-			Count: 0.294
-		[INFO] Index: 110
-i: 121
-			Count: 0.376
-		[INFO] Index: 121
+i: 118
+			Count: 0.271
+		[INFO] Index: 118
+i: 1
+			Count: 0.404
+		[INFO] Index: 1
 i: 130
-			Count: 0.501
+			Count: 0.469
 		[INFO] Index: 130
+i: 121
+			Count: 0.544
+		[INFO] Index: 121
 i: 3
-			Count: 0.541
+			Count: 0.612
 		[INFO] Index: 3
 i: 36
-			Count: 0.628
+			Count: 0.666
 		[INFO] Index: 36
-i: 106
-			Count: 0.637
-		[INFO] Index: 106
-i: 37
-			Count: 0.722
-		[INFO] Index: 37
-i: 132
-			Count: 0.723
-		[INFO] Index: 132
-i: 106
-			Count: 0.763
-		[INFO] Index: 106
 i: 35
-			Count: 0.789
+			Count: 0.721
 		[INFO] Index: 35
-i: 110
-			Count: 0.702
-		[INFO] Index: 110
-i: 50
-			Count: 0.826
-		[INFO] Index: 50
-i: 40
-			Count: 0.84
-		[INFO] Index: 40
-i: 48
-			Count: 0.86
-		[INFO] Index: 48
 i: 55
-			Count: 0.878
+			Count: 0.773
 		[INFO] Index: 55
+i: 40
+			Count: 0.812
+		[INFO] Index: 40
+i: 132
+			Count: 0.798
+		[INFO] Index: 132
+i: 48
+			Count: 0.815
+		[INFO] Index: 48
+i: 131
+			Count: 0.863
+		[INFO] Index: 131
+i: 37
+			Count: 0.898
+		[INFO] Index: 37
 i: 127
-			Count: 0.909
+			Count: 0.931
 		[INFO] Index: 127
 i: 43
-			Count: 0.949
+			Count: 0.958
 		[INFO] Index: 43
-i: 56
-			Count: 0.964
+i: 46
+			Count: 0.975
 			Feasibility ==> ok!
 [INFO] Level: 290
 	CandidateFlights: 128
@@ -210,17 +204,17 @@ i: 56
 			Start
 		[INFO] Index: 48
 i: 53
-			Count: 0.959
+			Count: 0.95
 		[INFO] Index: 53
 i: 88
-			Count: 0.976
+			Count: 0.969
 			Feasibility ==> ok!
 [INFO] Level: 310
 	CandidateFlights: 129
 	ConflictFlights: 120
 			Start
 		[INFO] Index: 87
-i: 31
+i: 107
 			Count: 0.98
 			Feasibility ==> ok!
 [INFO] Level: 190
@@ -229,73 +223,96 @@ i: 31
 			Start
 		[INFO] Index: 56
 i: 48
-			Count: 0.187
+			Count: 0.17
 		[INFO] Index: 48
 i: 63
-			Count: 0.2
+			Count: 0.234
 		[INFO] Index: 63
 i: 87
-			Count: 0.32
+			Count: 0.312
 		[INFO] Index: 87
 i: 88
-			Count: 0.469
+			Count: 0.521
 		[INFO] Index: 88
 i: 42
-			Count: 0.599
+			Count: 0.582
 		[INFO] Index: 42
 i: 78
-			Count: 0.684
+			Count: 0.671
 		[INFO] Index: 78
 i: 47
-			Count: 0.775
+			Count: 0.786
 		[INFO] Index: 47
 i: 73
-			Count: 0.826
+			Count: 0.825
 		[INFO] Index: 73
-i: 70
-			Count: 0.841
-		[INFO] Index: 70
 i: 58
-			Count: 0.888
+			Count: 0.861
 		[INFO] Index: 58
-i: 62
-			Count: 0.903
-		[INFO] Index: 62
 i: 25
-			Count: 0.921
+			Count: 0.863
 		[INFO] Index: 25
+i: 62
+			Count: 0.875
+		[INFO] Index: 62
+i: 75
+			Count: 0.905
+		[INFO] Index: 75
+i: 41
+			Count: 0.922
+		[INFO] Index: 41
 i: 57
-			Count: 0.948
+			Count: 0.93
 		[INFO] Index: 57
 i: 41
-			Count: 0.95
-		[INFO] Index: 41
-i: 41
-			Count: 0.944
-		[INFO] Index: 41
-i: 41
-			Count: 0.955
-		[INFO] Index: 41
-i: 41
-			Count: 0.956
-		[INFO] Index: 41
-i: 41
 			Count: 0.946
-		[INFO] Index: 41
+[INFO] Level: 190
+	Remove: LB459TF
+	CandidateFlights: 125
+	ConflictFlights: 105
+			Start
+		[INFO] Index: 55
+i: 47
+			Count: 0.166
+		[INFO] Index: 47
+i: 62
+			Count: 0.215
+		[INFO] Index: 62
+i: 86
+			Count: 0.336
+		[INFO] Index: 86
 i: 41
-			Count: 0.953
+			Count: 0.521
 		[INFO] Index: 41
-i: 41
-			Count: 0.947
-		[INFO] Index: 41
-i: 41
-			Count: 0.944
-		[INFO] Index: 41
+i: 87
+			Count: 0.599
+		[INFO] Index: 87
+i: 77
+			Count: 0.701
+		[INFO] Index: 77
+i: 46
+			Count: 0.783
+		[INFO] Index: 46
+i: 74
+			Count: 0.833
+		[INFO] Index: 74
+i: 72
+			Count: 0.865
+		[INFO] Index: 72
+i: 57
+			Count: 0.89
+		[INFO] Index: 57
+i: 25
+			Count: 0.902
+		[INFO] Index: 25
+i: 61
+			Count: 0.917
+		[INFO] Index: 61
 i: 30
-			Count: 0.945
+			Count: 0.956
 		[INFO] Index: 30
-i: 41
-			Count: 0.964
+i: 56
+			Count: 0.97
 			Feasibility ==> ok!
 [INFO] Level: 330
 	CandidateFlights: 83
@@ -303,7 +320,7 @@ i: 41
 			Start
 		[INFO] Index: 57
 i: 60
-			Count: 0.985
+			Count: 0.984
 			Feasibility ==> ok!
 [INFO] Level: 270
 	CandidateFlights: 52
@@ -311,22 +328,22 @@ i: 60
 			Start
 		[INFO] Index: 15
 i: 5
-			Count: 0.363
+			Count: 0.39
 		[INFO] Index: 5
 i: 16
-			Count: 0.507
+			Count: 0.473
 		[INFO] Index: 16
 i: 10
-			Count: 0.637
+			Count: 0.672
 		[INFO] Index: 10
 i: 6
-			Count: 0.82
+			Count: 0.81
 		[INFO] Index: 6
 i: 3
-			Count: 0.916
+			Count: 0.929
 		[INFO] Index: 3
 i: 21
-			Count: 0.965
+			Count: 0.966
 			Feasibility ==> ok!
 [INFO] Level: 240
 	CandidateFlights: 52
@@ -334,19 +351,19 @@ i: 21
 			Start
 		[INFO] Index: 25
 i: 27
-			Count: 0.609
+			Count: 0.582
 		[INFO] Index: 27
 i: 10
-			Count: 0.816
+			Count: 0.776
 		[INFO] Index: 10
 i: 6
-			Count: 0.895
+			Count: 0.898
 		[INFO] Index: 6
 i: 8
-			Count: 0.935
+			Count: 0.946
 		[INFO] Index: 8
-i: 3
-			Count: 0.998
+i: 19
+			Count: 0.999
 			Feasibility ==> ok!
 [INFO] Level: 160
 	CandidateFlights: 38
@@ -354,13 +371,13 @@ i: 3
 			Start
 		[INFO] Index: 7
 i: 4
-			Count: 0.694
+			Count: 0.685
 		[INFO] Index: 4
 i: 11
-			Count: 0.898
+			Count: 0.906
 		[INFO] Index: 11
 i: 5
-			Count: 0.961
+			Count: 0.965
 			Feasibility ==> ok!
 [INFO] Level: 70
 	CandidateFlights: 30
@@ -368,7 +385,7 @@ i: 5
 			Start
 		[INFO] Index: 1
 i: 2
-			Count: 0.991
+			Count: 0.993
 			Feasibility ==> ok!
 [INFO] Level: 150
 	CandidateFlights: 29
@@ -376,6260 +393,3774 @@ i: 2
 			Start
 		[INFO] Index: 7
 i: 1
+			Count: 0.919
+		[INFO] Index: 1
+i: 1
+			Count: 0.882
+[INFO] Level: 150
+	Remove: RNO3412
+	CandidateFlights: 28
+	ConflictFlights: 8
+			Start
+		[INFO] Index: 5
+i: 4
+			Count: 0.978
+			Feasibility ==> ok!
+[INFO] Level: 210
+	CandidateFlights: 43
+	ConflictFlights: 23
+			Start
+		[INFO] Index: 20
+i: 14
+			Count: 0.718
+		[INFO] Index: 14
+i: 15
+			Count: 0.757
+		[INFO] Index: 15
+i: 19
+			Count: 0.851
+		[INFO] Index: 19
+i: 2
+			Count: 0.89
+		[INFO] Index: 2
+i: 1
+			Count: 0.945
+		[INFO] Index: 1
+i: 13
+			Count: 0.976
+			Feasibility ==> ok!
+[INFO] Level: 250
+	CandidateFlights: 32
+	ConflictFlights: 13
+			Start
+		[INFO] Index: 6
+i: 1
+			Count: 0.978
+			Feasibility ==> ok!
+[INFO] Level: 130
+	CandidateFlights: 26
+	ConflictFlights: 19
+			Start
+		[INFO] Index: 8
+i: 3
+			Count: 0.998
+			Feasibility ==> ok!
+[INFO] Level: 230
+	CandidateFlights: 30
+	ConflictFlights: 9
+			Start
+		[INFO] Index: 2
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 200
+	CandidateFlights: 48
+	ConflictFlights: 31
+			Start
+		[INFO] Index: 24
+i: 22
+			Count: 0.561
+		[INFO] Index: 22
+i: 11
+			Count: 0.708
+		[INFO] Index: 11
+i: 29
+			Count: 0.729
+		[INFO] Index: 29
+i: 6
+			Count: 0.866
+		[INFO] Index: 6
+i: 27
+			Count: 0.954
+		[INFO] Index: 27
+i: 9
+			Count: 0.98
+			Feasibility ==> ok!
+[INFO] Level: 350
+	CandidateFlights: 21
+	ConflictFlights: 7
+			Start
+		[INFO] Index: 1
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 170
+	CandidateFlights: 23
+	ConflictFlights: 7
+			Start
+		[INFO] Index: 1
+i: 6
+			Count: 0.973
+			Feasibility ==> ok!
+[INFO] Level: 80
+	CandidateFlights: 18
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 1
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 220
+	CandidateFlights: 18
+	ConflictFlights: 12
+			Start
+		[INFO] Index: 5
+i: 1
+			Count: 0.98
+			Feasibility ==> ok!
+[INFO] Level: 140
+	CandidateFlights: 19
+	ConflictFlights: 6
+			Start
+		[INFO] Index: 0
+i: 1
+			Count: 0.982
+			Feasibility ==> ok!
+[INFO] Level: 90
+	CandidateFlights: 16
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 60
+	CandidateFlights: 13
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 50
+	CandidateFlights: 12
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 40
+	CandidateFlights: 10
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 110
+	CandidateFlights: 9
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 100
+	CandidateFlights: 8
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 120
+	CandidateFlights: 8
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 30
+	CandidateFlights: 7
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 260
+	CandidateFlights: 11
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 390
+	CandidateFlights: 4
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 370
+	CandidateFlights: 3
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 45
+	CandidateFlights: 1
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 35
+	CandidateFlights: 1
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 300
+	CandidateFlights: 19
+	ConflictFlights: 8
+			Start
+		[INFO] Index: 7
+i: 2
+			Count: 0.96
+		[INFO] Index: 2
+i: 3
+			Count: 0.987
+			Feasibility ==> ok!
+[INFO] Level: 20
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 10
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 410
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 85
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 75
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 65
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 55
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+Solve the problem P':
+	Nb of flights change level: 85
+	Nb of flights not be assigned: 9
+	Elapsed time: 1233.82
+NbIteration: 1000
+[INFO] Level: 180
+	CandidateFlights: 139
+	ConflictFlights: 111
+			Start
+		[INFO] Index: 71
+i: 62
+			Count: 0.951
+		[INFO] Index: 62
+i: 96
+			Count: 0.97
+			Feasibility ==> ok!
+[INFO] Level: 280
+	CandidateFlights: 122
+	ConflictFlights: 117
+			Start
+		[INFO] Index: 47
+i: 39
+			Count: 0.984
+			Feasibility ==> ok!
+[INFO] Level: 290
+	CandidateFlights: 126
+	ConflictFlights: 117
+			Start
+		[INFO] Index: 80
+i: 86
+			Count: 0.979
+			Feasibility ==> ok!
+[INFO] Level: 310
+	CandidateFlights: 129
+	ConflictFlights: 120
+			Start
+		[INFO] Index: 24
+i: 31
+			Count: 0.986
+			Feasibility ==> ok!
+[INFO] Level: 190
+	CandidateFlights: 111
+	ConflictFlights: 89
+			Start
+		[INFO] Index: 67
+i: 49
+			Count: 0.958
+		[INFO] Index: 49
+i: 62
+			Count: 0.983
+			Feasibility ==> ok!
+[INFO] Level: 330
+	CandidateFlights: 83
+	ConflictFlights: 80
+			Start
+		[INFO] Index: 43
+i: 78
+			Count: 0.983
+			Feasibility ==> ok!
+[INFO] Level: 270
+	CandidateFlights: 46
+	ConflictFlights: 18
+			Start
+		[INFO] Index: 7
+i: 6
+			Count: 0.987
+			Feasibility ==> ok!
+[INFO] Level: 240
+	CandidateFlights: 49
+	ConflictFlights: 25
+			Start
+		[INFO] Index: 6
+i: 3
+			Count: 0.998
+			Feasibility ==> ok!
+[INFO] Level: 160
+	CandidateFlights: 37
+	ConflictFlights: 11
+			Start
+		[INFO] Index: 4
+i: 5
+			Count: 0.959
+		[INFO] Index: 5
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 70
+	CandidateFlights: 29
+	ConflictFlights: 4
+			Start
+		[INFO] Index: 1
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 150
+	CandidateFlights: 28
+	ConflictFlights: 8
+			Start
+		[INFO] Index: 6
+i: 1
+			Count: 0.933
+		[INFO] Index: 1
+i: 1
+			Count: 0.877
+[INFO] Level: 150
+	Remove: RNO3412
+	CandidateFlights: 27
+	ConflictFlights: 6
+			Start
+		[INFO] Index: 4
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 210
+	CandidateFlights: 38
+	ConflictFlights: 13
+			Start
+		[INFO] Index: 4
+i: 8
+			Count: 0.984
+			Feasibility ==> ok!
+[INFO] Level: 250
+	CandidateFlights: 32
+	ConflictFlights: 14
+			Start
+		[INFO] Index: 1
+i: 4
+			Count: 0.994
+			Feasibility ==> ok!
+[INFO] Level: 130
+	CandidateFlights: 27
+	ConflictFlights: 16
+			Start
+		[INFO] Index: 12
+i: 2
+			Count: 0.996
+			Feasibility ==> ok!
+[INFO] Level: 230
+	CandidateFlights: 32
+	ConflictFlights: 12
+			Start
+		[INFO] Index: 5
+i: 2
+			Count: 0.978
+			Feasibility ==> ok!
+[INFO] Level: 200
+	CandidateFlights: 43
+	ConflictFlights: 23
+			Start
+		[INFO] Index: 14
+i: 7
+			Count: 0.983
+			Feasibility ==> ok!
+[INFO] Level: 350
+	CandidateFlights: 21
+	ConflictFlights: 4
+			Start
+		[INFO] Index: 3
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 170
+	CandidateFlights: 22
+	ConflictFlights: 5
+			Start
+		[INFO] Index: 4
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 80
+	CandidateFlights: 18
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 1
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 220
+	CandidateFlights: 18
+	ConflictFlights: 11
+			Start
+		[INFO] Index: 5
+i: 1
+			Count: 0.987
+			Feasibility ==> ok!
+[INFO] Level: 140
+	CandidateFlights: 19
+	ConflictFlights: 4
+			Start
+		[INFO] Index: 0
+i: 1
+			Count: 0.992
+			Feasibility ==> ok!
+[INFO] Level: 90
+	CandidateFlights: 17
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 60
+	CandidateFlights: 13
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 50
+	CandidateFlights: 13
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 40
+	CandidateFlights: 10
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 110
+	CandidateFlights: 10
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 100
+	CandidateFlights: 8
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 120
+	CandidateFlights: 9
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 30
+	CandidateFlights: 7
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 260
+	CandidateFlights: 11
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 390
+	CandidateFlights: 4
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 370
+	CandidateFlights: 3
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 45
+	CandidateFlights: 1
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 35
+	CandidateFlights: 1
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 300
+	CandidateFlights: 17
+	ConflictFlights: 6
+			Start
+		[INFO] Index: 2
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 20
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 10
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 410
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 85
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 75
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 65
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 55
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+Solve the problem P':
+	Nb of flights change level: 103
+	Nb of flights not be assigned: 5
+	Elapsed time: 1331.26
+NbIteration: 1000
+[INFO] Level: 180
+	CandidateFlights: 139
+	ConflictFlights: 110
+			Start
+		[INFO] Index: 105
+i: 83
+			Count: 0.882
+		[INFO] Index: 83
+i: 53
+			Count: 0.978
+			Feasibility ==> ok!
+[INFO] Level: 280
+	CandidateFlights: 122
+	ConflictFlights: 117
+			Start
+		[INFO] Index: 114
+i: 33
+			Count: 0.951
+		[INFO] Index: 33
+i: 113
+			Count: 0.983
+			Feasibility ==> ok!
+[INFO] Level: 290
+	CandidateFlights: 125
+	ConflictFlights: 116
+			Start
+		[INFO] Index: 44
+i: 85
+			Count: 0.976
+			Feasibility ==> ok!
+[INFO] Level: 310
+	CandidateFlights: 129
+	ConflictFlights: 120
+			Start
+		[INFO] Index: 83
+i: 111
+			Count: 0.982
+			Feasibility ==> ok!
+[INFO] Level: 190
+	CandidateFlights: 110
+	ConflictFlights: 84
+			Start
+		[INFO] Index: 80
+i: 58
+			Count: 0.972
+			Feasibility ==> ok!
+[INFO] Level: 330
+	CandidateFlights: 83
+	ConflictFlights: 80
+			Start
+		[INFO] Index: 59
+i: 31
+			Count: 0.991
+			Feasibility ==> ok!
+[INFO] Level: 270
+	CandidateFlights: 45
+	ConflictFlights: 17
+			Start
+		[INFO] Index: 6
+i: 4
+			Count: 0.998
+			Feasibility ==> ok!
+[INFO] Level: 240
+	CandidateFlights: 48
+	ConflictFlights: 23
+			Start
+		[INFO] Index: 15
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 160
+	CandidateFlights: 40
+	ConflictFlights: 16
+			Start
+		[INFO] Index: 15
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 70
+	CandidateFlights: 28
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 150
+	CandidateFlights: 27
+	ConflictFlights: 6
+			Start
+		[INFO] Index: 4
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 210
+	CandidateFlights: 38
+	ConflictFlights: 15
+			Start
+		[INFO] Index: 7
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 250
+	CandidateFlights: 32
+	ConflictFlights: 13
+			Start
+		[INFO] Index: 2
+i: 9
+			Count: 0.998
+			Feasibility ==> ok!
+[INFO] Level: 130
+	CandidateFlights: 27
+	ConflictFlights: 15
+			Start
+		[INFO] Index: 2
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 230
+	CandidateFlights: 33
+	ConflictFlights: 11
+			Start
+		[INFO] Index: 2
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 200
+	CandidateFlights: 43
+	ConflictFlights: 23
+			Start
+		[INFO] Index: 22
+i: 7
+			Count: 0.984
+			Feasibility ==> ok!
+[INFO] Level: 350
+	CandidateFlights: 22
+	ConflictFlights: 4
+			Start
+		[INFO] Index: 3
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 170
+	CandidateFlights: 21
+	ConflictFlights: 4
+			Start
+		[INFO] Index: 1
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 80
+	CandidateFlights: 18
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 1
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 220
+	CandidateFlights: 18
+	ConflictFlights: 10
+			Start
+		[INFO] Index: 8
+i: 8
+			Count: 0.988
+			Feasibility ==> ok!
+[INFO] Level: 140
+	CandidateFlights: 18
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 90
+	CandidateFlights: 16
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 60
+	CandidateFlights: 13
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 50
+	CandidateFlights: 13
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 40
+	CandidateFlights: 10
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 110
+	CandidateFlights: 11
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 100
+	CandidateFlights: 8
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 120
+	CandidateFlights: 10
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 30
+	CandidateFlights: 7
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 260
+	CandidateFlights: 13
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 390
+	CandidateFlights: 4
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 370
+	CandidateFlights: 3
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 45
+	CandidateFlights: 1
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 35
+	CandidateFlights: 1
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 300
+	CandidateFlights: 17
+	ConflictFlights: 6
+			Start
+		[INFO] Index: 2
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 20
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 10
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 410
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 85
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 75
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 65
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 55
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+Solve the problem P':
+	Nb of flights change level: 118
+	Nb of flights not be assigned: 4
+	Elapsed time: 1430.45
+NbIteration: 1000
+[INFO] Level: 180
+	CandidateFlights: 135
+	ConflictFlights: 105
+			Start
+		[INFO] Index: 38
+i: 51
+			Count: 0.978
+			Feasibility ==> ok!
+[INFO] Level: 280
+	CandidateFlights: 121
+	ConflictFlights: 116
+			Start
+		[INFO] Index: 113
+i: 112
+			Count: 0.972
+			Feasibility ==> ok!
+[INFO] Level: 290
+	CandidateFlights: 124
+	ConflictFlights: 115
+			Start
+		[INFO] Index: 81
+i: 12
+			Count: 0.988
+			Feasibility ==> ok!
+[INFO] Level: 310
+	CandidateFlights: 129
+	ConflictFlights: 120
+			Start
+		[INFO] Index: 83
+i: 111
+			Count: 0.984
+			Feasibility ==> ok!
+[INFO] Level: 190
+	CandidateFlights: 109
+	ConflictFlights: 82
+			Start
+		[INFO] Index: 24
+i: 59
+			Count: 0.986
+			Feasibility ==> ok!
+[INFO] Level: 330
+	CandidateFlights: 83
+	ConflictFlights: 80
+			Start
+		[INFO] Index: 49
+i: 32
+			Count: 0.987
+			Feasibility ==> ok!
+[INFO] Level: 270
+	CandidateFlights: 45
+	ConflictFlights: 16
+			Start
+		[INFO] Index: 4
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 240
+	CandidateFlights: 48
+	ConflictFlights: 22
+			Start
+		[INFO] Index: 12
+i: 3
+			Count: 0.998
+			Feasibility ==> ok!
+[INFO] Level: 160
+	CandidateFlights: 40
+	ConflictFlights: 17
+			Start
+		[INFO] Index: 16
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 70
+	CandidateFlights: 28
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 150
+	CandidateFlights: 26
+	ConflictFlights: 4
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 210
+	CandidateFlights: 38
+	ConflictFlights: 15
+			Start
+		[INFO] Index: 5
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 250
+	CandidateFlights: 32
+	ConflictFlights: 14
+			Start
+		[INFO] Index: 2
+i: 9
+			Count: 0.997
+			Feasibility ==> ok!
+[INFO] Level: 130
+	CandidateFlights: 26
+	ConflictFlights: 13
+			Start
+		[INFO] Index: 8
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 230
+	CandidateFlights: 32
+	ConflictFlights: 9
+			Start
+		[INFO] Index: 2
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 200
+	CandidateFlights: 43
+	ConflictFlights: 23
+			Start
+		[INFO] Index: 13
+i: 7
+			Count: 0.983
+			Feasibility ==> ok!
+[INFO] Level: 350
+	CandidateFlights: 23
+	ConflictFlights: 4
+			Start
+		[INFO] Index: 3
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 170
+	CandidateFlights: 22
+	ConflictFlights: 4
+			Start
+		[INFO] Index: 1
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 80
+	CandidateFlights: 18
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 1
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 220
+	CandidateFlights: 19
+	ConflictFlights: 11
+			Start
+		[INFO] Index: 10
+i: 1
+			Count: 0.987
+			Feasibility ==> ok!
+[INFO] Level: 140
+	CandidateFlights: 17
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 90
+	CandidateFlights: 16
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 60
+	CandidateFlights: 13
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 50
+	CandidateFlights: 13
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 40
+	CandidateFlights: 10
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 110
+	CandidateFlights: 11
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 100
+	CandidateFlights: 8
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 120
+	CandidateFlights: 10
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 30
+	CandidateFlights: 7
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 260
+	CandidateFlights: 13
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 390
+	CandidateFlights: 4
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 370
+	CandidateFlights: 3
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 45
+	CandidateFlights: 1
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 35
+	CandidateFlights: 1
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 300
+	CandidateFlights: 16
+	ConflictFlights: 4
+			Start
+		[INFO] Index: 2
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 20
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 10
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 410
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 85
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 75
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 65
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 55
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+Solve the problem P':
+	Nb of flights change level: 126
+	Nb of flights not be assigned: 1
+	Elapsed time: 1504.3
+NbIteration: 1000
+[INFO] Level: 180
+	CandidateFlights: 135
+	ConflictFlights: 105
+			Start
+		[INFO] Index: 92
+i: 52
+			Count: 0.957
+		[INFO] Index: 52
+i: 1
+			Count: 0.978
+			Feasibility ==> ok!
+[INFO] Level: 280
+	CandidateFlights: 120
+	ConflictFlights: 115
+			Start
+		[INFO] Index: 61
+i: 38
+			Count: 0.98
+			Feasibility ==> ok!
+[INFO] Level: 290
+	CandidateFlights: 123
+	ConflictFlights: 114
+			Start
+		[INFO] Index: 83
+i: 12
+			Count: 0.986
+			Feasibility ==> ok!
+[INFO] Level: 310
+	CandidateFlights: 129
+	ConflictFlights: 120
+			Start
+		[INFO] Index: 23
+i: 30
+			Count: 0.984
+			Feasibility ==> ok!
+[INFO] Level: 190
+	CandidateFlights: 108
+	ConflictFlights: 80
+			Start
+		[INFO] Index: 15
+i: 57
+			Count: 0.98
+			Feasibility ==> ok!
+[INFO] Level: 330
+	CandidateFlights: 83
+	ConflictFlights: 81
+			Start
+		[INFO] Index: 40
+i: 77
+			Count: 0.991
+			Feasibility ==> ok!
+[INFO] Level: 270
+	CandidateFlights: 44
+	ConflictFlights: 15
+			Start
+		[INFO] Index: 11
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 240
+	CandidateFlights: 47
+	ConflictFlights: 21
+			Start
+		[INFO] Index: 18
+i: 3
+			Count: 0.999
+			Feasibility ==> ok!
+[INFO] Level: 160
+	CandidateFlights: 40
+	ConflictFlights: 15
+			Start
+		[INFO] Index: 2
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 70
+	CandidateFlights: 28
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 150
+	CandidateFlights: 26
+	ConflictFlights: 4
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 210
+	CandidateFlights: 38
+	ConflictFlights: 16
+			Start
+		[INFO] Index: 3
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 250
+	CandidateFlights: 32
+	ConflictFlights: 14
+			Start
+		[INFO] Index: 2
+i: 9
+			Count: 0.999
+			Feasibility ==> ok!
+[INFO] Level: 130
+	CandidateFlights: 26
+	ConflictFlights: 13
+			Start
+		[INFO] Index: 8
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 230
+	CandidateFlights: 32
+	ConflictFlights: 9
+			Start
+		[INFO] Index: 2
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 200
+	CandidateFlights: 43
+	ConflictFlights: 23
+			Start
+		[INFO] Index: 13
+i: 7
+			Count: 0.982
+			Feasibility ==> ok!
+[INFO] Level: 350
+	CandidateFlights: 24
+	ConflictFlights: 4
+			Start
+		[INFO] Index: 3
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 170
+	CandidateFlights: 23
+	ConflictFlights: 4
+			Start
+		[INFO] Index: 1
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 80
+	CandidateFlights: 18
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 1
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 220
+	CandidateFlights: 19
+	ConflictFlights: 11
+			Start
+		[INFO] Index: 10
+i: 9
+			Count: 0.987
+			Feasibility ==> ok!
+[INFO] Level: 140
+	CandidateFlights: 17
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 90
+	CandidateFlights: 16
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 60
+	CandidateFlights: 13
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 50
+	CandidateFlights: 13
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 40
+	CandidateFlights: 10
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 110
+	CandidateFlights: 11
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 100
+	CandidateFlights: 8
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 120
+	CandidateFlights: 10
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 30
+	CandidateFlights: 7
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 260
+	CandidateFlights: 14
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 390
+	CandidateFlights: 4
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 370
+	CandidateFlights: 3
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 45
+	CandidateFlights: 1
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 35
+	CandidateFlights: 1
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 300
+	CandidateFlights: 16
+	ConflictFlights: 4
+			Start
+		[INFO] Index: 2
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 20
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 10
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 410
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 85
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 75
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 65
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 55
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+Solve the problem P':
+	Nb of flights change level: 132
+	Nb of flights not be assigned: 1
+	Elapsed time: 1587.01
+NbIteration: 1000
+[INFO] Level: 180
+	CandidateFlights: 134
+	ConflictFlights: 104
+			Start
+		[INFO] Index: 37
+i: 52
+			Count: 0.953
+		[INFO] Index: 52
+i: 1
+			Count: 0.977
+			Feasibility ==> ok!
+[INFO] Level: 280
+	CandidateFlights: 119
+	ConflictFlights: 114
+			Start
+		[INFO] Index: 38
+i: 33
+			Count: 0.983
+			Feasibility ==> ok!
+[INFO] Level: 290
+	CandidateFlights: 122
+	ConflictFlights: 113
+			Start
+		[INFO] Index: 52
+i: 84
+			Count: 0.977
+			Feasibility ==> ok!
+[INFO] Level: 310
+	CandidateFlights: 129
+	ConflictFlights: 119
+			Start
+		[INFO] Index: 12
+i: 110
+			Count: 0.983
+			Feasibility ==> ok!
+[INFO] Level: 190
+	CandidateFlights: 107
+	ConflictFlights: 79
+			Start
+		[INFO] Index: 49
+i: 55
+			Count: 0.98
+			Feasibility ==> ok!
+[INFO] Level: 330
+	CandidateFlights: 83
+	ConflictFlights: 80
+			Start
+		[INFO] Index: 38
+i: 59
+			Count: 0.993
+			Feasibility ==> ok!
+[INFO] Level: 270
+	CandidateFlights: 44
+	ConflictFlights: 15
+			Start
+		[INFO] Index: 11
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 240
+	CandidateFlights: 47
+	ConflictFlights: 21
+			Start
+		[INFO] Index: 18
+i: 3
+			Count: 0.998
+			Feasibility ==> ok!
+[INFO] Level: 160
+	CandidateFlights: 42
+	ConflictFlights: 19
+			Start
+		[INFO] Index: 2
+i: 7
+			Count: 0.9
+		[INFO] Index: 7
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 70
+	CandidateFlights: 28
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 150
+	CandidateFlights: 26
+	ConflictFlights: 4
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 210
+	CandidateFlights: 38
+	ConflictFlights: 14
+			Start
+		[INFO] Index: 8
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 250
+	CandidateFlights: 32
+	ConflictFlights: 14
+			Start
+		[INFO] Index: 2
+i: 9
+			Count: 0.999
+			Feasibility ==> ok!
+[INFO] Level: 130
+	CandidateFlights: 26
+	ConflictFlights: 13
+			Start
+		[INFO] Index: 8
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 230
+	CandidateFlights: 32
+	ConflictFlights: 9
+			Start
+		[INFO] Index: 2
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 200
+	CandidateFlights: 45
+	ConflictFlights: 26
+			Start
+		[INFO] Index: 9
+i: 7
+			Count: 0.98
+			Feasibility ==> ok!
+[INFO] Level: 350
+	CandidateFlights: 25
+	ConflictFlights: 4
+			Start
+		[INFO] Index: 3
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 170
+	CandidateFlights: 23
+	ConflictFlights: 4
+			Start
+		[INFO] Index: 1
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 80
+	CandidateFlights: 18
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 1
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 220
+	CandidateFlights: 18
+	ConflictFlights: 9
+			Start
+		[INFO] Index: 2
+i: 1
+			Count: 0.986
+			Feasibility ==> ok!
+[INFO] Level: 140
+	CandidateFlights: 18
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 90
+	CandidateFlights: 16
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 60
+	CandidateFlights: 13
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 50
+	CandidateFlights: 13
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 40
+	CandidateFlights: 10
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 110
+	CandidateFlights: 11
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 100
+	CandidateFlights: 8
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 120
+	CandidateFlights: 10
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 30
+	CandidateFlights: 7
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 260
+	CandidateFlights: 15
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 390
+	CandidateFlights: 4
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 370
+	CandidateFlights: 3
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 45
+	CandidateFlights: 1
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 35
+	CandidateFlights: 1
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 300
+	CandidateFlights: 16
+	ConflictFlights: 4
+			Start
+		[INFO] Index: 2
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 20
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 10
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 410
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 85
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 75
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 65
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 55
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+Solve the problem P':
+	Nb of flights change level: 140
+	Nb of flights not be assigned: 1
+	Elapsed time: 1668.88
+NbIteration: 1000
+[INFO] Level: 180
+	CandidateFlights: 132
+	ConflictFlights: 101
+			Start
+		[INFO] Index: 37
+i: 1
+			Count: 0.983
+			Feasibility ==> ok!
+[INFO] Level: 280
+	CandidateFlights: 118
+	ConflictFlights: 113
+			Start
+		[INFO] Index: 60
+i: 83
+			Count: 0.989
+			Feasibility ==> ok!
+[INFO] Level: 290
+	CandidateFlights: 121
+	ConflictFlights: 112
+			Start
+		[INFO] Index: 45
+i: 83
+			Count: 0.987
+			Feasibility ==> ok!
+[INFO] Level: 310
+	CandidateFlights: 129
+	ConflictFlights: 119
+			Start
+		[INFO] Index: 100
+i: 105
+			Count: 0.984
+			Feasibility ==> ok!
+[INFO] Level: 190
+	CandidateFlights: 106
+	ConflictFlights: 78
+			Start
+		[INFO] Index: 58
+i: 54
+			Count: 0.994
+			Feasibility ==> ok!
+[INFO] Level: 330
+	CandidateFlights: 82
+	ConflictFlights: 79
+			Start
+		[INFO] Index: 74
+i: 64
+			Count: 0.992
+			Feasibility ==> ok!
+[INFO] Level: 270
+	CandidateFlights: 45
+	ConflictFlights: 15
+			Start
+		[INFO] Index: 11
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 240
+	CandidateFlights: 47
+	ConflictFlights: 21
+			Start
+		[INFO] Index: 18
+i: 3
+			Count: 0.998
+			Feasibility ==> ok!
+[INFO] Level: 160
+	CandidateFlights: 41
+	ConflictFlights: 18
+			Start
+		[INFO] Index: 12
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 70
+	CandidateFlights: 28
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 150
+	CandidateFlights: 26
+	ConflictFlights: 4
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 210
+	CandidateFlights: 39
+	ConflictFlights: 14
+			Start
+		[INFO] Index: 8
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 250
+	CandidateFlights: 32
+	ConflictFlights: 14
+			Start
+		[INFO] Index: 2
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 130
+	CandidateFlights: 26
+	ConflictFlights: 13
+			Start
+		[INFO] Index: 8
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 230
+	CandidateFlights: 32
+	ConflictFlights: 9
+			Start
+		[INFO] Index: 2
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 200
+	CandidateFlights: 46
+	ConflictFlights: 27
+			Start
+		[INFO] Index: 16
+i: 18
+			Count: 0.938
+		[INFO] Index: 18
+i: 7
+			Count: 0.983
+			Feasibility ==> ok!
+[INFO] Level: 350
+	CandidateFlights: 26
+	ConflictFlights: 4
+			Start
+		[INFO] Index: 3
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 170
+	CandidateFlights: 23
+	ConflictFlights: 4
+			Start
+		[INFO] Index: 1
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 80
+	CandidateFlights: 18
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 1
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 220
+	CandidateFlights: 18
+	ConflictFlights: 9
+			Start
+		[INFO] Index: 2
+i: 1
+			Count: 0.986
+			Feasibility ==> ok!
+[INFO] Level: 140
+	CandidateFlights: 18
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 90
+	CandidateFlights: 16
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 60
+	CandidateFlights: 13
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 50
+	CandidateFlights: 13
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 40
+	CandidateFlights: 10
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 110
+	CandidateFlights: 11
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 100
+	CandidateFlights: 8
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 120
+	CandidateFlights: 10
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 30
+	CandidateFlights: 7
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 260
+	CandidateFlights: 16
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 390
+	CandidateFlights: 4
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 370
+	CandidateFlights: 3
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 45
+	CandidateFlights: 1
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 35
+	CandidateFlights: 1
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 300
+	CandidateFlights: 16
+	ConflictFlights: 4
+			Start
+		[INFO] Index: 2
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 20
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 10
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 410
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 85
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 75
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 65
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 55
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+Solve the problem P':
+	Nb of flights change level: 144
+	Nb of flights not be assigned: 2
+	Elapsed time: 1740.38
+NbIteration: 1000
+[INFO] Level: 180
+	CandidateFlights: 132
+	ConflictFlights: 101
+			Start
+		[INFO] Index: 16
+i: 77
+			Count: 0.928
+		[INFO] Index: 77
+i: 1
+			Count: 0.987
+			Feasibility ==> ok!
+[INFO] Level: 280
+	CandidateFlights: 117
+	ConflictFlights: 112
+			Start
+		[INFO] Index: 82
+i: 83
+			Count: 0.99
+			Feasibility ==> ok!
+[INFO] Level: 290
+	CandidateFlights: 120
+	ConflictFlights: 111
+			Start
+		[INFO] Index: 12
+i: 13
+			Count: 0.995
+			Feasibility ==> ok!
+[INFO] Level: 310
+	CandidateFlights: 129
+	ConflictFlights: 118
+			Start
+		[INFO] Index: 116
+i: 28
+			Count: 0.989
+			Feasibility ==> ok!
+[INFO] Level: 190
+	CandidateFlights: 105
+	ConflictFlights: 76
+			Start
+		[INFO] Index: 28
+i: 32
+			Count: 0.997
+			Feasibility ==> ok!
+[INFO] Level: 330
+	CandidateFlights: 82
+	ConflictFlights: 79
+			Start
+		[INFO] Index: 64
+i: 74
+			Count: 0.992
+			Feasibility ==> ok!
+[INFO] Level: 270
+	CandidateFlights: 45
+	ConflictFlights: 15
+			Start
+		[INFO] Index: 11
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 240
+	CandidateFlights: 47
+	ConflictFlights: 21
+			Start
+		[INFO] Index: 18
+i: 3
+			Count: 0.998
+			Feasibility ==> ok!
+[INFO] Level: 160
+	CandidateFlights: 42
+	ConflictFlights: 19
+			Start
+		[INFO] Index: 13
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 70
+	CandidateFlights: 28
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 150
+	CandidateFlights: 26
+	ConflictFlights: 4
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 210
+	CandidateFlights: 40
+	ConflictFlights: 16
+			Start
+		[INFO] Index: 10
+i: 3
+			Count: 0.987
+			Feasibility ==> ok!
+[INFO] Level: 250
+	CandidateFlights: 32
+	ConflictFlights: 14
+			Start
+		[INFO] Index: 2
+i: 9
+			Count: 0.998
+			Feasibility ==> ok!
+[INFO] Level: 130
+	CandidateFlights: 26
+	ConflictFlights: 13
+			Start
+		[INFO] Index: 8
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 230
+	CandidateFlights: 32
+	ConflictFlights: 9
+			Start
+		[INFO] Index: 2
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 200
+	CandidateFlights: 46
+	ConflictFlights: 27
+			Start
+		[INFO] Index: 16
+i: 18
+			Count: 0.943
+		[INFO] Index: 18
+i: 7
+			Count: 0.987
+			Feasibility ==> ok!
+[INFO] Level: 350
+	CandidateFlights: 27
+	ConflictFlights: 6
+			Start
+		[INFO] Index: 5
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 170
+	CandidateFlights: 23
+	ConflictFlights: 4
+			Start
+		[INFO] Index: 1
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 80
+	CandidateFlights: 18
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 1
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 220
+	CandidateFlights: 18
+	ConflictFlights: 9
+			Start
+		[INFO] Index: 2
+i: 8
+			Count: 0.985
+			Feasibility ==> ok!
+[INFO] Level: 140
+	CandidateFlights: 18
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 90
+	CandidateFlights: 16
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 60
+	CandidateFlights: 13
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 50
+	CandidateFlights: 13
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 40
+	CandidateFlights: 10
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 110
+	CandidateFlights: 11
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 100
+	CandidateFlights: 8
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 120
+	CandidateFlights: 10
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 30
+	CandidateFlights: 7
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 260
+	CandidateFlights: 17
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 390
+	CandidateFlights: 4
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 370
+	CandidateFlights: 3
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 45
+	CandidateFlights: 1
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 35
+	CandidateFlights: 1
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 300
+	CandidateFlights: 16
+	ConflictFlights: 4
+			Start
+		[INFO] Index: 2
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 20
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 10
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 410
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 85
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 75
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 65
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 55
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+Solve the problem P':
+	Nb of flights change level: 150
+	Nb of flights not be assigned: 2
+	Elapsed time: 1819.81
+NbIteration: 1000
+[INFO] Level: 180
+	CandidateFlights: 131
+	ConflictFlights: 99
+			Start
+		[INFO] Index: 44
+i: 75
 			Count: 0.914
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.895
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.863
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.866
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.868
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.861
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.872
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.899
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.858
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.891
-		[INFO] Index: 1
-i: 1
-			Count: 0.895
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.867
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.866
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.872
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.862
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.869
-		[INFO] Index: 1
-i: 1
-			Count: 0.891
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.898
-		[INFO] Index: 1
-i: 1
-			Count: 0.872
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.866
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.865
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.859
-		[INFO] Index: 1
-i: 1
-			Count: 0.907
-		[INFO] Index: 1
-i: 1
-			Count: 0.867
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.896
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.896
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.899
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.896
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.897
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.869
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.867
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.852
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.9
-		[INFO] Index: 1
-i: 1
-			Count: 0.858
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.865
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.896
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.872
-		[INFO] Index: 1
-i: 1
-			Count: 0.85
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.899
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.902
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.872
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.891
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.891
-		[INFO] Index: 1
-i: 1
-			Count: 0.863
-		[INFO] Index: 1
-i: 1
-			Count: 0.896
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.901
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.898
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.869
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.867
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.866
-		[INFO] Index: 1
-i: 1
-			Count: 0.896
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.861
-		[INFO] Index: 1
-i: 1
-			Count: 0.904
-		[INFO] Index: 1
-i: 1
-			Count: 0.867
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.895
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.891
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.858
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.869
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.872
-		[INFO] Index: 1
-i: 1
-			Count: 0.867
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.899
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.898
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.867
-		[INFO] Index: 1
-i: 1
-			Count: 0.863
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.866
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.899
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.898
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.864
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.859
-		[INFO] Index: 1
-i: 1
-			Count: 0.908
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.904
-		[INFO] Index: 1
-i: 1
-			Count: 0.867
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.897
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.895
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.891
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.865
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.856
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.899
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.869
-		[INFO] Index: 1
-i: 1
-			Count: 0.891
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.898
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.868
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.867
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.898
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.872
-		[INFO] Index: 1
-i: 1
-			Count: 0.901
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.896
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.869
-		[INFO] Index: 1
-i: 1
-			Count: 0.866
-		[INFO] Index: 1
-i: 1
-			Count: 0.897
-		[INFO] Index: 1
-i: 1
-			Count: 0.898
-		[INFO] Index: 1
-i: 1
-			Count: 0.896
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.868
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.863
-		[INFO] Index: 1
-i: 1
-			Count: 0.891
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.866
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.868
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.859
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.908
-		[INFO] Index: 1
-i: 1
-			Count: 0.891
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.858
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.911
-		[INFO] Index: 1
-i: 1
-			Count: 0.895
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.896
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.896
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.868
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.897
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.869
-		[INFO] Index: 1
-i: 1
-			Count: 0.863
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.896
-		[INFO] Index: 1
-i: 1
-			Count: 0.862
-		[INFO] Index: 1
-i: 1
-			Count: 0.863
-		[INFO] Index: 1
-i: 1
-			Count: 0.872
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.897
-		[INFO] Index: 1
-i: 1
-			Count: 0.896
-		[INFO] Index: 1
-i: 1
-			Count: 0.866
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.849
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.866
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.904
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.868
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.868
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.898
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.866
-		[INFO] Index: 1
-i: 1
-			Count: 0.905
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.867
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.907
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.867
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.867
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.895
-		[INFO] Index: 1
-i: 1
-			Count: 0.867
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.866
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.896
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.872
-		[INFO] Index: 1
-i: 1
-			Count: 0.901
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.905
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.868
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.861
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.909
-		[INFO] Index: 1
-i: 1
-			Count: 0.898
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.891
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.897
-		[INFO] Index: 1
-i: 1
-			Count: 0.867
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.897
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.898
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.864
-		[INFO] Index: 1
-i: 1
-			Count: 0.869
-		[INFO] Index: 1
-i: 1
-			Count: 0.863
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.896
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.866
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.84
-		[INFO] Index: 1
-i: 1
-			Count: 0.868
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.866
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.872
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.895
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.896
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.865
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.899
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.891
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.901
-		[INFO] Index: 1
-i: 1
-			Count: 0.865
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.903
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.864
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.902
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.9
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.872
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.867
-		[INFO] Index: 1
-i: 1
-			Count: 0.863
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.868
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.899
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.854
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.862
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.864
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.868
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.862
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.899
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.865
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.896
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.898
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.861
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.867
-		[INFO] Index: 1
-i: 1
-			Count: 0.868
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.897
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.903
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.869
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.869
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.891
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.856
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.869
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.865
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.906
-		[INFO] Index: 1
-i: 1
-			Count: 0.868
-		[INFO] Index: 1
-i: 1
-			Count: 0.897
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.897
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.903
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.872
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.863
-		[INFO] Index: 1
-i: 1
-			Count: 0.902
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.897
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.9
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.862
-		[INFO] Index: 1
-i: 1
-			Count: 0.862
-		[INFO] Index: 1
-i: 1
-			Count: 0.898
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.899
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.868
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.891
-		[INFO] Index: 1
-i: 1
-			Count: 0.872
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.896
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.872
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.904
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.899
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.867
-		[INFO] Index: 1
-i: 1
-			Count: 0.865
-		[INFO] Index: 1
-i: 1
-			Count: 0.866
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.895
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.866
-		[INFO] Index: 1
-i: 1
-			Count: 0.897
-		[INFO] Index: 1
-i: 1
-			Count: 0.865
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.861
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.868
-		[INFO] Index: 1
-i: 1
-			Count: 0.872
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.897
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.872
-		[INFO] Index: 1
-i: 1
-			Count: 0.868
-		[INFO] Index: 1
-i: 1
-			Count: 0.899
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.865
-		[INFO] Index: 1
-i: 1
-			Count: 0.868
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.865
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.869
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.891
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.891
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.863
-		[INFO] Index: 1
-i: 1
-			Count: 0.9
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.863
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.891
-		[INFO] Index: 1
-i: 1
-			Count: 0.872
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.863
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.898
-		[INFO] Index: 1
-i: 1
-			Count: 0.869
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.898
-		[INFO] Index: 1
-i: 1
-			Count: 0.872
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.895
-		[INFO] Index: 1
-i: 1
-			Count: 0.898
-		[INFO] Index: 1
-i: 1
-			Count: 0.897
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.908
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.867
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.872
-		[INFO] Index: 1
-i: 1
-			Count: 0.903
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.891
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.891
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.857
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.898
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.867
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.897
-		[INFO] Index: 1
-i: 1
-			Count: 0.906
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.898
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.903
-		[INFO] Index: 1
-i: 1
-			Count: 0.867
-		[INFO] Index: 1
-i: 1
-			Count: 0.866
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.865
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.903
-		[INFO] Index: 1
-i: 1
-			Count: 0.898
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.867
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.895
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.898
-		[INFO] Index: 1
-i: 1
-			Count: 0.897
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.872
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.895
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.865
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.891
-		[INFO] Index: 1
-i: 1
-			Count: 0.868
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.864
-		[INFO] Index: 1
-i: 1
-			Count: 0.868
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.891
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.895
-		[INFO] Index: 1
-i: 1
-			Count: 0.865
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.86
-		[INFO] Index: 1
-i: 1
-			Count: 0.866
-		[INFO] Index: 1
-i: 1
-			Count: 0.864
-		[INFO] Index: 1
-i: 1
-			Count: 0.867
-		[INFO] Index: 1
-i: 1
-			Count: 0.898
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.859
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.872
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.867
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.897
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.872
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.866
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.891
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.86
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.899
-		[INFO] Index: 1
-i: 1
-			Count: 0.897
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.862
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.866
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.905
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.898
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.872
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.903
-		[INFO] Index: 1
-i: 1
-			Count: 0.912
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.867
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.872
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.903
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.895
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.868
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.872
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.896
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.9
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.865
-		[INFO] Index: 1
-i: 1
-			Count: 0.865
-		[INFO] Index: 1
-i: 1
-			Count: 0.859
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.897
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.891
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.862
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.902
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.866
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.865
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.869
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.904
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.864
-		[INFO] Index: 1
-i: 1
-			Count: 0.891
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.868
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.891
-		[INFO] Index: 1
-i: 1
-			Count: 0.861
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.891
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.891
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.901
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.911
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.899
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.896
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.891
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.869
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.869
-		[INFO] Index: 1
-i: 1
-			Count: 0.899
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.872
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.907
-		[INFO] Index: 1
-i: 1
-			Count: 0.896
-		[INFO] Index: 1
-i: 1
-			Count: 0.903
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.872
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.872
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.869
-		[INFO] Index: 1
-i: 1
-			Count: 0.872
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.907
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.86
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.862
-		[INFO] Index: 1
-i: 1
-			Count: 0.869
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.872
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.872
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.869
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.899
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.865
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.862
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.869
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.895
-		[INFO] Index: 1
-i: 1
-			Count: 0.912
-		[INFO] Index: 1
-i: 1
-			Count: 0.901
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.864
-		[INFO] Index: 1
-i: 1
-			Count: 0.866
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.869
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.904
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.869
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.901
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.891
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.862
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.891
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.898
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.902
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.895
-		[INFO] Index: 1
-i: 1
-			Count: 0.869
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.859
-		[INFO] Index: 1
-i: 1
-			Count: 0.866
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.864
-		[INFO] Index: 1
-i: 1
-			Count: 0.896
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.891
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.861
-		[INFO] Index: 1
-i: 1
-			Count: 0.866
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.862
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.891
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.869
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.898
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.869
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.899
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.862
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.863
-		[INFO] Index: 1
-i: 1
-			Count: 0.899
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.866
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.865
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.865
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.891
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.868
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.857
-		[INFO] Index: 1
-i: 1
-			Count: 0.896
-		[INFO] Index: 1
-i: 1
-			Count: 0.865
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.869
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.861
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.872
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.891
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.895
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.907
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.857
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.901
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.862
-		[INFO] Index: 1
-i: 1
-			Count: 0.891
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.868
-		[INFO] Index: 1
-i: 1
-			Count: 0.915
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.891
-		[INFO] Index: 1
-i: 1
-			Count: 0.867
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.872
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.891
-		[INFO] Index: 1
-i: 1
-			Count: 0.896
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.907
-		[INFO] Index: 1
-i: 1
-			Count: 0.872
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.891
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.864
-		[INFO] Index: 1
-i: 1
-			Count: 0.867
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.868
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.872
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.868
-		[INFO] Index: 1
-i: 1
-			Count: 0.868
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.864
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.896
-		[INFO] Index: 1
-i: 1
-			Count: 0.896
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.865
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.862
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.891
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.868
-		[INFO] Index: 1
-i: 1
-			Count: 0.862
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.868
-		[INFO] Index: 1
-i: 1
-			Count: 0.899
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.865
-		[INFO] Index: 1
-i: 1
-			Count: 0.86
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.867
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.865
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.852
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.901
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.866
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.869
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.856
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.895
-		[INFO] Index: 1
-i: 1
-			Count: 0.895
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.867
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.869
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.896
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.897
-		[INFO] Index: 1
-i: 1
-			Count: 0.86
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.896
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.891
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.852
-		[INFO] Index: 1
-i: 1
-			Count: 0.864
-		[INFO] Index: 1
-i: 1
-			Count: 0.91
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.858
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.869
-		[INFO] Index: 1
-i: 1
-			Count: 0.9
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.911
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.896
-		[INFO] Index: 1
-i: 1
-			Count: 0.895
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.872
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.896
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.895
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.891
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.895
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.899
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.9
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.891
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.872
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.867
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.866
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.867
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.891
-		[INFO] Index: 1
-i: 1
-			Count: 0.853
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.862
-		[INFO] Index: 1
-i: 1
-			Count: 0.906
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.872
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.863
-		[INFO] Index: 1
-i: 1
-			Count: 0.867
-		[INFO] Index: 1
-i: 1
-			Count: 0.863
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.904
-		[INFO] Index: 1
-i: 1
-			Count: 0.853
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.895
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.86
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.868
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.898
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.891
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.897
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.864
-		[INFO] Index: 1
-i: 1
-			Count: 0.872
-		[INFO] Index: 1
-i: 1
-			Count: 0.898
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.87
-		[INFO] Index: 1
-i: 1
-			Count: 0.863
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.896
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.859
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.865
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.867
-		[INFO] Index: 1
-i: 1
-			Count: 0.899
-		[INFO] Index: 1
-i: 1
-			Count: 0.872
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.898
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.891
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.872
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.896
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.9
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.852
-		[INFO] Index: 1
-i: 1
-			Count: 0.896
-		[INFO] Index: 1
-i: 1
-			Count: 0.876
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.898
-		[INFO] Index: 1
-i: 1
-			Count: 0.872
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.866
-		[INFO] Index: 1
-i: 1
-			Count: 0.877
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.898
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.866
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.892
-		[INFO] Index: 1
-i: 1
-			Count: 0.869
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.895
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.871
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.878
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.86
-		[INFO] Index: 1
-i: 1
-			Count: 0.887
-		[INFO] Index: 1
-i: 1
-			Count: 0.867
-		[INFO] Index: 1
-i: 1
-			Count: 0.869
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.897
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.896
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.867
-		[INFO] Index: 1
-i: 1
-			Count: 0.895
-		[INFO] Index: 1
-i: 1
-			Count: 0.869
-		[INFO] Index: 1
-i: 1
-			Count: 0.902
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.896
-		[INFO] Index: 1
-i: 1
-			Count: 0.893
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.854
-		[INFO] Index: 1
-i: 1
-			Count: 0.875
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.863
-		[INFO] Index: 1
-i: 1
-			Count: 0.899
-		[INFO] Index: 1
-i: 1
-			Count: 0.864
-		[INFO] Index: 1
-i: 1
-			Count: 0.884
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.894
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.872
-		[INFO] Index: 1
-i: 1
-			Count: 0.867
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.866
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.88
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.889
-		[INFO] Index: 1
-i: 1
-			Count: 0.881
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
-i: 1
-			Count: 0.86
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.89
-		[INFO] Index: 1
-i: 1
-			Count: 0.882
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.888
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.873
-		[INFO] Index: 1
-i: 1
-			Count: 0.874
-		[INFO] Index: 1
-i: 1
-			Count: 0.879
-		[INFO] Index: 1
-i: 1
-			Count: 0.885
-		[INFO] Index: 1
-i: 1
-			Count: 0.883
-		[INFO] Index: 1
-i: 1
-			Count: 0.864
-		[INFO] Index: 1
-i: 1
-			Count: 0.886
-		[INFO] Index: 1
+		[INFO] Index: 75
+i: 1
+			Count: 0.987
+			Feasibility ==> ok!
+[INFO] Level: 280
+	CandidateFlights: 116
+	ConflictFlights: 111
+			Start
+		[INFO] Index: 61
+i: 33
+			Count: 0.991
+			Feasibility ==> ok!
+[INFO] Level: 290
+	CandidateFlights: 119
+	ConflictFlights: 110
+			Start
+		[INFO] Index: 80
+i: 11
+			Count: 0.989
+			Feasibility ==> ok!
+[INFO] Level: 310
+	CandidateFlights: 129
+	ConflictFlights: 118
+			Start
+		[INFO] Index: 102
+i: 106
+			Count: 0.988
+			Feasibility ==> ok!
+[INFO] Level: 190
+	CandidateFlights: 104
+	ConflictFlights: 74
+			Start
+		[INFO] Index: 68
+i: 52
+			Count: 0.991
+			Feasibility ==> ok!
+[INFO] Level: 330
+	CandidateFlights: 81
+	ConflictFlights: 78
+			Start
+		[INFO] Index: 55
+i: 73
+			Count: 0.994
+			Feasibility ==> ok!
+[INFO] Level: 270
+	CandidateFlights: 46
+	ConflictFlights: 17
+			Start
+		[INFO] Index: 13
+i: 4
+			Count: 0.99
+			Feasibility ==> ok!
+[INFO] Level: 240
+	CandidateFlights: 47
+	ConflictFlights: 21
+			Start
+		[INFO] Index: 18
+i: 3
+			Count: 0.998
+			Feasibility ==> ok!
+[INFO] Level: 160
+	CandidateFlights: 43
+	ConflictFlights: 20
+			Start
+		[INFO] Index: 14
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 70
+	CandidateFlights: 28
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 150
+	CandidateFlights: 26
+	ConflictFlights: 4
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 210
+	CandidateFlights: 41
+	ConflictFlights: 19
+			Start
+		[INFO] Index: 17
+i: 3
+			Count: 0.99
+			Feasibility ==> ok!
+[INFO] Level: 250
+	CandidateFlights: 32
+	ConflictFlights: 14
+			Start
+		[INFO] Index: 2
+i: 9
+			Count: 0.997
+			Feasibility ==> ok!
+[INFO] Level: 130
+	CandidateFlights: 26
+	ConflictFlights: 13
+			Start
+		[INFO] Index: 8
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 230
+	CandidateFlights: 33
+	ConflictFlights: 9
+			Start
+		[INFO] Index: 2
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 200
+	CandidateFlights: 45
+	ConflictFlights: 26
+			Start
+		[INFO] Index: 25
+i: 7
+			Count: 0.992
+			Feasibility ==> ok!
+[INFO] Level: 350
+	CandidateFlights: 28
+	ConflictFlights: 6
+			Start
+		[INFO] Index: 5
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 170
+	CandidateFlights: 24
+	ConflictFlights: 5
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 80
+	CandidateFlights: 18
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 1
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 220
+	CandidateFlights: 18
+	ConflictFlights: 9
+			Start
+		[INFO] Index: 2
+i: 3
+			Count: 0.981
+			Feasibility ==> ok!
+[INFO] Level: 140
+	CandidateFlights: 18
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 90
+	CandidateFlights: 16
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 60
+	CandidateFlights: 13
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 50
+	CandidateFlights: 13
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 40
+	CandidateFlights: 10
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 110
+	CandidateFlights: 11
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 100
+	CandidateFlights: 8
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 120
+	CandidateFlights: 10
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 30
+	CandidateFlights: 7
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 260
+	CandidateFlights: 18
+	ConflictFlights: 4
+			Start
+		[INFO] Index: 1
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 390
+	CandidateFlights: 4
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 370
+	CandidateFlights: 3
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 45
+	CandidateFlights: 1
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 35
+	CandidateFlights: 1
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 300
+	CandidateFlights: 16
+	ConflictFlights: 4
+			Start
+		[INFO] Index: 2
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 20
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 10
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 410
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 85
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 75
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 65
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 55
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+Solve the problem P':
+	Nb of flights change level: 155
+	Nb of flights not be assigned: 2
+	Elapsed time: 1897.53
+NbIteration: 1000
+[INFO] Level: 180
+	CandidateFlights: 129
+	ConflictFlights: 97
+			Start
+		[INFO] Index: 77
+i: 1
+			Count: 0.983
+			Feasibility ==> ok!
+[INFO] Level: 280
+	CandidateFlights: 115
+	ConflictFlights: 110
+			Start
+		[INFO] Index: 10
+i: 81
+			Count: 0.99
+			Feasibility ==> ok!
+[INFO] Level: 290
+	CandidateFlights: 118
+	ConflictFlights: 109
+			Start
+		[INFO] Index: 85
+i: 10
+			Count: 0.991
+			Feasibility ==> ok!
+[INFO] Level: 310
+	CandidateFlights: 129
+	ConflictFlights: 118
+			Start
+		[INFO] Index: 40
+i: 28
+			Count: 0.986
+			Feasibility ==> ok!
+[INFO] Level: 190
+	CandidateFlights: 104
+	ConflictFlights: 74
+			Start
+		[INFO] Index: 68
+i: 2
+			Count: 0.992
+			Feasibility ==> ok!
+[INFO] Level: 330
+	CandidateFlights: 81
+	ConflictFlights: 77
+			Start
+		[INFO] Index: 74
+i: 68
+			Count: 0.987
+			Feasibility ==> ok!
+[INFO] Level: 270
+	CandidateFlights: 46
+	ConflictFlights: 17
+			Start
+		[INFO] Index: 13
+i: 4
+			Count: 0.989
+			Feasibility ==> ok!
+[INFO] Level: 240
+	CandidateFlights: 47
+	ConflictFlights: 21
+			Start
+		[INFO] Index: 18
+i: 3
+			Count: 0.995
+			Feasibility ==> ok!
+[INFO] Level: 160
+	CandidateFlights: 43
+	ConflictFlights: 19
+			Start
+		[INFO] Index: 6
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 70
+	CandidateFlights: 28
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 150
+	CandidateFlights: 26
+	ConflictFlights: 4
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 210
+	CandidateFlights: 40
+	ConflictFlights: 18
+			Start
+		[INFO] Index: 4
+i: 3
+			Count: 0.993
+			Feasibility ==> ok!
+[INFO] Level: 250
+	CandidateFlights: 32
+	ConflictFlights: 14
+			Start
+		[INFO] Index: 2
+i: 9
+			Count: 0.997
+			Feasibility ==> ok!
+[INFO] Level: 130
+	CandidateFlights: 26
+	ConflictFlights: 13
+			Start
+		[INFO] Index: 8
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 230
+	CandidateFlights: 33
+	ConflictFlights: 9
+			Start
+		[INFO] Index: 2
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 200
+	CandidateFlights: 45
+	ConflictFlights: 26
+			Start
+		[INFO] Index: 9
+i: 7
+			Count: 0.989
+			Feasibility ==> ok!
+[INFO] Level: 350
+	CandidateFlights: 29
+	ConflictFlights: 8
+			Start
+		[INFO] Index: 5
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 170
+	CandidateFlights: 24
+	ConflictFlights: 5
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 80
+	CandidateFlights: 18
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 1
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 220
+	CandidateFlights: 18
+	ConflictFlights: 9
+			Start
+		[INFO] Index: 2
+i: 8
+			Count: 0.982
+			Feasibility ==> ok!
+[INFO] Level: 140
+	CandidateFlights: 18
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 90
+	CandidateFlights: 16
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 60
+	CandidateFlights: 13
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 50
+	CandidateFlights: 13
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 40
+	CandidateFlights: 10
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 110
+	CandidateFlights: 11
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 100
+	CandidateFlights: 8
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 120
+	CandidateFlights: 10
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 30
+	CandidateFlights: 7
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 260
+	CandidateFlights: 19
+	ConflictFlights: 6
+			Start
+		[INFO] Index: 2
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 390
+	CandidateFlights: 4
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 370
+	CandidateFlights: 3
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 45
+	CandidateFlights: 1
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 35
+	CandidateFlights: 1
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 300
+	CandidateFlights: 16
+	ConflictFlights: 4
+			Start
+		[INFO] Index: 2
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 20
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 10
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 410
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 85
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 75
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 65
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 55
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+Solve the problem P':
+	Nb of flights change level: 160
+	Nb of flights not be assigned: 2
+	Elapsed time: 1966
+NbIteration: 1000
+[INFO] Level: 180
+	CandidateFlights: 129
+	ConflictFlights: 96
+			Start
+		[INFO] Index: 69
+i: 1
+			Count: 0.986
+			Feasibility ==> ok!
+[INFO] Level: 280
+	CandidateFlights: 114
+	ConflictFlights: 109
+			Start
+		[INFO] Index: 54
+i: 80
+			Count: 0.988
+			Feasibility ==> ok!
+[INFO] Level: 290
+	CandidateFlights: 117
+	ConflictFlights: 108
+			Start
+		[INFO] Index: 48
+i: 80
+			Count: 0.993
+			Feasibility ==> ok!
+[INFO] Level: 310
+	CandidateFlights: 129
+	ConflictFlights: 118
+			Start
+		[INFO] Index: 100
+i: 106
+			Count: 0.985
+			Feasibility ==> ok!
+[INFO] Level: 190
+	CandidateFlights: 104
+	ConflictFlights: 74
+			Start
+		[INFO] Index: 68
+i: 52
+			Count: 0.988
+			Feasibility ==> ok!
+[INFO] Level: 330
+	CandidateFlights: 81
+	ConflictFlights: 76
+			Start
+		[INFO] Index: 41
+i: 12
+			Count: 0.991
+			Feasibility ==> ok!
+[INFO] Level: 270
+	CandidateFlights: 47
+	ConflictFlights: 19
+			Start
+		[INFO] Index: 15
+i: 5
+			Count: 0.987
+			Feasibility ==> ok!
+[INFO] Level: 240
+	CandidateFlights: 47
+	ConflictFlights: 21
+			Start
+		[INFO] Index: 18
+i: 3
+			Count: 0.996
+			Feasibility ==> ok!
+[INFO] Level: 160
+	CandidateFlights: 43
+	ConflictFlights: 18
+			Start
+		[INFO] Index: 10
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 70
+	CandidateFlights: 28
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 150
+	CandidateFlights: 26
+	ConflictFlights: 4
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 210
+	CandidateFlights: 40
+	ConflictFlights: 18
+			Start
+		[INFO] Index: 4
+i: 3
+			Count: 0.991
+			Feasibility ==> ok!
+[INFO] Level: 250
+	CandidateFlights: 32
+	ConflictFlights: 14
+			Start
+		[INFO] Index: 2
+i: 9
+			Count: 0.999
+			Feasibility ==> ok!
+[INFO] Level: 130
+	CandidateFlights: 26
+	ConflictFlights: 13
+			Start
+		[INFO] Index: 8
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 230
+	CandidateFlights: 33
+	ConflictFlights: 9
+			Start
+		[INFO] Index: 2
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 200
+	CandidateFlights: 45
+	ConflictFlights: 24
+			Start
+		[INFO] Index: 13
+i: 7
+			Count: 0.982
+			Feasibility ==> ok!
+[INFO] Level: 350
+	CandidateFlights: 30
+	ConflictFlights: 8
+			Start
+		[INFO] Index: 5
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 170
+	CandidateFlights: 24
+	ConflictFlights: 5
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 80
+	CandidateFlights: 18
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 1
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 220
+	CandidateFlights: 19
+	ConflictFlights: 11
+			Start
+		[INFO] Index: 10
+i: 9
+			Count: 0.989
+			Feasibility ==> ok!
+[INFO] Level: 140
+	CandidateFlights: 18
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 90
+	CandidateFlights: 16
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 60
+	CandidateFlights: 13
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 50
+	CandidateFlights: 13
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 40
+	CandidateFlights: 10
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 110
+	CandidateFlights: 11
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 100
+	CandidateFlights: 8
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 120
+	CandidateFlights: 10
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 30
+	CandidateFlights: 7
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 260
+	CandidateFlights: 20
+	ConflictFlights: 8
+			Start
+		[INFO] Index: 4
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 390
+	CandidateFlights: 4
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 370
+	CandidateFlights: 3
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 45
+	CandidateFlights: 1
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 35
+	CandidateFlights: 1
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 300
+	CandidateFlights: 16
+	ConflictFlights: 4
+			Start
+		[INFO] Index: 2
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 20
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 10
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 410
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 85
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 75
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 65
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 55
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+Solve the problem P':
+	Nb of flights change level: 164
+	Nb of flights not be assigned: 2
+	Elapsed time: 2032.37
+NbIteration: 1000
+[INFO] Level: 180
+	CandidateFlights: 129
+	ConflictFlights: 96
+			Start
+		[INFO] Index: 9
+i: 1
+			Count: 0.982
+			Feasibility ==> ok!
+[INFO] Level: 280
+	CandidateFlights: 113
+	ConflictFlights: 108
+			Start
+		[INFO] Index: 68
+i: 32
+			Count: 0.995
+			Feasibility ==> ok!
+[INFO] Level: 290
+	CandidateFlights: 116
+	ConflictFlights: 107
+			Start
+		[INFO] Index: 74
+i: 37
+			Count: 0.99
+			Feasibility ==> ok!
+[INFO] Level: 310
+	CandidateFlights: 128
+	ConflictFlights: 117
+			Start
+		[INFO] Index: 32
+i: 28
+			Count: 0.987
+			Feasibility ==> ok!
+[INFO] Level: 190
+	CandidateFlights: 104
+	ConflictFlights: 74
+			Start
+		[INFO] Index: 68
+i: 52
+			Count: 0.989
+			Feasibility ==> ok!
+[INFO] Level: 330
+	CandidateFlights: 81
+	ConflictFlights: 75
+			Start
+		[INFO] Index: 60
+i: 64
+			Count: 0.996
+			Feasibility ==> ok!
+[INFO] Level: 270
+	CandidateFlights: 47
+	ConflictFlights: 19
+			Start
+		[INFO] Index: 15
+i: 5
+			Count: 0.987
+			Feasibility ==> ok!
+[INFO] Level: 240
+	CandidateFlights: 47
+	ConflictFlights: 21
+			Start
+		[INFO] Index: 18
+i: 3
+			Count: 0.999
+			Feasibility ==> ok!
+[INFO] Level: 160
+	CandidateFlights: 43
+	ConflictFlights: 18
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 70
+	CandidateFlights: 28
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 150
+	CandidateFlights: 26
+	ConflictFlights: 4
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 210
+	CandidateFlights: 40
+	ConflictFlights: 18
+			Start
+		[INFO] Index: 4
+i: 3
+			Count: 0.992
+			Feasibility ==> ok!
+[INFO] Level: 250
+	CandidateFlights: 32
+	ConflictFlights: 14
+			Start
+		[INFO] Index: 2
+i: 9
+			Count: 0.999
+			Feasibility ==> ok!
+[INFO] Level: 130
+	CandidateFlights: 26
+	ConflictFlights: 13
+			Start
+		[INFO] Index: 8
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 230
+	CandidateFlights: 33
+	ConflictFlights: 9
+			Start
+		[INFO] Index: 2
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 200
+	CandidateFlights: 45
+	ConflictFlights: 23
+			Start
+		[INFO] Index: 8
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 350
+	CandidateFlights: 31
+	ConflictFlights: 10
+			Start
+		[INFO] Index: 6
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 170
+	CandidateFlights: 24
+	ConflictFlights: 5
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 80
+	CandidateFlights: 18
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 1
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 220
+	CandidateFlights: 18
+	ConflictFlights: 9
+			Start
+		[INFO] Index: 2
+i: 8
+			Count: 0.992
+			Feasibility ==> ok!
+[INFO] Level: 140
+	CandidateFlights: 18
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 90
+	CandidateFlights: 16
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 60
+	CandidateFlights: 13
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 50
+	CandidateFlights: 13
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 40
+	CandidateFlights: 10
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 110
+	CandidateFlights: 11
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 100
+	CandidateFlights: 8
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 120
+	CandidateFlights: 10
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 30
+	CandidateFlights: 7
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 260
+	CandidateFlights: 21
+	ConflictFlights: 8
+			Start
+		[INFO] Index: 4
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 390
+	CandidateFlights: 4
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 370
+	CandidateFlights: 3
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 45
+	CandidateFlights: 1
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 35
+	CandidateFlights: 1
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 300
+	CandidateFlights: 16
+	ConflictFlights: 4
+			Start
+		[INFO] Index: 2
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 20
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 10
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 410
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 85
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 75
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 65
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 55
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+Solve the problem P':
+	Nb of flights change level: 170
+	Nb of flights not be assigned: 2
+	Elapsed time: 2094.46
+NbIteration: 1000
+[INFO] Level: 180
+	CandidateFlights: 129
+	ConflictFlights: 95
+			Start
+		[INFO] Index: 69
+i: 28
+			Count: 0.969
+			Feasibility ==> ok!
+[INFO] Level: 280
+	CandidateFlights: 112
+	ConflictFlights: 107
+			Start
+		[INFO] Index: 76
+i: 32
+			Count: 0.991
+			Feasibility ==> ok!
+[INFO] Level: 290
+	CandidateFlights: 115
+	ConflictFlights: 106
+			Start
+		[INFO] Index: 26
+i: 78
+			Count: 0.99
+			Feasibility ==> ok!
+[INFO] Level: 310
+	CandidateFlights: 128
+	ConflictFlights: 117
+			Start
+		[INFO] Index: 111
+i: 28
+			Count: 0.992
+			Feasibility ==> ok!
+[INFO] Level: 190
+	CandidateFlights: 104
+	ConflictFlights: 74
+			Start
+		[INFO] Index: 68
+i: 52
+			Count: 0.99
+			Feasibility ==> ok!
+[INFO] Level: 330
+	CandidateFlights: 81
+	ConflictFlights: 76
+			Start
+		[INFO] Index: 34
+i: 35
+			Count: 0.997
+			Feasibility ==> ok!
+[INFO] Level: 270
+	CandidateFlights: 47
+	ConflictFlights: 19
+			Start
+		[INFO] Index: 15
+i: 5
+			Count: 0.988
+			Feasibility ==> ok!
+[INFO] Level: 240
+	CandidateFlights: 47
+	ConflictFlights: 21
+			Start
+		[INFO] Index: 18
+i: 3
+			Count: 0.998
+			Feasibility ==> ok!
+[INFO] Level: 160
+	CandidateFlights: 43
+	ConflictFlights: 18
+			Start
+		[INFO] Index: 10
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 70
+	CandidateFlights: 28
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 150
+	CandidateFlights: 26
+	ConflictFlights: 4
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 210
+	CandidateFlights: 40
+	ConflictFlights: 18
+			Start
+		[INFO] Index: 4
+i: 3
+			Count: 0.993
+			Feasibility ==> ok!
+[INFO] Level: 250
+	CandidateFlights: 32
+	ConflictFlights: 14
+			Start
+		[INFO] Index: 2
+i: 9
+			Count: 0.999
+			Feasibility ==> ok!
+[INFO] Level: 130
+	CandidateFlights: 26
+	ConflictFlights: 13
+			Start
+		[INFO] Index: 8
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 230
+	CandidateFlights: 33
+	ConflictFlights: 9
+			Start
+		[INFO] Index: 2
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 200
+	CandidateFlights: 45
+	ConflictFlights: 23
+			Start
+		[INFO] Index: 7
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 350
+	CandidateFlights: 32
+	ConflictFlights: 12
+			Start
+		[INFO] Index: 6
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 170
+	CandidateFlights: 24
+	ConflictFlights: 5
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 80
+	CandidateFlights: 18
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 1
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 220
+	CandidateFlights: 18
+	ConflictFlights: 9
+			Start
+		[INFO] Index: 2
+i: 3
+			Count: 0.99
+			Feasibility ==> ok!
+[INFO] Level: 140
+	CandidateFlights: 18
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 90
+	CandidateFlights: 16
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 60
+	CandidateFlights: 13
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 50
+	CandidateFlights: 13
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 40
+	CandidateFlights: 10
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 110
+	CandidateFlights: 11
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 100
+	CandidateFlights: 8
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 120
+	CandidateFlights: 10
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 30
+	CandidateFlights: 7
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 260
+	CandidateFlights: 22
+	ConflictFlights: 8
+			Start
+		[INFO] Index: 4
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 390
+	CandidateFlights: 4
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 370
+	CandidateFlights: 3
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 45
+	CandidateFlights: 1
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 35
+	CandidateFlights: 1
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 300
+	CandidateFlights: 16
+	ConflictFlights: 4
+			Start
+		[INFO] Index: 2
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 20
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 10
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 410
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 85
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 75
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 65
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 55
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+Solve the problem P':
+	Nb of flights change level: 174
+	Nb of flights not be assigned: 2
+	Elapsed time: 2156.04
+NbIteration: 1000
+[INFO] Level: 180
+	CandidateFlights: 129
+	ConflictFlights: 95
+			Start
+		[INFO] Index: 43
+i: 28
+			Count: 0.971
+			Feasibility ==> ok!
+[INFO] Level: 280
+	CandidateFlights: 111
+	ConflictFlights: 106
+			Start
+		[INFO] Index: 63
+i: 32
+			Count: 0.995
+			Feasibility ==> ok!
+[INFO] Level: 290
+	CandidateFlights: 114
+	ConflictFlights: 105
+			Start
+		[INFO] Index: 67
+i: 10
+			Count: 0.993
+			Feasibility ==> ok!
+[INFO] Level: 310
+	CandidateFlights: 128
+	ConflictFlights: 117
+			Start
+		[INFO] Index: 68
+i: 28
+			Count: 0.996
+			Feasibility ==> ok!
+[INFO] Level: 190
+	CandidateFlights: 104
+	ConflictFlights: 74
+			Start
+		[INFO] Index: 68
+i: 52
+			Count: 0.99
+			Feasibility ==> ok!
+[INFO] Level: 330
+	CandidateFlights: 80
+	ConflictFlights: 75
+			Start
+		[INFO] Index: 27
+i: 36
+			Count: 0.999
+			Feasibility ==> ok!
+[INFO] Level: 270
+	CandidateFlights: 48
+	ConflictFlights: 19
+			Start
+		[INFO] Index: 15
+i: 5
+			Count: 0.991
+			Feasibility ==> ok!
+[INFO] Level: 240
+	CandidateFlights: 47
+	ConflictFlights: 21
+			Start
+		[INFO] Index: 18
+i: 3
+			Count: 0.998
+			Feasibility ==> ok!
+[INFO] Level: 160
+	CandidateFlights: 44
+	ConflictFlights: 20
+			Start
+		[INFO] Index: 6
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 70
+	CandidateFlights: 28
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 150
+	CandidateFlights: 26
+	ConflictFlights: 4
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 210
+	CandidateFlights: 40
+	ConflictFlights: 18
+			Start
+		[INFO] Index: 4
+i: 3
+			Count: 0.993
+			Feasibility ==> ok!
+[INFO] Level: 250
+	CandidateFlights: 32
+	ConflictFlights: 14
+			Start
+		[INFO] Index: 2
+i: 9
+			Count: 0.999
+			Feasibility ==> ok!
+[INFO] Level: 130
+	CandidateFlights: 26
+	ConflictFlights: 13
+			Start
+		[INFO] Index: 8
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 230
+	CandidateFlights: 33
+	ConflictFlights: 9
+			Start
+		[INFO] Index: 2
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 200
+	CandidateFlights: 45
+	ConflictFlights: 22
+			Start
+		[INFO] Index: 19
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 350
+	CandidateFlights: 33
+	ConflictFlights: 12
+			Start
+		[INFO] Index: 6
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 170
+	CandidateFlights: 24
+	ConflictFlights: 5
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 80
+	CandidateFlights: 18
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 1
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 220
+	CandidateFlights: 18
+	ConflictFlights: 9
+			Start
+		[INFO] Index: 2
+i: 1
+			Count: 0.983
+			Feasibility ==> ok!
+[INFO] Level: 140
+	CandidateFlights: 18
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 90
+	CandidateFlights: 16
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 60
+	CandidateFlights: 13
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 50
+	CandidateFlights: 13
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 40
+	CandidateFlights: 10
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 110
+	CandidateFlights: 11
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 100
+	CandidateFlights: 8
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 120
+	CandidateFlights: 10
+	ConflictFlights: 2
+			Start
+		[INFO] Index: 0
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 30
+	CandidateFlights: 7
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 260
+	CandidateFlights: 23
+	ConflictFlights: 10
+			Start
+		[INFO] Index: 4
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 390
+	CandidateFlights: 4
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 370
+	CandidateFlights: 3
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 45
+	CandidateFlights: 1
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 35
+	CandidateFlights: 1
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 300
+	CandidateFlights: 16
+	ConflictFlights: 4
+			Start
+		[INFO] Index: 2
+i: 0
+			Count: 1
+			Feasibility ==> ok!
+[INFO] Level: 20
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 10
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 410
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 85
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 75
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 65
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+[INFO] Level: 55
+	CandidateFlights: 0
+	ConflictFlights: 0
+	No conflict flights
+Solve the problem P':
+	Nb of flights change level: 178
+	Nb of flights not be assigned: 2
+	Elapsed time: 2217.22
+NbIteration: 1000
+Result MC
+	Nb of flights change level: 178
+	Nb of flights not be assigned: 2
+	Max conflict: 14
+	Max diverse levels: 20
+	Sum benefits: 22982.5
+	Elapsed time: 2217.22
+

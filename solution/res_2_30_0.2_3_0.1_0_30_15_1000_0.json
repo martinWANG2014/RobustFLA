@@ -18,8 +18,8 @@
     "NbFlightUnassigned": "0",
     "NbMaxConflict": "14",
     "NbMaxDiverseLevels": "20",
-    "SumBenefits": "24886.764125622158",
-    "ElapsedTime": "669.63",
+    "SumBenefits": "24891.434899892629",
+    "ElapsedTime": "577.38",
     "MinAdmissibleCost": "0",
     "MaxAdmissibleCost": "30"
   }
