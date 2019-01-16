@@ -94,6 +94,7 @@ void Solver::initConstraint(const viList &constraintList, const FlightVector &Co
         IloConstraint c(constraint <= (miPiMap.at(ConflictFlightList[i]->getCode()).first +
                                        miPiMap.at(ConflictFlightList[i]->getCode()).second));
         model.add(c);
+        constraint.end();
     }
 }
 
